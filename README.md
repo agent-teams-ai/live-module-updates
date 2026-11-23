@@ -38,6 +38,7 @@ before any adoption; no public runtime is shipped.
 | Question | Entry |
 | --- | --- |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
+| Critical strategy: one architecture, distinct frontend/backend mechanisms, real adoption candidate and scale gates | [Foundation strategy review](docs/architecture/foundation-strategy-review-2026-11-23.md) |
 | Module authoring, ownership and upstream changes | [Architecture review](docs/architecture/cross-repository-review.md) |
 | What established implementations do well and where guarantees stop | [Industry register](docs/research/industry-patterns.md) |
 | Ready stacks and the proposed common application comparison | [Existing stack comparison](https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-ready-stack-comparison-2026-11-23.md) |

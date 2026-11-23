@@ -97,7 +97,10 @@ async function fixture() {
       receipts.set(id, receipt);
       if (state.dropOnce) {
         state.dropOnce = false;
-        observe(0); res.destroy(); return;
+        // Incomplete receipt after the effect is committed. No socket-reset retry ambiguity.
+        observe(200);
+        reply(res, 200, "application/json", '{"result":');
+        return;
       }
       observe(200); json(res, 200, receipt); return;
     }
@@ -138,8 +141,14 @@ async function fixture() {
 }
 
 async function expectText(page: Page, id: string, text: string): Promise<void> {
-  await page.waitForFunction(({ selector, expected }) =>
-    document.getElementById(selector)?.textContent === expected, { selector: id, expected: text }, { timeout: 10000 });
+  try {
+    await page.waitForFunction(({ selector, expected }) =>
+      document.getElementById(selector)?.textContent === expected, { selector: id, expected: text }, { timeout: 10000 });
+  } catch (cause) {
+    throw new Error("DOM observation " + id + ": expected " + text + "; actual " +
+      await page.locator("#" + id).textContent() + "; page error " +
+      await page.locator("#error").textContent(), { cause });
+  }
   assert.equal(await page.locator("#" + id).textContent(), text);
 }
 async function click(page: Page, id: string): Promise<void> {
@@ -152,6 +161,7 @@ async function switchView(page: Page): Promise<void> {
   await expectText(page, "result", "mounted:B");
 }
 const browser = await chromium.launch({ headless: true });
+console.log("Actual Chromium:", browser.version());
 after(async () => { await browser.close(); });
 
 test("X1 actual old/new browser clients and incompatible/compatible backend paths", { timeout: 40000 }, async t => {
@@ -232,7 +242,7 @@ test("X3 real late A HTTP result, switched B view, and stable dirty input/focus"
   }
 });
 
-test("X4 actual HTTP lost reply, original command identity across backend switch, and grant refusal", { timeout: 40000 }, async t => {
+test("X4 actual incomplete HTTP receipt, original command identity across backend switch, and grant refusal", { timeout: 40000 }, async t => {
   const f = await fixture();
   try {
     const a = await f.page();
@@ -240,6 +250,7 @@ test("X4 actual HTTP lost reply, original command identity across backend switch
     await click(a, "submit");
     await expectText(a, "command-result", "unknown");
     assert.deepEqual(await (await fetch(f.url + "/api/effects")).json(), { count: 1, texts: ["same logical intent"] });
+    assert.ok(f.hits.some(x => x.path === "/api/v1/command" && x.version === "A" && x.status === 200));
     f.state.version = "B";
     await click(a, "submit");
     await expectText(a, "command-result", "accepted:1");
@@ -251,15 +262,17 @@ test("X4 actual HTTP lost reply, original command identity across backend switch
     assert.equal(f.effects.length, 1);
     await a.locator("#draft").fill("same logical intent");
     await click(a, "fresh-id");
+    await expectText(a, "command-result", "fresh-id");
     await click(a, "submit");
     await expectText(a, "command-result", "accepted:2");
     assert.equal(f.effects.length, 2);
     f.state.allowed = false;
     await click(a, "fresh-id");
+    await expectText(a, "command-result", "fresh-id");
     await click(a, "submit");
     await expectText(a, "command-result", "rejected:403");
     assert.deepEqual(await (await fetch(f.url + "/api/effects")).json(), { count: 2, texts: ["same logical intent", "same logical intent"] });
     assert.ok(f.hits.some(x => x.path === "/api/v1/command" && x.version === "B" && x.status === 200));
-    t.diagnostic(JSON.stringify({ lostReply: "unknown", sameIdAfterSwitch: "accepted:1", conflictingIntent: 409, freshIdDuplicates: true, revokedNewCommand: 403, effects: f.effects.length }));
+    t.diagnostic(JSON.stringify({ incompleteReceipt: "unknown", sameIdAfterSwitch: "accepted:1", conflictingIntent: 409, freshIdDuplicates: true, revokedNewCommand: 403, effects: f.effects.length }));
   } finally { await f.close(); }
 });

@@ -40,3 +40,16 @@ Artifacts and test logs required. Failure to install/compile/run/upload is not
 a successful native result. Estimate: 300–400 test/fixture TS lines plus
 workflow, zero production LOC; complexity 7/10, expected probe reliability
 8/10, recommendation confidence 9/10 (judgments, not measured reliability).
+
+## First-run failure and bounded correction
+
+Run 45257881795 at feb3927d320fe905bd3f712a46f7458c0107db4e: strict TS7,
+actual browser build, installation and artifact upload passed; X1–X3 passed;
+X4 timed out at the expected unknown acknowledgement. Exact cause of the
+socket-reset case is not established. The amended X4 tests an incomplete
+JSON receipt over an actual HTTP response (not a claim about TCP reset or
+transparent retries). It still requires an observed committed effect before
+retry, the same command identity after switching to B, conflicting intent
+refusal, deliberate new-ID duplicate, and current grant denial. Explicit DOM
+diagnostics and fresh-ID observation improve falsifiability. Reuse the exact
+first-run lock; no dependency resolution on the second attempt.

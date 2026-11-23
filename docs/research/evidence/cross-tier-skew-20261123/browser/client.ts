@@ -96,7 +96,7 @@ action("lazy", lazy);
 action("slow-safe", () => slow(true));
 action("slow-unsafe", () => slow(false));
 action("submit", command);
-action("fresh-id", () => { requestId += "-fresh"; });
+action("fresh-id", () => { requestId += "-fresh"; set("command-result", "fresh-id"); });
 const initial = document.body.dataset.version;
 if (initial !== "A" && initial !== "B") throw Error("unexpected initial version");
 await mount(initial);

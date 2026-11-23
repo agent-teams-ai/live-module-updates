@@ -36,18 +36,20 @@ jobs:
           cp .github/workflows/cross-tier-skew-research.yml "$root/evidence/"
           printf 'RESEARCH_ROOT=%s\n' "$root" >> "$GITHUB_ENV"
           cd "$root"
-          sha256sum PLAN.md package.json tsconfig.json tsconfig.browser.json skew.test.ts browser/*.ts evidence/cross-tier-skew-research.yml > evidence/input-sha256.txt
+          sha256sum PLAN.md package.json tsconfig.json tsconfig.browser.json skew.test.ts browser/*.ts first-run-pnpm-lock.yaml.gz evidence/cross-tier-skew-research.yml > evidence/input-sha256.txt
           printf 'commit=%s\nrun=%s\nattempt=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > evidence/run.txt
           node --version | tee evidence/node-version.txt
           pnpm --version | tee evidence/pnpm-version.txt
           test "$(node --version)" = v24.22.3
           test "$(pnpm --version)" = 11.25.0
-      - name: Resolve exact direct coordinates then install frozen graph
+      - name: Restore first-run exact lock then install frozen graph
         working-directory: ${{ env.RESEARCH_ROOT }}
         shell: bash
         run: |
           set -euo pipefail
-          pnpm install --lockfile-only --ignore-scripts --engine-strict --strict-peer-dependencies 2>&1 | tee evidence/resolve.log
+          printf '%s  %s\n' 5fa2d473afccf2846f94a17a88b624ceb9c5e5fb67692a10357bba610b65e2ae first-run-pnpm-lock.yaml.gz | sha256sum -c -
+          gzip -dc first-run-pnpm-lock.yaml.gz > pnpm-lock.yaml
+          printf '%s  %s\n' c70e5d8e78d46a37a623729838b19215fc63b514a728684d419924900bedae2a pnpm-lock.yaml | sha256sum -c -
           sha256sum pnpm-lock.yaml | tee evidence/lock-sha256.txt
           pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies 2>&1 | tee evidence/install.log
           python - <<'PY'
@@ -104,6 +106,7 @@ jobs:
             ${{ env.RESEARCH_ROOT }}/*.ts
             ${{ env.RESEARCH_ROOT }}/*.json
             ${{ env.RESEARCH_ROOT }}/pnpm-lock.yaml
+            ${{ env.RESEARCH_ROOT }}/first-run-pnpm-lock.yaml.gz
             ${{ env.RESEARCH_ROOT }}/PLAN.md
           if-no-files-found: error
           retention-days: 30
