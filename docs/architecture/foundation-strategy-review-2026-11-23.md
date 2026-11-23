@@ -12,6 +12,14 @@ and [12 native public-package cases](../research/public-runtime-identity-and-saf
 It is a decision-oriented review, not a new framework survey or duplicate
 lifecycle specification.
 
+> **Owner clarification (later on 2026-11-23):** read the
+> [continuous evolution vision](continuous-evolution-vision-2026-11-23.md)
+> as the current strategic refinement. Broad replaceability of the entire
+> system is the long-term goal, not a capability restricted to today's
+> first profile. The greenfield organization repositories are the target.
+> The legacy desktop inspection in section 7 is historical reference
+> evidence only, and its adoption-candidate recommendation is withdrawn.
+
 ## Executive recommendation
 
 **Standardize replaceability as an authoring discipline; activate live
@@ -304,49 +312,38 @@ isolates these risks in native browser ESM plus a real local HTTP fixture. It
 is not a React/IPC/Protobuf or product rollout qualification. See its run-linked
 evidence separately; this strategy is not contingent on a fixture passing.
 
-## 7. A concrete first adoption candidate in our existing product
+## 7. Historical legacy desktop reference (not an adoption target)
 
-Rather than begin with the hardest agent session, choose a meaningful feature
-with a small genuine cross-process surface. The current desktop app
+The old desktop application is a read-only architecture/behavior reference
+for the greenfield design. The previously proposed first integration into
+recent-projects is withdrawn by the owner's scope clarification. The
 [recent-projects reference](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/README.md)
-is an unusually good candidate for evaluation, not an adopted scope. Its
-[feature architecture standard](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/docs/FEATURE_ARCHITECTURE_STANDARD.md)
-already separates contracts, domain/application, main composition/adapters,
-preload, renderer hooks/view models/UI.
+and its [feature standard](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/docs/FEATURE_ARCHITECTURE_STANDARD.md)
+remain useful source evidence about cross-process ownership. The table
+below supplies requirements and counterexamples for the **new** system;
+none authorizes a legacy change.
 
 Concrete inspected boundaries:
 
 | Actual source | Recommended use / specific risk to qualify |
 | --- | --- |
-| [createRecentProjectsFeature](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/composition/createRecentProjectsFeature.ts) | Existing facade is a genuine typed query seam. Evaluate A/B versions of one cohesive feature, not a module per mapper. Cache and sources have real owners; do not duplicate scans or competing mutable caches during overlap. |
-| [IPC registration](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/adapters/input/ipc/registerRecentProjectsIpc.ts), [HTTP registration](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/adapters/input/http/registerRecentProjectsHttp.ts), [preload bridge](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/preload/createRecentProjectsBridge.ts) | Existing transports capture the facade. Preserve stable routes and bridge; a future host-owned admitted invocation boundary would choose the actual implementation. Do not remove/re-register handlers on every feature swap. |
+| [createRecentProjectsFeature](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/composition/createRecentProjectsFeature.ts) | Existing facade is a genuine typed query seam. An analogous greenfield cohesive query is a better update unit than a module per mapper. Cache and sources have real owners; do not duplicate scans or competing mutable caches during overlap. |
+| [IPC registration](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/adapters/input/ipc/registerRecentProjectsIpc.ts), [HTTP registration](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/adapters/input/http/registerRecentProjectsHttp.ts), [preload bridge](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/preload/createRecentProjectsBridge.ts) | Existing transports capture the facade. For the new system, preserve its own stable transport boundary and qualified admitted invocation. Avoid re-registering endpoints on each feature change. |
 | [ListDashboardRecentProjectsUseCase](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/core/application/use-cases/ListDashboardRecentProjectsUseCase.ts) | Existing in-flight dedupe and stale/degraded cache behavior. Source timeout uses Promise.race; response timeout cannot establish underlying source termination. Test actual owned work before retirement. |
 | [Claude source adapter](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/adapters/output/sources/ClaudeRecentProjectsSourceAdapter.ts), [Codex file source](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/main/adapters/output/sources/CodexSessionFileRecentProjectsSourceAdapter.ts) | The facade chooses a context for its cache key; adapters separately obtain active context and the Codex source maintains an in-flight list and writes a cache file. Read-oriented user behavior is not effect-free runtime work. Qualify captured context consistency and exclusive/shared cache ownership instead of assuming all sources may overlap. This is a source-derived risk/test target, not a reproduced product bug. |
 | [renderer hook](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/renderer/hooks/useRecentProjectsSection.ts), [client cache](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/features/recent-projects/renderer/utils/recentProjectsClientCache.ts), [existing context request epoch](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/renderer/store/utils/contextScopedRequestEpoch.ts) | Existing late-response fencing and cache identity are valuable. Reuse/compose the actual Target guard; module generation is an additional distinct compatibility basis only where required. Do not replace the global store or invent another client cache just for the updater. |
 
-First evaluate two compatible versions of the **existing read-oriented
-capability**, using only disposable local project/source data. Keep project
-opening, writes to user projects, active agent work and permission changes
-outside the first slice. The initial test must prove old request completion,
-useful B output, actual source/handle disposition, compatible response shape,
-and unaffected sibling feature. Second, evaluate replacing its actual renderer
-contribution under the same stable app shell and source contract. Test old/new
-client combinations and context changes; a stale result must not cross either
-the retired Target or retired view.
-
-The current app's
-[MemberExecutionLog](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/renderer/components/team/members/MemberExecutionLog.tsx)
-is another read-oriented UI candidate with local expanded/collapsed state.
-Its existing [composer draft owner](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/renderer/hooks/useComposerDraft.ts)
-has considerably stronger unsent-edit and persistence invariants; do not use
-the editor or live provider selection as the very first qualification target.
-The existing [app updater](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/main/ipc/updater.ts)
-already owns quit/install; preserve it as the actual platform-update route.
-
-The selected first product owner still must approve a real slice. Later
-Orchestrator/Agent Runtime integration uses its own existing first-materialization
-and exact-pin gates. Recent-projects evidence would not certify their distributed
-or agent-session lifecycles.
+Transfer the requirements to a selected greenfield query and its own
+frontend contribution: admitted old request completion, useful B output,
+actual source/handle disposition, compatible response shape, unaffected
+siblings and stale Target/view result refusal. No edit of the legacy
+recent-projects feature is proposed. The old
+[MemberExecutionLog](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/renderer/components/team/members/MemberExecutionLog.tsx),
+[composer draft](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/renderer/hooks/useComposerDraft.ts)
+and [app updater](https://github.com/777genius/agent-teams-ai/blob/e876918f362e2fad55dbf47996e3ba346dbc22b9/src/main/ipc/updater.ts)
+are similarly reference evidence, not the new renderer, state owner or
+bootstrap design. New products choose the actual owners under their own
+accepted contracts. See [the corrected greenfield roadmap](continuous-evolution-vision-2026-11-23.md#5-greenfield-adoption-and-an-extensible-architectural-contract).
 
 ## 8. Scale and practical performance: preserve local fast paths
 

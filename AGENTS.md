@@ -5,6 +5,14 @@ and [open decisions](docs/decisions/open-decisions.md) before changing scope.
 This prepared project contains research and proposed contracts. It has no
 accepted public runtime API or admitted production package.
 
+For product and first-consumer selection, read the
+[greenfield scope and continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md)
+and the organization [product-scope clarification PR](https://github.com/agent-teams-ai/.github/pull/416).
+The old `777genius/agent-teams-ai` is a reference only for this work. Do not
+propose its refactoring or qualification as the new product. Prefer the
+actual greenfield owner. The proposed GM-first reference path does not
+authorize public kernel use or any product pin change.
+
 Follow the organization
 [Engineering Quality Standard](https://github.com/agent-teams-ai/.github/blob/main/docs/engineering-quality-standard.md),
 including its

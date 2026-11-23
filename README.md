@@ -33,10 +33,25 @@ organization classification, applicable quality/Docs gates and production
 qualification remain distinct. Read [bootstrap status](BOOTSTRAP.md)
 before any adoption; no public runtime is shipped.
 
+## Strategic direction and product scope
+
+The owner clarified on 2026-11-23 that new Agent Teams products are greenfield
+in the owning organization repositories. The old
+[777genius/agent-teams-ai](https://github.com/777genius/agent-teams-ai)
+application is a behavior and UX reference, not the default implementation
+or first integration target; do not modify it for this research.
+
+The long-term objective is continuous evolution across frontend, backend and
+the foundation itself through qualified replacement paths. A narrow first
+profile is a delivery discriminator, not a permanent vision limit.
+See the [continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md)
+for the proposed GM-first dependency and ownership map.
+
 ## Read by responsibility
 
 | Question | Entry |
 | --- | --- |
+| Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
 | Critical strategy: one architecture, distinct frontend/backend mechanisms, real adoption candidate and scale gates | [Foundation strategy review](docs/architecture/foundation-strategy-review-2026-11-23.md) |
 | Module authoring, ownership and upstream changes | [Architecture review](docs/architecture/cross-repository-review.md) |

@@ -2,6 +2,12 @@
 
 Date: 2026-11-23. Status: **design proposal and source review; no production API, policy adoption, repository admission, package release or native execution is claimed**. Working project name supplied by the coordinating lane: `live-module-updates`.
 
+> Later direction: the [continuous evolution vision](continuous-evolution-vision-2026-11-23.md)
+> records the greenfield scope and a concrete GM-first reference dependency
+> recommendation. The existing separate ownership and admission constraints
+> remain authoritative. The earlier narrow first profile does not limit the
+> long-term system-wide coverage target.
+
 ## 1. Recommendation and the unresolved delivery dependency
 
 Build one reusable operation over supported existing mechanisms: inspect and plan an update, prepare a candidate, request authoritative publication, reconcile an uncertain outcome, coordinate old work and cleanup, and report what became useful. The consumer supplies its authorization, canonical state and publication primitives; it must not implement the operation again. This is the already confirmed direction, not a new policy decision. [EF1], [EF2]

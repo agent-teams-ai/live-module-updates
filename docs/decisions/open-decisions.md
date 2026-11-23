@@ -15,6 +15,15 @@ discussion projection, not a second decision authority.
 - Existing composition, loading, resource and execution mechanisms are reused.
 - Eligible built-in features and distributed plugins both belong in the vision.
 
+## Strategic clarification, not Q1-Q7 selection
+
+The owner clarified the long-term target of continuous evolution across the
+whole greenfield system on 2026-11-23. A bounded first supported profile is
+not a ceiling on future independent replacement. The legacy desktop is not
+the default consumer. The [vision and technical dependency review](../architecture/continuous-evolution-vision-2026-11-23.md)
+proposes GM-first integration and explicit measures to decide the long-term
+bet. No production decision or accepted package pin changes here.
+
 ## Choices that determine the first supported guarantee
 
 | Question | Main alternatives | Evidence that should decide it |
