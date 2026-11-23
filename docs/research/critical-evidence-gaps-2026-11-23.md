@@ -58,6 +58,20 @@ A real result can be committed but not yet adopted, useful but still holding cle
 | G17 — retention and memory pressure | H: unlimited old generations accumulate | Long stream, unreachable offline tab, failed cleanup and pinned history each have explicit hold, time/space budget and owner action; cleanup does not silently delete live bytes | Runtime, client and history owners, coordinated by library |
 | G18 — truthful telemetry | H: same progress label hides different failures | A dashboard can show committed + useful + cleanup debt without misleading success, preserve original attempt and evidence after reconnect | Library read model, product observation; no duplicate publishing authority |
 
+### Platform-specific runtime limits from primary documentation
+
+A pure JS updater must not advertise "reload anything" even in a cooperating desktop application:
+
+| Target | Inspected platform contract (S) | Honest proposed support label / negative control |
+| --- | --- | --- |
+| Node ESM | Imports use an ESM URL/module cache distinct from require.cache; different URLs can yield different module instances | **Cooperative generation switch**, not an in-place overwrite/unload; old reference and listener survival must be tested |
+| Node native .node addon | The CommonJS cache documentation warns that reloading a native addon by deleting require.cache results in an error | **No in-process native addon reload claim**; process-boundary restart/isolation is a separate capability and must be qualified |
+| Electron renderer | Renderer runs as a separate web process; security requires isolation and narrowly exposed privileged APIs | **Renderer contribution switch** only if the actual renderer adapter demonstrates usable behavior and preserved owner state |
+| Electron preload | Preload executes before document content and exposes IPC through contextBridge; it is not merely another application component | **Window/navigation restart or unsupported**, unless a native qualified host path proves a stronger guarantee |
+| Electron main/update installer | Main owns windows/Node privileges; Electron's built-in autoUpdater quitAndInstall closes windows and restarts the application to install the update | **Explicit process restart**, not "all main-process code live-replaced". App updates and feature updates are distinct operations |
+
+This is a *taxonomy for future profiles*, not a claim that the proposed library has any of these adapters. Do not use an Electron security feature (contextIsolation or preload sandbox) as evidence of arbitrary third-party plugin containment. [Electron process model](https://www.electronjs.org/docs/latest/tutorial/process-model), [Electron preload](https://www.electronjs.org/docs/latest/tutorial/tutorial-preload), [Electron application updater](https://www.electronjs.org/docs/latest/api/auto-updater), [Node CommonJS caching](https://nodejs.org/api/modules.html#caching).
+
 ### Why the established stacks do not remove the entire problem
 
 | Ready stack | Credit the actual shipped feature | Boundary **not** established by that feature | Fit to a first trusted TypeScript library |
