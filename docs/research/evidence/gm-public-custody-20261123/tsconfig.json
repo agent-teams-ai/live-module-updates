@@ -19,6 +19,7 @@
     "noEmit": true
   },
   "include": [
-    "probe.test.ts"
+    "probe.test.ts",
+    "identity.test.ts"
   ]
 }
