@@ -43,6 +43,7 @@ before any adoption; no public runtime is shipped.
 | Ready stacks and the proposed common application comparison | [Existing stack comparison](https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-ready-stack-comparison-2026-11-23.md) |
 | Exact experiment inputs, results and limits | [Validation](docs/research/validation.md) |
 | Critical unproven guarantees, upstream tradeoffs and prioritized falsifiers | [Critical Evidence Gaps](docs/research/critical-evidence-gaps-2026-11-23.md) |
+| Deeper source audit: atomic admission, borrowed providers, state/stream ownership, and executed ordering/SQL witnesses | [Cutover, Admission and State Custody](docs/research/cutover-admission-and-state-custody-2026-11-23.md) |
 | Unresolved product/profile choices | [Open decisions](docs/decisions/open-decisions.md) |
 | Original material and transfer identities | [Provenance](provenance/README.md) |
 | Immutable historical and campaign packets | [Source registry](history/SOURCES.json) |

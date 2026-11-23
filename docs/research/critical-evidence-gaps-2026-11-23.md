@@ -8,6 +8,8 @@ The existing [operation](../architecture/operation.md), [critical industry regis
 
 The maintained cross-product [Engineering Research index](https://github.com/agent-teams-ai/engineering-research/blob/eaaac0a4bab203f242cdbb833006f1ff1f486ed2/docs/studies/plugin-system-research-index.md) records general patterns and counterexamples. Detailed proposed adapter contracts and the first consumer's qualification belong **here**; Get Modular, Extension Foundation, Engineering Foundation and each product retain their own implementation/adoption authority. Source classifications below: **E** = executed in the earlier bounded campaign; **S** = inspected source/public documentation only; **H** = design hypothesis or derived risk, not executed.
 
+**Subsequent deeper evidence:** [Cutover, Admission and State Custody](cutover-admission-and-state-custody-2026-11-23.md) inspects the actual Get Modular/Agent Runtime boundaries and reports an executed finite-ordering model and a disposable SQLite transaction witness. These are new bounded research results; they are not installed-library, PostgreSQL, or whole-updater qualification. The S1-S7 table below retains its originally proposed native scope.
+
 ## The most consequential unproven invariant
 
 A module update must never confuse five distinct events: **candidate prepared**, **authoritative target committed**, **new behavior usefully adopted**, **old admitted work released**, and **old physical resources/artifacts eligible for disposal**.
