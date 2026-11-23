@@ -25,12 +25,13 @@ records the exact executed inputs, earlier delivery failures and scope. This
 packet contains no production-library implementation; the complete consumer
 operation and comparison with ready stacks remain unqualified.
 
-This is a prepared standalone repository directory. The GitHub destination has
-not been created or admitted through this work. The creation capability was
-rechecked on November 23 at 16:39 UTC. See
-[bootstrap status](BOOTSTRAP.md) for the observed limitation and the official
-continuation route. Do not infer release or runtime qualification from the
-directory name, an archive, or a package installation.
+The public [GitHub repository](https://github.com/agent-teams-ai/live-module-updates)
+was created by the owner on November 23, 2026. Initial main source is
+5ba2eca9a175b3cff40fd9725b86b658aece1c47; its first push omitted
+CLAUDE.md due to the owner's global gitignore. Creation is not admission:
+organization classification, applicable quality/Docs gates and production
+qualification remain distinct. Read [bootstrap status](BOOTSTRAP.md)
+before any adoption; no public runtime is shipped.
 
 ## Read by responsibility
 
@@ -41,6 +42,7 @@ directory name, an archive, or a package installation.
 | What established implementations do well and where guarantees stop | [Industry register](docs/research/industry-patterns.md) |
 | Ready stacks and the proposed common application comparison | [Existing stack comparison](https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-ready-stack-comparison-2026-11-23.md) |
 | Exact experiment inputs, results and limits | [Validation](docs/research/validation.md) |
+| Critical unproven guarantees, upstream tradeoffs and prioritized falsifiers | [Critical Evidence Gaps](docs/research/critical-evidence-gaps-2026-11-23.md) |
 | Unresolved product/profile choices | [Open decisions](docs/decisions/open-decisions.md) |
 | Original material and transfer identities | [Provenance](provenance/README.md) |
 | Immutable historical and campaign packets | [Source registry](history/SOURCES.json) |
