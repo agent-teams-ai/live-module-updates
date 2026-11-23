@@ -1,0 +1,109 @@
+name: Cross-tier Browser and Backend Research
+
+# Disposable research only, not production admission or updater implementation.
+on:
+  push:
+    branches: [docs/deep-critical-gaps-20261123]
+    paths:
+      - '.github/workflows/cross-tier-skew-research.yml'
+      - 'docs/research/evidence/cross-tier-skew-20261123/**'
+permissions:
+  contents: read
+jobs:
+  cross-tier:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.22.3
+      - uses: pnpm/action-setup@008330803749db0355799c700092d9a85fd074e9
+        with:
+          version: 11.25.0
+          package_json_file: docs/research/evidence/cross-tier-skew-20261123/package.json
+      - name: Freeze reviewed fixture inputs into disposable root
+        shell: bash
+        run: |
+          set -euo pipefail
+          src=docs/research/evidence/cross-tier-skew-20261123
+          root="$RUNNER_TEMP/lmu-cross-tier"
+          mkdir -p "$root/evidence"
+          cp -R "$src/." "$root/"
+          cp .github/workflows/cross-tier-skew-research.yml "$root/evidence/"
+          printf 'RESEARCH_ROOT=%s\n' "$root" >> "$GITHUB_ENV"
+          cd "$root"
+          sha256sum PLAN.md package.json tsconfig.json tsconfig.browser.json skew.test.ts browser/*.ts evidence/cross-tier-skew-research.yml > evidence/input-sha256.txt
+          printf 'commit=%s\nrun=%s\nattempt=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > evidence/run.txt
+          node --version | tee evidence/node-version.txt
+          pnpm --version | tee evidence/pnpm-version.txt
+          test "$(node --version)" = v24.22.3
+          test "$(pnpm --version)" = 11.25.0
+      - name: Resolve exact direct coordinates then install frozen graph
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm install --lockfile-only --ignore-scripts --engine-strict --strict-peer-dependencies 2>&1 | tee evidence/resolve.log
+          sha256sum pnpm-lock.yaml | tee evidence/lock-sha256.txt
+          pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies 2>&1 | tee evidence/install.log
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          expected=json.loads(Path('package.json').read_text())['devDependencies']
+          actual={name:json.loads((Path('node_modules')/name/'package.json').read_text())['version'] for name in expected}
+          assert actual==expected,(expected,actual)
+          packages={}
+          for pattern in ['*/node_modules/*/package.json','*/node_modules/@*/*/package.json']:
+              for p in sorted(Path('node_modules/.pnpm').glob(pattern)):
+                  if p.parent.is_symlink(): continue
+                  b=p.read_bytes()
+                  m=json.loads(b)
+                  packages[str(p)]={'name':m['name'],'version':m['version'],'manifestSha256':hashlib.sha256(b).hexdigest()}
+          compilers=[r for r in packages.values() if r['name']=='typescript' or r['name'].startswith('@typescript/typescript-')]
+          assert compilers and all(r['version']=='7.0.2' for r in compilers),compilers
+          Path('evidence/installed.json').write_text(json.dumps({'direct':actual,'packages':packages},indent=2)+'\n')
+          print('Exact direct versions:',json.dumps(actual,sort_keys=True))
+          print('Compiler packages:',json.dumps(compilers))
+          PY
+      - name: Strict TS7 and emit actual browser ESM
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm exec tsc --version | tee evidence/compiler-version.txt
+          test "$(cat evidence/compiler-version.txt)" = 'Version 7.0.2'
+          pnpm check 2>&1 | tee evidence/typecheck.log
+          pnpm build 2>&1 | tee evidence/build.log
+          sha256sum dist/browser/*.js | tee evidence/browser-output-sha256.txt
+      - name: Install pinned Playwright Chromium
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm exec playwright --version | tee evidence/playwright-version.txt
+          pnpm exec playwright install --with-deps chromium 2>&1 | tee evidence/browser-install.log
+      - name: Execute actual browser and local HTTP controls
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm probe 2>&1 | tee evidence/native.log
+      - name: Retain evidence and exact inputs even on failure
+        if: always() && env.RESEARCH_ROOT != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: cross-tier-skew-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ env.RESEARCH_ROOT }}/evidence/
+            ${{ env.RESEARCH_ROOT }}/browser/
+            ${{ env.RESEARCH_ROOT }}/dist/
+            ${{ env.RESEARCH_ROOT }}/*.ts
+            ${{ env.RESEARCH_ROOT }}/*.json
+            ${{ env.RESEARCH_ROOT }}/pnpm-lock.yaml
+            ${{ env.RESEARCH_ROOT }}/PLAN.md
+          if-no-files-found: error
+          retention-days: 30

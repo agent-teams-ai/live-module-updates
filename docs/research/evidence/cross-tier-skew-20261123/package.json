@@ -1,0 +1,20 @@
+{
+  "name": "lmu-cross-tier-skew-research",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": "24.22.3"
+  },
+  "scripts": {
+    "check": "tsc -p tsconfig.json && tsc -p tsconfig.browser.json --noEmit",
+    "build": "tsc -p tsconfig.browser.json",
+    "probe": "node --test skew.test.ts"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "24.19.1",
+    "playwright": "1.65.1"
+  }
+}
