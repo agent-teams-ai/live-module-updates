@@ -10,6 +10,8 @@ The maintained cross-product [Engineering Research index](https://github.com/age
 
 **Subsequent deeper evidence:** [Cutover, Admission and State Custody](cutover-admission-and-state-custody-2026-11-23.md) inspects the actual Get Modular/Agent Runtime boundaries and reports an executed finite-ordering model and a disposable SQLite transaction witness. These are new bounded research results; they are not installed-library, PostgreSQL, or whole-updater qualification. The S1-S7 table below retains its originally proposed native scope.
 
+**Later bounded witnesses:** [Closure Integrity and Safe Reclamation](closure-integrity-and-reclamation-2026-11-23.md) adds an actual Nginx three-generation reload with failed-candidate and out-of-order retirement controls, and disposable SQLite/file counterexamples for closure races, state writes, retirement, receiver idempotency and grant reordering. These are not Get Modular, PostgreSQL, or complete-library qualification. The original native S1-S7 scope remains open.
+
 ## The most consequential unproven invariant
 
 A module update must never confuse five distinct events: **candidate prepared**, **authoritative target committed**, **new behavior usefully adopted**, **old admitted work released**, and **old physical resources/artifacts eligible for disposal**.
