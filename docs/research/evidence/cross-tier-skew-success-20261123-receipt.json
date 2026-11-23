@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "source": "2bc1affa58f0fd149b69620be940bc091456f48c",
+  "run": 45259638070,
+  "attempt": 1,
+  "job": 137990621676,
+  "artifact": {
+    "id": 14857519775,
+    "bytes": 26481,
+    "sha256": "cc1fb1dff0ace985004a3166f97858f9913dec82868b447e573d98a297370869",
+    "members": 32
+  },
+  "checks": {
+    "zipIntegrity": true,
+    "inputHashesRecomputed": true,
+    "browserOutputHashesRecomputed": true,
+    "sourceBlobComparison": true,
+    "firstLockSha256": "c70e5d8e78d46a37a623729838b19215fc63b514a728684d419924900bedae2a"
+  },
+  "toolchain": {
+    "node": "24.22.3",
+    "pnpm": "11.25.0",
+    "typescript": "7.0.2",
+    "nodeTypes": "24.19.1",
+    "playwright": "1.65.1",
+    "chromium": "159.0.8154.6"
+  },
+  "inputs": {
+    "PLAN.md": "6f3d691670fbf24fd3854af81f436675ea221f66f5c74ed4f67605687ae23795",
+    "package.json": "af28cc3b424a6ee7b02888ebb32460ea8d5c78dfe1bd86cd3726a3a86e59de33",
+    "tsconfig.json": "f70c577e4ec0457fe6063ca307fe1ee339b90948f565846c40a8a3ebdc246945",
+    "tsconfig.browser.json": "f9840d72f813dc9a336622514c8c52637bdc8120814fa274f35bbceb1820c2f9",
+    "skew.test.ts": "ca98f44ac654c5fe1dca172c7f9e1afe834c40b191875f1fede13e99ccd90382",
+    "browser/client.ts": "6156e6a0d055a8283ac4767a896ecac9a35ada7a56a4e9a62b290f09a87646f0",
+    "browser/late-a.ts": "119041269c981c6b08fab979806220fb838fb3c9d61cf8f7f8aaf94091d75b3f",
+    "browser/late-b.ts": "4eac0dba0e66696239c094396a2e7a70a7f32e1e872a1660fcaf4c7c78f1195e",
+    "browser/view-a.ts": "a8a89e10d112e8142e6003a726aee63c47aa80247cc723aa72ad3bc7ab356257",
+    "browser/view-b.ts": "177743f3dff27a3d4d00a396a12301452902241a45e642d5fc396736129d2326",
+    "first-run-pnpm-lock.yaml.gz": "5fa2d473afccf2846f94a17a88b624ceb9c5e5fb67692a10357bba610b65e2ae",
+    "evidence/cross-tier-skew-research.yml": "d5b40e45bc570bea94706a3d2ef24c14b3661b23c5620ff5a705bc97aa78ae2d"
+  },
+  "browserOutputs": {
+    "dist/browser/client.js": "c8113f140cca23fb0451687c336754322c44b18fb93d8b86f066f3f129e2955f",
+    "dist/browser/late-a.js": "119041269c981c6b08fab979806220fb838fb3c9d61cf8f7f8aaf94091d75b3f",
+    "dist/browser/late-b.js": "4eac0dba0e66696239c094396a2e7a70a7f32e1e872a1660fcaf4c7c78f1195e",
+    "dist/browser/view-a.js": "695ec37305307d3b54cced9a246b1d57642d26a0ef70dea3e37d46e07f2ed81f",
+    "dist/browser/view-b.js": "0105f74c7fb82d56ccb16bda96f1a75cd5773c7f033ca0601b593c7e6f84b97c"
+  },
+  "installedManifests": {
+    "playwright-core@1.65.1": "8243ae9fe675146825391eba8e2b06db88ea5ec94b8291a7394525965f3e7a32",
+    "playwright@1.65.1": "66a5c412c28b7fe15902da5cb5d7dd503d1c8604d0afe46797fe31aa7dc1a6e0",
+    "typescript@7.0.2": "3722b30210616a13a3213ded11575ba6b2dbab10c32a5ef67afca8513e27017e",
+    "undici-types@7.24.6": "541adf5ec10733ecbf9278ec706914c76b1e5b25cccebdadb7ade8f3066ae052",
+    "@types/node@24.19.1": "6e6bedd46e6541dce6fedbf7570c499a97476e1517123f0bdae4621dab023978",
+    "@typescript/typescript-linux-x64@7.0.2": "d229521d1ab1d09e60eeb887c8be8e9454a1ea184fe801dcbfa276da3c569cf7"
+  },
+  "tests": {
+    "pass": 4,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "scope": "Disposable plain ESM/HTTP fixture, incomplete application acknowledgement, not TCP-reset, database or production update qualification."
+}

@@ -461,3 +461,14 @@ proposal must retain these tighter boundaries. Existing studies support
 specific native mechanisms and counterexamples, not the entire design.
 No production implementation, Q1–Q7 acceptance, dependency pin migration,
 public SPI, central policy change or product adoption is authorized here.
+
+## Executed cross-tier follow-up
+
+The [bounded browser/HTTP evidence](../research/cross-tier-version-skew-2026-11-23.md)
+now records all four passing amended cases on TS 7.0.2, Node 24.22.3 and
+actual Chromium 159.0.8154.6. Initial X4 timed out and is preserved; the
+amended case proves incomplete application acknowledgement, not TCP reset.
+Native observations support compatibility intervals, lazy-asset retention,
+stale-result fencing and stable draft ownership, plus original command
+identity across a backend selection. They do not qualify an actual product
+or the complete proposed update operation. R0–R5 and Q1–Q7 remain distinct.
