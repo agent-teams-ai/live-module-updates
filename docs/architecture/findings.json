@@ -1,0 +1,663 @@
+{
+  "schema": "live-module-architecture-review/v1",
+  "date": "2026-11-23",
+  "status": "complete_reviewed_proposal_not_adopted",
+  "owner_lane": "/root/architecture_decisions",
+  "report": "REPORT.md",
+  "repositories": {
+    "ef": "f285333c5869b1f69070efee29b205da8fd19e49",
+    "gm": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+    "org": "0b44c64c824f536bd1b085341e7669bcc64ef124",
+    "foundation": "e38d8444f74cceef37c366f4e28ed1918b214d4a",
+    "effect": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8"
+  },
+  "existing_repositories_read_only": true,
+  "production_code_written": false,
+  "native_execution": false,
+  "accepted_pins_updated": false,
+  "owner_policy_decisions": {
+    "Q1": "OPEN",
+    "Q2": "OPEN",
+    "Q3": "OPEN",
+    "Q4": "OPEN",
+    "Q5": "OPEN",
+    "Q6": "OPEN",
+    "Q7": "OPEN"
+  },
+  "source_records": [
+    {
+      "id": "GM1",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "README.md",
+      "git_blob_sha": "53274df4f402bea59a1968d9ccedb17fab92a126",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/README.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GM2",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "docs/architecture/system-boundary.md",
+      "git_blob_sha": "66567d663f146888cfd3dca6080a3751d7fd813f",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/docs/architecture/system-boundary.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GM3",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "docs/architecture/common-assembly.md",
+      "git_blob_sha": "3cd861ac20e6ee825c4f54c1ffb325b622f60d08",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/docs/architecture/common-assembly.md",
+      "read_scope": "scope/CMS/composition/resources excerpts; not whole 1426-line document",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GM4",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/resources/README.md",
+      "git_blob_sha": "a134e34abcc6d102b69e64924bbe3e0f20c613e7",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/resources/README.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GM5",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/lifecycle-kernel/README.md",
+      "git_blob_sha": "740d7e395231f0e5f1c5524e6ef136d9cdc2b7c8",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/lifecycle-kernel/README.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GM6",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "docs/decisions/0029-admit-an-optional-lifecycle-kernel-candidate.md",
+      "git_blob_sha": "94b0bcce49b0a1592d9480d8240977291fcdf10e",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/docs/decisions/0029-admit-an-optional-lifecycle-kernel-candidate.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GM7",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "docs/decisions/0030-admit-the-module-resource-scope-package.md",
+      "git_blob_sha": "5a26ce0f5839aa774bfb7cc64486192c84d0bc8e",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/docs/decisions/0030-admit-the-module-resource-scope-package.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GM8",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/assembly/README.md",
+      "git_blob_sha": "24cf2372a17ebb5d951093e54eebe877310e59bf",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/assembly/README.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GMP1",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/core/package.json",
+      "git_blob_sha": "c960948db04338992b0d080806a535e84db9a3e3",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/core/package.json",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GMP2",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/assembly/package.json",
+      "git_blob_sha": "08b547ce61e1428f97f815dd89763947accd47e8",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/assembly/package.json",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GMP3",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/resources/package.json",
+      "git_blob_sha": "c2603483c9c0de1c95a393e4d3451cc9d93ecde2",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/resources/package.json",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GMP4",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/effect/package.json",
+      "git_blob_sha": "e6cbff8477aafebfd721d13d908c4cbd98c94d68",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/effect/package.json",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "GMP5",
+      "repository": "agent-teams-ai/get-modular",
+      "commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb",
+      "path": "packages/lifecycle-kernel/package.json",
+      "git_blob_sha": "a54ef330f875cd70e0f9e40bdde662e1f2da519e",
+      "url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/lifecycle-kernel/package.json",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "ORG1",
+      "repository": "agent-teams-ai/.github",
+      "commit": "0b44c64c824f536bd1b085341e7669bcc64ef124",
+      "path": "docs/engineering-quality-standard.md",
+      "git_blob_sha": "9d4fc54d99249077bf6887be35a59ace1d5547bd",
+      "url": "https://github.com/agent-teams-ai/.github/blob/0b44c64c824f536bd1b085341e7669bcc64ef124/docs/engineering-quality-standard.md",
+      "read_scope": "complete at unchanged pin in prior review; fresh reread current pin",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "ORG2",
+      "repository": "agent-teams-ai/.github",
+      "commit": "0b44c64c824f536bd1b085341e7669bcc64ef124",
+      "path": "docs/architecture/feature-module-standard/v1.1.md",
+      "git_blob_sha": "bd949a9a670862fea851a7791fce772fdef3b4fc",
+      "url": "https://github.com/agent-teams-ai/.github/blob/0b44c64c824f536bd1b085341e7669bcc64ef124/docs/architecture/feature-module-standard/v1.1.md",
+      "read_scope": "complete",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "ORG3",
+      "repository": "agent-teams-ai/.github",
+      "commit": "0b44c64c824f536bd1b085341e7669bcc64ef124",
+      "path": "docs/repository-admission.md",
+      "git_blob_sha": "f2cbf6513c450baa205964df69e2b1026fd40034",
+      "url": "https://github.com/agent-teams-ai/.github/blob/0b44c64c824f536bd1b085341e7669bcc64ef124/docs/repository-admission.md",
+      "read_scope": "bootstrap and supported contract first 155 lines",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "FND1",
+      "repository": "agent-teams-ai/engineering-foundation",
+      "commit": "e38d8444f74cceef37c366f4e28ed1918b214d4a",
+      "path": "README.md",
+      "git_blob_sha": "51157c9691cfdfba4c86391cba3948d8484e2071",
+      "url": "https://github.com/agent-teams-ai/engineering-foundation/blob/e38d8444f74cceef37c366f4e28ed1918b214d4a/README.md",
+      "read_scope": "relevant ownership/public capabilities excerpts",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "FND2",
+      "repository": "agent-teams-ai/engineering-foundation",
+      "commit": "e38d8444f74cceef37c366f4e28ed1918b214d4a",
+      "path": "packages/engineering-foundation/README.md",
+      "git_blob_sha": "3e1ae8b7d1492fc93bb9fa6d6a067fd4c4fdaac6",
+      "url": "https://github.com/agent-teams-ai/engineering-foundation/blob/e38d8444f74cceef37c366f4e28ed1918b214d4a/packages/engineering-foundation/README.md",
+      "read_scope": "public capabilities/quality/dev-only/source graph/transaction excerpts",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "FND3",
+      "repository": "agent-teams-ai/engineering-foundation",
+      "commit": "e38d8444f74cceef37c366f4e28ed1918b214d4a",
+      "path": "packages/feature-module-standard/README.md",
+      "git_blob_sha": "120298c447684c0684ef445dde4baaca29fdfb7e",
+      "url": "https://github.com/agent-teams-ai/engineering-foundation/blob/e38d8444f74cceef37c366f4e28ed1918b214d4a/packages/feature-module-standard/README.md",
+      "read_scope": "kernel/runner/coverage/limitations excerpts",
+      "evidence_level": "source_or_document_inspection"
+    },
+    {
+      "id": "EF1",
+      "repository": "agent-teams-ai/extension-foundation",
+      "commit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "path": "docs/architecture/live-extension-system-map.md",
+      "url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/architecture/live-extension-system-map.md",
+      "read_scope": "current local read and prior independent complete audit",
+      "evidence_level": "accepted_decision_or_recorded_research",
+      "git_blob_sha": "ce31ac3da59a79b695cd71c3827af9219ae0c66c"
+    },
+    {
+      "id": "EF2",
+      "repository": "agent-teams-ai/extension-foundation",
+      "commit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "path": "docs/open-decisions/OD-003-module-runtime-and-public-spi-choices.md",
+      "url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/open-decisions/OD-003-module-runtime-and-public-spi-choices.md",
+      "read_scope": "prior complete audit; current ownership sections rechecked",
+      "evidence_level": "accepted_decision_or_recorded_research",
+      "git_blob_sha": "7673223788b764764ef8dc9cb3a69e230ca151eb"
+    },
+    {
+      "id": "EF3",
+      "repository": "agent-teams-ai/extension-foundation",
+      "commit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "path": "docs/decisions/0011-extension-admission-custody-and-retirement-closure.md",
+      "url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/decisions/0011-extension-admission-custody-and-retirement-closure.md",
+      "read_scope": "accepted contract read in prior audit, unchanged at f285",
+      "evidence_level": "accepted_decision_or_recorded_research",
+      "git_blob_sha": "50032b2b4991bd1f2af4323d3e332b52556e54df"
+    },
+    {
+      "id": "EF4",
+      "repository": "agent-teams-ai/extension-foundation",
+      "commit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "path": "docs/decisions/0014-product-local-module-authoring-composition-and-generation-guardrails.md",
+      "url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/decisions/0014-product-local-module-authoring-composition-and-generation-guardrails.md",
+      "read_scope": "accepted contract read in prior audit, unchanged at f285",
+      "evidence_level": "accepted_decision_or_recorded_research",
+      "git_blob_sha": "554b72f4d056eaacab2f9620fdac0a53a5168a3a"
+    },
+    {
+      "id": "EF5",
+      "repository": "agent-teams-ai/extension-foundation",
+      "commit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "path": "docs/decisions/0015-authorize-get-modular-semantic-extraction.md",
+      "url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/decisions/0015-authorize-get-modular-semantic-extraction.md",
+      "read_scope": "complete current local read",
+      "evidence_level": "accepted_decision_or_recorded_research",
+      "git_blob_sha": "261e1b24ba9ec7e785c5ee106694abaa7bfc2cc6"
+    },
+    {
+      "id": "EF6",
+      "repository": "agent-teams-ai/extension-foundation",
+      "commit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "path": "docs/research/live-update-value-competition-and-implementation-size-2026-11-22.md",
+      "url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-value-competition-and-implementation-size-2026-11-22.md",
+      "read_scope": "prior complete authored/reviewed study; size boundaries rechecked",
+      "evidence_level": "accepted_decision_or_recorded_research",
+      "git_blob_sha": "e84853f1da17de4071418523d639a884a0d055fa"
+    },
+    {
+      "id": "EFFECT1",
+      "repository": "Effect-TS/effect",
+      "commit": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8",
+      "path": "packages/effect/src/Layer.ts",
+      "url": "https://github.com/Effect-TS/effect/blob/e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8/packages/effect/src/Layer.ts",
+      "read_scope": [
+        [
+          418,
+          468
+        ],
+        [
+          579,
+          690
+        ]
+      ],
+      "evidence_level": "fresh_source_only_no_new_execution",
+      "consumer_upgrade": false
+    },
+    {
+      "id": "EFFECT2",
+      "repository": "Effect-TS/effect",
+      "commit": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8",
+      "path": "packages/effect/src/Scope.ts",
+      "url": "https://github.com/Effect-TS/effect/blob/e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8/packages/effect/src/Scope.ts",
+      "read_scope": [
+        [
+          470,
+          530
+        ]
+      ],
+      "evidence_level": "fresh_source_only_no_new_execution",
+      "consumer_upgrade": false
+    },
+    {
+      "id": "EF7",
+      "repository": "agent-teams-ai/extension-foundation",
+      "commit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "path": "docs/research/standalone-live-plugin-library-blueprint-2026-11-22.md",
+      "url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/standalone-live-plugin-library-blueprint-2026-11-22.md",
+      "read_scope": "prior complete reviewed blueprint; current reuse/architecture excerpts rechecked",
+      "evidence_level": "recorded_research_not_policy_adoption",
+      "git_blob_sha": "c56d82e7425e4e2e82d0e473435f42e4acbe71b1"
+    }
+  ],
+  "findings": [
+    {
+      "id": "AR01",
+      "priority": "critical",
+      "status": "owner_confirmed",
+      "title": "Complete operation belongs in the library",
+      "sources": [
+        "EF1",
+        "EF2"
+      ],
+      "proposal": "Ship planning/preparation/publication reconciliation/continuity/cleanup coordination and observable results through narrow consumer primitives.",
+      "guardrail": "Consumer business code must not recreate orchestration or recovery."
+    },
+    {
+      "id": "AR02",
+      "priority": "critical",
+      "status": "source_verified_gap",
+      "title": "Public call/custody mechanism remains unresolved",
+      "sources": [
+        "GMP5",
+        "GM5",
+        "GM6",
+        "GM7"
+      ],
+      "proposal": "Qualify an official existing mechanism for the supported profile; assess existing GM candidate before alternatives.",
+      "guardrail": "No copying, deep import, incidental rename, fake public-release claim or mandatory consumer counter implementation."
+    },
+    {
+      "id": "AR03",
+      "priority": "critical",
+      "status": "source_verified",
+      "title": "Resources cleanup differs from call/custody/physical stop",
+      "sources": [
+        "GM4",
+        "GM7",
+        "GM3"
+      ],
+      "proposal": "Project native cleanup outcomes and retain original native ownership; separate call and continuation lifetime.",
+      "guardrail": "A complete callback report, released lease, aborted signal and physical stop are not interchangeable."
+    },
+    {
+      "id": "AR04",
+      "priority": "high",
+      "status": "source_verified_correction",
+      "title": "ADR0030 supersedes withdrawn ADR0028 gate",
+      "sources": [
+        "GM6",
+        "GM7"
+      ],
+      "proposal": "Use the surviving owning-source qualification path, preserve historical accepted bytes.",
+      "guardrail": "Withdrawal does not publish the private kernel; do not revive K1 or two-production-scope eligibility as current."
+    },
+    {
+      "id": "AR05",
+      "priority": "critical",
+      "status": "accepted_boundary",
+      "title": "One canonical head and product authority",
+      "sources": [
+        "EF3",
+        "EF5",
+        "GM2"
+      ],
+      "proposal": "Library attempt records reference real authority outcomes and lifetime identities.",
+      "guardrail": "No independently advancing head, grant database or shadow generation registry."
+    },
+    {
+      "id": "AR06",
+      "priority": "critical",
+      "status": "proposed_contract_requirement",
+      "title": "Atomic selection/admission/custody boundary",
+      "sources": [
+        "GM3",
+        "GM5",
+        "EF3"
+      ],
+      "proposal": "A supported adapter must preserve exact cohort admission and retention across await and stream continuation.",
+      "guardrail": "Read-head-then-retain is not sufficient; no default Q5 policy adopted."
+    },
+    {
+      "id": "AR07",
+      "priority": "high",
+      "status": "proposed_contract_requirement",
+      "title": "Explicit unknown publication and recovery",
+      "sources": [
+        "EF3",
+        "EF1"
+      ],
+      "proposal": "Reconcile original attempt before retry/destructive cleanup; qualify durable recovery only when claimed.",
+      "guardrail": "Do not map timeout to rejection or force consumer to rebuild recovery."
+    },
+    {
+      "id": "AR08",
+      "priority": "high",
+      "status": "proposal",
+      "title": "Colocated update-eligibility dossier",
+      "sources": [
+        "EF4",
+        "ORG2"
+      ],
+      "proposal": "Own inert profile/state/readiness/lifetime/fallback/evidence facts beside each real eligible feature/module declaration.",
+      "guardrail": "No new generic Plugin SPI, GM schema expansion or universal hot flag."
+    },
+    {
+      "id": "AR09",
+      "priority": "high",
+      "status": "proposal",
+      "title": "One real module with cohesive features",
+      "sources": [
+        "ORG2",
+        "EF1"
+      ],
+      "proposal": "Start with operation feature and actual adapters; split planning/observation only when substantive.",
+      "guardrail": "No package per phase, empty folders or top-level shared/core substitute."
+    },
+    {
+      "id": "AR10",
+      "priority": "high",
+      "status": "proposal",
+      "title": "Orthogonal profile dimensions",
+      "sources": [
+        "EF1",
+        "GM3"
+      ],
+      "proposal": "Separate composition, loader, ABI, placement, resources, UI, delivery and state.",
+      "guardrail": "MF/NF/Piral/OC/Wasm/Effect are not interchangeable runtime adapters."
+    },
+    {
+      "id": "AR11",
+      "priority": "high",
+      "status": "proposal",
+      "title": "Visible usefulness and state continuity are separate evidence",
+      "sources": [
+        "EF1",
+        "EF2"
+      ],
+      "proposal": "Observe selected versus useful contributions, draft/undo/focus affinity and actual fallback.",
+      "guardrail": "Do not select Q3/Q4 or claim a version label proves user adoption."
+    },
+    {
+      "id": "AR12",
+      "priority": "high",
+      "status": "proposal",
+      "title": "Exact registration ownership protects successor",
+      "sources": [
+        "EF1"
+      ],
+      "proposal": "Require old finalizer compare exact ownership before clearing selected reference.",
+      "guardrail": "Reference continuity is not whole-cohort atomicity."
+    },
+    {
+      "id": "AR13",
+      "priority": "high",
+      "status": "source_verified",
+      "title": "Native Effect has existing sharing and nonjoining second-close semantics",
+      "sources": [
+        "EFFECT1",
+        "EFFECT2"
+      ],
+      "proposal": "Reuse native layer/memo ownership and preserve original finalization result in optional profile.",
+      "guardrail": "Source evidence is not native execution; no GM consumer peer upgrade or mandatory Effect."
+    },
+    {
+      "id": "AR14",
+      "priority": "critical",
+      "status": "source_verified",
+      "title": "New production repository requires full FMS1.1 bootstrap",
+      "sources": [
+        "ORG2",
+        "ORG3"
+      ],
+      "proposal": "Real feature, profile pin, deterministic rejecting fixtures, strict source gates and observed admission evidence.",
+      "guardrail": "Research packet/private scaffold/package installation is not admission; existing EF FMS pin unchanged."
+    },
+    {
+      "id": "AR15",
+      "priority": "high",
+      "status": "source_verified",
+      "title": "GM integration preserves outer composition imports and single compiler",
+      "sources": [
+        "GM2",
+        "GM3",
+        "GM8"
+      ],
+      "proposal": "Consume public prepared facts; compose narrow values/ports at accepted outer boundary.",
+      "guardrail": "No shadow resolver, generic registry, group-as-lifecycle-unit or GM imports throughout inner code."
+    },
+    {
+      "id": "AR16",
+      "priority": "high",
+      "status": "proposal",
+      "title": "Optional providers do not leak into ordinary declarations",
+      "sources": [
+        "ORG1",
+        "ORG2",
+        "GM2"
+      ],
+      "proposal": "Check public declaration/runtime closure with disposable packed consumers.",
+      "guardrail": "No mandatory DOM/Node/Effect/Wasm/EF catalog dependency."
+    },
+    {
+      "id": "AR17",
+      "priority": "high",
+      "status": "open_qualification",
+      "title": "Published tooling is distinct from eligible executed bootstrap cohort",
+      "sources": [
+        "ORG3",
+        "FND1",
+        "FND2"
+      ],
+      "proposal": "Qualify exact current released dependencies and central recognition; root retains release/cohort evidence.",
+      "guardrail": "No automatic Foundation3.1 adoption or blind1.7 downgrade; older development catalog not authority."
+    },
+    {
+      "id": "AR18",
+      "priority": "medium",
+      "status": "source_verified_no_defect",
+      "title": "Current EF map has no active withdrawn-gate assertion",
+      "sources": [
+        "EF1",
+        "EF2"
+      ],
+      "proposal": "Clarify blueprint combined Resources/lifecycle row and add dated route if useful.",
+      "guardrail": "Do not manufacture a correction or rewrite historical report/evidence."
+    },
+    {
+      "id": "AR19",
+      "priority": "high",
+      "status": "proposal",
+      "title": "Foundation validates owned data and contracts only",
+      "sources": [
+        "FND2",
+        "FND3",
+        "ORG2"
+      ],
+      "proposal": "Reuse existing optional executable-specification/source graph/profile checks; add capability only for demonstrated gap.",
+      "guardrail": "No runtime supervisor, business eligibility inference or every-module-hot certification."
+    },
+    {
+      "id": "AR20",
+      "priority": "high",
+      "status": "open_policy",
+      "title": "Q1-Q7 all remain open",
+      "sources": [
+        "EF2"
+      ],
+      "proposal": "Design seams and explicit profile limitations; resolve owner policies before corresponding production promises.",
+      "guardrail": "Experimental fixture scope is not adoption."
+    },
+    {
+      "id": "AR21",
+      "priority": "medium",
+      "status": "conditional_estimate",
+      "title": "Existing sizing remains bounded research estimate",
+      "sources": [
+        "EF6"
+      ],
+      "proposal": "Retain 3-6k/7-14k/15-30k authored production SLOC scenarios with separate tests/integration and scoped assumptions.",
+      "guardrail": "No size escalation from diagram boxes or claim of measured production readiness."
+    },
+    {
+      "id": "AR22",
+      "priority": "high",
+      "status": "proposal_preserves_existing_blueprint",
+      "title": "Optional native drivers share decision and receipt semantics",
+      "sources": [
+        "EF7",
+        "EFFECT1",
+        "EFFECT2"
+      ],
+      "proposal": "Ordinary TS and optional native Effect retain their own execution semantics while technical transition decisions and receipt interpretation have one owner. Defer interpreter abstraction until a real native consumer.",
+      "guardrail": "No mandatory Effect core behind Promise facade, no second independently authored transition policy and no speculative universal effect framework."
+    },
+    {
+      "id": "AR23",
+      "priority": "medium",
+      "status": "proposal",
+      "title": "Patterns mapped to owners and negative examples",
+      "sources": [
+        "EF7",
+        "EF3",
+        "GM3",
+        "GM4",
+        "ORG2"
+      ],
+      "proposal": "Map typed transitions/state-machine option, ports/adapters, expected-head CAS, same-attempt reconciliation, native custody, projections and real anti-corruption boundaries to existing owners.",
+      "guardrail": "No framework selection, workflow DSL or duplicate general mechanism."
+    },
+    {
+      "id": "AR24",
+      "priority": "high",
+      "status": "proposed_eligibility_requirement",
+      "title": "Attempt scope does not capture unregistered top-level effects",
+      "sources": [
+        "GM3",
+        "GM4",
+        "EF4"
+      ],
+      "proposal": "A cooperative TS profile qualifies owned effect paths and names unsupported effects; require the actual isolation profile where its trust guarantee is needed.",
+      "guardrail": "No false containment from surrounding an arbitrary import with a scope; Q1 stays open."
+    }
+  ],
+  "review_limits": [
+    "No final public API selection",
+    "No remote repository creation or admission",
+    "Source versions are not registry or packed qualification",
+    "Fresh optional Effect source is not an upgrade or native proof",
+    "Prior native receipts retain original scoped claims; pending sibling probes not assumed successful",
+    "No package-per-phase scaffolding"
+  ],
+  "next_delivery_gates": [
+    "Supported public lifecycle mechanism for claimed TS profile",
+    "Owner choices for first actual production guarantee",
+    "Full FMS1.1 production bootstrap with real feature and exact qualified toolchain",
+    "Independent packed consumer and bounded rejecting use-case examples"
+  ],
+  "upstream_changes_are_proposals": true,
+  "independent_review": {
+    "reviewer": "/root/mf_runtime",
+    "scope": "REPORT sections 6-9 before final refinements",
+    "result": "no material must-fix",
+    "qualification": "Old cleanup cannot delete successor is a requirement of a supported library profile, not a fact about arbitrary upstream lifecycle; source-only Effect facts remain unexecuted here."
+  },
+  "root_review": {
+    "scope": "complete report including eligibility dossier and adverse cases",
+    "requested_refinements": [
+      "optional native driver with shared transition/receipt semantics",
+      "patterns mapped to owners and negative examples"
+    ],
+    "disposition": "both incorporated; no new policy or framework selection"
+  },
+  "report_sha256": "c48f0e3edb125c85670c778f730d8c1f6748bcb924537254c1a156f8d89774a1",
+  "report_words": 6698,
+  "report_lines": 345,
+  "qualification_receipt_boundaries": {
+    "this_lane_native_runs": 0,
+    "sibling_new_probe_results": "not asserted; integrate only their independent receipts",
+    "ordinary_library_publication": "not claimed",
+    "new_repository_admission": "not claimed",
+    "consumer_upgrade": "not performed"
+  }
+}

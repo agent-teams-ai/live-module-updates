@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "scope": "Immutable historical and campaign packets remain durably in the source repository; not duplicated inside the current transfer.",
+  "packets": [
+    {
+      "name": "standalone-live-library-deepening-20261122.tar.gz",
+      "bytes": 5384666,
+      "sha256": "30ac307e967b28c341ae9d04d9863442d9aa6ea69921001f07dfb47f1483f9a7",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "archivePath": "docs/research/evidence/standalone-live-library-deepening-20261122.tar.gz",
+      "manifestPath": "docs/research/evidence/standalone-live-library-deepening-20261122.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/evidence/standalone-live-library-deepening-20261122.tar.gz",
+      "treatment": "immutable sibling evidence; do not overlay current project files"
+    },
+    {
+      "name": "module-federation-research-supplement-20261122.tar.gz",
+      "bytes": 663845,
+      "sha256": "8da74ec8776654caed6c359af25a1b69b9b7e45c689f27ecab176540abac6449",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "archivePath": "docs/research/evidence/module-federation-research-supplement-20261122.tar.gz",
+      "manifestPath": "docs/research/evidence/module-federation-research-supplement-20261122.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/evidence/module-federation-research-supplement-20261122.tar.gz",
+      "treatment": "immutable sibling evidence; do not overlay current project files"
+    },
+    {
+      "name": "live-extension-audit-checkpoint2-20261123.tar.gz",
+      "bytes": 371754,
+      "sha256": "09f1e923dd7d9ad84d10bcf116958b0100df42cd8e0f8e3a54e7c634b1174140",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "archivePath": "docs/research/evidence/live-extension-audit-checkpoint2-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-extension-audit-checkpoint2-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/evidence/live-extension-audit-checkpoint2-20261123.tar.gz",
+      "treatment": "immutable sibling evidence; do not overlay current project files"
+    },
+    {
+      "name": "live-extension-audit-reviews-20261123.tar.gz",
+      "bytes": 31242,
+      "sha256": "512b704b75a9f899db16197727697f256e42b34b211bed657f97a6a440f7876c",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "archivePath": "docs/research/evidence/live-extension-audit-reviews-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-extension-audit-reviews-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/evidence/live-extension-audit-reviews-20261123.tar.gz",
+      "treatment": "immutable sibling evidence; do not overlay current project files"
+    },
+    {
+      "name": "live-module-design-plan-20261123.tar.gz",
+      "bytes": 6124,
+      "sha256": "fbddc7c4f56502341abc8e75e15325de3457dd76039c8a18ba7b31964c2d125e",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "cc07959309f65ab2401f838c982911743075fe1e",
+      "archivePath": "docs/research/evidence/live-module-design-plan-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-module-design-plan-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/cc07959309f65ab2401f838c982911743075fe1e/docs/research/evidence/live-module-design-plan-20261123.tar.gz",
+      "treatment": "immutable planning evidence; not executed results"
+    },
+    {
+      "name": "live-module-design-review-20261123.tar.gz",
+      "bytes": 70573,
+      "sha256": "72d46bab76bf6d5056001e7737c6e7e67c5f49dc59de2a67af921a5d594a5175",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "cc07959309f65ab2401f838c982911743075fe1e",
+      "archivePath": "docs/research/evidence/live-module-design-review-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-module-design-review-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/cc07959309f65ab2401f838c982911743075fe1e/docs/research/evidence/live-module-design-review-20261123.tar.gz",
+      "treatment": "immutable source research and preparation reviews; preserve original evidence classes"
+    },
+    {
+      "name": "live-module-contracts-v1-input-20261123.tar.gz",
+      "bytes": 144946,
+      "sha256": "5db80d05009fe298a6cc6d8a1a628a17c80fc8e429beb3dab811ecb5d1db99b1",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "cc07959309f65ab2401f838c982911743075fe1e",
+      "archivePath": "docs/research/evidence/live-module-contracts-v1-input-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-module-contracts-v1-input-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/cc07959309f65ab2401f838c982911743075fe1e/docs/research/evidence/live-module-contracts-v1-input-20261123.tar.gz",
+      "treatment": "immutable 97-file campaign input; archived workflow is preparation evidence, not the corrected executed workflow"
+    },
+    {
+      "name": "live-module-contracts-first-delivery-failure-20261123.tar.gz",
+      "bytes": 22802,
+      "sha256": "8c42813e08bf933a33be06a768c38607cc1c16d6ec3c64a4b54fdcfdb24802da",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "cc07959309f65ab2401f838c982911743075fe1e",
+      "archivePath": "docs/research/evidence/live-module-contracts-first-delivery-failure-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-module-contracts-first-delivery-failure-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/cc07959309f65ab2401f838c982911743075fe1e/docs/research/evidence/live-module-contracts-first-delivery-failure-20261123.tar.gz",
+      "treatment": "immutable original logs: native tests passed but artifact delivery failed; missing observation JSON is not reconstructed"
+    },
+    {
+      "name": "live-module-contracts-context-failure-20261123.tar.gz",
+      "bytes": 7113,
+      "sha256": "bc4817c96318b3cd4ef38f12d54abaaf2995394ce9f95155121d9e141f897317",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "cc07959309f65ab2401f838c982911743075fe1e",
+      "archivePath": "docs/research/evidence/live-module-contracts-context-failure-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-module-contracts-context-failure-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/cc07959309f65ab2401f838c982911743075fe1e/docs/research/evidence/live-module-contracts-context-failure-20261123.tar.gz",
+      "treatment": "immutable workflow-validation failure: zero jobs and zero native executions"
+    },
+    {
+      "name": "live-module-contracts-results-20261123.tar.gz",
+      "bytes": 691662,
+      "sha256": "52ebb4aea355ae338cbc99d40f392cd85b1f600adb5c0e2c9efe1db82f0f73a8",
+      "sourceRepository": "agent-teams-ai/extension-foundation",
+      "sourceCommit": "cc07959309f65ab2401f838c982911743075fe1e",
+      "archivePath": "docs/research/evidence/live-module-contracts-results-20261123.tar.gz",
+      "manifestPath": "docs/research/evidence/live-module-contracts-results-20261123.manifest.json",
+      "archiveUrl": "https://github.com/agent-teams-ai/extension-foundation/blob/cc07959309f65ab2401f838c982911743075fe1e/docs/research/evidence/live-module-contracts-results-20261123.tar.gz",
+      "treatment": "immutable delivered results and independent review for run 45208310980 at b86e05988334f657d933fa412a02572b455dcd7e; 3 tests, 6 cases, 66 comparisons"
+    }
+  ]
+}

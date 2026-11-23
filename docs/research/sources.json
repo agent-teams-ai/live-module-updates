@@ -1,0 +1,1138 @@
+{
+  "schema": "live-module-design.industry-sources.v1",
+  "created_at_utc": "2026-11-23 15:07:00 UTC",
+  "baseline_head": "f285333c5869b1f69070efee29b205da8fd19e49",
+  "native_experiments_in_this_lane": 0,
+  "source_anchors": [
+    {
+      "path": "packages/effect/src/Layer.ts",
+      "anchors": [
+        {
+          "term": "const memoMapObserve",
+          "line": 270
+        },
+        {
+          "term": "class MemoMapImpl",
+          "line": 418
+        },
+        {
+          "term": "readonly map =",
+          "line": 429
+        },
+        {
+          "term": "export const forkMemoMap =",
+          "line": 579
+        },
+        {
+          "term": "export const buildWithMemoMap",
+          "line": 662
+        },
+        {
+          "term": "Install the exit handler",
+          "line": 449
+        }
+      ]
+    },
+    {
+      "path": "packages/effect/src/Scope.ts",
+      "anchors": [
+        {
+          "term": "Closing a scope that is already closed",
+          "line": 497
+        },
+        {
+          "term": "export const close:",
+          "line": 523
+        },
+        {
+          "term": "export const closeUnsafe",
+          "line": 551
+        },
+        {
+          "term": "Ignoring the returned effect",
+          "line": 541
+        }
+      ]
+    },
+    {
+      "path": "src/framework/piral-base/src/types/runtime.ts",
+      "anchors": [
+        {
+          "term": "setup(api",
+          "line": 76
+        },
+        {
+          "term": "teardown?",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "path": "src/framework/piral-core/src/utils/state.ts",
+      "anchors": [
+        {
+          "term": "export function withoutPage",
+          "line": 42
+        },
+        {
+          "term": "export function withoutExtension",
+          "line": 74
+        }
+      ]
+    }
+  ],
+  "package_metadata_snapshots": {
+    "piral": {
+      "retrieved_at_utc": "2026-11-23T14:53:47.323753+00:00",
+      "metadata": [
+        {
+          "name": "piral",
+          "version": "1.12.5",
+          "gitHead": "15af4fd41e049b5880916af81e130cf22e6ac44b",
+          "exports": {
+            ".": "./lib/index.js",
+            "./lib/*": {
+              "types": "./lib/*.d.ts",
+              "import": "./lib/*"
+            },
+            "./polyfills": "./polyfills.js",
+            "./package.json": "./package.json"
+          },
+          "main": "lib/index.js",
+          "module": "lib/index.js",
+          "dependencies": {
+            "react": "^18.0.0",
+            "piral-ext": "^1.12.5",
+            "react-dom": "^18.0.0",
+            "piral-base": "^1.12.5",
+            "piral-core": "^1.12.5",
+            "react-router": "^5.2.0",
+            "react-router-dom": "^5.2.0"
+          },
+          "peerDependencies": null,
+          "peerDependenciesMeta": null,
+          "scripts": {
+            "test": "echo \"Error: run tests from root\" && exit 1",
+            "build": "yarn build:esnext",
+            "typedoc": "typedoc --json ../../../docs/types/piral.json src --exclude \"src/**/*.test.*\"",
+            "build:esnext": "tsc --project tsconfig.json --outDir lib --module esnext"
+          }
+        },
+        {
+          "name": "piral-core",
+          "version": "1.12.5",
+          "gitHead": "15af4fd41e049b5880916af81e130cf22e6ac44b",
+          "exports": {
+            ".": "./lib/index.js",
+            "./lib/*": {
+              "types": "./lib/*.d.ts",
+              "import": "./lib/*"
+            },
+            "./app.codegen": "./app.codegen",
+            "./package.json": "./package.json",
+            "./styles/sheet.css": "./styles/sheet.css"
+          },
+          "main": "lib/index.js",
+          "module": "lib/index.js",
+          "dependencies": {
+            "zustand": "^3.0.0",
+            "piral-base": "^1.12.5",
+            "piral-debug-utils": "^1.12.5"
+          },
+          "peerDependencies": null,
+          "peerDependenciesMeta": null,
+          "scripts": {
+            "test": "echo \"Error: run tests from root\" && exit 1",
+            "build": "yarn build:esnext && yarn build:codegen",
+            "cleanup": "rimraf dist esm lib",
+            "typedoc": "typedoc --json ../../../docs/types/piral-core.json src --exclude \"src/**/*.test.*\"",
+            "build:esnext": "tsc --project tsconfig.json --outDir lib --module esnext",
+            "build:codegen": "esbuild src/tools/codegen.ts --bundle --outfile=lib/codegen.js --format=cjs --platform=node --external:pnpapi"
+          }
+        },
+        {
+          "name": "piral-base",
+          "version": "1.12.5",
+          "gitHead": "15af4fd41e049b5880916af81e130cf22e6ac44b",
+          "exports": {
+            ".": {
+              "node": "./dist/piral-base-node.js",
+              "types": "./lib/index.full.d.ts",
+              "import": "./dist/piral-base-full.mjs",
+              "require": "./dist/piral-base-node.js"
+            },
+            "./full": {
+              "types": "./lib/index.full.d.ts",
+              "import": "./dist/piral-base-full.mjs"
+            },
+            "./node": {
+              "types": "./lib/index.node.d.ts",
+              "require": "./dist/piral-base-node.js"
+            },
+            "./lib/*": "./lib/*.d.ts",
+            "./minimal": {
+              "types": "./lib/index.minimal.d.ts",
+              "import": "./dist/piral-base-minimal.mjs"
+            },
+            "./package.json": "./package.json"
+          },
+          "main": "dist/piral-base-node.js",
+          "module": "dist/piral-base-full.mjs",
+          "dependencies": {
+            "tslib": "^2.3.1"
+          },
+          "peerDependencies": null,
+          "peerDependenciesMeta": null,
+          "scripts": {
+            "test": "echo \"Error: run tests from root\" && exit 1",
+            "build": "yarn build:node && yarn build:full && yarn build:minimal && tsc --project tsconfig.json",
+            "cleanup": "rimraf dist esm lib",
+            "typedoc": "typedoc src/index.full.ts --json ../../../docs/types/piral-base.json src --exclude \"src/**/*.test.*\"",
+            "build:full": "esbuild src/index.full.ts --bundle --outfile=dist/piral-base-full.mjs --platform=browser --format=esm --external:tslib --target=es2020",
+            "build:node": "esbuild src/index.node.ts --bundle --outfile=dist/piral-base-node.js --platform=node --format=cjs --external:tslib --target=es2020",
+            "build:minimal": "esbuild src/index.minimal.ts --bundle --outfile=dist/piral-base-minimal.mjs --platform=browser --format=esm --external:tslib --target=es2020"
+          }
+        },
+        {
+          "name": "piral-debug-utils",
+          "version": "1.12.5",
+          "gitHead": "15af4fd41e049b5880916af81e130cf22e6ac44b",
+          "exports": {
+            ".": "./lib/index.js",
+            "./debug": "./lib/debug.js",
+            "./lib/*": {
+              "types": "./lib/*.d.ts",
+              "import": "./lib/*"
+            },
+            "./emulator": "./lib/emulator.js",
+            "./package.json": "./package.json"
+          },
+          "main": "lib/index.js",
+          "module": "lib/index.js",
+          "dependencies": null,
+          "peerDependencies": null,
+          "peerDependenciesMeta": null,
+          "scripts": {
+            "test": "echo \"Error: run tests from root\" && exit 1",
+            "build": "yarn build:esnext",
+            "cleanup": "rimraf esm lib",
+            "typedoc": "typedoc --json ../../../docs/types/piral-debug-utils.json src --exclude \"src/**/*.test.*\"",
+            "build:esnext": "tsc --project tsconfig.json --outDir lib --module esnext"
+          }
+        }
+      ]
+    },
+    "families": {
+      "retrieved_at_utc": "2026-11-23T14:57:48.899569+00:00",
+      "metadata": [
+        {
+          "url": "https://registry.npmjs.org/@module-federation/runtime/latest",
+          "name": "@module-federation/runtime",
+          "version": "2.9.3",
+          "gitHead": null,
+          "repository": {
+            "url": "git+https://github.com/module-federation/core.git",
+            "type": "git",
+            "directory": "packages/runtime"
+          },
+          "integrity": "sha512-VCJV1VzKk+jvt+1CcTrslbl3LAKScHFpPxKSviafpMIqeHDWIDEY7ZEbVVJl/GuUjA36R7j0QhOPEjihPcz9/A==",
+          "selected_dependencies": {
+            "@module-federation/runtime-core": "2.9.3"
+          }
+        },
+        {
+          "url": "https://registry.npmjs.org/@softarc/native-federation/latest",
+          "name": "@softarc/native-federation",
+          "version": "4.10.1",
+          "gitHead": null,
+          "repository": {
+            "url": "git+https://github.com/native-federation/native-federation-core.git",
+            "type": "git"
+          },
+          "integrity": "sha512-c0khoJzzQIwdUU0IEQJea4jLlubp4rKR16eUsgGhRhzHGrs7ngz5tPW5wCenmUpB6ZMdUlPUlz7oD/P3dIO+aw==",
+          "selected_dependencies": {
+            "typescript": ">=5.0.0 <7"
+          }
+        },
+        {
+          "url": "https://registry.npmjs.org/@softarc/native-federation-orchestrator/latest",
+          "name": "@softarc/native-federation-orchestrator",
+          "version": "4.10.2",
+          "gitHead": null,
+          "repository": {
+            "url": "git+https://github.com/native-federation/orchestrator.git",
+            "type": "git"
+          },
+          "integrity": "sha512-Q38qg/BLZA74TcczHt6flGRYyNOxWn6hbTNHkbJNxZerRQgXujT1ZsQ51GCttxrfkQX0Cp1wWvinssrOmR9F5A==",
+          "selected_dependencies": {}
+        },
+        {
+          "url": "https://registry.npmjs.org/oc/latest",
+          "name": "oc",
+          "version": "0.50.67",
+          "gitHead": "5aa450735335fac676ea319241aac36b87446a72",
+          "repository": {
+            "url": "git+https://github.com/opencomponents/oc.git",
+            "type": "git"
+          },
+          "integrity": "sha512-gdn3gVgEAwT5mcAAakKK1hs35c6LSQdC4uIZNaOfKs95x164fqP28oEsRJkBGfVYUO7CtKsESaf1cpd/Oh7VTA==",
+          "selected_dependencies": {
+            "oc-client": "^4.0.4",
+            "oc-client-browser": "^2.1.13"
+          }
+        },
+        {
+          "url": "https://registry.npmjs.org/oc-client-browser/latest",
+          "name": "oc-client-browser",
+          "version": "2.1.13",
+          "gitHead": "806b6a08d16d583a75dcdc5adb3266076e615dfd",
+          "repository": {
+            "url": "git+https://github.com/opencomponents/oc.git",
+            "type": "git",
+            "directory": "packages/oc-client-browser"
+          },
+          "integrity": "sha512-R4LE4TUdh02kWqP/nqk8NKFZLEIQPWqgtiB58aGtb9rrIF4eExTpkN34vce1CxGYo4X1fwpBs7vFOSJNxqwCNA==",
+          "selected_dependencies": {}
+        },
+        {
+          "url": "https://registry.npmjs.org/oc-client/latest",
+          "name": "oc-client",
+          "version": "4.0.4",
+          "gitHead": "8e464ac02ab8f4e02e436318960966b44a623a61",
+          "repository": {
+            "url": "git+https://github.com/opencomponents/oc-client-node.git",
+            "type": "git"
+          },
+          "integrity": "sha512-87p6Qdsm4qazuZ2fCsWwBz/s0y4XW2IDw6N8TxdZ1MW6xit+M+du/yrHgpE8FOAIpAy3a13ld8XU02sBaymTdA==",
+          "selected_dependencies": {
+            "oc-client-browser": "1.5.4"
+          }
+        }
+      ]
+    },
+    "effect": {
+      "retrieved_at_utc": "2026-11-23T14:57:06.997953+00:00",
+      "url": "https://registry.npmjs.org/effect/latest",
+      "name": "effect",
+      "version": "4.1.5",
+      "gitHead": null,
+      "repository": {
+        "url": "https://github.com/Effect-TS/effect.git",
+        "type": "git",
+        "directory": "packages/effect"
+      },
+      "dependencies": null,
+      "integrity": "sha512-xyR20KhQI0vg2gD8ILUSQRTTESEYJ0JKdP+QD8J37xbwPTqXRxFM/l0+vUVD9fuSvoYruoTqyt33C4FZv1s4TQ=="
+    },
+    "codegen": {
+      "retrieved_at_utc": "2026-11-23T15:05:06.279052+00:00",
+      "metadata": [
+        {
+          "url": "https://registry.npmjs.org/piral-cli-vite8/latest",
+          "name": "piral-cli-vite8",
+          "version": "1.0.0",
+          "gitHead": "ac874a5fd39a6d35a47ce21d91c10668d3ff15b6",
+          "repository": {
+            "url": "git+https://github.com/smapiot/piral-cli-vite8.git",
+            "type": "git"
+          },
+          "main": "lib/index.js",
+          "module": null,
+          "exports": null,
+          "dependencies": {
+            "sass": "^1",
+            "vite": "^8",
+            "cheerio": "^1",
+            "@babel/core": "^7",
+            "magic-string": "^0.30.5",
+            "vite-plugin-codegen": "^2",
+            "vite-plugin-environment": "^1",
+            "@jridgewell/sourcemap-codec": "^1.4.15",
+            "@babel/plugin-transform-dynamic-import": "^7",
+            "@babel/plugin-transform-modules-systemjs": "^7"
+          },
+          "peerDependencies": null,
+          "integrity": "sha512-UtjaVuFGUowCKnPZ9EYJ6kdyVrhG4ajeVUPh6P/xz9OubEY/1yWHHI/qF73D08WadPZNRddY8KpXr3LP1/rIGw=="
+        },
+        {
+          "url": "https://registry.npmjs.org/vite-plugin-codegen/latest",
+          "name": "vite-plugin-codegen",
+          "version": "2.1.0",
+          "gitHead": "7f623fa40a8f5742464b8e36dde897e96f8c4367",
+          "repository": {
+            "url": "git+https://github.com/FlorianRappl/codegen-js.git",
+            "type": "git"
+          },
+          "main": "lib/cjs/index.cjs",
+          "module": "lib/esm/index.mjs",
+          "exports": {
+            ".": {
+              "types": "./lib/index.d.ts",
+              "import": "./lib/esm/index.mjs",
+              "require": "./lib/cjs/index.cjs"
+            },
+            "./package.json": "./package.json"
+          },
+          "dependencies": null,
+          "peerDependencies": null,
+          "integrity": "sha512-HY5CflBWBSXW0vh1YhHP4suKDTgxtcUGWsUPWR/4xKAqI4jnX+6dz9dAohWA5pGeKHv8tmZa+pXCvhvmljdzdw=="
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "P01",
+      "title": "Piral declared lifecycle return contracts",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-base/src/types/runtime.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "setup accepts void or Promise<void>; teardown returns void."
+      ],
+      "limits": [
+        "Async teardown is an explicit cooperative extension, not an upstream awaited-Promise guarantee."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P02",
+      "title": "Piral selection and injection order",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/actions/app.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "addPilet loads, injects/removes same-name managed registrations and emits unload, then runs setup."
+      ],
+      "limits": [
+        "Emission/call order does not prove completed predecessor teardown."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P03",
+      "title": "Piral setup rejection handling",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-base/src/lifecycle/setup.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "setupSinglePilet logs synchronous errors and caught Promise rejection."
+      ],
+      "limits": [
+        "Readiness needs its selected explicit contract; no blanket statement about every shell integration."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P04",
+      "title": "Piral cleanup actions",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-base/src/lifecycle/cleanup.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Managed cleanup calls teardown and removes selected pilet-owned loader/style references; arbitrary async teardown is not awaited."
+      ],
+      "limits": [
+        "Matches the declared void boundary; no vendor Promise bug asserted."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P05",
+      "title": "Piral registration disposers",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/modules/core.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Page disposer captures route; extension disposer captures name plus reference.",
+        "Shell data APIs and actual registration helpers already exist."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "P06",
+      "title": "Piral registration actions",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/actions/components.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "unregisterPage forwards a route; unregisterExtension forwards name and reference."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "P07",
+      "title": "Piral deletion predicates",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/utils/state.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "withoutPage removes by key; withoutExtension filters reference equality."
+      ],
+      "limits": [
+        "Delayed same-route disposer race is source-predicted, not executed by this lane; synchronous intended ownership is a valid use."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P08",
+      "title": "Piral public root exports",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/index.tsx",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Root reexports createInstance, state and public types."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "P09",
+      "title": "Piral public instance creation",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/createInstance.tsx",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Accepts loadPilet and returns actual context/actions, options and root API."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "P10",
+      "title": "Piral public configuration",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/types/config.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "loadPilet is a public PiletLoader hook; initial state/components are configurable."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "P11",
+      "title": "Piral public action/state observation",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/types/state.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Public context exposes addPilet, removePilet and readState; registry types include pilet-owned page registrations."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "P12",
+      "title": "Piral published codegen entry",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/app.codegen",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Entry is a generator calling the bundled codegen implementation to emit default state/router/debug/dependency code."
+      ],
+      "limits": [
+        "Plain bundling needs a real codegen transform; no handwritten substitute is qualified."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P13",
+      "title": "Piral generation implementation",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/tools/codegen.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Generates actual defaults and version-specific router integration; handles React Router 5 through 8 and Wouter in this source."
+      ],
+      "limits": [
+        "The spike selects one exact React18/Router5 cohort; broad cross-router support is not newly qualified."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P14",
+      "title": "Piral root renderer",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/Piral.tsx",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Public Piral component composes its context, registered router and actual view."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "P15",
+      "title": "Piral initial loading barrier",
+      "exact_url": "https://github.com/smapiot/piral/blob/15af4fd41e049b5880916af81e130cf22e6ac44b/src/framework/piral-core/src/components/Mediator.tsx",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "piral-core/piral-base",
+        "release": "1.12.5",
+        "source_commit": "15af4fd41e049b5880916af81e130cf22e6ac44b"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Initial loader notifier calls initialize and emits loaded-pilets."
+      ],
+      "limits": [
+        "Dynamic fixture updates must occur after this actual startup barrier."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "E01",
+      "title": "Effect Scope completion contract",
+      "exact_url": "https://github.com/Effect-TS/effect/blob/e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8/packages/effect/src/Scope.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "effect",
+        "release": "4.1.5",
+        "source_commit": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8",
+        "tag": "effect@4.1.5"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Second close returns immediately when already closed, even while prior finalizers run.",
+        "closeUnsafe requires execution of its returned finalizer effect."
+      ],
+      "limits": [
+        "Fresh source research, not an upgrade of Get Modular's retained Effect peer profile.",
+        "Native test is proposed separately; closed state alone is not joined retirement."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "E02",
+      "title": "Effect Layer MemoMap and child reuse",
+      "exact_url": "https://github.com/Effect-TS/effect/blob/e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8/packages/effect/src/Layer.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "effect",
+        "release": "4.1.5",
+        "source_commit": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8",
+        "tag": "effect@4.1.5"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Map keys are Layer object identities; forkMemoMap can reuse parent entries while isolating new allocations in the child.",
+        "Observer count/finalizer registration are paired synchronously; exit observer installed before publishing a new shared entry."
+      ],
+      "limits": [
+        "Fresh source research, not an upgrade of Get Modular's retained Effect peer profile.",
+        "Internal mechanism is evidence for public reuse, not permission to import or copy private implementation.",
+        "Layer sharing does not choose application semantic compatibility."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "E03",
+      "title": "Effect public fiber scheduling",
+      "exact_url": "https://github.com/Effect-TS/effect/blob/e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8/packages/effect/src/Effect.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "effect",
+        "release": "4.1.5",
+        "source_commit": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8",
+        "tag": "effect@4.1.5"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Public forkChild, forkScoped, forkDetach and runPromise have distinct lifetime boundaries."
+      ],
+      "limits": [
+        "Fresh source research, not an upgrade of Get Modular's retained Effect peer profile.",
+        "Only source-read recipe for the planned close discriminator."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "E04",
+      "title": "Effect public gates",
+      "exact_url": "https://github.com/Effect-TS/effect/blob/e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8/packages/effect/src/Deferred.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "effect",
+        "release": "4.1.5",
+        "source_commit": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8",
+        "tag": "effect@4.1.5"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Public make, succeed and await support explicit entered/release ordering."
+      ],
+      "limits": [
+        "Fresh source research, not an upgrade of Get Modular's retained Effect peer profile."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "E05",
+      "title": "Effect public completion observation",
+      "exact_url": "https://github.com/Effect-TS/effect/blob/e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8/packages/effect/src/Fiber.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "effect",
+        "release": "4.1.5",
+        "source_commit": "e3aca1f1484e623cee09b7f3fa18d6ff5d66c0e8",
+        "tag": "effect@4.1.5"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Public join/await observe actual fiber completion; unsafe poll is unnecessary for the proposed fixture."
+      ],
+      "limits": [
+        "Fresh source research, not an upgrade of Get Modular's retained Effect peer profile."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "E06",
+      "title": "Effect layer memoization guide",
+      "exact_url": "https://effect.website/docs/v4/requirements-management/layer-memoization",
+      "evidence_class": "primary_official_documentation",
+      "cohort": {
+        "docs": "v4"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Reference identity, explicit MemoMap and fresh layers are existing mechanisms."
+      ],
+      "limits": [
+        "Mutable docs are separate from exact source and executed cohort."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "E07",
+      "title": "Effect September concurrency correction history",
+      "exact_url": "https://effect.website/blog/effect-v4-rc-september-recap",
+      "evidence_class": "primary_upstream_release_report",
+      "cohort": {
+        "updated": "2026-10-01",
+        "historical_status": "reported fixed"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Upstream reports fixes for cleanup-registration interruption gaps and shared-layer interruption hangs/leaks."
+      ],
+      "limits": [
+        "Historical fixed issues; exact original affected commit and an independent reproduction are not established here. Not claimed as current defects."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "G01",
+      "title": "Public Resources ownership and completion",
+      "exact_url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/resources/README.md",
+      "evidence_class": "primary_source_documentation",
+      "cohort": {
+        "package": "@get-modular/resources",
+        "release": "0.2.2",
+        "source_commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "One close flight per scope; repeated calls join; failed cleanup can be retried and debt remains reported.",
+        "Abandon stops a caller's wait, not the flight; complete means registered callback success, not independently proven physical release."
+      ],
+      "limits": [
+        "Latest repo source and installed published package must have separate identity receipts.",
+        "Resources is not atomic invocation-plus-retention admission or a plugin update kernel."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "G02",
+      "title": "Public Resources exports",
+      "exact_url": "https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/packages/resources/src/index.ts",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "package": "@get-modular/resources",
+        "release": "0.2.2",
+        "source_commit": "850bac5fd02fa5697846cc8958ac447d5c2ee7bb"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Root exports createScope, scoped, error codes/types, registration and control contracts."
+      ],
+      "limits": [
+        "No private lifecycle kernel import proposed."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "O01",
+      "title": "OSGi dynamic reference replacement ordering",
+      "exact_url": "https://docs.osgi.org/specification/osgi.cmpn/8.1.0/service.component.html",
+      "evidence_class": "primary_versioned_specification",
+      "cohort": {
+        "spec": "OSGi Compendium 8.1.0 / DS 1.5",
+        "section": "112.5.12"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Dynamic unary replacement binds new before unbinding old; old unbind must not overwrite new binding."
+      ],
+      "limits": [
+        "Per-reference continuity does not establish whole-cohort atomicity; no Java runtime executed."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "O02",
+      "title": "OSGi reference selection policy",
+      "exact_url": "https://docs.osgi.org/javadoc/osgi.cmpn/8.1.0/org/osgi/service/component/annotations/ReferencePolicyOption.html",
+      "evidence_class": "primary_versioned_specification",
+      "cohort": {
+        "spec": "OSGi Compendium 8.1.0"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Greedy and reluctant behavior distinguish availability of a better target from rebinding policy."
+      ],
+      "limits": [
+        "OSGi's defaults are not selected for this library."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "T01",
+      "title": "OTP atomic module loading and retirement boundary",
+      "exact_url": "https://github.com/erlang/otp/blob/d199a49a01a2079afb6f2c5c9ae047cd4555e68d/lib/kernel/src/code.erl",
+      "evidence_class": "primary_source_static",
+      "cohort": {
+        "release": "OTP-29.1.2",
+        "source_commit": "d199a49a01a2079afb6f2c5c9ae047cd4555e68d",
+        "tag_object": "faae228dc28c60b848c775c079ec5700b90436bd"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "prepare_loading/finish_loading and atomic_load give an actual module-set load boundary and explicit failure reasons.",
+        "soft_purge refuses while the VM detects lingering direct code references."
+      ],
+      "limits": [
+        "No equivalent JS runtime guarantee claimed; does not reverse state migration or external effects.",
+        "VM purge's definition of references is narrower than every future application callback/asset hold."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "T02",
+      "title": "OTP current documentation cohort",
+      "exact_url": "https://www.erlang.org/doc/apps/kernel/code.html",
+      "evidence_class": "primary_official_documentation",
+      "cohort": {
+        "observed_release": "OTP 29.1.2",
+        "kernel": "11.0.4"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Atomic load excludes on_load modules and can reject not_purged; prepare/finish separates work."
+      ],
+      "limits": [
+        "Source pin T01 is the stable identity used for transfer; no OTP execution here."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "N01",
+      "title": "Native Federation committed mapping policy",
+      "exact_url": "https://github.com/native-federation/orchestrator/blob/d1502d3b99e1164c79c0946296caad2cd9ee8068/docs/version-resolver.md",
+      "evidence_class": "retained_primary_source_documentation",
+      "cohort": {
+        "source_commit": "d1502d3b99e1164c79c0946296caad2cd9ee8068",
+        "source_package_version": "4.10.0",
+        "published_version": "4.10.2"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Dynamic init is additive against committed mappings and does not override a known remote."
+      ],
+      "limits": [
+        "Retained source review, current package metadata rechecked; source/tarball equivalence not asserted."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "N02",
+      "title": "Native Federation staged rollback",
+      "exact_url": "https://github.com/native-federation/orchestrator/blob/d1502d3b99e1164c79c0946296caad2cd9ee8068/src/lib/core/2.app/steps/rollback-changes.ts",
+      "evidence_class": "retained_primary_source_static",
+      "cohort": {
+        "source_commit": "d1502d3b99e1164c79c0946296caad2cd9ee8068"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Existing rollback targets specific staged repositories and survives logger failure."
+      ],
+      "limits": [
+        "Not host/UI/canonical-data rollback."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "N03",
+      "title": "Native Federation map acknowledgment",
+      "exact_url": "https://github.com/native-federation/orchestrator/blob/d1502d3b99e1164c79c0946296caad2cd9ee8068/src/lib/core/2.app/steps/commit-changes.ts",
+      "evidence_class": "retained_primary_source_static",
+      "cohort": {
+        "source_commit": "d1502d3b99e1164c79c0946296caad2cd9ee8068"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "A Promise returned by setImportMapFn is intentionally observed separately from repository commit."
+      ],
+      "limits": [
+        "A source-scoped design boundary, not a general vendor defect."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "C01",
+      "title": "OpenComponents browser lifecycle",
+      "exact_url": "https://github.com/opencomponents/oc/blob/806b6a08d16d583a75dcdc5adb3266076e615dfd/packages/oc-client-browser/src/oc-client.js",
+      "evidence_class": "retained_primary_source_static",
+      "cohort": {
+        "package": "oc-client-browser",
+        "release": "2.1.13",
+        "source_commit": "806b6a08d16d583a75dcdc5adb3266076e615dfd"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Disconnect delays cleanup and skips it after reconnection; available unmount is invoked in the selected managed profile.",
+        "Inspected ESM mount/unmount path does not await arbitrary returned Promise."
+      ],
+      "limits": [
+        "Separate oc-client@4.0.4 pins browser 1.5.4; current metadata rechecked. No blanket async Promise contract defect inferred."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "D01",
+      "title": "Zephyr rollback and actual client adoption",
+      "exact_url": "https://docs.zephyr-cloud.io/features/instant-rollbacks",
+      "evidence_class": "retained_primary_official_documentation",
+      "cohort": {
+        "read_in_prior_pass": "2026-11-23"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Routing rollback and adoption by already-running clients are separate."
+      ],
+      "limits": [
+        "Not application-state or external-effect reversal."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "D02",
+      "title": "Zephyr renderer update profile",
+      "exact_url": "https://docs.zephyr-cloud.io/features/electron-ota-updates",
+      "evidence_class": "retained_primary_official_documentation",
+      "cohort": {
+        "status": "Electron OTA Beta",
+        "read_in_prior_pass": "2026-11-23"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Existing real renderer update/prompt flow must be credited."
+      ],
+      "limits": [
+        "Not main/preload/native update; no execution here."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "Q01",
+      "title": "Engineering Quality Standard",
+      "exact_url": "https://github.com/agent-teams-ai/.github/blob/0b44c64c824f536bd1b085341e7669bcc64ef124/docs/engineering-quality-standard.md",
+      "evidence_class": "primary_owner_guidance",
+      "cohort": {
+        "source_commit": "0b44c64c824f536bd1b085341e7669bcc64ef124"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "TS>=7.0.2 includes embedded compiler APIs; explicit owner/custody boundaries; findings do not prove adoption."
+      ],
+      "limits": [],
+      "new_native_execution": false
+    },
+    {
+      "id": "B01",
+      "title": "Current system map",
+      "local_path": "/workspace/scratch/95e187720be1/live-update-value-validation/docs/architecture/live-extension-system-map.md",
+      "evidence_class": "baseline_repository_evidence",
+      "repository_head": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "claims": [
+        "Retain existing source/native scope; no duplicate campaign or adoption by this report."
+      ],
+      "new_native_execution": false,
+      "exact_url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/architecture/live-extension-system-map.md"
+    },
+    {
+      "id": "B02",
+      "title": "Current ready-stack comparison",
+      "local_path": "/workspace/scratch/95e187720be1/live-update-value-validation/docs/research/live-update-ready-stack-comparison-2026-11-23.md",
+      "evidence_class": "baseline_repository_evidence",
+      "repository_head": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "claims": [
+        "Retain existing source/native scope; no duplicate campaign or adoption by this report."
+      ],
+      "new_native_execution": false,
+      "exact_url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-ready-stack-comparison-2026-11-23.md"
+    },
+    {
+      "id": "B03",
+      "title": "Existing reliability and Resources qualification",
+      "local_path": "/workspace/scratch/95e187720be1/live-update-value-validation/docs/research/live-update-reliability-and-industry-evidence-2026-11-22.md",
+      "evidence_class": "baseline_repository_evidence",
+      "repository_head": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "claims": [
+        "Retain existing source/native scope; no duplicate campaign or adoption by this report."
+      ],
+      "new_native_execution": false,
+      "exact_url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-reliability-and-industry-evidence-2026-11-22.md"
+    },
+    {
+      "id": "B04",
+      "title": "Earlier mature runtime contracts",
+      "local_path": "/workspace/scratch/95e187720be1/live-update-value-validation/docs/research/live-plugin-evolution-final-research-and-architecture-2026-11-17.md",
+      "evidence_class": "baseline_repository_evidence",
+      "repository_head": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "claims": [
+        "Retain existing source/native scope; no duplicate campaign or adoption by this report."
+      ],
+      "new_native_execution": false,
+      "exact_url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-plugin-evolution-final-research-and-architecture-2026-11-17.md"
+    },
+    {
+      "id": "B05",
+      "title": "Prior MF and SystemJS native evidence",
+      "local_path": "/workspace/scratch/95e187720be1/live-update-value-validation/docs/research/module-federation-update-boundaries-and-architecture-options-2026-11-22.md",
+      "evidence_class": "baseline_repository_evidence",
+      "repository_head": "f285333c5869b1f69070efee29b205da8fd19e49",
+      "claims": [
+        "Retain existing source/native scope; no duplicate campaign or adoption by this report."
+      ],
+      "new_native_execution": false,
+      "exact_url": "https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/module-federation-update-boundaries-and-architecture-options-2026-11-22.md"
+    },
+    {
+      "id": "P16",
+      "title": "piral-cli-vite8 published metadata",
+      "exact_url": "https://registry.npmjs.org/piral-cli-vite8/1.0.0",
+      "evidence_class": "primary_registry_metadata",
+      "cohort": {
+        "release": "1.0.0",
+        "source_commit": "ac874a5fd39a6d35a47ce21d91c10668d3ff15b6"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Official Vite8 integration depends on vite-plugin-codegen ^2."
+      ],
+      "limits": [
+        "Metadata is not installed graph or executed compatibility."
+      ],
+      "new_native_execution": false
+    },
+    {
+      "id": "P17",
+      "title": "vite-plugin-codegen published metadata",
+      "exact_url": "https://registry.npmjs.org/vite-plugin-codegen/2.1.0",
+      "evidence_class": "primary_registry_metadata",
+      "cohort": {
+        "release": "2.1.0",
+        "source_commit": "7f623fa40a8f5742464b8e36dde897e96f8c4367"
+      },
+      "retrieved_date_utc": "2026-11-23",
+      "claims": [
+        "Published root-exported build plugin has no runtime dependencies in this metadata."
+      ],
+      "limits": [
+        "Metadata is not installed graph or executed compatibility."
+      ],
+      "new_native_execution": false
+    }
+  ],
+  "cohort_limits": [
+    "Effect 4.1.5 is fresh source research; Get Modular's retained Effect 4.1.4 consumer profile is not upgraded.",
+    "Native Federation source package 4.10.0 and npm core 4.10.1/orchestrator 4.10.2 remain distinct.",
+    "Piral setup Promise support and teardown void are distinct declared contracts.",
+    "Published package metadata and source tags are not byte-for-byte tarball verification.",
+    "No private implementation is copied or imported."
+  ]
+}

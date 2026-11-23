@@ -1,0 +1,278 @@
+{
+  "schema": "live-module-design.industry-findings.v1",
+  "date": "2026-11-23",
+  "baseline_head": "f285333c5869b1f69070efee29b205da8fd19e49",
+  "status": "source_research_and_design_proposal",
+  "production_loc": 0,
+  "native_experiments_executed_by_this_lane": 0,
+  "contentious_choices": "Q1–Q7 remain OPEN",
+  "findings": [
+    {
+      "id": "I01",
+      "title": "Piral: Promise readiness и синхронный teardown — разные контракты",
+      "novelty": "new_public_type_check",
+      "evidence_class": "primary_source_static",
+      "source_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04"
+      ],
+      "observed": "setup допускает void | Promise<void>, teardown объявлен void. Runner обрабатывает и логирует ошибки setup; Promise внешнего addPilet не равнозначен успешной прикладной готовности.",
+      "proposed_transfer": "Профиль добавляет явное подтверждение полезной готовности, если библиотека должна обещать его. Асинхронное завершение пользовательской очистки требует отдельного согласованного контракта.",
+      "appropriate_upstream_use": "Устойчивая shell-композиция, где ошибка одной contribution логируется и не рушит всю загрузку.",
+      "dangerous_mapping": "Считать fulfillment addPilet готовностью, а void teardown — обещанием await произвольной асинхронной работы.",
+      "counterevidence_or_limit": "Ненаблюдаемая асинхронная очистка не означает нарушение заявленного Promise-контракта Piral: такого контракта teardown здесь нет.",
+      "contract_obligation": "Сохранять исходный результат setup и конкретную readiness-ack отдельно от действия framework.",
+      "validation": "P1/B1 proposed browser cases; not executed by this lane.",
+      "owner_choices": "Q1–Q7 remain OPEN; no production adapter or policy selected.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I02",
+      "title": "Поздний disposer должен сохранять идентичность владельца",
+      "novelty": "new_source_counterexample_with_positive_control",
+      "evidence_class": "primary_source_static_and_versioned_specification",
+      "source_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "O01"
+      ],
+      "observed": "Piral page disposer удаляет по route; extension disposer передаёт reference и удаляет совпавшую регистрацию. OSGi DS при dynamic unary rebind сначала привязывает нового провайдера, затем отвязывает старого и предупреждает не стирать новую привязку старым unbind.",
+      "proposed_transfer": "Проверять право старого cleanup изменять текущую registration по точному владельцу/ссылке. Использовать существующую identity-aware API, где она есть.",
+      "appropriate_upstream_use": "Удаление по имени достаточно при синхронном cleanup или исключительном владении именем.",
+      "dangerous_mapping": "Откладывать disposer поколения A до регистрации B с тем же именем и считать удаление по имени безопасным.",
+      "counterevidence_or_limit": "Reference-based extension removal — положительный контроль, а не blanket-оценка всего Piral. Per-reference safety не означает atomic cohort replacement.",
+      "contract_obligation": "Поддержанный bridge не скрывает generation-unaware delayed disposer; ограничивает профиль или явно отклоняет такую гарантию.",
+      "validation": "P2 proposed browser case, real page + distinct extension reference; no new execution here.",
+      "owner_choices": "Replacement/granularity/default policy choices remain OPEN.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I03",
+      "title": "Подготовка, выбор поколения и полезное UI adoption не совпадают",
+      "novelty": "new_Piral_application_of_retained_loader_evidence",
+      "evidence_class": "primary_source_static_and_retained_native_evidence",
+      "source_ids": [
+        "P02",
+        "P03",
+        "P09",
+        "P15",
+        "B05"
+      ],
+      "observed": "Piral same-name inject удаляет прежние managed registrations до завершения нового setup. Retained MF evidence отдельно показывает выполнение effects во время загрузки и сохранение старых ссылок после выбора новых.",
+      "proposed_transfer": "Профиль сообщает, возможно ли недеструктивное prepare; destructive seam получает явно ограниченный результат, а не выдуманный rollback.",
+      "appropriate_upstream_use": "Немедленная смена contributions у cooperative shell, когда disruptive semantics допустимы.",
+      "dangerous_mapping": "Обещать сохранение полезного A при любом провале B, опираясь только на отдельные методы load/add/remove.",
+      "counterevidence_or_limit": "Отдельные adapter paths могут давать более сильные возможности; они требуют собственной qualification. Initial loading завершение должно быть публично наблюдено до динамической замены в spike.",
+      "contract_obligation": "Различать requested, prepared, selected, useful и predecessor-cleanup observations с идентичностью attempt/instance.",
+      "validation": "P1/B1 proposed; prior MF 4/4 retained without rerun.",
+      "owner_choices": "Fallback and UI continuity choices remain OPEN.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I04",
+      "title": "Idempotent close не означает joined cleanup",
+      "novelty": "new_exact_Effect_source_contract",
+      "evidence_class": "primary_source_static_and_owner_documentation",
+      "source_ids": [
+        "E01",
+        "G01"
+      ],
+      "observed": "Effect 4.1.5 Scope.close документирует немедленный возврат повторного close, даже пока finalizers первого вызова выполняются. Resources 0.2.2 описывает one close flight: повторный вызов присоединяется к нему; abandon прерывает только ожидание вызывающего.",
+      "proposed_transfer": "Сохранять и наблюдать исходную native finalization flight; не подменять её повторным idempotent вызовом.",
+      "appropriate_upstream_use": "Idempotent отметка закрытия исключает повторное планирование finalizers; joinable API полезна для отчёта о конкретной очистке.",
+      "dangerous_mapping": "Нормализовать любую close():Promise/Effect в единый cleanup-complete boolean.",
+      "counterevidence_or_limit": "Это различие заявленных контрактов, не defect Effect. Даже complete Resources означает успешные callbacks, а не независимое доказательство физического release.",
+      "contract_obligation": "Раздельные факты close requested, native flight pending/settled, callback debt, independently observed physical state.",
+      "validation": "E1 proposed Node Effect case; native EventTarget + Deferred gates + join of original fiber.",
+      "owner_choices": "Optional Effect remains separate; source research does not upgrade GM peer 4.1.4.",
+      "confidence_10": 10
+    },
+    {
+      "id": "I05",
+      "title": "Публикация shared acquisition должна переживать interruption первого requester",
+      "novelty": "new_current_internal_protection_read",
+      "evidence_class": "primary_source_static_with_historical_fixed_report",
+      "source_ids": [
+        "E02",
+        "E07"
+      ],
+      "observed": "Effect MemoMap связывает observer admission с finalizer registration; exit observer устанавливается перед публикацией новой shared entry. Upstream September recap сообщает уже исправленные interruption-related Layer/cleanup issues.",
+      "proposed_transfer": "Переиспользовать public native MemoMap/Layer machinery вместо своей карты Promise/refcount. При анализе чужой concurrency API проверять владение незавершённым acquisition.",
+      "appropriate_upstream_use": "Native Effect dependency construction и shared lifetime в поддержанном profile.",
+      "dangerous_mapping": "Публиковать общий pending acquisition до гарантированного завершения Deferred при сбое/прерывании первого создателя.",
+      "counterevidence_or_limit": "Важен текущий guard в исходнике; исторические fixes не доказательство текущей уязвимости. Точные affected releases здесь не воспроизводились.",
+      "contract_obligation": "Незавершённый acquisition имеет владельца и наблюдаемый исход даже после отказа первоначального caller.",
+      "validation": "Source review only; no new MemoMap experiment proposed in this pass.",
+      "owner_choices": "No copied internal implementation; no new cache/public SPI selected.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I06",
+      "title": "Child MemoMap даёт готовый controlled reuse, но не выбирает совместимость",
+      "novelty": "new_public_reuse_candidate",
+      "evidence_class": "primary_source_static",
+      "source_ids": [
+        "E02",
+        "E06"
+      ],
+      "observed": "Public forkMemoMap(parent) может использовать уже существующие parent entries, сохраняя новые allocations в child. MemoMap keyed by Layer object identity; buildWithMemoMap принимает явный scope.",
+      "proposed_transfer": "В native Effect profile исследовать уже имеющийся reuse механизм для stable dependencies и отдельного candidate scope.",
+      "appropriate_upstream_use": "Согласованное совместное использование одинакового Layer object в том же native dependency model.",
+      "dangerous_mapping": "Считать одинаковый SemVer/исходник или структурный descriptor тем же Layer object либо автоматически совместимым state contract.",
+      "counterevidence_or_limit": "Новая entry в child не делает lifetime всех parent services независимым; точная native scope semantics сохраняется.",
+      "contract_obligation": "План фиксирует identity и semantic compatibility отдельно; resource owner остаётся native.",
+      "validation": "Source only; no production choice, installed qualification or peer upgrade.",
+      "owner_choices": "Q2 compatibility/cohort policy remains OPEN.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I07",
+      "title": "Loader instance, shared scope и runtime generation — независимые identities",
+      "novelty": "retained_evidence_applied_to_new_design",
+      "evidence_class": "retained_native_and_source_evidence",
+      "source_ids": [
+        "B05",
+        "B01"
+      ],
+      "observed": "Сохранённые MF 4/4 подтверждают ограниченные случаи old/new reference coexistence, evaluation effects, specific destructive force-registration failure и shared-scope/container identity. Fresh runtime instance не доказывает fresh realm.",
+      "proposed_transfer": "Переиспользовать actual sharing resolver; объявлять realm/shared-contract assumptions и lifecycle guarantee отдельно.",
+      "appropriate_upstream_use": "React/token singleton identity и загрузка независимо собранных remote modules.",
+      "dangerous_mapping": "Реализовать unload как удаление записи loader или считать каждый MF instance изолированным executor.",
+      "counterevidence_or_limit": "Результаты относятся к сохранённым versioned fixtures, не всем bundlers/configurations и не performance superiority.",
+      "contract_obligation": "Profile identifies code resolution, evaluation realm, shared objects and exact generation separately.",
+      "validation": "Retained MF 4/4; not rerun.",
+      "owner_choices": "Runtime/loader selection remains OPEN.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I08",
+      "title": "Staged cache rollback имеет точную, полезную область",
+      "novelty": "retained_source_mechanism_applied_to_contract",
+      "evidence_class": "retained_primary_source_static",
+      "source_ids": [
+        "N01",
+        "N02",
+        "N03"
+      ],
+      "observed": "Inspected NF orchestrator has staged repository rollback; dynamic init не заменяет уже известные committed remote mappings. Promise map setter observed separately from repository commit.",
+      "proposed_transfer": "Использовать готовую transaction machinery в её границе; сохранять раздельные completion facts repository/map/application.",
+      "appropriate_upstream_use": "Аддитивное federated discovery и стабильные committed mappings.",
+      "dangerous_mapping": "Назвать локальный staged rollback транзакцией UI/state/host effects или трактовать dynamic init как hot overwrite.",
+      "counterevidence_or_limit": "Source package 4.10.0, observed published core 4.10.1/orchestrator 4.10.2; equivalence не установлена. Сильная staged rollback поддержка уже есть; не утверждать её отсутствие.",
+      "contract_obligation": "Каждый commit/rollback receipt указывает объект и owner, к которому относится.",
+      "validation": "No new runtime execution; TS dependency range >=5 <7 is a compatibility gate for affected tooling.",
+      "owner_choices": "No NF adapter adopted.",
+      "confidence_10": 8
+    },
+    {
+      "id": "I09",
+      "title": "Сильная native atomic load не отменяет повторной проверки при commit",
+      "novelty": "fresh_versioned_OTP_detail",
+      "evidence_class": "primary_source_static_and_official_documentation",
+      "source_ids": [
+        "T01",
+        "T02"
+      ],
+      "observed": "OTP prepare_loading/finish_loading/atomic_load дают реальную атомарность выбранной загрузки модулей; prepare исключает определённые модули, finish может отклониться при изменившемся runtime condition. soft_purge отказывается при проверяемых VM lingering code references.",
+      "proposed_transfer": "Использовать более сильную native boundary, где она действительно есть; revalidate final publication and retain explicit backpressure.",
+      "appropriate_upstream_use": "VM-supported module update within documented restrictions.",
+      "dangerous_mapping": "Переносить guarantees OTP VM в произвольный TS loader или считать soft_purge учётом всех внешних effects/клиентских assets.",
+      "counterevidence_or_limit": "Atomic module loading не равно atomic application state change; exact code-reference definition VM-specific.",
+      "contract_obligation": "Prepared не означает irrevocably publishable; retained predecessor может блокировать следующий native transition.",
+      "validation": "Source only; no Erlang execution.",
+      "owner_choices": "Retention/forced-stop policy remains OPEN.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I10",
+      "title": "DOM disconnect может быть перемещением, а не окончанием жизни",
+      "novelty": "retained_browser_lifecycle_positive_pattern",
+      "evidence_class": "retained_primary_source_static",
+      "source_ids": [
+        "C01"
+      ],
+      "observed": "OC browser 2.1.13 откладывает cleanup и пропускает его после reconnect; selected managed ESM path invokes unmount, не ожидая произвольный returned Promise.",
+      "proposed_transfer": "Переиспользовать framework lifecycle и его reconnect protection; scope cleanup завершать по отдельному подтверждению там, где оно нужно.",
+      "appropriate_upstream_use": "UI composition и synchronous mount/unmount contract выбранного template/client.",
+      "dangerous_mapping": "Приравнять любой DOM detach к terminal resource release или распространять поведение browser2.1.13 на oc-client4.0.4/browser1.5.4.",
+      "counterevidence_or_limit": "No documented arbitrary async Promise guarantee inferred; source-only boundary is not vendor bug.",
+      "contract_obligation": "View lifetime, managed contribution disposal и asynchronous native resources имеют отдельные observations.",
+      "validation": "Retained source; no OC native execution.",
+      "owner_choices": "UI framework and profile selection remain OPEN.",
+      "confidence_10": 8
+    },
+    {
+      "id": "I11",
+      "title": "Новая версия доступна — не значит выбрана и применена",
+      "novelty": "cross_industry_policy_transfer",
+      "evidence_class": "versioned_specification_and_retained_official_documentation",
+      "source_ids": [
+        "O02",
+        "D01",
+        "D02"
+      ],
+      "observed": "OSGi GREEDY/RELUCTANT отделяют наличие более подходящего service от автоматического rebind. Zephyr предоставляет release rollback/adoption mechanisms; Electron OTA документирован как Beta.",
+      "proposed_transfer": "Разделить available, authorized/selected и useful client adoption; показать человеку задержку, запрет и требуемое действие.",
+      "appropriate_upstream_use": "Стабильность текущей dependency либо автоматический выбор предпочтительной — осознанные разные политики.",
+      "dangerous_mapping": "Автоматически переключать всё при появлении нового manifest или называть environment rollback восстановлением произвольного application state.",
+      "counterevidence_or_limit": "Ready delivery/rollout solutions already solve meaningful operation parts; no claim that ours is unique or superior.",
+      "contract_obligation": "UI/report references selected generation and actual useful client observation independently.",
+      "validation": "Source only; no rollout/product evaluation.",
+      "owner_choices": "Automatic/manual update and fallback policies remain OPEN.",
+      "confidence_10": 8
+    },
+    {
+      "id": "I12",
+      "title": "Build closure — часть реального adapter profile",
+      "novelty": "new_Piral_codegen_reuse_gate",
+      "evidence_class": "primary_source_static_and_registry_metadata",
+      "source_ids": [
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "Q01"
+      ],
+      "observed": "Публичный Piral root использует настоящий app.codegen generator. Official piral-cli-vite8 использует vite-plugin-codegen; current2.1.0 metadata has public ESM/CJS/types and no runtime dependencies. Core package не объявляет React peer constraint.",
+      "proposed_transfer": "Квалифицировать public loader+codegen+framework+compiler profile и переиспользовать готовый codegen plugin.",
+      "appropriate_upstream_use": "Published build-time extension intended to produce actual defaults/router integration.",
+      "dangerous_mapping": "Подменять генератор handwritten state/router shim, импортировать private lib или делать вывод о совместимости из npm version alone.",
+      "counterevidence_or_limit": "Plugin source signature independently checked in CI lane; this lane retains metadata/source gate, not build pass.",
+      "contract_obligation": "Exact lock, compiler resolution, public declaration closure, actual generated output and executable input identities.",
+      "validation": "Proposed strict TS7.0.2 gate and real hosted browser fixture; not executed here.",
+      "owner_choices": "No production build stack selected.",
+      "confidence_10": 9
+    },
+    {
+      "id": "I13",
+      "title": "Complete operation принадлежит библиотеке; custody не дублируется",
+      "novelty": "architecture_synthesis_of_existing_accepted_boundary",
+      "evidence_class": "owner_direction_and_source_based_inference",
+      "source_ids": [
+        "G01",
+        "G02",
+        "B01",
+        "B02",
+        "B03"
+      ],
+      "observed": "Public Resources owns cooperative cleanup, not atomic call admission and generation custody. Existing accepted design keeps update coordination in standalone library and canonical authority/state in consumer.",
+      "proposed_transfer": "Поставлять готовую операцию с честными bounded profiles, используя квалифицированного существующего owner для каждого механизма. Отсутствующую публичную qualification lifecycle kernel решить upstream.",
+      "appropriate_upstream_use": "Narrow consumer primitives for authoritative mutation/read, grants and canonical data.",
+      "dangerous_mapping": "Решать нехватку public kernel копированием private algorithm, вторым registry или переносом orchestration в каждого consumer.",
+      "counterevidence_or_limit": "Stateless/disruptive profiles may require fewer guarantees. Не все модули обязаны иметь call/custody kernel.",
+      "contract_obligation": "One semantic owner per truth; attempt record projects observations without becoming another active-generation authority.",
+      "validation": "Design proposal; no new production code or public API.",
+      "owner_choices": "All Q1–Q7 OPEN; qualification scope not selected.",
+      "confidence_10": 9
+    }
+  ]
+}
