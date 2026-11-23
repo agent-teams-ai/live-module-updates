@@ -45,6 +45,7 @@ before any adoption; no public runtime is shipped.
 | Critical unproven guarantees, upstream tradeoffs and prioritized falsifiers | [Critical Evidence Gaps](docs/research/critical-evidence-gaps-2026-11-23.md) |
 | Deeper source audit: atomic admission, borrowed providers, state/stream ownership, and executed ordering/SQL witnesses | [Cutover, Admission and State Custody](docs/research/cutover-admission-and-state-custody-2026-11-23.md) |
 | Actual overlapping-generation reload, whole-closure CAS, state-write compatibility, reclamation and trust/effect counterexamples | [Closure Integrity and Safe Reclamation](docs/research/closure-integrity-and-reclamation-2026-11-23.md) |
+| Executed public Get Modular 12-case custody, physical runtime identity and failed-drain qualification | [Public Runtime Identity and Safe Drain](docs/research/public-runtime-identity-and-safe-drain-2026-11-23.md) |
 | Unresolved product/profile choices | [Open decisions](docs/decisions/open-decisions.md) |
 | Original material and transfer identities | [Provenance](provenance/README.md) |
 | Immutable historical and campaign packets | [Source registry](history/SOURCES.json) |
