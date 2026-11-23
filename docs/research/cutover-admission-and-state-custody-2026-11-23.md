@@ -134,7 +134,10 @@ are outside its state space.
 A minimal local profile can put selection, lease admission and route mutation
 in one bounded non-yielding owner operation. Do not put imports, arbitrary
 factory callbacks, abort listeners, event emission or user-defined getters
-inside that boundary. An ordinary synchronous JavaScript call can be reentrant
+inside that boundary.
+Validate the participants and the admissible phases before changing the route;
+a rejected activation or other partial synchronous failure must not expose a
+half-switched route as success. Qualify the owner operation's refusal path. An ordinary synchronous JavaScript call can be reentrant
 if it calls application code. For a caller that already started executing a
 side effect, redoing the whole invocation is not a harmless retry. A
 cross-process canonical CAS and a local routing update are different boundaries;
@@ -409,6 +412,38 @@ competitor scores.
 | Existing distributed rollout/workflow stack | Ready replica/worker placement, durable progress and infrastructure operation | Mixed versions, receiver fences, database migration, client retention and external effects still need product ownership | Reuse for qualifying deployment/work classes; do not build a generic controller |
 | Foreign UI stack with lifecycle and loader adapter | Existing contribution registration, loading, mounting and delivery | Does not automatically provide coherent application authority, state and old work | Use when the concrete UI already uses that stack; compare complete consumer scenario |
 
+### Actual Agent Runtime ownership and why not to duplicate it
+
+The new study also re-read current Agent Runtime
+[main 0ce60d74](https://github.com/agent-teams-ai/agent-runtime/tree/0ce60d7474159396132752a625c914ffa87c5049),
+rather than guessing how an interactive agent works. Its
+[Get Modular adoption checkpoint](https://github.com/agent-teams-ai/agent-runtime/blob/0ce60d7474159396132752a625c914ffa87c5049/docs/architecture/get-modular-adoption.md#current-package-and-standard-compatibility-checkpoint)
+records Core/Assembly 0.6.0, Resources 0.2.0, development-only Conformance 0.4.0
+and TypeScript 7.0.2 for that accepted passive/ordinary direction. Dynamic
+graph, Observation and lifecycle-kernel are explicitly **not selected** there.
+The newer GM main source audited in this study must not silently update this
+consumer's accepted pins.
+
+| Agent Runtime existing boundary | What a future update integration must reuse or respect |
+| --- | --- |
+| [Execution generation model](https://github.com/agent-teams-ai/agent-runtime/blob/0ce60d7474159396132752a625c914ffa87c5049/docs/architecture/execution-generation-model.md#generation-activation-transaction) | One session authority, expected revision, canonical successor, incremented execution epoch and rotated fence; control/dispatch intent persisted before external provider call. Do not introduce a second session generation/authority or claim the library's code-generation identity is the execution epoch |
+| [ADR-0091 interactive input admission and handoff](https://github.com/agent-teams-ai/agent-runtime/blob/0ce60d7474159396132752a625c914ffa87c5049/docs/decisions/0091-interactive-agent-session-synthetic-vertical-slice.md#durable-intent-and-sequential-handoff) | Existing owner requires command identity/fingerprint, readback of unknown commit, and original dispatch evidence; a committed claim alone does not establish delivery or authorize another send. The library must not own provider retry, invent an execution ID or turn a fresh model/provider request into recovery |
+| [ADR-0091 targeted interrupt, close and restore](https://github.com/agent-teams-ai/agent-runtime/blob/0ce60d7474159396132752a625c914ffa87c5049/docs/decisions/0091-interactive-agent-session-synthetic-vertical-slice.md#independent-replies-targeted-control-and-closure) | Exact operation/generation-bound control; seal admission, settle output and resources; restore creates new execution generation and does not restore old callback authority. An adapter must not replace a live provider session merely because a new module was published |
+| [ADR-0024 Resources ownership](https://github.com/agent-teams-ai/agent-runtime/blob/0ce60d7474159396132752a625c914ffa87c5049/docs/decisions/0024-get-modular-resource-scopes-for-ordinary-owners-and-provider-access-grants.md) | Existing ordinary Host drain precedes owner close; journal closes only when owner cleanup completes; scopes live in owning composition, not domain/application contracts. The update library must not close shared backing hosts or implement another Host cleanup tree |
+
+This is a source/documentation audit, not proof that all described Runtime
+contracts are currently qualified. The current interactive direction remains
+a distinct accepted owner slice; it is **not** automatically the first
+complete-library consumer. A provider code upgrade may affect only *new*
+sessions at first, leaving the existing execution owner and exact SDK/process
+binding intact for already admitted sessions. Stronger live transfer of a
+running SDK conversation requires its own accepted continuity and authority
+evidence. A low-risk, finite, trusted feature boundary with stable state
+ownership would test the generic update operation with fewer orthogonal risks.
+First choose that actual boundary with its product owner, then prove it
+through the packed public package. Do not start by migrating the entire
+runtime or forcing every agent to support hot code replacement.
+
 ## 7. Narrow next qualification gates, not another framework survey
 
 The following refine the previous S1-S7 plan; they are **not executed** by the
@@ -434,8 +469,7 @@ repository are not being implemented now.
 
 ## Reproduction and evidence identity
 
-Run from this document's directory or the repository root with Python's
-standard library; the probe creates only temporary database files, runs two
+Run from the repository root with Python's standard library; the probe creates only temporary database files, runs two
 child processes, and prints its receipt. It is a frozen research input,
 not product code, dependency or library implementation.
 
