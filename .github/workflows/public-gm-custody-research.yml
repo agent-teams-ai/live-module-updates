@@ -12,6 +12,8 @@ on:
       - 'docs/research/evidence/gm-public-custody-20261123/tsconfig.json'
       - 'docs/research/evidence/gm-public-custody-20261123/probe.test.ts'
       - 'docs/research/evidence/gm-public-custody-20261123/identity.test.ts'
+      - 'docs/research/evidence/gm-public-custody-20261123/BOUNDARY-PLAN.md'
+      - 'docs/research/evidence/gm-public-custody-20261123/boundary.test.ts'
       - 'docs/research/evidence/public-gm-custody-45253364235-1.zip'
 permissions:
   contents: read
@@ -38,12 +40,12 @@ jobs:
           src=docs/research/evidence/gm-public-custody-20261123
           root="$RUNNER_TEMP/lmu-public-custody"
           mkdir -p "$root/evidence"
-          cp "$src/PLAN.md" "$src/IDENTITY-PLAN.md" "$src/package.json" "$src/tsconfig.json" "$src/probe.test.ts" "$src/identity.test.ts" "$root/"
+          cp "$src/PLAN.md" "$src/IDENTITY-PLAN.md" "$src/package.json" "$src/tsconfig.json" "$src/probe.test.ts" "$src/identity.test.ts" "$src/BOUNDARY-PLAN.md" "$src/boundary.test.ts" "$root/"
           cp docs/research/evidence/public-gm-custody-45253364235-1.zip "$root/first-run.zip"
           cp .github/workflows/public-gm-custody-research.yml "$root/evidence/"
           printf 'RESEARCH_ROOT=%s\n' "$root" >> "$GITHUB_ENV"
           cd "$root"
-          sha256sum PLAN.md IDENTITY-PLAN.md package.json tsconfig.json probe.test.ts identity.test.ts evidence/public-gm-custody-research.yml > evidence/input-sha256.txt
+          sha256sum PLAN.md IDENTITY-PLAN.md BOUNDARY-PLAN.md package.json tsconfig.json probe.test.ts identity.test.ts boundary.test.ts evidence/public-gm-custody-research.yml > evidence/input-sha256.txt
           printf 'commit=%s\nrun=%s\nattempt=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > evidence/run.txt
           node --version | tee evidence/node-version.txt
           pnpm --version | tee evidence/pnpm-version.txt
@@ -127,7 +129,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          node --test probe.test.ts identity.test.ts 2>&1 | tee evidence/native.log
+          node --test probe.test.ts identity.test.ts boundary.test.ts 2>&1 | tee evidence/native.log
       - name: Retain raw output, exact inputs and lock (also on failure)
         if: always() && env.RESEARCH_ROOT != ''
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
@@ -140,5 +142,6 @@ jobs:
             ${{ env.RESEARCH_ROOT }}/pnpm-lock.yaml
             ${{ env.RESEARCH_ROOT }}/PLAN.md
             ${{ env.RESEARCH_ROOT }}/IDENTITY-PLAN.md
+            ${{ env.RESEARCH_ROOT }}/BOUNDARY-PLAN.md
           if-no-files-found: error
           retention-days: 30
