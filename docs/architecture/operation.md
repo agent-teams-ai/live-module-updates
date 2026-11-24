@@ -2,6 +2,13 @@
 
 Status: proposed specification; no public API acceptance.
 
+For the bounded static foundation that can precede this dynamic operation, use
+the [application guide](application-foundation.md) and
+[delivery plan](../plans/foundation-delivery-plan.md). The
+[headless/UI proposal](headless-plugins-and-ui.md) defines related portability
+boundaries without making the full update operation a prerequisite for every
+ordinary module or plugin installation.
+
 ## Scope and authority
 
 This is the proposed implementation contract for **live-module-updates**, the
@@ -180,7 +187,7 @@ generalize facts demonstrated by independent uses.
 The [system map's technology register](https://github.com/agent-teams-ai/extension-foundation/blob/f40968f88a1fd29bea3dfcf207bab56e32b90e0d/docs/architecture/live-extension-system-map.md#module-format-and-execution-profile-register)
 owns the complete candidate list. Separate integration dimensions:
 
-- **Composition:** fixed typed factories or an optional Get Modular integration.
+- **Composition:** fixed typed factories or a Get Modular integration are possible portable profiles. The [later owner-directed vision review](continuous-evolution-vision-2026-11-23.md#4-concrete-technical-foundation-build-on-get-modular-not-next-to-it) recommends one GM-first ordinary TS reference implementation for the organization; do not implement a parallel composition engine in the first delivery.
   A simple external consumer need not introduce a dynamic dependency graph.
 - **Delivery and loading:** ordinary build output/ESM, Module Federation,
   SystemJS or Native Federation where required. Reuse their resolution semantics;

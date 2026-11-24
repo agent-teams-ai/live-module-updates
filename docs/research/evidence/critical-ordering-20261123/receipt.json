@@ -1,0 +1,368 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "schedule_model": {
+    "atomic_switch_atomic_acquire": {
+      "denied": 0,
+      "first_denial": null,
+      "schedules": [
+        {
+          "outcome": "admitted-B",
+          "schedule": [
+            "switch",
+            "acquire"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "acquire",
+            "switch"
+          ]
+        }
+      ],
+      "total": 2
+    },
+    "atomic_switch_split_acquire": {
+      "denied": 1,
+      "first_denial": {
+        "outcome": "denied",
+        "schedule": [
+          "read",
+          "switch",
+          "admit"
+        ]
+      },
+      "schedules": [
+        {
+          "outcome": "admitted-B",
+          "schedule": [
+            "switch",
+            "read",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "read",
+            "switch",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "read",
+            "admit",
+            "switch"
+          ]
+        }
+      ],
+      "total": 3
+    },
+    "separate_activation_quiesce_route": {
+      "denied": 6,
+      "first_denial": {
+        "outcome": "denied",
+        "schedule": [
+          "activate",
+          "quiesce",
+          "read",
+          "route",
+          "admit"
+        ]
+      },
+      "schedules": [
+        {
+          "outcome": "admitted-B",
+          "schedule": [
+            "activate",
+            "quiesce",
+            "route",
+            "read",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "activate",
+            "quiesce",
+            "read",
+            "route",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "activate",
+            "quiesce",
+            "read",
+            "admit",
+            "route"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "activate",
+            "read",
+            "quiesce",
+            "route",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "activate",
+            "read",
+            "quiesce",
+            "admit",
+            "route"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "activate",
+            "read",
+            "admit",
+            "quiesce",
+            "route"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "read",
+            "activate",
+            "quiesce",
+            "route",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "read",
+            "activate",
+            "quiesce",
+            "admit",
+            "route"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "read",
+            "activate",
+            "admit",
+            "quiesce",
+            "route"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "read",
+            "admit",
+            "activate",
+            "quiesce",
+            "route"
+          ]
+        }
+      ],
+      "total": 10
+    },
+    "separate_activation_route_quiesce": {
+      "denied": 2,
+      "first_denial": {
+        "outcome": "denied",
+        "schedule": [
+          "activate",
+          "read",
+          "route",
+          "quiesce",
+          "admit"
+        ]
+      },
+      "schedules": [
+        {
+          "outcome": "admitted-B",
+          "schedule": [
+            "activate",
+            "route",
+            "quiesce",
+            "read",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "admitted-B",
+          "schedule": [
+            "activate",
+            "route",
+            "read",
+            "quiesce",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "admitted-B",
+          "schedule": [
+            "activate",
+            "route",
+            "read",
+            "admit",
+            "quiesce"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "activate",
+            "read",
+            "route",
+            "quiesce",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "activate",
+            "read",
+            "route",
+            "admit",
+            "quiesce"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "activate",
+            "read",
+            "admit",
+            "route",
+            "quiesce"
+          ]
+        },
+        {
+          "outcome": "denied",
+          "schedule": [
+            "read",
+            "activate",
+            "route",
+            "quiesce",
+            "admit"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "read",
+            "activate",
+            "route",
+            "admit",
+            "quiesce"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "read",
+            "activate",
+            "admit",
+            "route",
+            "quiesce"
+          ]
+        },
+        {
+          "outcome": "admitted-A",
+          "schedule": [
+            "read",
+            "admit",
+            "activate",
+            "route",
+            "quiesce"
+          ]
+        }
+      ],
+      "total": 10
+    }
+  },
+  "scope": "finite ordering model and real SQLite transactions; no product/GM/PG runtime execution",
+  "sqlite": "3.46.1",
+  "sqlite_cases": {
+    "aba": {
+      "digest_guard_changed": 1,
+      "epoch_guard_changed": 0
+    },
+    "commit_before_lost_reply": {
+      "child": {
+        "exit_code": 73,
+        "stderr": "",
+        "stdout": ""
+      },
+      "observed_head": [
+        1,
+        "B"
+      ]
+    },
+    "head_only_ambiguity": {
+      "identical_final_heads": [
+        [
+          2,
+          "A"
+        ],
+        [
+          2,
+          "A"
+        ]
+      ],
+      "lost_reply": {
+        "exit_code": 73,
+        "stderr": "",
+        "stdout": ""
+      },
+      "original_committed_history": [
+        "A",
+        "B",
+        "A"
+      ],
+      "receipt_counts": [
+        0,
+        0
+      ],
+      "unrelated_history": [
+        "A",
+        "C",
+        "A"
+      ]
+    },
+    "receiver_fence": {
+      "current_epoch": 3,
+      "current_fenced_rows": 1,
+      "prechecked_epoch": 2,
+      "stale_fenced_rows": 0,
+      "stale_unfenced_rows": 1
+    },
+    "same_attempt_after_successor": {
+      "current_head": [
+        2,
+        "A"
+      ],
+      "mismatched_intent": [
+        "intent-mismatch"
+      ],
+      "receipt": [
+        "replay",
+        1,
+        "B"
+      ],
+      "receipt_count": 2
+    }
+  }
+}

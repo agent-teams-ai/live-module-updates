@@ -1,0 +1,147 @@
+name: Public Get Modular Custody Research
+
+# Exact-branch research only. Not an admission, release, or required production gate.
+on:
+  push:
+    branches: [docs/deep-critical-gaps-20261123]
+    paths:
+      - '.github/workflows/public-gm-custody-research.yml'
+      - 'docs/research/evidence/gm-public-custody-20261123/PLAN.md'
+      - 'docs/research/evidence/gm-public-custody-20261123/IDENTITY-PLAN.md'
+      - 'docs/research/evidence/gm-public-custody-20261123/package.json'
+      - 'docs/research/evidence/gm-public-custody-20261123/tsconfig.json'
+      - 'docs/research/evidence/gm-public-custody-20261123/probe.test.ts'
+      - 'docs/research/evidence/gm-public-custody-20261123/identity.test.ts'
+      - 'docs/research/evidence/gm-public-custody-20261123/BOUNDARY-PLAN.md'
+      - 'docs/research/evidence/gm-public-custody-20261123/boundary.test.ts'
+      - 'docs/research/evidence/public-gm-custody-45253364235-1.zip'
+permissions:
+  contents: read
+jobs:
+  public-custody:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.22.3
+      - uses: pnpm/action-setup@008330803749db0355799c700092d9a85fd074e9
+        with:
+          version: 11.25.0
+          package_json_file: docs/research/evidence/gm-public-custody-20261123/package.json
+      - name: Freeze reviewed fixture inputs into a disposable root
+        shell: bash
+        run: |
+          set -euo pipefail
+          src=docs/research/evidence/gm-public-custody-20261123
+          root="$RUNNER_TEMP/lmu-public-custody"
+          mkdir -p "$root/evidence"
+          cp "$src/PLAN.md" "$src/IDENTITY-PLAN.md" "$src/package.json" "$src/tsconfig.json" "$src/probe.test.ts" "$src/identity.test.ts" "$src/BOUNDARY-PLAN.md" "$src/boundary.test.ts" "$root/"
+          cp docs/research/evidence/public-gm-custody-45253364235-1.zip "$root/first-run.zip"
+          cp .github/workflows/public-gm-custody-research.yml "$root/evidence/"
+          printf 'RESEARCH_ROOT=%s\n' "$root" >> "$GITHUB_ENV"
+          cd "$root"
+          sha256sum PLAN.md IDENTITY-PLAN.md BOUNDARY-PLAN.md package.json tsconfig.json probe.test.ts identity.test.ts boundary.test.ts evidence/public-gm-custody-research.yml > evidence/input-sha256.txt
+          printf 'commit=%s\nrun=%s\nattempt=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > evidence/run.txt
+          node --version | tee evidence/node-version.txt
+          pnpm --version | tee evidence/pnpm-version.txt
+          test "$(node --version)" = v24.22.3
+          test "$(pnpm --version)" = 11.25.0
+      - name: Verify first-run archive, recover its exact lock and install frozen
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, zipfile
+          from pathlib import Path
+          b=Path('first-run.zip').read_bytes()
+          assert len(b)==13664
+          assert hashlib.sha256(b).hexdigest()=='05bc4ff131e3ce489c2ea38705c8ba0e42c7865d07174a7ef44ed37fcddef2d8'
+          with zipfile.ZipFile('first-run.zip') as z:
+              assert z.testzip() is None
+              lock=z.read('pnpm-lock.yaml')
+          assert hashlib.sha256(lock).hexdigest()=='fa419ff2a21ab6ec54cc1e35eda2e87a706dff144ed2629b6841ce07869d9510'
+          Path('pnpm-lock.yaml').write_bytes(lock)
+          PY
+          sha256sum pnpm-lock.yaml | tee evidence/lock-sha256.txt
+          pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies 2>&1 | tee evidence/install.log
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          declared=json.loads(Path('package.json').read_text())
+          expected=declared['dependencies'] | declared['devDependencies']
+          actual={name:json.loads((Path('node_modules')/name/'package.json').read_text())['version'] for name in expected}
+          assert actual == expected, (expected,actual)
+          records=[]
+          for pattern in ['*/node_modules/*/package.json','*/node_modules/@*/*/package.json']:
+              for p in sorted(Path('node_modules/.pnpm').glob(pattern)):
+                  if p.is_symlink(): continue
+                  b=p.read_bytes()
+                  m=json.loads(b)
+                  records.append({'name':m['name'],'version':m['version'],'manifestSha256':hashlib.sha256(b).hexdigest()})
+          compilers=[r for r in records if r['name']=='typescript' or r['name'].startswith('@typescript/typescript-')]
+          assert compilers and all(r['version']=='7.0.2' for r in compilers), compilers
+          Path('evidence/installed.json').write_text(json.dumps({'direct':actual,'packages':records},indent=2)+'\n')
+          print('Exact installed direct versions:',json.dumps(actual,sort_keys=True))
+          print('Compiler packages:',json.dumps(compilers))
+          PY
+      - name: Create byte-identical independent roots as deliberate negative-test input
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, shutil
+          from pathlib import Path
+          evidence=[]
+          for package,version in [('assembly','0.8.0'),('resources','0.2.2')]:
+              source=Path('node_modules/@get-modular')/package
+              target=Path('node_modules/@research')/(package+'-copy')
+              assert source.resolve()!=target.resolve()
+              assert not target.exists()
+              assert json.loads((source/'package.json').read_text())['version']==version
+              target.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copytree(source,target)
+              def inventory(root):
+                  return [{'path':str(p.relative_to(root)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(root.rglob('*')) if p.is_file()]
+              original=inventory(source.resolve())
+              copied=inventory(target.resolve())
+              assert original==copied and original
+              evidence.append({'package':package,'version':version,'originalRoot':str(source.resolve()),'duplicateRoot':str(target.resolve()),'fileCount':len(original),'files':original})
+          Path('evidence/physical-copies.json').write_text(json.dumps(evidence,indent=2)+'\n')
+          print('Verified copied package files:',[(r['package'],r['fileCount']) for r in evidence])
+          PY
+      - name: Strict TS7 public declarations and all maintained fixture sources
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm exec tsc --version | tee evidence/compiler-version.txt
+          test "$(cat evidence/compiler-version.txt)" = 'Version 7.0.2'
+          pnpm typecheck 2>&1 | tee evidence/typecheck.log
+          printf 'strict typecheck completed\n' | tee -a evidence/typecheck.log
+      - name: Execute real public package and physical handle controls
+        working-directory: ${{ env.RESEARCH_ROOT }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test probe.test.ts identity.test.ts boundary.test.ts 2>&1 | tee evidence/native.log
+      - name: Retain raw output, exact inputs and lock (also on failure)
+        if: always() && env.RESEARCH_ROOT != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: public-gm-custody-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ env.RESEARCH_ROOT }}/evidence/
+            ${{ env.RESEARCH_ROOT }}/*.ts
+            ${{ env.RESEARCH_ROOT }}/*.json
+            ${{ env.RESEARCH_ROOT }}/pnpm-lock.yaml
+            ${{ env.RESEARCH_ROOT }}/PLAN.md
+            ${{ env.RESEARCH_ROOT }}/IDENTITY-PLAN.md
+            ${{ env.RESEARCH_ROOT }}/BOUNDARY-PLAN.md
+          if-no-files-found: error
+          retention-days: 30

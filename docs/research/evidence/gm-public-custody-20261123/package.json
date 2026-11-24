@@ -1,0 +1,23 @@
+{
+  "name": "lmu-gm-public-custody-research",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": "24.22.3"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "probe": "node --test probe.test.ts"
+  },
+  "dependencies": {
+    "@get-modular/core": "0.8.0",
+    "@get-modular/assembly": "0.8.0",
+    "@get-modular/resources": "0.2.2"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "24.19.1"
+  }
+}

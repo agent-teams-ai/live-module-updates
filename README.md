@@ -18,30 +18,47 @@ Wasm/Extism are separate candidate profiles. Module Federation, Piral,
 Native Federation and OpenComponents are considered at their actual delivery,
 loading and contribution boundaries.
 
-The bounded Piral/Resources and Effect campaign completed successfully: three
-declared tests, six named cases and 66 explicit comparisons, with both official
-artifacts delivered and independently reviewed. [Validation](docs/research/validation.md)
-records the exact executed inputs, earlier delivery failures and scope. This
-packet contains no production-library implementation; the complete consumer
-operation and comparison with ready stacks remain unqualified.
+Executed research includes the original Piral/Resources and Effect campaign,
+public Get Modular custody/identity controls, and actual browser/HTTP version
+skew. The [research map](docs/research/README.md) routes exact inputs, raw results,
+original failures and limits. The complete production library, real product
+cutover and common comparison with ready stacks remain unqualified.
 
-This is a prepared standalone repository directory. The GitHub destination has
-not been created or admitted through this work. The creation capability was
-rechecked on November 23 at 16:39 UTC. See
-[bootstrap status](BOOTSTRAP.md) for the observed limitation and the official
-continuation route. Do not infer release or runtime qualification from the
-directory name, an archive, or a package installation.
+The public [GitHub repository](https://github.com/agent-teams-ai/live-module-updates)
+was created by the owner on November 23, 2026. Initial main source is
+5ba2eca9a175b3cff40fd9725b86b658aece1c47; its first push omitted
+CLAUDE.md due to the owner's global gitignore. Creation is not admission:
+organization classification, applicable quality/Docs gates and production
+qualification remain distinct. Read [bootstrap status](BOOTSTRAP.md)
+before any adoption; no public runtime is shipped.
+
+## Strategic direction and product scope
+
+The owner clarified on 2026-11-23 that new Agent Teams products are greenfield
+in the owning organization repositories. The old
+[777genius/agent-teams-ai](https://github.com/777genius/agent-teams-ai)
+application is a behavior and UX reference, not the default implementation
+or first integration target; do not modify it for this research.
+
+The long-term objective is continuous evolution across frontend, backend and
+the foundation itself through qualified replacement paths. A narrow first
+profile is a delivery discriminator, not a permanent vision limit.
+See the [continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md)
+for the proposed GM-first dependency and ownership map.
 
 ## Read by responsibility
 
 | Question | Entry |
 | --- | --- |
+| Where should a new application author start? | [Documentation map](docs/README.md) and [application foundation](docs/architecture/application-foundation.md) |
+| What is available, published or still awaiting qualification? | [Dated status and source map](docs/status.md) |
+| How can the same behavior work across apps with optional custom/declarative UI? | [Headless plugins and UI](docs/architecture/headless-plugins-and-ui.md) |
+| What work unblocks applications before full live replacement? | [Foundation delivery plan](docs/plans/foundation-delivery-plan.md) |
+| Which choices need the owner and which need another experiment? | [Concrete decision packet](docs/decisions/open-decisions.md#decision-packet-for-the-first-useful-delivery) |
+| Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
-| Module authoring, ownership and upstream changes | [Architecture review](docs/architecture/cross-repository-review.md) |
-| What established implementations do well and where guarantees stop | [Industry register](docs/research/industry-patterns.md) |
-| Ready stacks and the proposed common application comparison | [Existing stack comparison](https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-ready-stack-comparison-2026-11-23.md) |
-| Exact experiment inputs, results and limits | [Validation](docs/research/validation.md) |
-| Unresolved product/profile choices | [Open decisions](docs/decisions/open-decisions.md) |
+| Which experiment addresses a particular risk? | [Research and evidence map](docs/research/README.md) |
+| What changed after independent critique? | [Consolidation review](docs/reviews/foundation-consolidation-2026-11-24.md) |
 | Original material and transfer identities | [Provenance](provenance/README.md) |
 | Immutable historical and campaign packets | [Source registry](history/SOURCES.json) |
 | Organization bootstrap and external consumer independence | [Bootstrap](BOOTSTRAP.md) |
@@ -65,8 +82,9 @@ mechanism. That availability gap remains explicit in the design.
 
 The retained historical research is stored as separate immutable packets. New
 findings refine current proposals without rewriting old results or treating
-source inspection as native execution. The packet manifest identifies every
-file; it is a transfer inventory, not repository admission evidence.
+source inspection as native execution. Original packet manifests identify their
+frozen transfer contents; they are not a live inventory of later repository
+changes or repository admission evidence.
 
 Transferred project material retains the existing Apache-2.0 license. Original
 third-party notices remain with their historical archives and experiment

@@ -1,0 +1,19 @@
+$ node --test skew.test.ts
+Actual Chromium: 159.0.8154.6
+✔ X1 actual old/new browser clients and incompatible/compatible backend paths (400.403725ms)
+ℹ {"oldClient":"A","backend":"B","unversioned":"incompatible-response","oldCompatible":"B-via-v1","newCompatible":"B-via-v2"}
+✔ X2 retained lazy assets serve both generations; premature removal breaks a real old tab (361.035217ms)
+ℹ {"oldRetained":"A-lazy","new":"B-lazy","prematurelyRemoved":"unavailable","realAsset404":true}
+✔ X3 real late A HTTP result, switched B view, and stable dirty input/focus (299.495949ms)
+ℹ {"guarded":false,"lateResult":"A-late overwritten","preserved":{"draft":"unsaved draft","focus":"draft","start":2,"end":5,"sameDocument":true}}
+ℹ {"guarded":true,"lateResult":"stale-ignored","preserved":{"draft":"unsaved draft","focus":"draft","start":2,"end":5,"sameDocument":true}}
+✔ X4 actual incomplete HTTP receipt, original command identity across backend switch, and grant refusal (465.088512ms)
+ℹ {"incompleteReceipt":"unknown","sameIdAfterSwitch":"accepted:1","conflictingIntent":409,"freshIdDuplicates":true,"revokedNewCommand":403,"effects":2}
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2042.779472

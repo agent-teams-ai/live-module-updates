@@ -1,0 +1,87 @@
+{
+  "archive": {
+    "bytes": 10558,
+    "path": "critical-closure-witnesses-20261123.tar.gz",
+    "sha256": "d0b10093cc957ae6b15b04c8c0037d4f65a3e8b46eade1e05a573ecda977c152"
+  },
+  "members": [
+    {
+      "bytes": 11309,
+      "path": "authority-closure-probe.py",
+      "sha256": "fea59497e62ea44b9f9e8b7ab2da3424a040435215626a963e55d04c4a931cff"
+    },
+    {
+      "bytes": 5188,
+      "path": "authority-closure-receipt.json",
+      "sha256": "58b4825e8242ddbe764ca59ee8d24ab819e4d7e748779fc5ba97229e8e63c1d4"
+    },
+    {
+      "bytes": 5188,
+      "path": "authority-closure-recheck.json",
+      "sha256": "58b4825e8242ddbe764ca59ee8d24ab819e4d7e748779fc5ba97229e8e63c1d4"
+    },
+    {
+      "bytes": 6018,
+      "path": "authority-races-probe.py",
+      "sha256": "6bc6b0659a8b7b0f42fb1079424753bd01799a97d9c0612a9642c137c7ec9aa2"
+    },
+    {
+      "bytes": 2015,
+      "path": "authority-races-receipt.json",
+      "sha256": "ea9d788745292c661facdb67456a00337cc50a9d6e214d12284c15a36dc404db"
+    },
+    {
+      "bytes": 2015,
+      "path": "authority-races-recheck.json",
+      "sha256": "ea9d788745292c661facdb67456a00337cc50a9d6e214d12284c15a36dc404db"
+    },
+    {
+      "bytes": 603,
+      "path": "nginx-first-failure.txt",
+      "sha256": "39d02f4d1c2ef70cdc50c0e14253fd23a971b8fb44bbb83e07426cd398f00075"
+    },
+    {
+      "bytes": 7545,
+      "path": "nginx-reload-first-input.py",
+      "sha256": "c18c67e0e75b2c499b4a888ef3c9f485b7487fe511e6db86f30a1ae47bc83597"
+    },
+    {
+      "bytes": 7922,
+      "path": "nginx-reload-probe.py",
+      "sha256": "0faa07729a23125f719a13357043372dce92982ccab32b27369dae2efd929687"
+    },
+    {
+      "bytes": 4650,
+      "path": "nginx-reload-receipt.json",
+      "sha256": "2b388bc06066af81e1ae70c444d8edfaf94f16b920e98a5278b5ba8ec4487c88"
+    },
+    {
+      "bytes": 4650,
+      "path": "nginx-reload-recheck.json",
+      "sha256": "f6c594779aeee961571019c1318c1da8de0d612e7075bb8fe41bf27f5c26eaa2"
+    }
+  ],
+  "purpose": "Independent research-only Nginx native and SQLite/byte/finite-model witnesses; no live-module-updates implementation or qualification",
+  "recheck": {
+    "authority_closure": "byte-identical",
+    "authority_races": "byte-identical",
+    "nginx": "same semantic fields after removing worker_pid_map and nginx_log; both original logs retained"
+  },
+  "runtime": {
+    "nginx": "nginx version: nginx/1.26.3",
+    "node": "v22.16.0",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "sqlite": "3.46.1",
+    "typescript": "Version 5.8.3"
+  },
+  "schemaVersion": 1,
+  "scope": {
+    "finite_hold_combinations": 128,
+    "initial_incomplete_nginx_harness_attempts": 1,
+    "native_nginx_observation_groups": 4,
+    "new_library_or_js_executions": 0,
+    "sqlite_file_model_result_groups": 17,
+    "successful_runs_per_final_probe": 2
+  }
+}

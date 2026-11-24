@@ -1,7 +1,16 @@
 # Repository bootstrap status
 
-Creation capability rechecked: **2026-11-23, 16:39 UTC**. Working destination:
-`agent-teams-ai/live-module-updates`.
+The original creation-capability check was **2026-11-23, 16:39 UTC**.
+The owner's subsequent real GitHub creation supersedes that original limitation.
+
+## Verified new repository identity (2026-11-23)
+
+- Public organization repository: [agent-teams-ai/live-module-updates](https://github.com/agent-teams-ai/live-module-updates).
+- GitHub repository ID: **1469193941**; visibility **public**; default branch **main**.
+- Initial committed main HEAD: **5ba2eca9a175b3cff40fd9725b86b658aece1c47**.
+- The first main tree contains **17 regular project files**; the transfer manifest describes **18**, including CLAUDE.md. The owner reports that a global .gitignore excluded their local CLAUDE.md. This research change does not overwrite that local ignored file.
+- Creation and initial research transfer are observed; central **classification / pending registration**, required-check enforcement and production FMS/Docs/quality admission are **not** established by these facts.
+- This directory remains a **research/specification** repository. No runtime package, accepted public API, library E2E or release is implied by its existence.
 
 ## What is prepared
 
@@ -11,12 +20,13 @@ The library scope is portable and intended for open-source consumers. The
 directory is not an empty npm package or a claim of implemented runtime support.
 
 The name describes the capability without an Agent Teams or framework prefix.
-The recovery lookup of this destination returned HTTP 404. No accessible remote
-or successful creation was observed. This response does not reserve the name,
-establish namespace availability or prove that an inaccessible repository cannot
-exist.
+**Historical note:** before the owner's action, the recovery lookup returned
+HTTP 404, and the earlier agent could not observe a remote. That finding was
+correct at its inspection time but is **superseded** by the verified repository
+identity above. A missing repository is never inferred from an unauthenticated
+search result alone.
 
-## Creation capability observed
+## Historical creation capability observed (before the owner action)
 
 At the recheck, the active GitHub connector could publish to the existing
 authorized research repository but exposed no repository-creation operation.
@@ -26,23 +36,23 @@ operation reported:
 > Browser access requires the originating browser context. Open ChatGPT in the
 > browser with the connected extension and try again.
 
-The separate remote repository has not been created through this work. No
-repository ID, initial branch, ruleset or organization registration is claimed.
-The exact native results are already retained in Extension Foundation at
-`cc07959309f65ab2401f838c982911743075fe1e`; the prepared transfer remains
-publishable in that authorized research branch. Creating the destination requires an
-ordinary authenticated repository-creation route for the organization; the
-owner has already authorized creation, so no additional scope permission is
-required once that route is available.
+This historical check did **not** create the remote. The owner later created
+and pushed it through their authenticated CLI; the immutable repository ID and
+initial commit are now recorded above. The fact of creation does **not** imply
+that a central ruleset, organization registration or qualification was installed.
+The original native results still belong to Extension Foundation at
+`cc07959309f65ab2401f838c982911743075fe1e`.
 
-## Official sequence after creation is available
+## Onboarding sequence after actual creation
 
-1. Create the intended standalone repository through GitHub's ordinary UI or
-   authenticated CLI, then independently read its name, immutable ID, owner,
-   visibility and default branch. Preserve the source license and notices.
-2. Review this concrete packet and its content manifest. Import current files
-   and keep historical packets as separate evidence; do not overlay their old
-   current files or activate archived workflows blindly.
+1. **Observed, research-only:** the owner created the public repository, pushed
+   initial main, and the repository identity was independently read. The source
+   Apache-2.0 license and notices remain part of the transferred packet.
+2. **Partially complete:** main contains 17 of the 18 manifest-listed current
+   files. Resolve CLAUDE.md through a reviewed tracked-file addition after
+   checking the owner's unchanged local contents; do not discard or overwrite
+   the globally ignored local file. Historical packets remain referenced as
+   immutable sibling evidence; they are not blindly unpacked over current files.
 3. Classify and register the actual repository through the central pending
    registration route. Individual registration is not a complete organization
    census or positive qualification.
