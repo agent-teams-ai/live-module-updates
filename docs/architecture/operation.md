@@ -2,6 +2,13 @@
 
 Status: proposed specification; no public API acceptance.
 
+For the bounded static foundation that can precede this dynamic operation, use
+the [application guide](application-foundation.md) and
+[delivery plan](../plans/foundation-delivery-plan.md). The
+[headless/UI proposal](headless-plugins-and-ui.md) defines related portability
+boundaries without making the full update operation a prerequisite for every
+ordinary module or plugin installation.
+
 ## Scope and authority
 
 This is the proposed implementation contract for **live-module-updates**, the

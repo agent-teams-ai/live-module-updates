@@ -18,12 +18,11 @@ Wasm/Extism are separate candidate profiles. Module Federation, Piral,
 Native Federation and OpenComponents are considered at their actual delivery,
 loading and contribution boundaries.
 
-The bounded Piral/Resources and Effect campaign completed successfully: three
-declared tests, six named cases and 66 explicit comparisons, with both official
-artifacts delivered and independently reviewed. [Validation](docs/research/validation.md)
-records the exact executed inputs, earlier delivery failures and scope. This
-packet contains no production-library implementation; the complete consumer
-operation and comparison with ready stacks remain unqualified.
+Executed research includes the original Piral/Resources and Effect campaign,
+public Get Modular custody/identity controls, and actual browser/HTTP version
+skew. The [research map](docs/research/README.md) routes exact inputs, raw results,
+original failures and limits. The complete production library, real product
+cutover and common comparison with ready stacks remain unqualified.
 
 The public [GitHub repository](https://github.com/agent-teams-ai/live-module-updates)
 was created by the owner on November 23, 2026. Initial main source is
@@ -51,19 +50,15 @@ for the proposed GM-first dependency and ownership map.
 
 | Question | Entry |
 | --- | --- |
+| Where should a new application author start? | [Documentation map](docs/README.md) and [application foundation](docs/architecture/application-foundation.md) |
+| What is available, published or still awaiting qualification? | [Dated status and source map](docs/status.md) |
+| How can the same behavior work across apps with optional custom/declarative UI? | [Headless plugins and UI](docs/architecture/headless-plugins-and-ui.md) |
+| What work unblocks applications before full live replacement? | [Foundation delivery plan](docs/plans/foundation-delivery-plan.md) |
+| Which choices need the owner and which need another experiment? | [Concrete decision packet](docs/decisions/open-decisions.md#decision-packet-for-the-first-useful-delivery) |
 | Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
-| Critical strategy: one architecture, distinct frontend/backend mechanisms, real adoption candidate and scale gates | [Foundation strategy review](docs/architecture/foundation-strategy-review-2026-11-23.md) |
-| Module authoring, ownership and upstream changes | [Architecture review](docs/architecture/cross-repository-review.md) |
-| What established implementations do well and where guarantees stop | [Industry register](docs/research/industry-patterns.md) |
-| Ready stacks and the proposed common application comparison | [Existing stack comparison](https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/live-update-ready-stack-comparison-2026-11-23.md) |
-| Exact experiment inputs, results and limits | [Validation](docs/research/validation.md) |
-| Critical unproven guarantees, upstream tradeoffs and prioritized falsifiers | [Critical Evidence Gaps](docs/research/critical-evidence-gaps-2026-11-23.md) |
-| Deeper source audit: atomic admission, borrowed providers, state/stream ownership, and executed ordering/SQL witnesses | [Cutover, Admission and State Custody](docs/research/cutover-admission-and-state-custody-2026-11-23.md) |
-| Actual overlapping-generation reload, whole-closure CAS, state-write compatibility, reclamation and trust/effect counterexamples | [Closure Integrity and Safe Reclamation](docs/research/closure-integrity-and-reclamation-2026-11-23.md) |
-| Executed public Get Modular 12-case custody, physical runtime identity and failed-drain qualification | [Public Runtime Identity and Safe Drain](docs/research/public-runtime-identity-and-safe-drain-2026-11-23.md) |
-| Actual cross-tier browser/backend skew, old asset retention, stale view result and uncertain acknowledgement | [Cross-tier evidence](docs/research/cross-tier-version-skew-2026-11-23.md) |
-| Unresolved product/profile choices | [Open decisions](docs/decisions/open-decisions.md) |
+| Which experiment addresses a particular risk? | [Research and evidence map](docs/research/README.md) |
+| What changed after independent critique? | [Consolidation review](docs/reviews/foundation-consolidation-2026-11-24.md) |
 | Original material and transfer identities | [Provenance](provenance/README.md) |
 | Immutable historical and campaign packets | [Source registry](history/SOURCES.json) |
 | Organization bootstrap and external consumer independence | [Bootstrap](BOOTSTRAP.md) |
@@ -87,8 +82,9 @@ mechanism. That availability gap remains explicit in the design.
 
 The retained historical research is stored as separate immutable packets. New
 findings refine current proposals without rewriting old results or treating
-source inspection as native execution. The packet manifest identifies every
-file; it is a transfer inventory, not repository admission evidence.
+source inspection as native execution. Original packet manifests identify their
+frozen transfer contents; they are not a live inventory of later repository
+changes or repository admission evidence.
 
 Transferred project material retains the existing Apache-2.0 license. Original
 third-party notices remain with their historical archives and experiment

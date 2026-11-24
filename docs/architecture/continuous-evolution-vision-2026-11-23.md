@@ -18,6 +18,14 @@ mechanisms are limited. Preserve the previous experiments and actual negative
 controls. Q1-Q7, public admission, product feature selection and first
 production bootstrap remain open.
 
+**2026-11-24 navigation update:** the owner requested structured foundation
+plans, parallel critique and headless reuse with optional declarative UI. The
+[application foundation](application-foundation.md),
+[headless/UI proposal](headless-plugins-and-ui.md) and
+[delivery plan](../plans/foundation-delivery-plan.md) turn this vision into
+bounded work and explicit acceptance. They retain the long-term ambition and
+the original evidence below without selecting the remaining production defaults.
+
 ## 1. The thesis: replaceable software as a competitive capability
 
 The strategic aim is **continuous evolution of the whole useful application**,

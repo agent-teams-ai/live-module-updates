@@ -1,7 +1,12 @@
 # Agent navigation
 
-Read [README](README.md), the [operation proposal](docs/architecture/operation.md)
-and [open decisions](docs/decisions/open-decisions.md) before changing scope.
+Read [README](README.md) and the [task-oriented documentation map](docs/README.md)
+first. For application foundation and reusable plugins, read the
+[application guide](docs/architecture/application-foundation.md),
+[headless/UI proposal](docs/architecture/headless-plugins-and-ui.md) and
+[delivery plan](docs/plans/foundation-delivery-plan.md). Read the
+[operation proposal](docs/architecture/operation.md) and
+[open decisions](docs/decisions/open-decisions.md) before changing dynamic scope.
 This prepared project contains research and proposed contracts. It has no
 accepted public runtime API or admitted production package.
 
@@ -32,6 +37,19 @@ availability and production qualification are distinct. Preserve failures,
 exact dependency/input identities and independent test oracles. Review public
 mechanism availability before implementing an adapter. Q1-Q7 remain open until
 the owner decides the relevant production scope.
+
+Keep two meaningful profiles of one consumer distinct from two independent Host
+integrations and from the public plugin-SPI conformance gate. Headless behavior
+and optional declarative UI do not imply a universal renderer, supported browser
+runtime or security isolation. Do not turn a recommended first-profile option
+into an accepted default. Record unresolved owner choices with alternatives and
+technical uncertainties with a discriminating experiment.
+
+For foundation consolidation, use independent plan/content critique and review
+material corrections; retain scoped findings in the
+[review record](docs/reviews/foundation-consolidation-2026-11-24.md).
+Link accepted rules instead of copying a second mutable CMS/FMS or status ledger.
+Keep dated research and sealed evidence accessible through the research index.
 
 Use strict TypeScript 7.0.2 or newer for maintained JavaScript-runtime code,
 including fixtures and runners; inspect initialized embedded compiler versions.
