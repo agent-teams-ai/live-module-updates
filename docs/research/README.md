@@ -1,13 +1,14 @@
 # Research and evidence map
 
 This index routes a specific architectural question to its bounded evidence.
-Start at the [documentation map](../README.md) for current application guidance.
+Start at the [documentation map](../README.md) for foundation qualification and later application adoption.
 Dated studies remain available without becoming additional normative contracts.
 
 ## Find the relevant result
 
 | Question | Report | Evidence and remaining limit |
 | --- | --- | --- |
+| How do we qualify the foundation without waiting for applications? | [Foundation qualification matrix](foundation-qualification-matrix.md) | Representative fixture contracts, exact current evidence, independent oracles and remaining runtime/trust/profile gaps |
 | Why preserve broad future replaceability? | [Continuous evolution vision](../architecture/continuous-evolution-vision-2026-11-23.md) | Owner direction and source-based strategic hypothesis; no measured market or universal runtime guarantee |
 | Which concrete guarantees are still unproved? | [Critical evidence gaps](critical-evidence-gaps-2026-11-23.md) | G01–G18 and proposed falsifying experiments; a named gap is not a failed production feature |
 | Where must selection/admission be atomic? | [Cutover, admission and state custody](cutover-admission-and-state-custody-2026-11-23.md) | 25 finite schedules; native SQLite lost-reply, original-receipt, ABA and writer-fence controls; not complete public JS admission or distributed exactly-once |
@@ -30,9 +31,14 @@ Use these labels when adding a finding:
    exact finite/file/database model; no extrapolated failure probability.
 4. **Native mechanism experiment:** actual supported installed inputs and raw
    positive/negative results, limited to the tested mechanism.
-5. **Independent consumer qualification:** real packaged integration with an
-   independent oracle and owned support envelope.
-6. **Production adoption:** the product accepts its qualified scope and gates.
+5. **Representative integrated fixture:** actual package/runtime mechanisms,
+   independently specified outcomes and concrete reset/negative controls.
+6. **Independent test-Host qualification:** the same built behavior in
+   independently wired Hosts for a named envelope; two configurations or two
+   shared-core adapters are not independent public SPI implementations.
+7. **Public delivery / production adoption:** the package or product owner
+   accepts its separately applicable release, conformance and integration gates.
+   Executable test packages do not establish either fact.
 
 Keep case counts separate from assertions, repeated executions, platform rows
 and total jobs. A skipped or queued row is not a successful execution. Preserve
@@ -74,8 +80,10 @@ The scope of each original audit remains in its own report.
 ## When another experiment is justified
 
 Name the open choice, owner, exact supported inputs and rejecting outcome first.
-Prefer a real selected consumer over another equivalent toy router. Reuse known
-positive/negative controls and vary the actual disputed mechanism. Preserve an
+Prefer a representative test Host with a materially different contract or
+runtime boundary over another equivalent toy router. Applications need not
+exist first. Reuse known positive/negative controls and vary the actual disputed
+mechanism. Preserve an
 independent expected result, full failure output and provenance. Update the
 current decision or profile when evidence changes it; do not count a longer
 research document as a closed implementation decision.

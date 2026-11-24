@@ -17,7 +17,10 @@ The owner's subsequent real GitHub creation supersedes that original limitation.
 This directory provides current architecture, a critical industry register,
 reviewed experiment evidence, unresolved choices and immutable history routes.
 The library scope is portable and intended for open-source consumers. The
-directory is not an empty npm package or a claim of implemented runtime support.
+maintained qualification fixtures exercise real package/runtime boundaries
+before products exist; their test packages are not released runtime packages.
+The [qualification matrix](docs/research/foundation-qualification-matrix.md)
+separates those results from production bootstrap and consumer adoption.
 
 The name describes the capability without an Agent Teams or framework prefix.
 **Historical note:** before the owner's action, the recovery lookup returned
@@ -85,8 +88,9 @@ Current public release metadata separately lists Foundation 3.1.0, FMS tooling
 0.3.2 and stack-toolchain 0.2.0. Those facts do not prove that the newer combined
 graph is eligible for managed consumer admission.
 
-Reconcile the actual first feature's quality requirements with an eligible
-cohort. Do not independently mix those pins, downgrade an adopted quality
+Reconcile a production implementation's quality requirements with an eligible
+cohort. The bounded test fixture records its own exact compiler/runtime graph;
+that execution does not silently admit a production tooling profile. Do not independently mix those pins, downgrade an adopted quality
 profile, or declare a blanket Docs exemption to obtain a green bootstrap.
 Producer graph qualification and consumer admission have their existing owners.
 This research task changes neither the central registry nor existing pins.
@@ -96,5 +100,6 @@ This research task changes neither the central registry nor existing pins.
 There is no accepted public API, package release, FMS conformance, managed Docs
 admission, production host adoption or whole-library comparative E2E here.
 Executed mechanism results retain their exact limited scope in
-[validation](docs/research/validation.md). Q1-Q7 and the first complete-library
-consumer/profile remain explicit choices, not defaults embedded in a scaffold.
+[validation](docs/research/validation.md). Representative test Hosts do not
+wait for product selection. Applicable Q1-Q7 choices for a complete update
+profile and later production adoption remain explicit, not scaffold defaults.

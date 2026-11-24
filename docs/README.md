@@ -7,12 +7,13 @@ LMU runtime, plugin SDK or product admission is established by this index.
 
 | Your task | Read in this order | Concrete outcome |
 | --- | --- | --- |
-| Start an application on the module foundation | [Current status](status.md), [application foundation](architecture/application-foundation.md), [delivery plan](plans/foundation-delivery-plan.md) | Know the supported starting profile, actual owner and evidence needed before product expansion |
+| Qualify the foundation before applications exist | [Current status](status.md), [foundation guide](architecture/application-foundation.md), [qualification matrix](research/foundation-qualification-matrix.md) | Select representative behavior, independent test Hosts and evidence for the claimed profile |
+| Adopt a qualified foundation in an application | Foundation guide, [delivery plan](plans/foundation-delivery-plan.md), the product's accepted profile | Preserve the product's own pins, integration and expansion gates |
 | Reuse a module or plugin across applications | [Headless plugins and UI](architecture/headless-plugins-and-ui.md), the consumer's pinned Get Modular CMS, [owner choices](decisions/open-decisions.md) | Separate portable behavior, host capabilities, composition and optional rendering |
 | Understand the long-term objective | [Continuous evolution vision](architecture/continuous-evolution-vision-2026-11-23.md), then the delivery plan | Preserve broad replaceability while choosing one bounded first delivery |
 | Design the update operation | [Operation](architecture/operation.md), owner choices, [evidence map](research/README.md) | Distinguish preparation, authoritative publication, useful adoption, old work and cleanup |
 | Check a claim or reproduce a finding | Evidence map, its dated report, then the original manifest and raw output | Identify the exact tested inputs and the claim that remains unproved |
-| Review delivery and remaining disagreements | [Consolidation review](reviews/foundation-consolidation-2026-11-24.md), owner choices | See corrections and unresolved decisions without re-reading the whole chronology |
+| Review delivery and remaining disagreements | [Fixture-first successor review](reviews/fixture-first-foundation-2026-11-24.md), [earlier consolidation](reviews/foundation-consolidation-2026-11-24.md), owner choices | See current corrections and retained historical decisions |
 | Prepare production onboarding | [Bootstrap](../BOOTSTRAP.md), actual repository admission guidance, the product's accepted profile | Establish real tooling and enforcement rather than copy a source repository's identity |
 
 ## Which document can decide what?
@@ -39,8 +40,9 @@ live qualification ledger or turn a planning estimate into a readiness gate.
   host-protocol obligations. Its production package materialization is separate.
 - **Live Module Updates:** the proposed complete reusable update operation over
   those existing mechanisms; no second resolver or cleanup manager.
-- **Products and executors:** semantic contracts, grants, canonical business
-  state, active-head authority, execution, recovery and actual user outcomes.
+- **Test Hosts, later products and executors:** the selected scope's semantic
+  contract, grants, canonical state, active-head authority, execution and
+  recovery. A test Host owns test state and proves no product adoption.
 - **Engineering Foundation / FMS:** development-time rules and qualification
   machinery, never an application runtime dependency.
 

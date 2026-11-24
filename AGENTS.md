@@ -10,7 +10,16 @@ first. For application foundation and reusable plugins, read the
 This prepared project contains research and proposed contracts. It has no
 accepted public runtime API or admitted production package.
 
-For product and first-consumer selection, read the
+The owner's 2026-11-24 clarification requires representative fixtures and
+independent test Hosts before dependent products. A first application is not
+an entry gate. Browser, Desktop and untrusted third-party execution constrain
+the architecture now; qualify their actual profiles separately. Read the
+[qualification matrix](docs/research/foundation-qualification-matrix.md) and
+[successor review](docs/reviews/fixture-first-foundation-2026-11-24.md).
+Reuse appropriate existing headless/widget libraries behind UI adapters; do not
+create a universal renderer or let framework types enter the portable core.
+
+For foundation qualification and later product adoption, read the
 [greenfield scope and continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md)
 and the organization [product-scope clarification PR](https://github.com/agent-teams-ai/.github/pull/416).
 The old `777genius/agent-teams-ai` is a reference only for this work. Do not
@@ -35,8 +44,10 @@ must not acquire organization-specific runtime dependencies.
 Source observations, proposed transfers, executed fixtures, public package
 availability and production qualification are distinct. Preserve failures,
 exact dependency/input identities and independent test oracles. Review public
-mechanism availability before implementing an adapter. Q1-Q7 remain open until
-the owner decides the relevant production scope.
+mechanism availability before implementing an adapter. Q1-Q7 remain profile
+choices until their owner selects the relevant guarantee.
+Their unresolved production policies do not block static fixture qualification;
+the confirmed Browser/Desktop/untrusted targets must not be reopened.
 
 Keep two meaningful profiles of one consumer distinct from two independent Host
 integrations and from the public plugin-SPI conformance gate. Headless behavior

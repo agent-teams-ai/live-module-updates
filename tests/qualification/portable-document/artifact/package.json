@@ -1,0 +1,12 @@
+{
+  "name": "@fixture/portable-document",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Disposable qualification fixture; not an LMU or plugin runtime package",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+  },
+  "files": ["dist/index.js", "dist/index.d.ts"],
+  "sideEffects": false
+}

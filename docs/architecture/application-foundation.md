@@ -2,25 +2,34 @@
 
 Status: proposed cross-repository adoption guide, 2026-11-24. It synthesizes
 existing owner contracts; it is not a new CMS/FMS version, public API, adoption
-approval or production implementation. The owner requested an actionable
-foundation so greenfield applications can progress before full live replacement.
+approval or production implementation. The owner requires the shared foundation
+to be qualified first through representative fixtures and independent test
+Hosts. Waiting greenfield applications adopt qualified profiles afterward.
 
 Read [current status](../status.md) and the [delivery plan](../plans/foundation-delivery-plan.md).
 The [vision](continuous-evolution-vision-2026-11-23.md) owns the long-term purpose;
-this guide owns the shortest proposed route from that purpose to a real consumer.
+this guide separates initial foundation qualification from later product adoption.
 
 ## 1. The first useful milestone
 
-One actual product capability uses its accepted public composition path, has
-explicit contracts and resource/state ownership, and passes a bounded consumer
-gate. Its implementation can be replaced through an already supported restart
-or rollout path. A second independent Host then exercises the same packaged
-headless behavior to qualify the claimed reuse boundary.
+A representative capability uses actual public composition/package boundaries,
+explicit contracts and state/resource ownership, then passes independently
+specified positive and rejecting tests. Its test Hosts provide realistic
+authority, state and lifetime pressure without implementing an application.
+Foundation work does not wait for a first product or migration candidate.
 
-These are different acceptance claims. One product with two meaningful GM
-profiles can close part of its static foundation gate. Two independent Hosts
-can demonstrate portability. Neither result alone qualifies live replacement,
-browser support, hostile-code isolation or an externally installable plugin SPI.
+Two meaningful GM profiles qualify the tested composition choices. The same
+built behavior in two independently wired test Hosts can qualify bounded reuse.
+An actual browser-execution row must run those bytes in a browser realm; a
+browser UI calling a Node backend is a different claim. Product adoption,
+installed-plugin support, public SPI stability and complete live replacement
+each retain their own gates. The [qualification matrix](../research/foundation-qualification-matrix.md)
+defines the concrete evidence and current gaps.
+
+Browser, desktop and untrusted third-party extensions are confirmed architecture
+targets now. Keep their execution, IPC, authority, storage and containment
+boundaries possible in the first design; do not postpone those boundaries until
+an application appears. Their native support remains separately qualified.
 
 The broader objective remains an upgrade path for every substantive owned
 capability, including foundations through their outer recovery owner. The
@@ -32,25 +41,27 @@ objective. An unsupported finer transition remains research work.
 
 | Decision | Owner/source | What this guide adds |
 | --- | --- | --- |
-| Feature semantics and business invariants | Product bounded context and accepted ADRs | Ask for an explicit capability owner before selecting a shared surface |
-| Feature visibility, layers and parent republication | [FMS v1.1](https://github.com/agent-teams-ai/.github/blob/0b44c64c824f536bd1b085341e7669bcc64ef124/docs/architecture/feature-module-standard/v1.1.md) as adopted by the consumer | Route the first consumer through its existing source checks |
+| Feature semantics and business invariants | Capability contract owner; later product bounded context and accepted ADRs | Define realistic fixture semantics without inventing a product's domain or requiring a first product |
+| Feature visibility, layers and parent republication | [FMS v1.1](https://github.com/agent-teams-ai/.github/blob/0b44c64c824f536bd1b085341e7669bcc64ef124/docs/architecture/feature-module-standard/v1.1.md) as adopted by the consumer | Exercise applicable source boundaries in fixtures, then retain each product's own checks |
 | Module declaration, bindings and construction | [GM Consumer Module Standard](https://github.com/agent-teams-ai/get-modular/blob/850bac5fd02fa5697846cc8958ac447d5c2ee7bb/docs/architecture/common-assembly.md) at the consumer's adopted revision | Keep portable behavior independent from composition registration |
 | Artifact/trust/installation obligations | [EF accepted extension model](https://github.com/agent-teams-ai/extension-foundation/blob/70f2bf21203b557e0f5a3b563a6b41eec5925fd8/docs/architecture/extension-model.md) and applicable host profile | Separate reusable code from independently admitted executable artifacts |
 | Public package and repository admission | Owning package release and [repository admission](https://github.com/agent-teams-ai/.github/blob/0b44c64c824f536bd1b085341e7669bcc64ef124/docs/repository-admission.md) | Retain exact public/declaration/runtime evidence; no implicit pin migration |
 | Complete live-update coordination | [Proposed LMU operation](operation.md) | Reuse qualified mechanisms without moving product authority into the library |
 
 These immutable links are inspected source coordinates, not automatic consumer
-adoptions. Before implementation, record the actual consumer's accepted pins and
-any reviewed migration. Historical GM eligibility requirements withdrawn by
+adoptions. Before qualification, record the fixture's exact public/tool cohort;
+before product integration, record its accepted pins and any reviewed migration.
+Historical GM eligibility requirements withdrawn by
 ADR-0030 must not be revived; its withdrawal also does not publish the private
 lifecycle kernel. Source availability, public release and product qualification
 remain separate facts.
 
 ## 3. The minimal authoring handoff
 
-Keep these facts beside the actual owned feature, reusing its existing CMS/FMS
-declarations and documentation. This table is a review aid, not another manifest
-schema or mandatory form for every class.
+Keep these facts beside the representative fixture or later owned feature,
+reusing applicable CMS/FMS declarations and documentation. The fixture contract
+has a real owner without pretending to be a product decision. This table is a
+review aid, not another manifest schema or mandatory form for every class.
 
 | Fact | Required question | Example of a rejecting gap |
 | --- | --- | --- |
@@ -62,7 +73,7 @@ schema or mandatory form for every class.
 | Lifetime | When may new work begin, and what must finish before cleanup? | Aborting a signal is treated as physical completion of asynchronous work |
 | Supported environment | Runtime, compiler, package cohort, placement and relevant APIs? | A Node-only dependency appears in a supposedly portable browser entry |
 | Change path | Which restart, rollout or live boundary is actually supported? | A changed file is advertised as an independently replaceable unit |
-| Evidence | Which real consumer and negative controls establish these claims? | A local monorepo import is presented as a public packed-consumer result |
+| Evidence | Which representative external fixture or adopted consumer and negative controls establish the stated claim? | A local source alias is presented as a packed-consumer result, or a test Host is labelled product adoption |
 
 Keep business behavior and its consumer-owned ports inward. GM declarations,
 entries and profiles stay in the actual outer composition boundary specified by
@@ -115,7 +126,7 @@ canonical state store to make update coordination convenient.
 
 ## 5. A bounded supported profile
 
-Before a consumer advertises support, its owner records:
+Before a fixture or consumer advertises support for a profile, its owner records:
 
 - exact accepted public package and compiler cohort, including embedded tools;
 - runtime and trust assumptions, execution process/realm and available APIs;
@@ -130,13 +141,15 @@ The public GM 0.8.0 cohort exercised by the dated research does not silently rep
 accepted 0.5.0 cohort. A peer dependency declaration also does not establish one
 physical runtime identity: validate actual packed roots and opaque-handle use.
 
-Select the smallest envelope that satisfies the real feature. Broader scales or
+Select a bounded envelope with representative pressure on the claimed contract.
+Do not shrink away a required Browser/Desktop/trust boundary merely to get a
+passing row. Broader scales or
 platforms require their own rows of evidence; a 1,000-entry typecheck fixture is
 not a thousand-concurrent-operation or live-update load test. Two Node Hosts do
 not qualify a browser renderer. Resources/Observation provide mechanisms for
 trusted same-process code, not a hostile plugin sandbox.
 
-## 6. The concrete Orchestrator gate
+## 6. Later adoption: the concrete Orchestrator gate
 
 At inspected main `c6ce98cd1a8ac1dd27ec877c018e5aa7cd5adff7`,
 [ADR-0117](https://github.com/agent-teams-ai/agent-teams-orchestrator/blob/c6ce98cd1a8ac1dd27ec877c018e5aa7cd5adff7/docs/decisions/0117-reconcile-mandatory-module-composition.md)
@@ -152,11 +165,13 @@ Smaller qualified adoption does not wait for the separate 100/500/1,000 growth
 matrix, full live update or every plugin-host decision. This guide does not
 retract existing scoped admission or declare the pending gate passed.
 
-Sandbox Manifest is a concrete first-consumer candidate for the shared planning
-work, not a newly selected LMU integration. The owner must choose the useful
-feature and actual acceptance target. A second disposable fixture cannot be
-presented as an independent product adoption. Other applications follow their
-own accepted scope and gates rather than inheriting Orchestrator's profile.
+Sandbox Manifest is an inspected product-adoption example, not the entry gate
+or selected first consumer for shared foundation qualification. Independent test
+Hosts can establish their declared library/profile claims before this product
+work. They cannot be presented as independent product adoptions. Other
+applications follow their own accepted scope and gates rather than inheriting
+Orchestrator's profile; applications are not required to start first so that the
+foundation can be tested.
 
 ## 7. Preserve the next change without implementing everything now
 
