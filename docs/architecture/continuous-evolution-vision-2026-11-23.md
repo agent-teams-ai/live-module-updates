@@ -26,6 +26,13 @@ plans, parallel critique and headless reuse with optional declarative UI. The
 bounded work and explicit acceptance. They retain the long-term ambition and
 the original evidence below without selecting the remaining production defaults.
 
+**2026-11-24 successor clarification:** shared foundation qualification starts
+with representative fixtures and independent test Hosts, not an implemented
+first application. Browser, Desktop and untrusted plugins are confirmed
+architecture targets now. The [qualification matrix](../research/foundation-qualification-matrix.md)
+records the current route. Product-adoption rows and source comparisons below
+remain dated evidence; they do not reintroduce a product-first entry gate.
+
 ## 1. The thesis: replaceable software as a competitive capability
 
 The strategic aim is **continuous evolution of the whole useful application**,

@@ -156,7 +156,9 @@ retains the typed-function/XState comparison and native Effect alternatives.
 An optional Effect profile preserves native errors, requirements and scopes.
 It must not make Effect mandatory through a Promise facade. A shared decision
 and receipt contract can support a native driver; the concrete interpreter shape
-needs a real consumer before introducing another abstraction framework.
+needs a representative native consumer fixture that demonstrates the missing
+capability before introducing another abstraction framework. No production
+application is required for that experiment.
 
 ## Eligible module authoring
 
@@ -227,15 +229,17 @@ execution, not represented by an empty method.
 | Host restarts mid-operation | Selected durable profile reconciles; in-memory limitation remains explicit |
 | Local instance is unused but old clients/history need bytes | Artifact retention continues for the actual remaining hold |
 
-The native mechanism studies qualify only their own fixtures. The first public
-library still needs one complete real consumer scenario and independent
-conformance, including a packed external consumer using only supported exports.
+The native mechanism studies qualify only their own fixtures. The complete
+operation must be qualified in a representative independently wired test Host,
+including a packed external consumer using only supported exports. No first
+application is required. Public delivery and actual product adoption retain
+their own applicable owner/conformance gates.
 
 ## Cross-repository delivery
 
 | Owner | Concrete next work | Acceptance boundary |
 | --- | --- | --- |
-| Standalone library | One real operation feature, supported profile, ordinary consumer and public-root conformance | No empty packages or callback kit requiring consumer orchestration |
+| Standalone library | One complete operation in a representative test Host, supported profile and packed public-root conformance | No empty packages or callback kit requiring consumer orchestration |
 | Get Modular | Qualify a supported invocation/custody mechanism for profiles requiring it; expose missing neutral facts through the existing owner | Public Resources is cleanup; private kernel source is not a supported dependency |
 | Extension Foundation | Keep current navigation, artifact mapping and admitted-host obligations connected to the standalone operation | Cores remain independent; accepted artifact and stable-SPI gates remain scoped |
 | Engineering Foundation | Reuse source/declaration/dev-only checks and FMS enforcement; propose new validation only for a demonstrated portable gap | Tooling remains development-only and cannot certify runtime behavior by metadata |
@@ -257,12 +261,13 @@ cohort, configured consumer and enforced hosted check remain separate steps.
 ## Decisions before implementation
 
 Keep Q1-Q7 open: trust, shared dependencies/update unit, state continuity, useful
-adoption, admitted work, rollback meaning and old-client support. The first
-complete-library consumer/profile is also not chosen here. The already accepted
-Agent Runtime provider journey is a distinct owner decision.
+adoption, admitted work, rollback meaning and old-client support. Browser,
+Desktop and untrusted-plugin architecture targets are already confirmed; the
+selected update profile's exact guarantees remain open. The already accepted
+Agent Runtime provider journey is a distinct product decision.
 
-The next vertical slice should settle only its required choices, verify public
-dependencies, implement the complete operation with one real consumer, then run
-independent adverse and packed-consumer conformance. Other adapters follow an
-actual consumer need. This architecture prepares extension points without
+The next complete-operation slice should settle only its required choices,
+verify public dependencies, implement the operation with representative test
+Hosts, then run independent adverse and packed-consumer conformance. Other
+adapters follow the confirmed targets and demonstrated contract differences. This architecture prepares extension points without
 advertising unimplemented guarantees.

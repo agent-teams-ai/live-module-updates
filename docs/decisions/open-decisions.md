@@ -14,6 +14,12 @@ discussion projection, not a second decision authority.
 - Products retain business contracts, authority and canonical state.
 - Existing composition, loading, resource and execution mechanisms are reused.
 - Eligible built-in features and distributed plugins both belong in the vision.
+- Foundation qualification starts with representative fixtures and independent
+  test Hosts; waiting products do not have to start first.
+- Browser, Desktop and untrusted third-party execution are confirmed architecture
+  targets. Their exact profiles, enforcement and support claims need evidence.
+- Existing headless/widget libraries are reused behind appropriate UI adapters;
+  no universal UI engine, renderer or vendor framework is selected.
 
 On 2026-11-24 the owner requested parallel documentation/plan consolidation,
 independent critique, correction and normal merge of ready related work. The
@@ -22,6 +28,11 @@ optional declarative Headless UI. These are direction and documentation scope;
 no public UI vocabulary, runtime defaults or production implementation is
 selected by this request. Read the [headless proposal](../architecture/headless-plugins-and-ui.md)
 and [delivery plan](../plans/foundation-delivery-plan.md).
+
+The later fixture-first clarification supersedes the earlier recommendation to
+select a real product before foundation testing. A purpose-built Host can own
+its test authority/state and qualify a library profile. It cannot accept a
+product's production gate or publish a stable SPI on that product's behalf.
 
 ## Strategic clarification, not Q1-Q7 selection
 
@@ -44,17 +55,18 @@ bet. No production decision or accepted package pin changes here.
 | Q6: returning to old code | Fresh compatible transition; compensating action; restricted code-only fallback | Current state schema, grants, external effects and retained artifacts |
 | Q7: old clients | Bounded supported window; active sessions only; explicit offline support | Lazy assets, reconnect behavior, storage budgets and service policy |
 
-The smallest coherent candidate to evaluate is one trusted TypeScript feature
-with explicit host-owned state and a real limited update boundary. That is a
-conditional scope recommendation, not a selection of Q1-Q7. If the first real
-consumer needs isolation, native Effect or durable restart recovery, its profile
-must include those requirements instead of borrowing weaker evidence.
+One useful candidate is a trusted TypeScript operation with Host-owned state
+and a bounded update boundary in a representative test Host. It establishes
+only that profile. The confirmed Browser/Desktop/untrusted targets also need
+their own discriminating work; a cooperative Node result cannot stand in for
+isolation, physical stop or durable restart recovery. These are scoped choices,
+not a renewed vote on whether the required targets belong in the architecture.
 
 ## Technical delivery questions
 
-1. Which real application feature will prove the first complete operation?
-   An existing accepted Agent Runtime provider journey is not automatically
-   the same acceptance target.
+1. Which representative fixture contract and independent effect/work oracle
+   will qualify the first complete operation? The existing portable-document
+   fixture covers packaging and ordinary behavior, not an update operation.
 2. Which qualified public mechanism supplies invocation admission and generation
    custody for that profile? Public Resources is cleanup; the private GM kernel
    cannot be silently imported or copied.
@@ -76,32 +88,34 @@ nonbinding recommendations for evaluation, not silent defaults. Select only
 choices required by the actual first profile; record a justified inapplicable
 case instead of selecting every future policy before static development.
 
-### D1 — first actual consumer and useful outcome
+### D1 — representative qualification family and useful outcome
 
 | Option | Benefit | Cost / prerequisite |
 | --- | --- | --- |
-| Existing Sandbox Manifest capability and its real product owner | Concrete existing seam and an accepted bounded static foundation gate | Verify exact owner/scope and actual behavior; does not automatically select the first LMU operation |
-| Another waiting greenfield product nominates one useful capability | Aligns work with the most urgent actual application | Its owner must supply contracts, admitted scope, state/lifetime and an independent acceptance oracle |
-| Continue only isolated research while product selection remains open | Can falsify a specific substrate risk without production changes | Cannot close real product adoption or demonstrate cross-Host reuse |
+| Versioned document query/edit in independently wired test Hosts | Already bounded packaging/authority/revision/reset seam; later stream/update variants can add one missing discriminator at a time | Current slice does not cover GM composition, installation, streams or live updates |
+| Execution-session fixture with a bounded stream and borrowed provider | Exposes long-lived work, cancellation and custody resembling Runtime needs | Must remain a representative contract, not an implementation of Runtime's domain or a second executor |
+| Artifact/contribution admission fixture with independent schemas | Exposes distribution/trust/required-capability and installation-to-effect boundaries | Requires the applicable EF mechanisms and admission basis; mocked verification cannot qualify them |
 
-Recommendation: prefer a real existing narrow seam whose owner can supply useful
-acceptance now; Sandbox Manifest is the current concrete candidate. The owner
-should choose between actual product needs, not between equivalent toy fixtures.
-The second independent Host is selected for the portability claim, not imposed
-as a prerequisite to every first static feature.
+Recommendation: finish delivery of the qualified portable-document slice, then
+select the family that exposes the next missing guarantee. The
+[matrix](../research/foundation-qualification-matrix.md) records those distinct
+claims. These are incremental fixture scopes, not three competing universal
+architectures or a requirement to implement a product. A new shared/public
+contract still follows its owning decision process.
 
-### D2 — first execution and trust profile
+### D2 — exact profiles for the confirmed execution and trust targets
 
-| Option | Benefit | Cost / rejecting condition |
+| Profile concern | Benefit | Cost / rejecting condition |
 | --- | --- | --- |
-| Trusted cooperative TS in one supported Node process | Closest to the existing public package evidence and smallest initial delivery | Cannot advertise hostile-code isolation or forced physical stop |
-| A real browser/desktop consumer first | Addresses the application's actual UI/runtime constraints early | Needs actual packed browser/runtime qualification; Node observations do not substitute |
-| Isolated untrusted execution first | Addresses a real third-party execution requirement | Actual sandbox, capability enforcement, protocol and physical-stop/recovery evidence become prerequisites |
+| Trusted cooperative TS in an exact Node process and browser realm | Qualifies ordinary portable behavior while target-specific work proceeds | No hostile-code isolation or forced physical-stop claim |
+| Selected Desktop shell with separate renderer and privileged receiver | Exercises actual placement, IPC, state and native-resource owners | Requires the real shell/OS, denied/malformed IPC and shutdown/recovery evidence |
+| Selected isolated execution mechanism for untrusted code | Exercises a required hostile-code boundary and capability limits | Requires actual denied file/network/IPC access, resource limits and observed stop; process/Worker placement alone is insufficient |
 
-Recommendation: use the simplest profile that satisfies the chosen real
-consumer's trust and placement requirement. Do not downgrade a requirement to
-fit available evidence. This elaborates Q1 and does not resolve it for all
-products. Third-party provenance alone does not determine admitted trust.
+All three target concerns are in scope; they are not exclusive alternatives.
+Choose the exact shell/executor and profile guarantees through discriminating
+spikes at their semantic owners. Keep the shared behavior contract narrow.
+Third-party provenance alone does not determine admitted trust, and no profile
+may borrow a weaker row's evidence for a stronger guarantee.
 
 ### D3 — initial optional Headless UI scope
 
@@ -112,10 +126,12 @@ products. Third-party provenance alone does not determine admitted trust.
 | A separately delivered custom UI contribution | Supports specialized interactions beyond Host vocabulary | Stronger framework/trust/asset/lifetime coupling; separate profile and qualification |
 
 Recommendation: retain Host-native rendering as available and compare the
-smallest semantic declaration needed by the first real interaction. Do not
+smallest semantic declaration needed by the representative interaction. Do not
 select a universal DSL, vendor library or renderer based on the term Headless
 UI alone. Two actual presentations qualify that UI promise separately from
-two headless backend integrations.
+two headless backend integrations. Native controls can prove a simple fixture;
+reuse established widget libraries where their mechanics are needed, keeping
+framework and machine-service types behind the presentation adapter.
 
 ### Q1–Q7: how to resolve rather than silently assume
 

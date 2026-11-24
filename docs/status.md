@@ -1,7 +1,8 @@
 # Foundation status and source map
 
-Observation date: 2026-11-24. This is a dated navigation snapshot for the
-documentation consolidation, not a second package, admission or required-check
+Observation date: 2026-11-24. The source table below retains the initial
+consolidation observation; the successor clarification follows it. This is a
+dated navigation snapshot, not a second package, admission or required-check
 registry. Re-read the linked owner before implementation, adoption or merge.
 The [delivery plan](plans/foundation-delivery-plan.md) records proposed work;
 the [evidence map](research/README.md) records what the research actually proves.
@@ -42,6 +43,28 @@ Observation's inspected README does not claim a tested browser profile.
 
 ## Existing execution evidence
 
+### Fixture-first successor
+
+The owner's later clarification removes first-product selection as a prerequisite
+for foundation qualification. Browser, Desktop and untrusted plugins are
+confirmed design targets. Their runtime and enforcement evidence remains scoped
+to the actual profile. See the [qualification matrix](research/foundation-qualification-matrix.md).
+
+The recovered portable-document source was published as
+[`c5f6ed8`](https://github.com/agent-teams-ai/live-module-updates/commit/c5f6ed8b75c490785679de7e813f54901ee4e3b0)
+on `test/fixture-first-qualification-20261124`, based on main `3147f87`.
+It is an ordinary-library test artifact with independently wired Node and
+browser Hosts. The original hosted
+[run 45487365519](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45487365519)
+subsequently passed Q1 packed Node, Q2 actual Node/browser reuse in both orders,
+and Q3's rejecting broken-cleanup control: 3 passed, 0 failed/skipped/cancelled.
+The matrix retains exact job, browser and artifact identities. This is bounded
+execution evidence for `c5f6ed8`, not final merge or public package release.
+The [fixture README](../tests/qualification/portable-document/README.md) records
+commands and scope; later source/check results belong to their exact PR/run.
+
+### Retained mechanism campaigns
+
 | Campaign | Exact execution/result | Supported conclusion |
 | --- | --- | --- |
 | Piral/Resources and native Effect | [EF run 45208310980](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45208310980), tested `b86e059`; 3 tests / 6 cases / 66 comparisons | Specific predecessor cleanup, candidate failure and original-finalizer controls; see [validation](research/validation.md) |
@@ -51,24 +74,29 @@ Observation's inspected README does not claim a tested browser profile.
 
 The first browser run had 3/4 passing cases; the original failure is retained.
 The amended acknowledgement case is not proof of a TCP reset. Repeated execution
-does not add unique cases. Source review, a mechanism probe and an independent
-real product integration are different evidence classes. Documentation-only
-HEADs do not inherit an unqualified claim of whole-library E2E.
+does not add unique cases. Source review, mechanism probes, representative
+integrations, independent test Hosts and product adoption are different evidence
+classes. Documentation-only HEADs do not inherit an unqualified claim of
+whole-library E2E.
 
 ## Immediate readiness questions
 
-- Which actual product capability and owner define the first useful acceptance?
-- Which exact public/compiler/runtime cohort is admitted in that consumer?
-- Which static foundation gate remains, and what is its initial supported limit?
-- Which second independent Host will establish a headless portability claim?
-- Which optional UI contribution and actual renderer need separate qualification?
+- Which representative capability and independent expected outcomes expose the
+  next unproved foundation contract?
+- Which exact public/compiler/runtime cohort and support envelope belong to
+  that fixture, separately from any later product admission?
+- Which composition, package, state and lifetime rows are actually executed?
+- Does the same artifact execute through independently wired Host boundaries,
+  including an actual browser for that claim?
+- Which native Desktop, containment and optional UI rows still need their own
+  mechanisms and discriminating evidence?
 - Which supported mechanism can establish the first dynamic profile's atomic
   operation admission, lifetime and reconciliation obligations?
 
 The [decision register](decisions/open-decisions.md) records alternatives and
-evidence, including Q1–Q7. The author can implement a qualified static feature
-within its owning admission without waiting for every future dynamic profile.
-This observation does not declare any currently pending product gate passed.
+evidence, including profile-specific Q1–Q7 choices. Static fixture work proceeds
+without waiting for every dynamic choice or an application. A product later
+accepts its own qualified scope; this observation passes no pending product gate.
 
 ## Refresh and invalidation
 
