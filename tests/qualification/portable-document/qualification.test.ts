@@ -1,13 +1,13 @@
 import assert, { AssertionError } from "node:assert/strict";
 import { createServer } from "node:http";
 import { existsSync } from "node:fs";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { after, before, test } from "node:test";
 import { chromium, type Browser, type BrowserContext } from "playwright";
-import { evidenceRoot, packConsumer, sha256 } from "./pack-consumer.ts";
+import { evidenceRoot, packConsumer, sha256, verifyPackageBytes } from "./pack-consumer.ts";
 
 interface Snapshot { readonly revision: number; readonly text: string }
 interface NodeHost {
@@ -247,6 +247,33 @@ async function browserCase(browser: Browser, label: string, mutation?: BrowserMu
     }
   }
 }
+
+test("F2 artifact oracle rejects changed installed bytes and inventory", async () => {
+  await verifyPackageBytes(packed.packageRoot, packed.built);
+  const controls = [
+    ["dist/index.js", "package bytes differ: dist/index.js"],
+    ["dist/index.d.ts", "package bytes differ: dist/index.d.ts"],
+    ["package.json", "package bytes differ: package.json"],
+    ["dist/extra.js", "package dist inventory"],
+    ["missing", "package dist inventory"],
+  ] as const;
+  for (const [path, reason] of controls) {
+    const root = await mkdtemp(join(tmpdir(), "document-artifact-control-"));
+    try {
+      const candidate = join(root, "package");
+      await cp(packed.packageRoot, candidate, { recursive: true, errorOnExist: true });
+      if (path === "missing") {
+        await rm(join(candidate, "dist", "index.js"));
+      } else {
+        await writeFile(join(candidate, path), "deliberate byte substitution");
+      }
+      await assert.rejects(verifyPackageBytes(candidate, packed.built), error =>
+        error instanceof AssertionError && error.message.includes(reason));
+      observations.push({ control: "artifact-" + path, rejectedBy: reason });
+    } finally { await rm(root, { recursive: true, force: true }); }
+  }
+  await verifyPackageBytes(packed.packageRoot, packed.built);
+});
 
 test("Q1 packed declarations and isolated Node Host preserve state, grants and owned cleanup", async () => {
   await nodeCase("node-first");
