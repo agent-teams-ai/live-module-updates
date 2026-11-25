@@ -51,7 +51,8 @@ the fixture profile. Scoped fixture checks do not admit this entire research
 repository to a production tooling profile. Preserve historical evidence bytes.
 
 One owner remains responsible for each concern: feature owners define semantic
-contracts; GM constructs the graph; Resources owns registered handles; each Host
+contracts; GM constructs the graph; actual factories/Hosts own their handles and
+use Resources to record and execute registered cleanup; each Host
 owns canonical state, final grant/revision checks and ingress/drain; EF owns
 contribution compatibility. No second mutable standards or status ledger.
 
@@ -83,22 +84,33 @@ review. Rows are alternatives or overlapping work, not additive estimates.
 
 ### Selected restart semantics
 
-The Host admits work only while its composition is open, retains each admitted
-raw asynchronous operation before callbacks can run, closes ingress before
+The Host admits work only while its composition is open and reserves a reachable
+operation owner before invoking effectful or reentrant code, then retains the
+original returned asynchronous flight under that owner. Reentrant close must
+not observe started work as unowned. The Host closes ingress before
 requesting cooperative cancellation, and waits for actual settlement before
 closing registered resources. Cancellation is not evidence of settlement.
 Pending/failed cleanup remains observable through the existing resource owner.
 A successor is constructed over the same borrowed canonical state only after
-the selected close obligation is met. Old public handles reject further work.
+all admitted raw operations settle and the original Resources close reports
+`settled: true` and `complete: true`. Pending cleanup leaves restart pending;
+incomplete cleanup refuses restart while retaining its report and owner. There
+is no retry of a failed cleanup hidden inside a new close call.
+Old Host invocation facades, including extracted/saved methods, reject further
+work; pure Format values and the
+borrowed canonical state owner are deliberately not revoked. No generic proxy
+or revocation membrane is added.
 
 This profile may interrupt availability. It promises neither A/B overlap nor
 atomic fleet publication. Format implementation A/B identities are distinct
-from semantic contract revision. A future qualified route can capture the same
-immutable feature capabilities without changing their business signatures.
+from semantic contract revision. Selection, authority, state adapters and lifetime
+stay at outer boundaries so future replacement work can be localized. Its final
+live-operation contract remains separately owned and may require reviewed changes.
 
 ## 4. Authoring structure and contracts
 
-Three modules have substantive, separately selectable responsibilities:
+Three feature-owned capability slices have substantive responsibilities, with
+document, format and export GM entries in the optional composition adapter:
 
 1. **Document:** existing query/edit use case and validation; borrows the Host's
    conditional state port. Canonical data and write receipts stay with the Host.
@@ -127,12 +139,21 @@ regex, relax an existing gate or copy a resolver/cleanup manager. New type check
 must cover maintained TS, emitted declarations and actual installed public roots.
 
 EF's generic exact-revision matcher remains under EF `tests/qualification`.
-Trusted extension-point owners supply payload validators. Unknown/incompatible
-required entries reject the whole preflight before evaluation; unsupported
-optional entries have explicit omission with no effect. Duplicate identity and
-invalid payload reject atomically. Existing live grant/scope/revision checks
+Trusted extension-point owners supply synchronous payload validators; artifact
+metadata cannot supply or import a validator. Unknown/incompatible required
+entries reject the whole preflight before evaluation; unsupported optional
+entries have explicit omission with no effect. Validate the bounded inert outer
+carrier for every entry; unknown optional payload semantics remain unknown.
+Malformed envelope and duplicate identity always reject; a supported contract's
+invalid payload rejects even when optional. Validator throws or malformed returns
+refuse. A later failing entry causes zero evaluation/effects for the entire
+candidate. Preserve accepted declaration order and a detached validated snapshot
+bound to the selected owner contract; later caller mutation cannot change it.
+Existing live grant/scope/revision checks
 remain at the actual Host receiver. LMU owns only its feature-specific semantic
-ports and inert identity, and does not import EF test internals.
+ports and inert identity, and does not import EF test internals. P5 integrates
+the matcher into EF's own existing packed-consumer preflight only. It provides
+separate executable EF evidence, not a cross-repository EF runtime integration.
 
 ## 5. Ordered implementation and verification
 
@@ -143,18 +164,18 @@ ports and inert identity, and does not import EF test internals.
 | P2 | Implement three features and optional composition adapter; preserve ordinary core-only consumer and original document outcomes; explain how to add another provider without changing business logic |
 | P3 | Integrate independent Node/browser state, final effect receivers, owned resource witnesses, cancellation and controlled restart; use existing Resources semantics |
 | P4 | Add real source/declaration/wiring checks and rejecting mutations over the actual reference; extend closed package inventories and workflow input coverage for nested source files |
-| P5 | Implement EF-owned exact-revision qualification and preflight integration, preserving existing permission/custody controls and production gates |
+| P5 | Implement EF-owned exact-revision qualification, integrate it into EF's existing TEST preflight, and document the future LMU admission-adapter boundary; preserve permission/custody controls and production gates |
 | P6 | Update maintained authoring navigation at the existing owners; run focused and full relevant gates, independent implementation review and fixes; observe exact-head CI and publish reviewable PRs |
 
 ### Acceptance matrix
 
 | Claim | Required observable evidence |
 | --- | --- |
-| Useful module composition | Handwritten expected document/export results for both format providers; wrong wiring/revision rejected before effects |
+| Useful module composition | Handwritten expected document/export results for both format providers; independent `checkWiring` detects wrong selected bindings before run; unsupported dependencies/revisions are refused by actual preparation. A structurally valid wrong profile is an authoring error, not an invented runtime security gate |
 | Ordinary reuse | Core-only packed consumer works with GM absent; no platform or optional-adapter types in its declarations |
 | Same artifacts in two Hosts | Hash and closed inventory checks before/after pack/install; actual Chromium executes installed core and adapter bytes; independent Node and browser state/IO paths |
 | Real state ownership | Accepted edit survives A-close-B; unchanged borrowed owner remains usable; stale revision/revoked grant cannot publish an export |
-| Lifetime and restart | New/old ingress rejects after close; supported cancellation and retained raw work observed separately; actual resource release follows settlement; partial setup and failed cleanup have visible owners |
+| Lifetime and restart | New/old Host ingress rejects after close; cooperative cancellation settles supported work, while a held raw operation survives cancellation until its explicit barrier. Resource close starts only after settlement. Partial setup and incomplete cleanup have visible owners; B cannot construct with cleanup debt |
 | Source boundaries | A real forbidden inward/platform/private import and forbidden source placement fail the installed checker for the intended rule |
 | EF extensibility | Two owner-defined payload shapes without changing the matcher; unknown/mismatched required, optional omission, invalid payload and duplicate identity; zero forbidden candidate evaluation/effect |
 | Regression strength | Existing controls retained; small deliberate broken controls fail the corresponding external state/resource/artifact oracle, not compilation/setup |
@@ -189,7 +210,7 @@ success. npm publication remains explicitly postponed by the user.
 | Review | Findings and disposition |
 | --- | --- |
 | Round 1 — independent repository/architecture review | Reuse LMU's real browser/package harness; keep ordinary core physically independent from optional GM adapter; EF generic compatibility remains EF-owned; choose restart instead of inventing a live coordinator. Incorporated in this draft. |
-| Round 2 — exact plan critique | Pending: architecture, scope, runtime/source gates and evidence review of this file. |
+| Round 2 — exact plan critique | Corrected resource ownership; separated EF-local preflight execution from LMU architectural alignment; made optional payload policy, trusted validators and detached selection explicit; restricted old-handle rejection to Host facades including saved methods; specified reservation before reentrant code, the complete-close restart gate, cooperative and held-operation cases, and independent wiring oracle versus runtime preparation refusal. Removed any promise of zero future live-operation API changes; identified three features rather than three distribution packages. |
 | Round 3 — corrected plan / adversarial acceptance | Pending after round 2 corrections and the precise delivery split. |
 
 Implementation evidence, actual counts and final review findings will be added
