@@ -14,5 +14,5 @@
     "skipLibCheck": false,
     "noEmit": true
   },
-  "include": ["qualification.test.ts", "pack-consumer.ts"]
+  "include": ["*.ts"]
 }

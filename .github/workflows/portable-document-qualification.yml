@@ -46,7 +46,8 @@ jobs:
           printf 'source=%s\nevent=%s\npr_head=%s\npr_base=%s\nrun=%s\nattempt=%s\n' "$source_sha" "$GITHUB_SHA" "$QUALIFICATION_PR_HEAD" "$QUALIFICATION_PR_BASE" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > .qualification/evidence/run.txt
           test "$(node --version)" = v24.22.3
           test "$(pnpm --version)" = 11.25.0
-          sha256sum package.json pnpm-lock.yaml tsconfig*.json *.ts core/*.ts consumer/*.ts artifact/package.json "$GITHUB_WORKSPACE/.github/workflows/portable-document-qualification.yml" > .qualification/evidence/input-sha256.txt
+          git ls-files -z -- . | sort -z | xargs -0 sha256sum > .qualification/evidence/input-sha256.txt
+          sha256sum "$GITHUB_WORKSPACE/.github/workflows/portable-document-qualification.yml" >> .qualification/evidence/input-sha256.txt
           cp "$GITHUB_WORKSPACE/.github/workflows/portable-document-qualification.yml" .qualification/evidence/inputs/
           pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies 2>&1 | tee .qualification/evidence/install.log
           test "$(node_modules/.bin/tsc --version)" = 'Version 7.0.2'
@@ -64,7 +65,7 @@ jobs:
       - name: Execute packed consumers, independent Hosts, resets and rejecting control
         run: |
           set -euo pipefail
-          node --test qualification.test.ts 2>&1 | tee .qualification/evidence/native.log
+          pnpm qualify 2>&1 | tee .qualification/evidence/native.log
       - name: Retain exact inputs and observations even on failure
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
@@ -78,6 +79,7 @@ jobs:
             tests/qualification/portable-document/core/
             tests/qualification/portable-document/consumer/
             tests/qualification/portable-document/artifact/
+            tests/qualification/portable-document/adapter/
             tests/qualification/portable-document/README.md
           include-hidden-files: true
           if-no-files-found: error
