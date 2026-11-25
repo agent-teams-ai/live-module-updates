@@ -1,7 +1,7 @@
 # Modular authoring foundation — implementation plan
 
-Status: draft for three review rounds, 2026-11-26. Implementation starts only
-after the review findings below are resolved. This is the bounded F1/F2 authoring
+Status: reviewed for scoped implementation, 2026-11-26. Three independent review
+rounds completed before source implementation. This is the bounded F1/F2 authoring
 delivery from the [foundation plan](foundation-delivery-plan.md), with an
 EF-owned contribution-compatibility qualification. It does not replace the
 [first-operation plan](first-operation-implementation-plan.md).
@@ -25,7 +25,7 @@ retain their owning materialization/admission gates.
 | --- | --- | --- |
 | LMU | Extend `tests/qualification/portable-document`; keep its maintained README as the author entry; add actual GM composition, three useful features, source checks, packed Node/Chromium proof and controlled restart | No public coordinator or copied private lifecycle kernel |
 | GM | Connect its maintained consumer quickstart/authoring route to the executed reference and precise adopted CMS contract | Preserve current public APIs, accepted ADRs and package versions |
-| EF | Exact-revision, owner-defined contribution compatibility in its existing qualification path; connect it to preflight before candidate execution | No production package, public SPI, generic envelope copied into LMU or weakened E1 gate |
+| EF | Exact-revision, owner-defined contribution compatibility in its existing qualification path; connect it to EF-owned TEST preflight before candidate execution | No production package, public SPI, generic envelope copied into LMU or weakened E1 gate |
 
 Excluded: npm publication, application implementation/migration, arbitrary hot
 replacement, distributed/durable publication, streams, arbitrary state migration,
@@ -211,7 +211,7 @@ success. npm publication remains explicitly postponed by the user.
 | --- | --- |
 | Round 1 — independent repository/architecture review | Reuse LMU's real browser/package harness; keep ordinary core physically independent from optional GM adapter; EF generic compatibility remains EF-owned; choose restart instead of inventing a live coordinator. Incorporated in this draft. |
 | Round 2 — exact plan critique | Corrected resource ownership; separated EF-local preflight execution from LMU architectural alignment; made optional payload policy, trusted validators and detached selection explicit; restricted old-handle rejection to Host facades including saved methods; specified reservation before reentrant code, the complete-close restart gate, cooperative and held-operation cases, and independent wiring oracle versus runtime preparation refusal. Removed any promise of zero future live-operation API changes; identified three features rather than three distribution packages. |
-| Round 3 — corrected plan / adversarial acceptance | Pending after round 2 corrections and the precise delivery split. |
+| Round 3 — corrected plan / adversarial acceptance | Three independent reviewers read exact corrected revision `0f05ca1767c2514d54afd987af9c22c7131b2d1a` and reported GO, with no remaining critical blocker. Clarified the owner-table EF wording. Begin P1; dependent composition work follows its public-artifact discriminator. |
 
 Implementation evidence, actual counts and final review findings will be added
 after execution; this plan is not itself a passing qualification record.
