@@ -27,7 +27,7 @@ export function openNodeHost(parent: string) {
       const snapshot = { revision: previous.revision + 1, text };
       // Synchronous single-process fixture; no crash durability claim.
       writeFileSync(stateFile, JSON.stringify(snapshot));
-      receipts.push(snapshot);
+      receipts.push({ ...snapshot });
       return { status: "saved", snapshot };
     },
   });

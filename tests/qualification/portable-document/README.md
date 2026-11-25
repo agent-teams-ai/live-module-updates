@@ -19,7 +19,10 @@ offline into a fresh directory outside the source checkout. Package installation
 disables lifecycle scripts. Node and browser consumers compile against the
 installed public export and declarations, without source aliases or shims.
 Compiler-only Node declarations come from the exact tool graph; the installed
-fixture artifact has no runtime or peer dependencies.
+fixture artifact has no runtime or peer dependencies. The three regular package
+files are captured before packing and compared byte-for-byte after installation
+and consumer compilation. The actual tarball integrity must match both the pack
+report and the isolated consumer lock; the dependency inventory is closed.
 
 The Node Host imports that installed package by name and uses an owned temporary
 file. The independently wired browser Host imports the same package name through
@@ -32,14 +35,22 @@ the same recorded SHA256. It is not a browser frontend calling a Node copy.
 
 | Case | Observable acceptance and rejection |
 | --- | --- |
+| F2 artifact control | The actual installed package matches pre-pack manifest, JavaScript and declaration bytes. Independent substitutions, an extra file and an omitted file in disposable copies must be rejected by the exact byte/inventory oracle. |
 | Q1 | Isolated packed consumer and emitted declarations work; initial query, normalized accepted edit, stale revision, invalid edit and revoked grant match handwritten expectations. The actual file and receipt ledger contain exactly one accepted edit. Closing removes only the owned root, leaves a borrowed owner's file intact and prevents later operations. Fresh construction repeats from the initial state. |
 | Q2 | The same artifact executes in Node then browser, and browser then Node, with fresh state ownership for each run. DOM actions, actual browser storage and the receipt ledger match independent expected outcomes. After close, another click cannot change the output or state. Contexts and the owned HTTP listener are closed. |
-| Q3 | An intentionally unsafe compiled browser-adapter mutation omits the Save-listener removal. The Q2 lifetime oracle must reject it specifically because a post-close action is still handled. A closed/grant guard preventing writes cannot hide the leaked listener. Unrelated compilation, browser or transport errors do not count as the expected rejection. |
+| Q1b | Caller mutation of a returned result or receipt read cannot alter the owner's actual recorded receipt. A deliberately aliased compiled Node adapter must fail that precise oracle. |
+| Q3 | Four separate compiled browser-adapter mutations omit Save, Query, Revoke or Close listener removal. Actual post-close DOM dispatch with a distinct output marker must detect each omission, including a repeated close or a query error. A closed/grant guard cannot hide a retained listener. |
+| F2 authority control | Prepare an action before revocation, then dispatch after revocation; check actual state and receipts after each denial. Separately omit revision and grant checks in the compiled browser adapter and require the corresponding rejecting oracle. |
 
 Repeated runs prove the specified reset/order controls, not additional unique
 features. The expected results are handwritten in the test, rather than generated
 from the core or Host transition logic. Receipts here are a bounded observation
 of accepted writes, not a durable distributed acknowledgement protocol.
+The expanded cases also reject unsafe, fractional and non-finite revisions and
+oversized text in both Hosts, observing canonical state and receipts after each
+attempt. These are single-Host controls, not generation fencing, hostile-code
+containment or atomic multi-process state transitions. The original Q1–Q3
+result remains tied to its prior exact source; this extension needs fresh CI.
 
 ## Run and retained evidence
 
