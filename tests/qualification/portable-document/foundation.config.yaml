@@ -1,0 +1,6 @@
+schemaVersion: 1
+project:
+  id: portable-document-authoring-reference
+capabilities:
+  architecture.source-dependencies:
+    configPath: architecture/foundation/source-dependencies.yaml

@@ -141,6 +141,8 @@ type BrowserMutation = CleanupControl | "revision" | "grant";
 
 async function browserCase(browser: Browser, label: string, mutation?: BrowserMutation) {
   const entryBytes = await readFile(packed.entry);
+  const packageAssets = new Map([...packed.built].filter(([path]) => path.startsWith("dist/") && path.endsWith(".js"))
+    .map(([path, bytes]) => ["/package/" + path.slice(5), bytes]));
   let hostBytes = await readFile(join(packed.root, "dist", "browser", "browser-host.js"), "utf8");
   if (mutation === "revision") {
     hostBytes = mutateOnce(hostBytes, "if (current.revision !== expectedRevision)", "if (false)");
@@ -151,7 +153,7 @@ async function browserCase(browser: Browser, label: string, mutation?: BrowserMu
   }
   const server = createServer((request, response) => {
     const path = request.url;
-    const body = path === "/" ? html : path === "/host.js" ? hostBytes : path === "/package/index.js" ? entryBytes : undefined;
+    const body = path === "/" ? html : path === "/host.js" ? hostBytes : packageAssets.get(path ?? "");
     if (body === undefined) { response.writeHead(404); response.end(); return; }
     response.writeHead(200, { "Content-Type": path === "/" ? "text/html; charset=utf-8" : "text/javascript; charset=utf-8", "Cache-Control": "no-store" });
     response.end(body);

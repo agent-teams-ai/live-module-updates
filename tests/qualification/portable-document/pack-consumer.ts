@@ -5,48 +5,49 @@ import { cp, lstat, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "nod
 import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { coreSources, packagePaths } from "./package-inventory.ts";
 
 export const fixtureRoot = fileURLToPath(new URL(".", import.meta.url));
 export const evidenceRoot = join(fixtureRoot, ".qualification", "evidence");
 export const sha256 = (bytes: Uint8Array | string) => createHash("sha256").update(bytes).digest("hex");
-const packagePaths = ["dist/index.d.ts", "dist/index.js", "package.json"] as const;
-
-async function snapshotPackage(root: string): Promise<ReadonlyMap<string, Buffer>> {
+export async function snapshotPackage(root: string, paths: readonly string[]): Promise<ReadonlyMap<string, Buffer>> {
   assert.ok((await lstat(root)).isDirectory(), "package root must be a real directory");
   const top = await readdir(root, { withFileTypes: true });
   assert.deepEqual(top.map(entry => entry.name).sort(), ["dist", "package.json"], "package root inventory");
   assert.ok(top.find(entry => entry.name === "dist")?.isDirectory(), "package dist must be a real directory");
   assert.ok(top.find(entry => entry.name === "package.json")?.isFile(), "package manifest must be a regular file");
-  const dist = await readdir(join(root, "dist"), { withFileTypes: true });
-  assert.deepEqual(dist.map(entry => entry.name).sort(), ["index.d.ts", "index.js"], "package dist inventory");
-  assert.ok(dist.every(entry => entry.isFile()), "package outputs must be regular files");
-  return new Map(await Promise.all(packagePaths.map(async path =>
+  const found: string[] = [];
+  async function visit(path: string): Promise<void> {
+    for (const entry of await readdir(join(root, path), { withFileTypes: true })) {
+      assert.ok(!entry.isSymbolicLink(), "package outputs must not be symbolic links");
+      const child = path + "/" + entry.name;
+      if (entry.isDirectory()) await visit(child);
+      else { assert.ok(entry.isFile(), "package outputs must be regular files"); found.push(child); }
+    }
+  }
+  await visit("dist");
+  assert.deepEqual(found.sort(), paths.filter(path => path.startsWith("dist/")).sort(), "package dist inventory");
+  return new Map(await Promise.all(paths.map(async path =>
     [path, await readFile(join(root, path))] as const)));
 }
 
 /** Verify the closed installed fixture against bytes captured before packing. */
 export async function verifyPackageBytes(root: string, built: ReadonlyMap<string, Buffer>): Promise<void> {
-  const actual = await snapshotPackage(root);
-  assert.equal(built.size, packagePaths.length, "incomplete build inventory");
-  for (const path of packagePaths) {
+  assert.ok(built.has("package.json") && built.has("dist/index.js") && built.has("dist/index.d.ts"), "incomplete build inventory");
+  const actual = await snapshotPackage(root, [...built.keys()]);
+  for (const path of built.keys()) {
     const expected = built.get(path);
     const bytes = actual.get(path);
     assert.ok(expected && bytes && bytes.equals(expected), "package bytes differ: " + path);
   }
 }
 
-function run(program: string, args: string[], cwd: string): string {
+export function run(program: string, args: string[], cwd: string): string {
   return execFileSync(program, args, { cwd, encoding: "utf8", timeout: 60000, maxBuffer: 1024 * 1024 });
 }
 
-export async function packConsumer() {
-  await mkdir(evidenceRoot, { recursive: true });
-  assert.equal(process.version, "v24.22.3");
-  const tsc = join(fixtureRoot, "node_modules", ".bin", "tsc");
-  assert.equal(run(tsc, ["--version"], fixtureRoot).trim(), "Version 7.0.2");
-  run(tsc, ["-p", "tsconfig.core.json"], fixtureRoot);
-  const artifactRoot = join(fixtureRoot, "artifact");
-  const built = await snapshotPackage(artifactRoot);
+export async function packArtifact(artifactRoot: string, paths: readonly string[]) {
+  const built = await snapshotPackage(artifactRoot, paths);
   const packLog = run("npm", ["pack", "--ignore-scripts", "--json", "--pack-destination", evidenceRoot], artifactRoot);
   const pack: unknown = JSON.parse(packLog);
   assert.ok(Array.isArray(pack) && pack.length === 1);
@@ -60,13 +61,24 @@ export async function packConsumer() {
     assert.ok(typeof file === "object" && file !== null && "path" in file && typeof file.path === "string");
     return file.path;
   });
-  assert.deepEqual(packedPaths.sort(), [...packagePaths].sort(), "pack file inventory");
+  assert.deepEqual(packedPaths.sort(), [...paths].sort(), "pack file inventory");
   assert.ok("integrity" in item && typeof item.integrity === "string");
   const archive = await readFile(tarball);
   const archiveDigest = sha256(archive);
   const integrity = "sha512-" + createHash("sha512").update(archive).digest("base64");
   assert.equal(item.integrity, integrity, "pack integrity differs from actual archive");
   await verifyPackageBytes(artifactRoot, built);
+  return { built, packLog, tarball, archiveDigest, integrity };
+}
+
+export async function packConsumer() {
+  await mkdir(evidenceRoot, { recursive: true });
+  assert.equal(process.version, "v24.22.3");
+  const tsc = join(fixtureRoot, "node_modules", ".bin", "tsc");
+  assert.equal(run(tsc, ["--version"], fixtureRoot).trim(), "Version 7.0.2");
+  run(tsc, ["-p", "tsconfig.core.json"], fixtureRoot);
+  const { built, packLog, tarball, archiveDigest, integrity } = await packArtifact(
+    join(fixtureRoot, "artifact"), packagePaths(coreSources));
   const root = await mkdtemp(join(tmpdir(), "portable-document-consumer-"));
   try {
     await writeFile(join(root, "package.json"), JSON.stringify({

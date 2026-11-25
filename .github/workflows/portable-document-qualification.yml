@@ -55,7 +55,7 @@ jobs:
       - name: Check strict TypeScript and build the ES-only portable core
         run: |
           set -euo pipefail
-          node_modules/.bin/tsc -p tsconfig.json 2>&1 | tee .qualification/evidence/typecheck.log
+          pnpm check 2>&1 | tee .qualification/evidence/typecheck-and-source.log
           node_modules/.bin/tsc -p tsconfig.core.json 2>&1 | tee .qualification/evidence/core-build.log
       - name: Install the pinned real Chromium headless shell
         run: |
@@ -80,6 +80,8 @@ jobs:
             tests/qualification/portable-document/consumer/
             tests/qualification/portable-document/artifact/
             tests/qualification/portable-document/adapter/
+            tests/qualification/portable-document/architecture/
+            tests/qualification/portable-document/*.yaml
             tests/qualification/portable-document/README.md
           include-hidden-files: true
           if-no-files-found: error
