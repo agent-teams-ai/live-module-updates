@@ -103,9 +103,11 @@ An adapter preserves meaning; it cannot manufacture unsupported guarantees.
 
 A bounded portability proof can use two independent Node test Hosts. It does
 not qualify browser or desktop support, and it does not remove those confirmed
-targets from the initial architecture. For browser execution, load and exercise
-the same built artifact in a real browser realm. Serving a UI which calls a Node
-backend qualifies only the observed transport/UI path. The
+targets from the initial architecture. For a same-artifact browser claim, load
+and exercise that exact built artifact in a real browser realm. If targets need
+different builds, qualify the shared contract and each actual target artifact;
+source portability is not proof that one binary runs everywhere. Serving a UI
+which calls a Node backend qualifies only the observed transport/UI path. The
 [qualification matrix](../research/foundation-qualification-matrix.md) keeps the
 runtime rows and exact evidence separate.
 
@@ -240,9 +242,13 @@ or an explicitly supported fallback; they do not prove old work has stopped.
 ## 8. Acceptance before calling a capability portable
 
 The [delivery plan](../plans/foundation-delivery-plan.md) orders the work. A
-portable headless claim needs the same built package in two independently wired
-test Host integrations, independent behavior expectations, no copied business
-logic, and negative cases relevant to its declared contract. These include
+portable headless claim needs independently wired test Host integrations,
+independent expectations for the shared behavior/contract, no copied business
+logic, and negative cases relevant to its declared contract. Use the same built
+package when claiming reuse of one artifact. For different target builds,
+qualify each real artifact and their shared contract; do not impose one binary
+on native/mobile/Desktop targets merely because the behavior is portable.
+Relevant negative cases include
 missing capabilities, incompatible revisions, revoked authority, partial setup
 and lifetime ownership where applicable. Inspect emitted declarations
 as well as runtime loading without optional UI dependencies installed. Expected

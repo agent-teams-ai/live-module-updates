@@ -1,6 +1,7 @@
 # Foundation qualification through representative fixtures
 
-Status: maintained qualification design and dated evidence snapshot, 2026-11-24.
+Status: maintained qualification design; current evidence refreshed 2026-11-25,
+with the original 2026-11-24 checkpoint preserved below.
 The owner's clarified sequence is foundation first, applications afterward.
 This matrix names falsifiable claims and their evidence; it is not another
 repository admission policy, universal test framework or stable public API.
@@ -35,11 +36,11 @@ does not erase that requirement or block unrelated qualified static work.
 | Claim and owner | Discriminating evidence | Current observation and remaining limit |
 | --- | --- | --- |
 | Static composition — GM | Public declarations/bindings, two materially different profiles, rejected bindings before factory effects, source boundaries and borrowed lifetimes | Existing GM/P1–P12 controls are linked below. The portable-document fixture does not import or qualify GM composition. A new integrated composition claim needs its own exact result. |
-| Packed ordinary behavior — capability contract | Public exports/declarations resolve in an isolated installed consumer; accepted edit, invalid input, stale revision and revoked grant match independent state/receipt expectations | `portable-document/Q1` passed at the exact source below. Test package only; no public LMU release, installation/admission SPI or crash durability. |
+| Packed ordinary behavior — capability contract | Public exports/declarations resolve in an isolated installed consumer; accepted edit, invalid input, stale revision and revoked grant match independent state/receipt expectations; installed bytes and owner receipts survive adversarial controls | Q1/Q1b plus artifact/authority controls passed in the six-test `6083e89` result below. Test package only; no public LMU release, installation/admission SPI or crash durability. |
 | Independent Node/browser use — test Hosts | One installed ESM artifact executes through independently wired file and browser-storage owners; response hashes agree; both execution orders reset to the expected initial state | `portable-document/Q2` passed in actual Chromium. These are two test Hosts using one core, not two production adoptions or independent plugin SPI implementations. |
-| Cleanup oracle — fixture lifetime owner | A deliberate Save-listener cleanup omission must fail specifically on a post-close action; unrelated compiler/browser failures cannot count as the expected rejection | `portable-document/Q3` passed as a rejecting control. It validates the tested listener oracle, not arbitrary leak freedom or hostile-code stop. |
+| Cleanup oracle — fixture lifetime owner | Independently omit Save, Query, Revoke or Close listener removal; actual post-close dispatch must fail the corresponding oracle, including query error/repeated close | Q3 passed all four rejecting controls in the `6083e89` result. A closed-state guard cannot hide the tested retained listener; no arbitrary leak freedom or hostile-code stop is claimed. |
 | Complete resource/work custody — existing lifetime owners | Partial/late construction, borrowed-provider survival, nested work/streams, cancellation, failed drain and retained original cleanup debt | Historical public-GM mechanism controls exist. This ordinary edit fixture has no stream or async update operation; no new complete-operation claim. |
-| Installable contribution — EF and test Host | Actual verified artifact/import closure to admitted invocation, denied/tampered/incompatible/wrong-scope/stale/revoked paths, disable/uninstall and explicit data retention | Architecture and bounded probes only. Full installed-plugin path and production SPI remain unqualified; a local tarball install does not satisfy artifact trust/admission. |
+| Installable contribution — EF and test Host | Actual verified artifact/import closure to admitted invocation, denied/tampered/incompatible/wrong-scope/stale/revoked paths, disable/uninstall and explicit data retention | [EF #66](https://github.com/agent-teams-ai/extension-foundation/pull/66) adds a real bounded trusted Node package-to-effect/disable/remove path. It does not qualify signed OCI trust, durable Host installation, full installed-plugin lifecycle or production SPI. |
 | Full live update — LMU and actual authorities | Atomic select/retain, failed B preserving A, useful B adoption while admitted A work remains coherent, original-attempt reconciliation, stale-writer rejection and retirement holds | Operation proposal plus mechanism witnesses. No implemented complete LMU runtime; supported public admission/custody path must be established before claiming this row. |
 | Desktop — selected shell and privileged receiver | Actual renderer/main or native boundary, versioned IPC, malformed/denied calls, native resources, recovery and observed shutdown on selected OS | Required design boundary; exact shell/profile and native qualification remain open. Node plus browser tests do not qualify Desktop. |
 | Untrusted code — selected executor/authority | Denied file/network/IPC and privilege access, current grants at the real effect receiver, quotas and actual termination under adversarial behavior | Required design boundary; selected enforceable mechanism and native evidence remain open. A grant toggle, Worker, process label or signed artifact does not prove containment. |
@@ -53,7 +54,35 @@ Neither claim is silently inherited from successful test Hosts.
 
 ## 3. Exact portable-document result
 
-The [fixture source and commands](../../tests/qualification/portable-document/README.md)
+### Delivered six-test successor, 2026-11-25
+
+The original actual-main job was inspected again for this documentation refresh:
+checkout `6083e89`, strict TypeScript 7.0.2, actual Chromium and **6 passed,
+0 failed/skipped/cancelled/todo**. The current fixture has six named tests;
+its delivery receipt distinguishes **6 positive Host scenarios** (4 Node,
+2 browser) and **12 rejecting controls within those tests**, not eighteen tests
+or new independent runtime profiles.
+
+| Evidence field | Exact value |
+| --- | --- |
+| Executed source and merge | [`6083e89ba7781b12571a102d273058052ad94148`](https://github.com/agent-teams-ai/live-module-updates/commit/6083e89ba7781b12571a102d273058052ad94148), [PR #3](https://github.com/agent-teams-ai/live-module-updates/pull/3) |
+| Actual-main run / job | [45518777341 / 138884992384](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45518777341/job/138884992384) |
+| Tool cohort / browser | Node 24.22.3, pnpm 11.25.0, TypeScript 7.0.2, Playwright 1.65.1; Chrome Headless Shell 159.0.8154.6, build 1255 |
+| Retained artifact | [14978894020](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45518777341/artifacts/14978894020) |
+| Artifact archive SHA256 | `c00229e44de992cf45b37c3efaba1e1dbf4086874b5503d7db4f7217b4cdf421` |
+
+The rejecting controls cover five installed-byte/inventory changes, one returned
+receipt alias, four physical browser-listener cleanup omissions and two missing
+revision/grant guards. Actual state and receipts are observed after accepted and
+denied operations, including an action prepared before grant revocation.
+The result is bounded F2 ordinary-library qualification. It does not implement
+GM composition, EF production admission, stream custody or complete LMU updates.
+No executable inputs change in this documentation refresh; the result remains
+bound to its original source/run, not presented as a new native execution.
+
+### Retained three-case checkpoint, 2026-11-24
+
+The [original fixture source and commands](https://github.com/agent-teams-ai/live-module-updates/blob/c5f6ed8b75c490785679de7e813f54901ee4e3b0/tests/qualification/portable-document/README.md)
 define three unique cases. The original hosted job log records the result:
 **3 passed, 0 failed, 0 skipped, 0 cancelled**. Executing both Host orders does
 not create extra unique cases.
@@ -132,3 +161,7 @@ owners. These can progress in parallel when independent. Select a substantive
 profile and its accepted mechanism before dependent implementation; use a
 discriminating spike for unresolved technical alternatives. No product launch
 is needed to run those fixtures, and no single passing row closes all of them.
+
+For complete-operation work, follow the [L0–L7 implementation steps](../plans/first-operation-implementation-plan.md)
+and their independent adverse witnesses. This matrix owns claim/evidence
+classification; the implementation plan does not mark an unexecuted row passed.

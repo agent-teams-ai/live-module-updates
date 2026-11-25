@@ -29,6 +29,11 @@ operation, and [open decisions](../decisions/open-decisions.md) for profile
 choices. The [qualification matrix](../research/foundation-qualification-matrix.md)
 owns the concrete scenarios, independent oracles and reset requirements.
 
+The [first-operation implementation plan](first-operation-implementation-plan.md)
+expands F4 into L0–L7 phases and steps, prerequisite contracts, focused E2E and
+negative controls, nonadditive estimates and exact blocked work. It is the
+implementation handoff; this page remains the cross-foundation dependency map.
+
 - Start with representative behavior and explicit test-Host ownership. Do not
   start an application merely to obtain a consumer name.
 - Use existing supported public mechanisms. A missing public primitive remains
@@ -49,7 +54,7 @@ owns the concrete scenarios, independent oracles and reset requirements.
 | --- | --- | --- |
 | F0: architecture and discriminators | Confirm required target boundaries, contract owners, alternatives and falsifying tests | First product selection or implementation |
 | F1: static foundation fixture | Real public composition and independently specified useful outcomes within a bounded envelope | EF runtime/SPI, full LMU or all future platforms |
-| F2: headless portability | The same built behavior in two independently wired test Hosts, with exact runtime evidence | Production adoption or a mandatory UI |
+| F2: headless portability | The claimed shared behavior/contract in independently wired test Hosts; the same artifact when that is the promise, or each actual target build | Production adoption or a mandatory UI |
 | F3: installable-plugin fixture | Applicable artifact/trust/installation mechanisms and Host enforcement, qualified for the claimed profile | A complete product or a live-update promise when restart suffices |
 | F4: complete update-operation fixture | Supported public primitives and one cohesive operation with adverse controls | First real application feature |
 | F5: stronger profile qualification | Actual browser/desktop, isolation, durable recovery or continuity evidence for the corresponding promise | Unrelated optional guarantees |
@@ -114,12 +119,15 @@ even when the first executed row covers only Node.
 **Owner:** capability contract and qualification maintainers. **Entry:** useful
 behavior and its required semantics, not a nominated application.
 
-1. Build one portable behavior artifact and inspect its runtime/declaration
-   closure without optional UI, GM or platform packages unless they belong to
-   an explicitly selected adapter.
-2. Connect that same artifact to two independently wired Host entry/composition,
-   state, authority and lifetime paths. Two instances of one configurable Host
-   builder are not automatically two independent integrations.
+1. State whether the promise is reuse of one built artifact or of a shared
+   contract across target builds. Inspect each actual runtime/declaration closure
+   without optional UI, GM or platform packages unless they belong to an
+   explicitly selected adapter.
+2. Connect the claimed behavior to two independently wired Host entry/composition,
+   state, authority and lifetime paths. Use the identical artifact for a
+   same-artifact claim; otherwise qualify each target build against the shared
+   contract. Two instances of one configurable Host builder are not automatically
+   two independent integrations.
 3. Use externally observed useful outcomes and independently authored expected
    receipts/effects. Share contracts and test input grammar where useful; do
    not share the decision implementation between actual and expected results.
@@ -135,8 +143,9 @@ shell/IPC/OS path; Node EventTarget is not browser or desktop qualification.
 
 The bounded [portable document fixture](../../tests/qualification/portable-document/)
 is the current implementation route for ordinary-library packaging and Node/
-browser behavior. Its receipt must establish the actual result; this plan does
-not predeclare a pass. It neither implements GM composition nor an EF/LMU runtime.
+browser behavior. The [current exact result](../research/foundation-qualification-matrix.md#3-exact-portable-document-result)
+records the delivered six-test successor at `6083e89`; historical Q1–Q3 evidence
+remains preserved. It neither implements GM composition nor an EF/LMU runtime.
 
 ### Optional UI qualification
 

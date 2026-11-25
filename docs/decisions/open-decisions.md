@@ -6,6 +6,14 @@ and [Q1-Q7 matrix](https://github.com/agent-teams-ai/extension-foundation/blob/f
 are the source of owner direction. This page is a standalone navigation and
 discussion projection, not a second decision authority.
 
+The [first-operation implementation plan](../plans/first-operation-implementation-plan.md)
+maps these choices to exact dependent steps, compares three credible initial
+profiles and records conditional P/I/T, effort and confidence estimates. Its
+profile packet must be selected before dependent production transitions; merging
+planning prose does not select Q1–Q7. Continue independent work within the
+assigned scope while a question remains open; retain alternatives and rejecting
+evidence through this navigation to the owning decision record.
+
 ## Confirmed direction
 
 - A reusable standalone library supplies the full update operation.

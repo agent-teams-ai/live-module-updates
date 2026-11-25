@@ -7,6 +7,11 @@ first. For application foundation and reusable plugins, read the
 [delivery plan](docs/plans/foundation-delivery-plan.md). Read the
 [operation proposal](docs/architecture/operation.md) and
 [open decisions](docs/decisions/open-decisions.md) before changing dynamic scope.
+For implementation, follow the [phase/step plan](docs/plans/first-operation-implementation-plan.md),
+the selected profile packet and exact unfinished step. An unresolved decision
+blocks its dependent contract only; continue independent work within the assigned
+scope and retain the question with alternatives. Do not infer production defaults
+from a merged plan.
 This prepared project contains research and proposed contracts. It has no
 accepted public runtime API or admitted production package.
 

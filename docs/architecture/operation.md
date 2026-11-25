@@ -9,6 +9,11 @@ the [application guide](application-foundation.md) and
 boundaries without making the full update operation a prerequisite for every
 ordinary module or plugin installation.
 
+The [first-operation implementation plan](../plans/first-operation-implementation-plan.md)
+turns these semantic obligations into dependent phases, concrete steps and
+adverse acceptance cases. It does not select the open profile policies or freeze
+public API names; record those decisions before their dependent implementation.
+
 ## Scope and authority
 
 This is the proposed implementation contract for **live-module-updates**, the

@@ -24,6 +24,14 @@ skew. The [research map](docs/research/README.md) routes exact inputs, raw resul
 original failures and limits. The complete production library, real product
 cutover and common comparison with ready stacks remain unqualified.
 
+The [current packed-fixture result](docs/research/foundation-qualification-matrix.md#3-exact-portable-document-result)
+records the delivered Node/browser qualification at `6083e89`: six named tests
+passed on actual main, including independent artifact, authority, receipt and
+cleanup controls. That is bounded F2 evidence, not an implemented update runtime.
+The [first-operation implementation plan](docs/plans/first-operation-implementation-plan.md)
+now breaks the remaining work into steps, dependencies, adverse checks, estimates
+and scoped open questions before production implementation.
+
 The public [GitHub repository](https://github.com/agent-teams-ai/live-module-updates)
 was created by the owner on November 23, 2026. Initial main source is
 5ba2eca9a175b3cff40fd9725b86b658aece1c47; its first push omitted
@@ -65,6 +73,7 @@ for the current executable slice and the remaining discriminating tests.
 | Which choices need the owner and which need another experiment? | [Concrete decision packet](docs/decisions/open-decisions.md#decision-packet-for-the-first-useful-delivery) |
 | Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
+| How should an implementing agent proceed phase by phase? | [First-operation implementation plan](docs/plans/first-operation-implementation-plan.md) |
 | Which experiment addresses a particular risk? | [Research and evidence map](docs/research/README.md) |
 | What changed after independent critique? | [Consolidation review](docs/reviews/foundation-consolidation-2026-11-24.md) |
 | What corrects the earlier product-first sequence? | [Fixture-first successor review](docs/reviews/fixture-first-foundation-2026-11-24.md) |

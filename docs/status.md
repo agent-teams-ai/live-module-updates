@@ -1,11 +1,16 @@
 # Foundation status and source map
 
-Observation date: 2026-11-24. The source table below retains the initial
-consolidation observation; the successor clarification follows it. This is a
+Current update: 2026-11-25. The original source table retains the 2026-11-24
+consolidation observation; the delivered-fixture successor follows it. This is a
 dated navigation snapshot, not a second package, admission or required-check
 registry. Re-read the linked owner before implementation, adoption or merge.
 The [delivery plan](plans/foundation-delivery-plan.md) records proposed work;
 the [evidence map](research/README.md) records what the research actually proves.
+
+The [first-operation implementation plan](plans/first-operation-implementation-plan.md)
+now provides phases, steps, prerequisite owners, failure controls, estimates and
+scoped unresolved questions. It is a proposed implementation handoff, not a
+selected runtime profile or completed production library.
 
 ## Distinguish five kinds of progress
 
@@ -24,7 +29,7 @@ estimated roughly 70–75% for a bounded TS-library planning/documentation packa
 its implementation-plan axis was 50–60%. Those values are not plugin runtime
 completion, reliability, test coverage or a product admission threshold.
 
-## Observed source and availability
+## Initial observed source and availability, 2026-11-24
 
 | Owner | Observed source | Available or implemented | Remaining boundary |
 | --- | --- | --- | --- |
@@ -43,7 +48,26 @@ Observation's inspected README does not claim a tested browser profile.
 
 ## Existing execution evidence
 
-### Fixture-first successor
+### Delivered fixture successor, 2026-11-25
+
+[LMU #3](https://github.com/agent-teams-ai/live-module-updates/pull/3) is merged at
+[`6083e89`](https://github.com/agent-teams-ai/live-module-updates/commit/6083e89ba7781b12571a102d273058052ad94148).
+The original [actual-main job](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45518777341/job/138884992384)
+checked out that source and passed strict TypeScript 7.0.2 and all six named
+tests, with zero failures/skips/cancellations, in Node and actual Chromium.
+This adds installed-byte/inventory, detached owner receipt, four physical
+browser-listener cleanup and live authority controls to the earlier Q1–Q3 slice.
+The [qualification matrix](research/foundation-qualification-matrix.md#3-exact-portable-document-result)
+retains exact source/run/artifact identities and count distinctions.
+
+Bounded portable-document F2 qualification is delivered. No full A → B operation,
+public production LMU runtime or product adoption is implied. EF's [delivered #66](https://github.com/agent-teams-ai/extension-foundation/pull/66)
+separately proves its bounded trusted Node artifact-to-effect/disable/remove
+fixture; durable installation, signed OCI admission and complete plugin Host
+claims remain distinct. These later results supersede pending status for those
+specific fixtures, not the historical observations or unrelated gates below.
+
+### Retained fixture-first checkpoint, 2026-11-24
 
 The owner's later clarification removes first-product selection as a prerequisite
 for foundation qualification. Browser, Desktop and untrusted plugins are
