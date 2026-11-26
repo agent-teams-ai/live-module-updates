@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { cp, mkdir, mkdtemp, readFile, readdir, realpath, rm, writeFile } from "node:fs/promises";
-import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { basename, dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { adapterSources, packagePaths } from "./package-inventory.ts";
 import { evidenceRoot, fixtureRoot, packArtifact, run, sha256, verifyPackageBytes, type packConsumer } from "./pack-consumer.ts";
 
@@ -123,15 +123,17 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
     await verifyPackageBytes(coreRoot, core.built);
 
     const adapterEntry = join(adapterRoot, "dist/index.js");
-    const fromAdapter = createRequire(adapterEntry);
-    const fromHost = createRequire(join(root, "dist/node/node-modular-host.js"));
+    const hostEntry = join(root, "dist/node/node-modular-host.js");
+    const resolveImport = (name: string, entry: string) => fileURLToPath(run(process.execPath,
+      ["--input-type=module", "--eval", "process.stdout.write(import.meta.resolve(" + JSON.stringify(name) + "))"],
+      dirname(entry)));
     for (const name of runtimeNames) {
-      assert.equal(await realpath(fromAdapter.resolve(name)), await realpath(fromHost.resolve(name)),
+      assert.equal(await realpath(resolveImport(name, adapterEntry)), await realpath(resolveImport(name, hostEntry)),
         "one physical public runtime identity: " + name);
     }
-    const assemblyEntry = fromHost.resolve("@get-modular/assembly");
-    assert.equal(await realpath(createRequire(assemblyEntry).resolve("@get-modular/core")),
-      await realpath(fromHost.resolve("@get-modular/core")), "Assembly uses the Host's physical Core");
+    const assemblyEntry = resolveImport("@get-modular/assembly", hostEntry);
+    assert.equal(await realpath(resolveImport("@get-modular/core", assemblyEntry)),
+      await realpath(resolveImport("@get-modular/core", hostEntry)), "Assembly uses the Host's physical Core");
     const assets = new Map<string, Buffer>();
     for (const name of runtimeNames) {
       await scriptAssets(join(root, "node_modules", name), "/packages/" + name, assets);
