@@ -1,6 +1,6 @@
 # Modular authoring navigation
 
-Date: 2026-11-26. Status: draft plan before documentation edits.
+Date: 2026-11-26. Status: revised plan for the second review, before edits.
 
 ## Goal and scope
 
@@ -20,6 +20,9 @@ package, dependency, workflow, accepted standard, consumer pin or release change
 The reference remains private TEST packages, independent Node/Chromium Hosts and
 controlled restart. A navigation link does not establish production adoption or
 automatic agent discovery in repositories without their own instruction route.
+The new pointers preserve the authority of each consumer's accepted CMS/FMS and
+local adoption profile. Label the retained GM plan as the original plan and its
+scope as historical; its original revision does not include later fixes.
 
 ## Delivery
 
@@ -41,6 +44,8 @@ automatic agent discovery in repositories without their own instruction route.
 - Confirm changed-file allowlists and unchanged code, packages and workflows.
 - Use Get Modular's installed Docs authoring/profile route and scoped docs gate;
   retain the organization repository's existing required checks.
+  Inspect the normal postmerge workflows, including GM's automatic main matrix;
+  do not change workflow selection to reduce this documentation task's checks.
 - LMU has no installed managed Docs route. Use focused Markdown/link review and
   any applicable emitted checks; do not add tooling or trigger native fixtures
   solely for these prose edits.
@@ -54,6 +59,7 @@ edits: approximately 15-25 lines, plus this short plan. Complexity 1/10,
 expected reliability for navigation 9/10, confidence 9/10; judgment, not a
 runtime qualification or delivery-time guarantee.
 
-- Round 1: pending.
+- Round 1: three independent reviewers found no blocker. Clarified the accepted
+  CMS/FMS authority, historical plan wording and normal postmerge check selection.
 - Round 2: pending.
 - Delivery: pending; exact PR/check receipts belong in the PR descriptions.
