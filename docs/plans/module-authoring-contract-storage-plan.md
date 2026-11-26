@@ -1,7 +1,9 @@
 # Modular authoring: complete feature contracts and early storage acquisition
 
-Status: reviewed for implementation, 2026-11-26. Two independent critique and
-correction rounds preceded maintained implementation and regression edits. This follows the
+Status: implemented and qualified at 7ff1b0492e955b1df0ff9846986c305c8798438b,
+2026-11-26. Two independent critique and correction rounds preceded maintained
+implementation and regression edits. Final delivery receipts belong to
+[PR #6](https://github.com/agent-teams-ai/live-module-updates/pull/6). This follows the
 [completed construction/conformance review](module-authoring-critical-review-plan.md).
 
 ## 1. Outcome and limits
@@ -184,12 +186,13 @@ tests only to resolve a concrete remaining risk or a required repository gate.
 | Round / step | Review and resulting correction |
 | --- | --- |
 | Deeper audit | Three independent audits isolated the map and acquisition defects. Storage scope was narrowed from generic cleanup aggregation to early acquisition of the required native holder. |
-| Plan review 1 | module_vision_review and npm_release_audit required independent union/interface parity and separate omission controls; the pre-fix compiler checkpoint must fail the existing map, not a missing new export. npm_release_audit required observable original native error identity. lifecycle_gap_review required actual import, secure-context and UUID preconditions. Corrections are incorporated; DOM acceptance now names observable insertion, not every detached allocation. No maintained implementation has started. |
+| Plan review 1 | module_vision_review and npm_release_audit required independent union/interface parity and separate omission controls; the pre-fix compiler checkpoint must fail the existing map, not a missing new export. npm_release_audit required observable original native error identity. lifecycle_gap_review required actual import, secure-context and UUID preconditions. Corrections were incorporated; DOM acceptance names observable insertion, not every detached allocation. No maintained implementation had started at this round. |
 | Plan review 2 | module_vision_review, npm_release_audit and lifecycle_gap_review reviewed exact corrected revision 29d1de176cf998b2af24276716cbb77e1fad0cde and returned GO with no blocker. Clarify that forbidden aliases mean path/resolution aliases, not the accepted descriptor-union type aliases. Collect delivered and outstanding native mutation records; distinguish quota calibration from the Host failure. Both rounds preceded maintained edits. |
 | P1 | Preserved source fd33d09935e092221b1161369a7be0099096ee5e leaves the actual contracts and Host unchanged. Run 45832279729 / job 139951844778 executed 44 tests: 42 passed and exactly M4 plus native storage-denied failed, with no skips/cancellations/todo. The downloaded artifact 15122902308 matches SHA256 869d7f639a2bc69b45e95a27a6cf4b7fc94fafa1cae021acc0d93d8e15e7c29c. |
 | P2–P3 | Complete unions/separate bases and early native holder implemented after preserved failing evidence. The reference-code diff is 22 added / 15 removed lines across three contract files and Browser Host. All eight compiler programs produce their intended outcomes; the focused packed-consumer M4 passes. |
 | Implementation review | lifecycle_gap_review and npm_release_audit independently returned GO on source and compiler controls. The latter also checked the red hosted job, plan and matrix; its own README guidance was self-reviewed. Root reviewed that guidance and verified 68 local documentation links. No new runtime mechanism, source pin or dependency change. |
-| P4–P5 | Strict TypeScript plus actual Foundation/FMS/CMS checks pass locally. Corrected full Node/Chromium qualification and ordinary delivery remain pending. |
+| P4 | Corrected source 7ff1b0492e955b1df0ff9846986c305c8798438b passed all 44 tests in run 45833913782 / job 139957585454, with zero failures/skips/cancellations/todo. Strict TypeScript, actual Foundation/FMS/CMS checks, real pinned Chromium and CodeQL passed. Downloaded artifact 15124201132 matches SHA256 a08e0fb26966ceff46f1a67d8e32e31b5f4fdc0dd8f1575ef120e85786174d7a. |
+| P5 | Both implementation reviewers reconfirmed GO against exact published 7ff1b0492e955b1df0ff9846986c305c8798438b and its unchanged reviewed source blobs. module_vision_review and lifecycle_gap_review independently verified the fixed ZIP and returned GO on the final evidence documentation; the matrix now explicitly labels pre-fix observations. PR #6 owns final-head checks, ordinary expected-head squash, actual author/tree/message and main-CI receipts; no publication or protection change is part of delivery. |
 
 The [pre-fix native run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45832279729/job/139951844778)
 used actual Chrome Headless Shell 159.0.8154.6 build 1255. Its retained observations
@@ -198,3 +201,17 @@ insertion and one retained root. The separate native quota case passed: the Host
 removed its acquired DOM and preserved unrelated keys and values. M4 failed with
 TS2339 for the missing transitive state and three TS2344 parity diagnostics,
 without resolution, missing-export or unrelated failures.
+
+The [corrected native run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45833913782/job/139957585454)
+preserves the original single getter exception and observes zero owned DOM
+insertions or retained roots on denial. The separate native quota case still
+observes one acquired and removed root, no provider construction, and unchanged
+unrelated storage. All eight compiler programs produce their specified outcomes
+inside one M4 test, with no unexpected diagnostics or compiler-process failures.
+
+Measured at that implementation revision, the reference change is 22 added /
+15 removed lines; qualification adds 340 lines and removes 4. The original test
+estimate was 160–300 added lines; independent union/interface controls and native
+setup/error witnesses account for the larger measured total. There is no public
+runtime implementation, dependency/lockfile change, second resource owner or npm
+publication. The reviewed plan and evidence documentation are separate from code.

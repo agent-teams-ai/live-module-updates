@@ -5,19 +5,21 @@ keep state, authority and resource ownership explicit. This TEST reference has
 three features—Document, Format and Export—and two private packed artifacts:
 an ordinary core and an optional Get Modular adapter.
 
-The [full modular run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45740189099/job/139642989290)
-at `926d474d031db630b81694c1659e435b9f016873` passed **41 tests, zero
-failures/cancellations/skips**, including actual Chromium. This adds construction
-cancellation/custody and complete-root smoke to the prior 36-test reference.
-The [evidence matrix](../../../docs/research/foundation-qualification-matrix.md#construction-and-full-root-follow-up-2026-11-26)
-owns exact results, including the preserved pre-fix failure;
+The [full modular run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45833913782/job/139957585454)
+at `7ff1b0492e955b1df0ff9846986c305c8798438b` passed **44 tests, zero
+failures/cancellations/skips/todo**, including actual Chromium. This adds complete
+standalone feature contracts and native storage boundaries to the prior 41-test
+construction/custody and complete-root checkpoint.
+The [evidence matrix](../../../docs/research/foundation-qualification-matrix.md#complete-feature-contracts-and-storage-acquisition-2026-11-26)
+owns exact results, including both preserved pre-fix failures;
 the [original plan](../../../docs/plans/module-authoring-implementation-plan.md)
 and [critical follow-up plan](../../../docs/plans/module-authoring-critical-review-plan.md)
-own the bounded delivery scope. Final delivery and actual-main checks are linked
-from [PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5).
+own the earlier bounded delivery scopes.
 The [contract/storage follow-up](../../../docs/plans/module-authoring-contract-storage-plan.md)
 and [PR #6](https://github.com/agent-teams-ai/live-module-updates/pull/6) retain the
-deeper review, original failures and qualification of the new boundaries below.
+deeper review, original failures, final delivery and actual-main checks. The
+prior [PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5) remains
+the separate construction/conformance checkpoint.
 
 These are maintained qualification packages, not an npm release or public
 LMU/EF runtime. The reference uses published GM APIs and contains no EF runtime
@@ -211,7 +213,8 @@ These are fixture-local checks, not admission of the whole research repository
 to a production tooling profile. The current tool lock SHA256 is
 `93c6f1d17b2606aedb4ac2c95c8f15cb8c6f0705875f5149f60e13065993f700`.
 
-`pnpm qualify` executes the modular contract/artifact, Node/browser lifecycle,
+`pnpm qualify` executes standalone feature-map compiler controls, native storage
+denial/quota cases, modular contract/artifact, Node/browser lifecycle,
 actual-root smoke, retained ordinary document, P1 and source-guard cases. A later source or package
 change needs its own exact-source result.
 The [workflow](../../../.github/workflows/portable-document-qualification.yml)
