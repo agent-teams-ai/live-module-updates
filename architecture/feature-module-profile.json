@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted",
+  "standard": {
+    "id": "agent-teams.feature-module-standard",
+    "version": "v1.1",
+    "repository": "agent-teams-ai/.github",
+    "path": "docs/architecture/feature-module-standard/v1.1.md",
+    "commit": "89b5d7c512d9c4b5ae63709857a0d71cb2e6d178",
+    "digest": "sha256:cfa088ef7396139554fe5e3bcc839271b23299c6b60c569a3a7f1cd7c9f0bc6c"
+  },
+  "productionRoots": [
+    "src"
+  ],
+  "applicationRoots": [],
+  "excludedRoots": [
+    "architecture",
+    "docs",
+    "research",
+    "scripts",
+    "tests/qualification",
+    "dist"
+  ],
+  "modules": [
+    {
+      "id": "live-module-updates",
+      "role": "platform-library",
+      "root": ".",
+      "sourceRoot": "src",
+      "testRoots": [
+        "tests/features",
+        "tests/module"
+      ],
+      "featuresRoot": "src/features",
+      "moduleComposition": [
+        "src/index.ts",
+        "src/resources.ts"
+      ],
+      "features": [
+        {
+          "id": "update-operation",
+          "root": "src/features/update-operation",
+          "layers": [
+            {
+              "role": "application",
+              "root": "src/features/update-operation/application"
+            },
+            {
+              "role": "adapters",
+              "root": "src/features/update-operation/adapters"
+            },
+            {
+              "role": "composition",
+              "root": "src/features/update-operation/composition"
+            }
+          ]
+        }
+      ],
+      "surfaces": {
+        "public": [
+          "src/features/update-operation/adapters/resources.ts",
+          "src/features/update-operation/application/models.ts",
+          "src/features/update-operation/application/ports/adoption.ts",
+          "src/features/update-operation/application/ports/authority.ts",
+          "src/features/update-operation/application/ports/invocation.ts",
+          "src/features/update-operation/application/ports/lifetime.ts",
+          "src/features/update-operation/application/ports/preparation.ts"
+        ],
+        "compositionSurface": [
+          "src/features/update-operation/composition/create-update-runtime.ts"
+        ]
+      },
+      "useEdges": [],
+      "republications": [],
+      "ownershipExceptions": []
+    }
+  ],
+  "topology": {
+    "sourcePolicy": "architecture/foundation/source-dependencies.yaml"
+  },
+  "extensions": [
+    {
+      "id": "portable-root-and-optional-native-cleanup",
+      "authority": "docs/architecture/source-ownership.md",
+      "rule": "The ordinary root has no mandatory GM or organization runtime dependency; concrete resource integration remains in its feature-owned optional adapter."
+    }
+  ],
+  "deviations": [],
+  "architectureDocument": "docs/architecture/source-ownership.md",
+  "decisionRecords": [
+    "docs/decisions/0002-production-source-adoption.md"
+  ],
+  "enforcementCommands": [
+    "pnpm run quality:fms",
+    "pnpm run quality:scope",
+    "pnpm run typecheck",
+    "pnpm run quality:typed",
+    "pnpm run test",
+    "pnpm run foundation:check"
+  ]
+}

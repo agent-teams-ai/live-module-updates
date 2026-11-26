@@ -1,0 +1,4 @@
+schemaVersion: 1
+governedRoots: [src, scripts, tests/features, tests/module]
+nonWaivableRulePrefixes: [architecture., quality.]
+waivers: []

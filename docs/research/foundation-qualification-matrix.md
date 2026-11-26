@@ -58,6 +58,36 @@ Neither claim is silently inherited from successful test Hosts.
 
 ## 3. Exact portable-document result
 
+### Independent installed feature, 2026-11-26
+
+The [B0 plan](../plans/installed-feature-consumer-plan.md) is implemented in
+workstream B's single PR. **46 tests passed, zero failures, skips or
+cancellations**, including actual Chromium regression, at
+`0721ffeee2fac54123592ea8c46f418eb801c4a4`.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Corrected source | [`0721ffeee2fac54123592ea8c46f418eb801c4a4`](https://github.com/agent-teams-ai/live-module-updates/commit/0721ffeee2fac54123592ea8c46f418eb801c4a4) |
+| Complete native execution | [Run 45903083884 / job 140193279968](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45903083884/job/140193279968): 46/46; strict compiler/source gates, frozen installation and pinned Chromium installation succeeded |
+| Input and observation archive | [Artifact 15156204421](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45903083884/artifacts/15156204421), including installed-consumer evidence and its actual package lock |
+| Preserved failure | [Pre-change compiler baseline](evidence/installed-feature-consumer-20261126/README.md): three missing canonical exports, exactly three TS2305 diagnostics after correcting the test's ambient configuration |
+| Scope | A new independently authored static Node feature and all previous Node/Chromium regression; no live-update or new browser-summary claim |
+
+M5 installs the verified core/adapter archives in a second clean directory
+outside the provider build root. The summary feature is the sole entry root;
+its required Export slot reaches the real provider graph. Complete inherited
+contracts, independent value/revision conflicts, identical overlaps, removal
+and restoration of the public exports, and the actual hidden-file export error
+are all discriminated. Useful publication returns revision 7 and 22 JavaScript
+code units for `"Document r7\nMiXeD text"`. Current receiver denial produces
+no extra delivery. Missing Export fails before factories or effects. Original
+Resources close agrees with the external lease count and preserves borrowed
+state. Whole-module FMS/CMS and the forbidden-GM application control pass.
+
+Root review checked each changed implementation file after the author's local
+positive and negative runs. Complete-operation independent reviews remain B6;
+this checkpoint does not claim their completion or repository admission.
+
 ### Complete feature contracts and storage acquisition, 2026-11-26
 
 The [bounded follow-up plan](../plans/module-authoring-contract-storage-plan.md)
@@ -212,6 +242,42 @@ installed artifact and browser response hashes to the actual run. It observes
 one synchronous file owner and one fresh browser context/origin. It does not
 qualify concurrent tabs, multiple writers/processes, transport recovery,
 discovery/admission, plugin removal, stream custody or live replacement.
+
+## 3a. Native invocation and authority discriminator
+
+[ADR-0001](../decisions/0001-cooperative-update-profile.md) selects the bounded
+cooperative fixture. L1 passed on both actual runtimes before production API
+implementation began. This is an invocation/authority feasibility result, not
+the complete update runtime or a production package admission.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Source | [`2f7392f3b1a9541e84ece0a910a14c49cbacb62f`](https://github.com/agent-teams-ai/live-module-updates/commit/2f7392f3b1a9541e84ece0a910a14c49cbacb62f) |
+| Native execution | [Run 45904704130 / job 140198533181](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45904704130/job/140198533181): both runner tests passed, no failures, cancellations or skips; strict TS and pinned browser installation passed |
+| Observations per target | Ten invocation cases, eighteen authority cases and one coupled lost-acknowledgement case; Chromium additionally checks its native Storage replacement cleanup |
+| Evidence archive | [Artifact 15158036050](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45904704130/artifacts/15158036050), uploaded ZIP SHA256 `f2fb808bfb7f3aa838abd685fa1b3664ee4f24d26c04296e237bd4c686e9b363` |
+| Runtime and bytes | Node 24.22.3, TS 7.0.2, Resources 0.2.2, Playwright 1.65.1 and its real pinned Chromium; Node and browser evidence bind the same compiled candidate hash and public Resources inventory |
+
+The explicit continuation retains A through nested/reentrant and post-await
+work while fresh requests observe B. Registered descendants outlive an
+unawaiting parent safely. Abandoning an observer does not release actual work.
+The original native close flight and debt remain identifiable after a distinct
+successful retry. One domain budget covers roots and descendants across
+generations.
+
+Independent Map and native Storage authorities condition publication at the
+actual mutation. They preserve the original receipt through later progress,
+refuse changed same-attempt input and retain nonterminal absence while the
+original request can still commit. A transport that throws after native commit
+does not prevent new calls using B. Retained A does not bypass current receiver
+authority. Browser head and receipt share one native replacement operation.
+
+The TEST candidate retains its two entries until session disposal. It does not
+prove repeated-update retention, safe registry forgetting or the complete
+prepare/publish/adopt/retire coordinator. Its split-selection negative control
+proves witness sensitivity; B6 must mutate the actual operation path or use a
+genuine faulty adapter with the same independent oracle. These limits remain
+explicit when the candidate is refined into production source.
 
 ## 4. Independent oracles, negative controls and reset
 

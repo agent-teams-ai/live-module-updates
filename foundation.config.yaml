@@ -1,0 +1,10 @@
+schemaVersion: 2
+project:
+  id: live-module-updates
+capabilities:
+  architecture.source-dependencies:
+    configPath: architecture/foundation/source-dependencies.yaml
+  quality.source-coverage:
+    configPath: architecture/foundation/source-coverage.yaml
+  quality.suppression-governance:
+    configPath: architecture/foundation/suppression-governance.yaml

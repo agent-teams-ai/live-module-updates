@@ -12,8 +12,14 @@ the selected profile packet and exact unfinished step. An unresolved decision
 blocks its dependent contract only; continue independent work within the assigned
 scope and retain the question with alternatives. Do not infer production defaults
 from a merged plan.
-This prepared project contains research and proposed contracts. It has no
-accepted public runtime API or admitted production package.
+The selected cooperative implementation follows
+[ADR-0001](docs/decisions/0001-cooperative-update-profile.md). Production source
+uses the [one FMS profile](architecture/feature-module-profile.json) and
+[native quality adoption](docs/decisions/0002-production-source-adoption.md).
+Read [source ownership](docs/architecture/source-ownership.md) before changing
+its public surface and [usage contracts](docs/architecture/cooperative-operation-usage.md)
+before changing invocation or Host obligations. The root package is private; source implementation, native
+qualification, managed admission and public npm release remain separate.
 
 For writing or qualifying a modular feature, start with the
 [maintained authoring reference](tests/qualification/portable-document/README.md)
@@ -78,7 +84,7 @@ including fixtures and runners; inspect initialized embedded compiler versions.
 Do not add declaration shims or weaken checks to hide an integration gap.
 Preserve exact historical archives rather than rerunning them under new names.
 
-This prepared directory has no installed managed Docs authoring route.
+This repository has no installed managed Docs authoring route.
 [BOOTSTRAP](BOOTSTRAP.md) records the official transition. Do not copy another
 repository's managed projection or claim that an unqualified tool cohort is
 admitted. Follow the current repository-owned route after actual onboarding.

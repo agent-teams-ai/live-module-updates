@@ -1,0 +1,40 @@
+name: Native library checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    name: native-library
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      QUALIFICATION_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.22.3
+      - uses: pnpm/action-setup@008330803749db0355799c700092d9a85fd074e9
+        with:
+          version: 11.25.0
+          run_install: false
+      - name: Install the exact development graph
+        run: pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies
+      - name: Install the pinned native browser
+        run: pnpm exec playwright install --with-deps chromium --only-shell
+      - name: Execute every native library gate
+        run: pnpm check
+      - name: Retain actual qualification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-library-evidence
+          path: .qualification/evidence
+          if-no-files-found: ignore
