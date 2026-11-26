@@ -1,6 +1,6 @@
 import assert, { AssertionError } from "node:assert/strict";
 import { createServer } from "node:http";
-import { test } from "node:test";
+import { test, type TestContext } from "node:test";
 import { chromium, type Browser, type BrowserContext } from "playwright";
 import { sha256 } from "./pack-consumer.ts";
 import type { packModularConsumer } from "./pack-modular.ts";
@@ -37,6 +37,19 @@ const complete = { complete: true, settled: true, debts: [] };
 const saved = { revision: 1, text: "reviewed draft" };
 const closed = { status: "rejected", reason: "closed" };
 const cancelled = { status: "rejected", reason: "cancelled" };
+
+async function ownedBrowser(context: TestContext): Promise<Browser> {
+  const browser = await chromium.launch({ headless: true });
+  let closing: Promise<void> | undefined;
+  const close = () => closing ??= browser.close();
+  const abort = () => {
+    void close().catch(error => { context.diagnostic("Browser cancellation cleanup failed: " + String(error)); });
+  };
+  context.signal.addEventListener("abort", abort, { once: true });
+  context.after(async () => { context.signal.removeEventListener("abort", abort); await close(); });
+  if (context.signal.aborted) abort();
+  return browser;
+}
 
 async function browserCase(browser: Browser, packed: Packed, scenario: Scenario, omitListenerCleanup = false) {
   const assets = new Map(packed.assets);
@@ -209,7 +222,7 @@ async function browserCase(browser: Browser, packed: Packed, scenario: Scenario,
       }
     }, { scenario, hostPath, adapterPath });
     await Promise.all(responses);
-    for (const name of runtimeNames) assert.ok(requested.has(imports[name]!), "browser did not execute " + name);
+    for (const name of runtimeNames) assert.ok(requested.has("/packages/" + name + "/dist/index.js"), "browser did not execute " + name);
     assert.ok(requested.has(hostPath));
     assert.deepEqual(errors, [], "browser runtime failed independently of intended lifecycle oracle");
     return { values, browser: browser.version(), responses: requested.size };
@@ -250,24 +263,20 @@ export function registerBrowserModularCases(getPacked: () => Packed, observation
   };
   const scenarios: Scenario[] = ["normal", "held", "cooperative", "pending-cleanup", "debt", "partial", "conflict", "denied", "reentrant"];
   for (const scenario of scenarios) {
-    void test("B modular Chromium: " + scenario, { timeout: 45000 }, async () => {
-      const browser = await chromium.launch({ headless: true });
-      try {
-        const result = await browserCase(browser, getPacked(), scenario);
-        if (scenario === "normal") assertNormal(result.values);
-        else assert.deepEqual(result.values, expectations[scenario], "independent browser lifecycle oracle: " + scenario);
-        observations.push({ host: "browser-modular", scenario, ...result });
-      } finally { await browser.close(); }
+    void test("B modular Chromium: " + scenario, { timeout: 45000 }, async context => {
+      const browser = await ownedBrowser(context);
+      const result = await browserCase(browser, getPacked(), scenario);
+      if (scenario === "normal") assertNormal(result.values);
+      else assert.deepEqual(result.values, expectations[scenario], "independent browser lifecycle oracle: " + scenario);
+      observations.push({ host: "browser-modular", scenario, ...result });
     });
   }
-  void test("B native DOM oracle rejects omitted modular listener cleanup", { timeout: 45000 }, async () => {
-    const browser = await chromium.launch({ headless: true });
-    try {
-      await assert.rejects((async () => {
-        const result = await browserCase(browser, getPacked(), "normal", true);
-        assertNormal(result.values);
-      })(), error => error instanceof AssertionError && error.message.includes("closed browser Host still handles retired export"));
-      observations.push({ host: "browser-modular", control: "omit-listener-cleanup", rejectedBy: "closed browser Host still handles retired export" });
-    } finally { await browser.close(); }
+  void test("B native DOM oracle rejects omitted modular listener cleanup", { timeout: 45000 }, async context => {
+    const browser = await ownedBrowser(context);
+    await assert.rejects((async () => {
+      const result = await browserCase(browser, getPacked(), "normal", true);
+      assertNormal(result.values);
+    })(), error => error instanceof AssertionError && error.message.includes("closed browser Host still handles retired export"));
+    observations.push({ host: "browser-modular", control: "omit-listener-cleanup", rejectedBy: "closed browser Host still handles retired export" });
   });
 }

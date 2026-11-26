@@ -84,6 +84,16 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
     await verifyPackageBytes(adapterRoot, adapter.built);
     await verifyPackageBytes(coreRoot, core.built);
 
+    const adapterManifest: unknown = JSON.parse(await readFile(join(adapterRoot, "package.json"), "utf8"));
+    assert.ok(typeof adapterManifest === "object" && adapterManifest !== null);
+    const exactRuntime = Object.fromEntries(published.filter(item => item.name !== "@get-modular/conformance")
+      .map(item => [item.name, item.version]));
+    assert.deepEqual(Reflect.get(adapterManifest, "dependencies"), { "@fixture/portable-document": "0.0.0" },
+      "GM runtime belongs to the Host, not the adapter's ordinary dependency closure");
+    assert.deepEqual(Reflect.get(adapterManifest, "peerDependencies"),
+      Object.fromEntries(Object.entries(exactRuntime).map(([name, version]) => [name, "^" + version])), "CMS compatible GM peers");
+    assert.deepEqual(Reflect.get(adapterManifest, "devDependencies"), exactRuntime, "CMS exact adapter test pins");
+
     const lock: unknown = JSON.parse(await readFile(join(root, "package-lock.json"), "utf8"));
     assert.ok(typeof lock === "object" && lock !== null && "packages" in lock
       && typeof lock.packages === "object" && lock.packages !== null);

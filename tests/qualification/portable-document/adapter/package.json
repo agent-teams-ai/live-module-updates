@@ -10,7 +10,14 @@
   "files": ["dist"],
   "sideEffects": false,
   "dependencies": {
-    "@fixture/portable-document": "0.0.0",
+    "@fixture/portable-document": "0.0.0"
+  },
+  "peerDependencies": {
+    "@get-modular/core": "^0.8.0",
+    "@get-modular/assembly": "^0.8.0",
+    "@get-modular/resources": "^0.2.2"
+  },
+  "devDependencies": {
     "@get-modular/core": "0.8.0",
     "@get-modular/assembly": "0.8.0",
     "@get-modular/resources": "0.2.2"
