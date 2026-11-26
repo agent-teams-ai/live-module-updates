@@ -15,6 +15,12 @@ from a merged plan.
 This prepared project contains research and proposed contracts. It has no
 accepted public runtime API or admitted production package.
 
+For writing or qualifying a modular feature, start with the
+[maintained authoring reference](tests/qualification/portable-document/README.md)
+for source, commands and scoped evidence. It covers private TEST packages,
+independent Node/Chromium Hosts and controlled restart. The consumer's accepted
+CMS/FMS and local adoption profile remain authoritative.
+
 The owner's 2026-11-24 clarification requires representative fixtures and
 independent test Hosts before dependent products. A first application is not
 an entry gate. Browser, Desktop and untrusted third-party execution constrain
