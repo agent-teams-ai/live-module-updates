@@ -7,5 +7,6 @@ export interface FormatCapabilities extends CapabilitiesOf<typeof Format> {}
 /** A selected implementation, not a registry or a semantic contract revision. */
 export interface FormatProvider {
   readonly implementationId: string;
+  /** Receiver-independent callback returning own arrow-function port members. */
   readonly create: () => FormatPort;
 }

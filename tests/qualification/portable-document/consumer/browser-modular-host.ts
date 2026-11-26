@@ -119,14 +119,14 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
           await hooks.afterAcquire?.(signal);
           if (signal.aborted) throw new Error("Browser setup was cancelled");
           return {
-            async prepare(): Promise<ExportPreparation> {
+            prepare: async (): Promise<ExportPreparation> => {
               // Actual browser-native asynchronous work, followed by a controlled finite wait.
               const staged = await new Blob([JSON.stringify(readState())], { type: "application/json" }).text();
               button.dataset["prepared"] = staged;
               const readiness = await hooks.wait?.(cancellation.signal);
               return { status: readiness === "cancelled" || cancellation.signal.aborted ? "cancelled" : "ready" };
             },
-            commit(expectedRevision, content): ExportResult {
+            commit: (expectedRevision, content): ExportResult => {
               if (!ingress.isOpen()) return { status: "rejected", reason: "closed" };
               if (!granted) return { status: "rejected", reason: "denied" };
               if (readState().revision !== expectedRevision) return { status: "rejected", reason: "conflict" };
@@ -154,12 +154,14 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
       const prepared = await prepareDocumentComposition(selectedProvider);
       if (prepared.status !== "prepared") throw new Error("Browser preparation failed", { cause: prepared });
       if (!ingress.isOpen() || disposed) throw new Error("Browser preparation was closed");
-      const result = await prepared.prepared.run({
+      type ConstructionOutcome = Awaited<ReturnType<typeof prepared.prepared.run>> | undefined;
+      const result = await ingress.invoke<ConstructionOutcome>(() => prepared.prepared.run({
+        signal: cancellation.signal,
         scope: scope.resources,
         inputs: {
           state: { "fixture/document/state": {
             read: readState,
-            commit(expectedRevision, text): EditResult {
+            commit: (expectedRevision, text): EditResult => {
               if (!ingress.isOpen()) return { status: "rejected", reason: "closed" };
               if (!granted) return { status: "rejected", reason: "denied" };
               const previous = readState();
@@ -171,7 +173,8 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
           } },
           delivery: { "fixture/export/delivery": delivery },
         },
-      });
+      }), undefined);
+      if (result === undefined) throw new Error("Browser construction was closed");
       if (result.status !== "succeeded") throw new Error("Browser construction failed", { cause: result });
       if (!ingress.isOpen() || disposed) throw new Error("Browser construction was closed");
       dispatch = () => ingress.invoke<ExportResult>(

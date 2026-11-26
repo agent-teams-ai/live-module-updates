@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { setImmediate as turn } from "node:timers/promises";
 import { pathToFileURL } from "node:url";
 import type { packModularConsumer } from "./pack-modular.ts";
-import { assertConstructionTrace, constructionTrace } from "./construction-controls.ts";
+import { assertConstructionTrace, constructionOrderingFailure, constructionTrace } from "./construction-controls.ts";
 import type { ConstructionObservation } from "./consumer/construction-probe.ts";
 
 type Packed = Awaited<ReturnType<typeof packModularConsumer>>;
@@ -382,5 +382,13 @@ export function registerNodeModularCases(getPacked: () => Packed, observations: 
     const trace = await constructionCase(getPacked(), context.signal);
     observations.push({ host: "node-modular", scenario: "construction", trace });
     assertConstructionTrace(trace, "Node");
+  });
+
+  void test("N12 construction oracle rejects omitted custody with cancellation intact", { timeout: 30000 }, async context => {
+    await assert.rejects((async () => {
+      const trace = await constructionCase(getPacked(), context.signal, "node-modular-construction-no-custody.js");
+      observations.push({ host: "node-modular", control: "omit-construction-custody", trace });
+      assertConstructionTrace(trace, "Node");
+    })(), error => error instanceof AssertionError && error.message.includes(constructionOrderingFailure));
   });
 }

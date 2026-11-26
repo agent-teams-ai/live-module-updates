@@ -5,7 +5,7 @@ keep state, authority and resource ownership explicit. This TEST reference has
 three features—Document, Format and Export—and two private packed artifacts:
 an ordinary core and an optional Get Modular adapter.
 
-The [full modular run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268)
+The prior [full modular run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268)
 at `6b22e4b5a9ce07b9be3e861004c880e68b5b88de` passed **36 tests, zero
 failures/cancellations/skips**, including actual Chromium. Independent source
 reviews are complete for this bounded reference, including the peer-policy and
@@ -13,6 +13,13 @@ browser-harness cleanup corrections.
 The [evidence matrix](../../../docs/research/foundation-qualification-matrix.md#modular-authoring-checkpoint-2026-11-26)
 owns exact results; the [reviewed plan](../../../docs/plans/module-authoring-implementation-plan.md)
 owns the delivery scope.
+
+The [critical follow-up plan](../../../docs/plans/module-authoring-critical-review-plan.md)
+adds explicit construction cancellation/custody and actual-root Conformance
+smoke. Its pre-fix [Node/Chromium run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45739825330/job/139641793448)
+at `c701a6b` passed the existing 36 tests and failed exactly the two new
+cancellation regressions. That red result is retained separately from the
+fixed implementation's pending full qualification.
 
 These are maintained qualification packages, not an npm release or public
 LMU/EF runtime. The reference uses published GM APIs and contains no EF runtime
@@ -63,6 +70,22 @@ semantics. Missing dependencies or incompatible revisions must fail actual GM
 preparation before factories run. A structurally valid but incorrectly selected
 provider is detected by the independent wiring oracle.
 
+Use receiver-independent factory callbacks and own arrow-function port members,
+as in C above. Class prototype methods are invalid ports under the adopted CMS;
+the rejecting example is kept in the test probe. Each selection has its own
+composition profile, derived from the captured implementation identity, such as
+`fixture/portable-document/fixture/format/author`. The profile and semantic
+contract revision have separate purposes.
+
+The [complete-root smoke probe](consumer/composition-smoke.ts) passes Conformance's
+typed Assembly API into the same `prepareDocumentComposition(provider, api)`
+function used by Hosts. Its ordinary API default is unchanged. For each A/B/C
+selection, it requires seven steps: successful construction and fail/abort after
+each of Document, Format and Export. Complete close reports and independent TEST
+delivery-lease counts must agree. Exact prototype-port and failed-cleanup controls
+check the rejecting paths; explicit fake-lease reclamation never rewrites debt.
+These checks complement the handwritten wiring and native lifetime evidence.
+
 For a new feature, place behavior and consumer-owned ports in the ordinary core
 and GM declarations/factories in the adapter. Update the explicit
 [source profile](source-profile.ts), [dependency policy](architecture/foundation/source-dependencies.yaml)
@@ -85,6 +108,13 @@ Read [node-modular-host.ts](consumer/node-modular-host.ts) and
 native I/O and resource adapters are independent. Each retains a Resources
 scope before construction. A setup that fails before returning its acquired
 value must clean that value itself.
+
+Construction itself is admitted through that same finite invocation owner.
+Pass the native cancellation signal to `prepared.run`, retain its raw flight,
+and wait for it to settle before closing the attempt's Resources scope. Keep
+construction failure handling outside the tracked callback: awaiting close from
+inside a flight that close must drain would deadlock. The post-construction
+guard prevents publication of a facade after ingress closes.
 
 Controlled restart closes ingress, requests cooperative cancellation, waits for
 admitted raw operations to settle, then awaits the original Resources close.
@@ -147,7 +177,7 @@ to a production tooling profile. The current tool lock SHA256 is
 `93c6f1d17b2606aedb4ac2c95c8f15cb8c6f0705875f5149f60e13065993f700`.
 
 `pnpm qualify` executes the modular contract/artifact, Node/browser lifecycle,
-retained ordinary document, P1 and source-guard cases. A later source or package
+actual-root smoke, retained ordinary document, P1 and source-guard cases. A later source or package
 change needs its own exact-source result.
 The [workflow](../../../.github/workflows/portable-document-qualification.yml)
 checks the actual PR head, installs real Chromium and retains source, tool
@@ -162,6 +192,11 @@ or GM in ordinary application code, sibling implementation access and ungoverned
 source placement. The modular suite additionally checks A/B/C useful
 outputs, independent Node/Chromium execution, raw-work drain, partial setup,
 original cleanup debt, final receiver races and discriminating broken controls.
+Construction probes are generated as separately typechecked TEST Host copies.
+They preserve the actual run Promise and actual scope close; a control keeps
+cancellation but omits only construction custody. Both Hosts must reject that
+control for premature close after finishing real teardown. Waiting for Resources
+setup alone cannot establish this ordering guarantee.
 
 The recorded native job runs on Ubuntu 24.04 with the pinned Node and Chromium.
 All claims are bounded to trusted finite work, one Host at a time in one Node

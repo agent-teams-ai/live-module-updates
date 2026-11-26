@@ -4,7 +4,7 @@ import { test, type TestContext } from "node:test";
 import { chromium, type Browser, type BrowserContext } from "playwright";
 import { sha256 } from "./pack-consumer.ts";
 import type { packModularConsumer } from "./pack-modular.ts";
-import { assertConstructionTrace } from "./construction-controls.ts";
+import { assertConstructionTrace, constructionOrderingFailure } from "./construction-controls.ts";
 import type { ConstructionObservation } from "./consumer/construction-probe.ts";
 
 type Packed = Awaited<ReturnType<typeof packModularConsumer>>;
@@ -353,5 +353,14 @@ export function registerBrowserModularCases(getPacked: () => Packed, observation
       assertNormal(result.values);
     })(), error => error instanceof AssertionError && error.message.includes("closed browser Host still handles retired export"));
     observations.push({ host: "browser-modular", control: "omit-listener-cleanup", rejectedBy: "closed browser Host still handles retired export" });
+  });
+
+  void test("B construction oracle rejects omitted custody with cancellation intact", { timeout: 45000 }, async context => {
+    const browser = await ownedBrowser(context);
+    await assert.rejects((async () => {
+      const result = await browserCase(browser, getPacked(), "construction", false, "browser-modular-construction-no-custody.js");
+      observations.push({ host: "browser-modular", control: "omit-construction-custody", ...result });
+      assertConstructionResult(result.values);
+    })(), error => error instanceof AssertionError && error.message.includes(constructionOrderingFailure));
   });
 }

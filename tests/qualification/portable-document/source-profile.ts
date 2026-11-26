@@ -6,7 +6,7 @@ export const sourceAuthority = {
     id: "agent-teams.feature-module-standard", version: "v1.1",
     digest: "sha256:cfa088ef7396139554fe5e3bcc839271b23299c6b60c569a3a7f1cd7c9f0bc6c",
   },
-  cms: "https://github.com/agent-teams-ai/get-modular/blob/ae2418b186119c3c84736a6217a9ef25bbfe86cb/docs/architecture/common-assembly.md#consumer-module-standard",
+  cms: "https://github.com/agent-teams-ai/get-modular/blob/a5f41853200aed26d692e89d768185013d629a12/docs/architecture/common-assembly.md#consumer-module-standard",
   tools: {
     "@agent-teams/engineering-foundation": "3.0.0",
     "@agent-teams/feature-module-standard": "0.3.0",

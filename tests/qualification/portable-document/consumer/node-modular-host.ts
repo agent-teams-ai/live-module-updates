@@ -133,12 +133,12 @@ export async function openNodeModularHost(
           await handle.writeFile("acquired\n");
           if (signal.aborted) throw new Error("Node setup was cancelled");
           return {
-            async prepare(): Promise<ExportPreparation> {
+            prepare: async (): Promise<ExportPreparation> => {
               await handle.writeFile("prepared\n");
               const readiness = await hooks.wait?.(cancellation.signal);
               return { status: readiness === "cancelled" || cancellation.signal.aborted ? "cancelled" : "ready" };
             },
-            commit(expectedRevision, content): ExportResult {
+            commit: (expectedRevision, content): ExportResult => {
               if (!ingress.isOpen()) return { status: "rejected", reason: "closed" };
               if (!granted) return { status: "rejected", reason: "denied" };
               if (readState().revision !== expectedRevision) return { status: "rejected", reason: "conflict" };
@@ -167,12 +167,14 @@ export async function openNodeModularHost(
       const prepared = await prepareDocumentComposition(selectedProvider);
       if (prepared.status !== "prepared") throw new Error("Node composition preparation failed", { cause: prepared });
       if (!ingress.isOpen() || disposed) throw new Error("Node construction was closed");
-      const result = await prepared.prepared.run({
+      type ConstructionOutcome = Awaited<ReturnType<typeof prepared.prepared.run>> | undefined;
+      const result = await ingress.invoke<ConstructionOutcome>(() => prepared.prepared.run({
+        signal: cancellation.signal,
         scope: scope.resources,
         inputs: {
           state: { "fixture/document/state": {
             read: readState,
-            commit(expectedRevision, text): EditResult {
+            commit: (expectedRevision, text): EditResult => {
               if (!ingress.isOpen()) return { status: "rejected", reason: "closed" };
               if (!granted) return { status: "rejected", reason: "denied" };
               const previous = readState();
@@ -184,16 +186,17 @@ export async function openNodeModularHost(
           } },
           delivery: { "fixture/export/delivery": delivery },
         },
-      });
+      }), undefined);
+      if (result === undefined) throw new Error("Node construction was closed");
       if (result.status !== "succeeded") throw new Error("Node composition construction failed", { cause: result });
       if (!ingress.isOpen() || disposed) throw new Error("Node construction was closed");
       return {
         implementationId: selectedProvider.implementationId,
-        query() {
+        query: () => {
           if (!ingress.isOpen()) throw new Error("Node session is closed");
           return result.roots.document.query();
         },
-        edit(expectedRevision, text) {
+        edit: (expectedRevision, text) => {
           if (!ingress.isOpen()) return { status: "rejected", reason: "closed" };
           return result.roots.document.edit(expectedRevision, text);
         },

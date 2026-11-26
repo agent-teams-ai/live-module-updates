@@ -111,12 +111,13 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
     }
 
     const requiredSources = ["node-modular-host.ts", "browser-modular-host.ts",
-      "invocation-owner.ts", "author-format.ts", "composition-contract.ts", "construction-probe.ts"];
+      "invocation-owner.ts", "author-format.ts", "composition-contract.ts", "composition-smoke.ts", "construction-probe.ts"];
     for (const path of requiredSources) await readFile(join(fixtureRoot, "consumer", path));
     await cp(join(fixtureRoot, "consumer"), join(root, "consumer"), { recursive: true });
     for (const target of ["node", "browser"]) {
       const source = await readFile(join(root, "consumer", target + "-modular-host.ts"), "utf8");
       await writeFile(join(root, "consumer", target + "-modular-construction.ts"), instrumentConstructionHost(source));
+      await writeFile(join(root, "consumer", target + "-modular-construction-no-custody.ts"), instrumentConstructionHost(source, true));
     }
     const common = {
       target: "ES2024", module: "NodeNext", moduleResolution: "NodeNext", strict: true,
@@ -126,11 +127,12 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
     await writeFile(join(root, "tsconfig.node.json"), JSON.stringify({
       compilerOptions: { ...common, lib: ["ES2024", "ESNext.Disposable", "DOM"], types: ["node"],
         typeRoots: [resolve(fixtureRoot, "node_modules/@types")], outDir: "dist/node" },
-      include: ["consumer/node-modular-host.ts", "consumer/node-modular-construction.ts", "consumer/composition-contract.ts", "consumer/author-format.ts"],
+      include: ["consumer/node-modular-host.ts", "consumer/node-modular-construction.ts", "consumer/node-modular-construction-no-custody.ts",
+        "consumer/composition-contract.ts", "consumer/composition-smoke.ts", "consumer/author-format.ts"],
     }, null, 2));
     await writeFile(join(root, "tsconfig.browser.json"), JSON.stringify({
       compilerOptions: { ...common, lib: ["ES2024", "ESNext.Disposable", "DOM", "DOM.Iterable"], types: [], outDir: "dist/browser" },
-      include: ["consumer/browser-modular-host.ts", "consumer/browser-modular-construction.ts", "consumer/author-format.ts"],
+      include: ["consumer/browser-modular-host.ts", "consumer/browser-modular-construction.ts", "consumer/browser-modular-construction-no-custody.ts", "consumer/author-format.ts"],
     }, null, 2));
     run(tsc, ["-p", "tsconfig.node.json"], root);
     run(tsc, ["-p", "tsconfig.browser.json"], root);

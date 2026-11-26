@@ -2,7 +2,7 @@ import type { ExportCommands, ExportDependencies, ExportResult } from "../ports/
 
 export function createExportCommands({ document, format, delivery }: ExportDependencies): ExportCommands {
   return {
-    async publish(): Promise<ExportResult> {
+    publish: async (): Promise<ExportResult> => {
       const { revision, text } = document.query();
       const title = format.title(revision);
       const preparation = await delivery.prepare();
