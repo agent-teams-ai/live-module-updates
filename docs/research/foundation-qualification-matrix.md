@@ -1,7 +1,8 @@
 # Foundation qualification through representative fixtures
 
-Status: maintained qualification design; current evidence refreshed 2026-11-25,
-with the original 2026-11-24 checkpoint preserved below.
+Status: maintained qualification design; current checkpoint refreshed 2026-11-26.
+The scoped modular suite and independent source reviews passed at `6b22e4b`.
+Earlier exact results remain preserved below.
 The owner's clarified sequence is foundation first, applications afterward.
 This matrix names falsifiable claims and their evidence; it is not another
 repository admission policy, universal test framework or stable public API.
@@ -12,11 +13,13 @@ the [open decisions](../decisions/open-decisions.md) retain exact profile choice
 
 Use small features with real state, effects and lifetimes. Their contracts should
 resemble expected applications without requiring those applications to exist.
-The current slice reads and edits a versioned document. Its portable core owns
-input validation and use-case coordination; each independent test Host owns
-canonical test state, final grant/revision validation, receipts and cleanup.
-The ordinary artifact uses narrow ports and contains no GM, UI or platform
-dependency. It is not a miniature plugin platform or update runtime.
+The current reference contains Document, Format and Export features. Its ordinary
+core owns validation, formatting and use-case coordination; each independent
+test Host owns canonical state, final grant/revision validation, receipts and
+cleanup. The core uses narrow ports without GM, UI or platform dependencies.
+A separately packed optional GM adapter supplies composition. The implemented
+controlled-restart profile has the bounded integrated result below, including
+the corrected package-peer policy and abort-aware browser-harness cleanup.
 
 Later fixtures can extend the family with bounded streams, candidate replacement
 or artifact admission when those discriminators are needed. Do not add all of
@@ -35,12 +38,13 @@ does not erase that requirement or block unrelated qualified static work.
 
 | Claim and owner | Discriminating evidence | Current observation and remaining limit |
 | --- | --- | --- |
-| Static composition — GM | Public declarations/bindings, two materially different profiles, rejected bindings before factory effects, source boundaries and borrowed lifetimes | Existing GM/P1–P12 controls are linked below. The portable-document fixture does not import or qualify GM composition. A new integrated composition claim needs its own exact result. |
+| Static composition — GM | Public declarations/bindings, materially different profiles, rejected bindings before factory effects, source boundaries and borrowed lifetimes | P1 and the integrated `6b22e4b` result execute public GM in Node and Chromium. M1 checks three-feature wiring and semantic A/B/C contracts through installed exports; unsupported revision/dependency cases reject before effects. Historical P1–P12 controls remain separately scoped. |
+| Authoring source boundaries — fixture checks | Real source parsing, exact tool/standard identities, forbidden dependency/placement mutations and restored-source acceptance | The `6b22e4b` checkpoint passes installed Foundation/FMS/GM checks and four mutation subtests over the actual flat core/adapter source. This is fixture-local qualification, not whole-repository production admission. |
 | Packed ordinary behavior — capability contract | Public exports/declarations resolve in an isolated installed consumer; accepted edit, invalid input, stale revision and revoked grant match independent state/receipt expectations; installed bytes and owner receipts survive adversarial controls | Q1/Q1b plus artifact/authority controls passed in the six-test `6083e89` result below. Test package only; no public LMU release, installation/admission SPI or crash durability. |
 | Independent Node/browser use — test Hosts | One installed ESM artifact executes through independently wired file and browser-storage owners; response hashes agree; both execution orders reset to the expected initial state | `portable-document/Q2` passed in actual Chromium. These are two test Hosts using one core, not two production adoptions or independent plugin SPI implementations. |
 | Cleanup oracle — fixture lifetime owner | Independently omit Save, Query, Revoke or Close listener removal; actual post-close dispatch must fail the corresponding oracle, including query error/repeated close | Q3 passed all four rejecting controls in the `6083e89` result. A closed-state guard cannot hide the tested retained listener; no arbitrary leak freedom or hostile-code stop is claimed. |
-| Complete resource/work custody — existing lifetime owners | Partial/late construction, borrowed-provider survival, nested work/streams, cancellation, failed drain and retained original cleanup debt | Historical public-GM mechanism controls exist. This ordinary edit fixture has no stream or async update operation; no new complete-operation claim. |
-| Installable contribution — EF and test Host | Actual verified artifact/import closure to admitted invocation, denied/tampered/incompatible/wrong-scope/stale/revoked paths, disable/uninstall and explicit data retention | [EF #66](https://github.com/agent-teams-ai/extension-foundation/pull/66) adds a real bounded trusted Node package-to-effect/disable/remove path. It does not qualify signed OCI trust, durable Host installation, full installed-plugin lifecycle or production SPI. |
+| Controlled restart — TEST Hosts and Resources | Stop ingress, retain raw asynchronous work until settlement, preserve canonical state, reject stale/revoked effects and refuse B while original cleanup is incomplete | The `6b22e4b` Node/Chromium suite passes the supported finite-work, actual resource and rejecting-control cases. No live overlap, stream custody, fleet publication or complete LMU operation follows. |
+| Installable contribution — EF and test Host | Actual verified artifact/import closure to admitted invocation, denied/tampered/incompatible/wrong-scope/stale/revoked paths, disable/uninstall and explicit data retention | [EF #66](https://github.com/agent-teams-ai/extension-foundation/pull/66) supplies the bounded trusted Node package-to-effect path. [EF #68](https://github.com/agent-teams-ai/extension-foundation/pull/68) adds EF-local TEST exact-revision compatibility work. Neither is an EF runtime integration in this LMU reference or proof of signed OCI trust, durable installation or production SPI. |
 | Full live update — LMU and actual authorities | Atomic select/retain, failed B preserving A, useful B adoption while admitted A work remains coherent, original-attempt reconciliation, stale-writer rejection and retirement holds | Operation proposal plus mechanism witnesses. No implemented complete LMU runtime; supported public admission/custody path must be established before claiming this row. |
 | Desktop — selected shell and privileged receiver | Actual renderer/main or native boundary, versioned IPC, malformed/denied calls, native resources, recovery and observed shutdown on selected OS | Required design boundary; exact shell/profile and native qualification remain open. Node plus browser tests do not qualify Desktop. |
 | Untrusted code — selected executor/authority | Denied file/network/IPC and privilege access, current grants at the real effect receiver, quotas and actual termination under adversarial behavior | Required design boundary; selected enforceable mechanism and native evidence remain open. A grant toggle, Worker, process label or signed artifact does not prove containment. |
@@ -54,11 +58,35 @@ Neither claim is silently inherited from successful test Hosts.
 
 ## 3. Exact portable-document result
 
+### Modular authoring checkpoint, 2026-11-26
+
+**Full scoped modular execution and independent source review passed at
+`6b22e4b`.** This includes the package-peer metadata and browser-harness cleanup
+corrections. A passing P1 or source-check result alone does not establish the
+integrated claim below.
+
+| Executed scope | Exact source and run | Observation |
+| --- | --- | --- |
+| Public-package P1 discriminator | [`7bb9aa85ef8d2867534ba59269d75e72606043c6`](https://github.com/agent-teams-ai/live-module-updates/commit/7bb9aa85ef8d2867534ba59269d75e72606043c6), [run 45721438195](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45721438195/job/139580479977) | Public Core/Assembly/Resources construction and close execute in Node and actual Chromium using the checked installed assets |
+| Earlier baseline/source checkpoint | [`bb270ead67ef3f985559ebdcfb0c7783dfce3c23`](https://github.com/agent-teams-ai/live-module-updates/commit/bb270ead67ef3f985559ebdcfb0c7783dfce3c23), [run 45726241258](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45726241258/job/139596712267) | 13 Node-runner tests passed; zero failed/skipped/cancelled. This count includes the source test's four subtests, the two P1 cases and the retained ordinary cases |
+| Earlier integrated modular result | [`1b1891679da90f13ab3e9ea2e57eb8b3e9627aa1`](https://github.com/agent-teams-ai/live-module-updates/commit/1b1891679da90f13ab3e9ea2e57eb8b3e9627aa1), [run 45727313854](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45727313854/job/139600310699) | 36 passed before the final metadata/harness corrections; retained as its own exact-source result |
+| Current corrected scoped reference | [`6b22e4b5a9ce07b9be3e861004c880e68b5b88de`](https://github.com/agent-teams-ai/live-module-updates/commit/6b22e4b5a9ce07b9be3e861004c880e68b5b88de), [run 45728069283](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268) | 36 passed, zero failed/skipped/cancelled: M1/M2, 11 Node cases, nine Chromium scenarios plus a listener-removal mutant, retained ordinary cases, P1 and source mutations |
+
+The integrated result used Chrome Headless Shell **159.0.8154.6**, build **1255**,
+and retained [artifact 15074823866](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/artifacts/15074823866),
+archive SHA256 `6787b5bb6bf052d82670900ebde8d47ce6e794da450e3205a3ca27cc69216a25`.
+Its source identities, logs and scope stay attached to `6b22e4b`; repeated runs
+do not add new profiles. The maintained
+[authoring route](../../tests/qualification/portable-document/README.md) and
+[implementation record](../plans/module-authoring-implementation-plan.md#execution-checkpoint-2026-11-26)
+describe the qualified source and delivery scope. No npm publication, public
+LMU/EF runtime or product adoption is established by this checkpoint.
+
 ### Delivered six-test successor, 2026-11-25
 
 The original actual-main job was inspected again for this documentation refresh:
 checkout `6083e89`, strict TypeScript 7.0.2, actual Chromium and **6 passed,
-0 failed/skipped/cancelled/todo**. The current fixture has six named tests;
+0 failed/skipped/cancelled/todo**. That source has six named tests;
 its delivery receipt distinguishes **6 positive Host scenarios** (4 Node,
 2 browser) and **12 rejecting controls within those tests**, not eighteen tests
 or new independent runtime profiles.
@@ -77,8 +105,8 @@ revision/grant guards. Actual state and receipts are observed after accepted and
 denied operations, including an action prepared before grant revocation.
 The result is bounded F2 ordinary-library qualification. It does not implement
 GM composition, EF production admission, stream custody or complete LMU updates.
-No executable inputs change in this documentation refresh; the result remains
-bound to its original source/run, not presented as a new native execution.
+The November 25 documentation refresh changed no executable inputs; that result
+remains bound to its original source/run, not a new native execution of later code.
 
 ### Retained three-case checkpoint, 2026-11-24
 

@@ -1,6 +1,7 @@
 # Foundation delivery plan
 
-Status: proposed sequence, corrected after the owner's 2026-11-24 clarification.
+Status: proposed sequence, corrected after the owner's 2026-11-24 clarification;
+modular authoring implementation checkpoint added 2026-11-26.
 Qualify the modularity, plugin and live-update foundation through representative
 fixtures, discriminating spikes and independent test Hosts **before a dependent
 application adopts that profile**. This does not
@@ -114,6 +115,19 @@ within its stated limits, not a completed product, stable public SPI or live
 replacement. Known browser/desktop/security boundaries remain design constraints
 even when the first executed row covers only Node.
 
+The [reviewed modular authoring plan](module-authoring-implementation-plan.md)
+selects the current bounded F1/F2 implementation in the
+[portable-document reference](../../tests/qualification/portable-document/README.md):
+Document, Format and Export in an ordinary core, plus a separately packed adapter
+using public GM. Two built-in format providers and a consumer-authored third provider
+exercise selection without changing document/export behavior. Source checks
+govern three flat features per artifact; no new nested-profile result is claimed.
+The public-package discriminator, source guards and full modular Host/restart
+suite passed at corrected source `6b22e4b`; independent source reviews report GO
+within the declared profile. The
+[evidence matrix](../research/foundation-qualification-matrix.md#modular-authoring-checkpoint-2026-11-26)
+records current and historical results.
+
 ## 4. F2 — independent test-Host portability
 
 **Owner:** capability contract and qualification maintainers. **Entry:** useful
@@ -141,11 +155,16 @@ browser realm. A browser UI calling a Node service proves a UI/transport path,
 not browser execution of the shared core. Desktop requires its selected actual
 shell/IPC/OS path; Node EventTarget is not browser or desktop qualification.
 
-The bounded [portable document fixture](../../tests/qualification/portable-document/)
-is the current implementation route for ordinary-library packaging and Node/
-browser behavior. The [current exact result](../research/foundation-qualification-matrix.md#3-exact-portable-document-result)
-records the delivered six-test successor at `6083e89`; historical Q1–Q3 evidence
-remains preserved. It neither implements GM composition nor an EF/LMU runtime.
+The bounded [portable document fixture](../../tests/qualification/portable-document/README.md)
+retains the ordinary core-only Node/browser cases and now contains independent
+modular Host adapters. Canonical state and receipts stay with their Host across
+controlled restart; module-owned files/listeners use Resources. Stop ingress,
+drain admitted work and await the original complete close before constructing a
+successor. This profile has no live A/B overlap or complete LMU update operation.
+The [current evidence record](../research/foundation-qualification-matrix.md#3-exact-portable-document-result)
+records the corrected scoped execution separately from earlier checkpoints.
+Historical Q1–Q3 and six-test evidence remain bound to their original sources.
+There is no EF runtime integration or production npm release in this reference.
 
 ### Optional UI qualification
 
@@ -247,8 +266,8 @@ Keep the first 3/4 browser failure and its acknowledgement limitation.
 | Incremental scope | Production LOC | Fixture/test or documentation estimate | Complexity / estimate confidence |
 | --- | --- | --- | --- |
 | This fixture-first documentation correction | 0 | About 450–750 changed/added prose lines; actual reviewed diff supersedes estimate | 5/10 / medium |
-| Packed portable document fixture | 0 | Root-owned plan estimates 150–240 fixture/Host TS lines plus 250–400 packaging/test TS lines; workflow/config separate | 4/10 / medium |
-| Current GM optional-adapter fixture | 0 | GM owner retains its separate current-base test estimate and evidence | Owner-scoped |
+| Original ordinary portable-document profile | 0 | Original plan estimated 150–240 fixture/Host TS lines plus 250–400 packaging/test TS lines; workflow/config separate | 4/10 / medium |
+| Scoped modular authoring reference | 0 | The [reviewed implementation plan](module-authoring-implementation-plan.md#6-delivery-cost-and-review-record) owns the combined reference, Host, source-check and EF qualification estimate; actual delivery count remains separate | Owner-scoped / medium |
 | First complete bounded LMU operation | Earlier planning range 3,000–6,000 | Earlier 4,000–9,000 test LOC; admission, other profiles and product adoption excluded | 8/10 / low |
 | Desktop, isolation or new public UI/SPI profile | Not responsibly fixed before mechanism selection | Discriminating spike first, then owner-specific estimate | Scope-dependent |
 

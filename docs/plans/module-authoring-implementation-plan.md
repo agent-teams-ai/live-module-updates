@@ -1,7 +1,9 @@
 # Modular authoring foundation — implementation plan
 
-Status: reviewed for scoped implementation, 2026-11-26. Three independent review
-rounds completed before source implementation. This is the bounded F1/F2 authoring
+Status: bounded implementation and independent source review complete, 2026-11-26;
+the corrected exact-source modular suite passed. Owner delivery receipts remain separate.
+Three independent review rounds completed before source implementation.
+This is the bounded F1/F2 authoring
 delivery from the [foundation plan](foundation-delivery-plan.md), with an
 EF-owned contribution-compatibility qualification. It does not replace the
 [first-operation plan](first-operation-implementation-plan.md).
@@ -181,9 +183,10 @@ separate executable EF evidence, not a cross-repository EF runtime integration.
 | Regression strength | Existing controls retained; small deliberate broken controls fail the corresponding external state/resource/artifact oracle, not compilation/setup |
 | Author ergonomics | Follow README from a fresh isolated consumer, add/select a format provider using public contracts and documented files, and change no document/export implementation |
 
-Keep the envelope explicit: three flat features, two providers, one trusted Host
-at a time per Node process/browser context, finite operations, one canonical
-document and bounded exports. Retain current runner time limits; no sleeps or
+Keep the envelope explicit: three flat features, two built-in format providers
+plus one consumer-authored provider, one trusted Host at a time per Node process/
+browser context, finite operations, one canonical document and bounded exports.
+Retain current runner time limits; no sleeps or
 test retries replace barriers/observations. Larger scale, concurrency, security
 or native targets need separate evidence.
 
@@ -212,6 +215,54 @@ success. npm publication remains explicitly postponed by the user.
 | Round 1 — independent repository/architecture review | Reuse LMU's real browser/package harness; keep ordinary core physically independent from optional GM adapter; EF generic compatibility remains EF-owned; choose restart instead of inventing a live coordinator. Incorporated in this draft. |
 | Round 2 — exact plan critique | Corrected resource ownership; separated EF-local preflight execution from LMU architectural alignment; made optional payload policy, trusted validators and detached selection explicit; restricted old-handle rejection to Host facades including saved methods; specified reservation before reentrant code, the complete-close restart gate, cooperative and held-operation cases, and independent wiring oracle versus runtime preparation refusal. Removed any promise of zero future live-operation API changes; identified three features rather than three distribution packages. |
 | Round 3 — corrected plan / adversarial acceptance | Three independent reviewers read exact corrected revision `0f05ca1767c2514d54afd987af9c22c7131b2d1a` and reported GO, with no remaining critical blocker. Clarified the owner-table EF wording. Begin P1; dependent composition work follows its public-artifact discriminator. |
+| Implementation review/spike — construction and ownership | Aligned factories with GM's asynchronous construction contract; sealed all retained session ingress before `dispose` yields and captured the selected provider; corrected installed ESM export resolution in the packer and the actual flat source-placement diagnostic. These corrections are incorporated in the current reference. |
+| Implementation review — package ownership and harness cleanup | Review required the CMS peer rule—GM peer ranges, exact development pins and consuming-Host selections—and abort-aware ownership in browser-scenario teardown. Both corrections were published at `6b22e4b5a9ce07b9be3e861004c880e68b5b88de`. Independent source reviews report GO within the selected scope; the corrected exact-head CI passed. |
 
-Implementation evidence, actual counts and final review findings will be added
-after execution; this plan is not itself a passing qualification record.
+### Execution checkpoint, 2026-11-26
+
+The [evidence matrix](../research/foundation-qualification-matrix.md#modular-authoring-checkpoint-2026-11-26)
+owns exact execution receipts. The integrated source
+`6b22e4b5a9ce07b9be3e861004c880e68b5b88de` has a
+[successful full run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268):
+36 passed, zero failed/skipped/cancelled, including actual Chromium. The previous
+13-test `bb270ea` result covered baseline/P1/source checks only; the first full
+36-test `1b18916` run preceded the final package-peer and harness corrections.
+Their original identities remain in the evidence matrix.
+
+| Step | Current disposition | Preserved boundary |
+| --- | --- | --- |
+| P0 | Complete: the plan and all three review dispositions were published before implementation at `e47f192c955fd196280ad226eab8faef9a3b858f` | Keep final implementation review distinct from plan approval |
+| P1 | Passed on public packages in Node and actual Chromium at `7bb9aa85ef8d2867534ba59269d75e72606043c6`, [run 45721438195](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45721438195/job/139580479977) | The discriminator permits dependent work; it does not qualify the larger reference |
+| P2 | Three ordinary features, separate optional GM adapter and consumer provider C passed installed-consumer behavior, public contract probes and the corrected package-peer policy | Preserve the ordinary core-only use path and consuming-Host runtime identity |
+| P3 | Independent Node/browser state/effect/resource adapters and shared finite ingress owner passed the scoped native lifecycle/restart cases | Preserve finite-work and controlled-restart limits; do not infer live overlap |
+| P4 | Installed source mutations, nested package inventories, wiring/revision/dependency probes and runtime negative controls passed in the integrated suite | Keep future source/metadata changes bound to fresh exact-head checks |
+| P5 | EF owns the TEST matcher/local packed preflight in [EF #68](https://github.com/agent-teams-ai/extension-foundation/pull/68), source `1be01541ef454b6bacfd92de23fa0a5150bea7a9`; its 246-test qualification and CI/Docs checks passed, with all eight files reviewed | Keep EF's production gates separate; no LMU import of EF test internals |
+| P6 | The maintained authoring route and owner status documents are updated; independent source reviews report GO and corrected-head CI passed; owner-specific draft PRs retain the reviewed delivery | Review any later change at its own head; production adoption and npm publication remain separate |
+
+**Corrected-head qualification and bounded implementation review are complete.**
+The passing suite establishes its exact scoped source result. No production npm
+release, EF runtime integration or live A/B overlap is introduced.
+
+### Measured implementation scope
+
+The following `git diff --numstat` counts compare LMU `6b22e4b` with the initial
+`6e0d5a9` baseline and EF `1be01541` with `65e03ed`. They include handwritten
+reference/test code, configuration and workflows; Markdown and lockfile changes
+are excluded. These are actual changes, not production runtime LOC or a revised
+calendar estimate.
+
+| Repository | Added | Removed | Net |
+| --- | ---: | ---: | ---: |
+| LMU | 2,633 | 66 | 2,567 |
+| EF | 393 | 6 | 387 |
+| Combined | 3,026 | 72 | 2,954 |
+
+Selected current file sizes, already included above: ordinary core 114 lines,
+GM adapter 174, shared invocation owner 47, Node Host 256, browser Host 234 and
+EF compatibility matcher 172. Production runtime added: **0 lines**.
+
+Reviewable delivery is retained in [LMU #4](https://github.com/agent-teams-ai/live-module-updates/pull/4),
+[GM #256](https://github.com/agent-teams-ai/get-modular/pull/256) and
+[EF #68](https://github.com/agent-teams-ai/extension-foundation/pull/68).
+Each PR records its own current checks. The measured implementation counts above
+exclude Markdown and generated lock changes; npm publication remains postponed.
