@@ -64,9 +64,13 @@ The paired Draft PRs contain the proposed assignments until merged.
 | Existing product owners | Product-specific contracts, actual grants/state/custody, selected pins and later useful-behavior integration | This programme does not migrate or begin business implementation in their repositories |
 | Existing tooling owners | Managed cohort and repository admission where actually required | Do not rewrite another agent's active upgrade or infer its completion from a plan |
 
-The existing [PR #8](https://github.com/agent-teams-ai/live-module-updates/pull/8)
-remains B's bounded initial checkpoint. It is based on the delivered navigation
-from #7. A supplies proposed contracts/artifacts through the EF workstream rather
+The [installed-consumer plan](installed-feature-consumer-plan.md), originally
+published in [PR #8](https://github.com/agent-teams-ai/live-module-updates/pull/8),
+remains B's bounded initial checkpoint. The owner's execution instruction now
+collects **all B0–B7 work in the existing [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9)**;
+the separate #8 is superseded after its content is preserved there. No phase PRs
+are created. The work is based on the delivered navigation from #7.
+A supplies proposed contracts/artifacts through the EF workstream rather
 than editing B's branch. Every shared-file handoff records current source SHA,
 changed paths, owner and next unfinished step. Review an existing implementation
 before adding an overlapping one; published plans do not disclose unpublished

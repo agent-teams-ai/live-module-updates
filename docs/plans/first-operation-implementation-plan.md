@@ -5,6 +5,15 @@ independent critique and recorded unresolved questions before risky implementati
 This plan makes the existing F4 work executable; merging it does not select a
 runtime policy, publish an API or admit a production package.
 
+Execution assignment, 2026-11-26: the owner has authorized workstream B through
+implementation, E2E, independent review/corrections and ordinary merge. Deliver
+all B0–B7 changes in the existing [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9);
+do not create phase PRs. The [installed-consumer plan](installed-feature-consumer-plan.md)
+from PR #8 is incorporated as B0. This execution authorization supersedes the
+earlier plan-only stopping point, while profile-specific acceptance and actual
+qualification remain obligations of the phases below. It does not select
+unrelated product defaults or authorize npm publication.
+
 The [operation contract](../architecture/operation.md) owns the required semantics,
 the [decision register](../decisions/open-decisions.md) routes open choices to their
 owning decisions, and the
