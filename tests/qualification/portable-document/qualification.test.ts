@@ -11,6 +11,7 @@ import { evidenceRoot, packConsumer, sha256, verifyPackageBytes } from "./pack-c
 import { packModularConsumer } from "./pack-modular.ts";
 import { registerNodeModularCases } from "./node-modular-cases.ts";
 import { registerBrowserModularCases } from "./browser-modular-cases.ts";
+import { registerFeatureContractCases } from "./feature-contract-cases.ts";
 
 interface Snapshot { readonly revision: number; readonly text: string }
 interface NodeHost {
@@ -114,6 +115,7 @@ test("M3 actual public composition root passes complete smoke and rejects invali
   observations.push({ profile: "modular-composition-smoke", result });
 });
 
+registerFeatureContractCases(() => modular, observations);
 registerNodeModularCases(() => modular, observations);
 registerBrowserModularCases(() => modular, observations);
 
