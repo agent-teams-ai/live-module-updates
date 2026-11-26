@@ -58,6 +58,37 @@ Neither claim is silently inherited from successful test Hosts.
 
 ## 3. Exact portable-document result
 
+### Complete feature contracts and storage acquisition, 2026-11-26
+
+The [bounded follow-up plan](../plans/module-authoring-contract-storage-plan.md)
+completed two independent review rounds before implementation. This slice
+corrects an incomplete standalone Export contract map and Browser Host storage
+acquisition after owned DOM creation. Corrected-source qualification is pending;
+the exact original failures are already preserved.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Preserved pre-fix source | [`fd33d09935e092221b1161369a7be0099096ee5e`](https://github.com/agent-teams-ai/live-module-updates/commit/fd33d09935e092221b1161369a7be0099096ee5e), [run 45832279729 / job 139951844778](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45832279729/job/139951844778): 44 tests, 42 passed, exactly independent feature parity and native storage denial failed; zero skips/cancellations/todo |
+| Pre-fix evidence | [Artifact 15122902308](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45832279729/artifacts/15122902308), downloaded archive SHA256 `869d7f639a2bc69b45e95a27a6cf4b7fc94fafa1cae021acc0d93d8e15e7c29c` |
+| Native execution | Unchanged pinned Chrome Headless Shell 159.0.8154.6 build 1255 on Ubuntu 24.04; actual installed ESM bytes checked for both storage scenarios |
+| Final delivery | [PR #6](https://github.com/agent-teams-ai/live-module-updates/pull/6) retains corrected-head review, merge attribution and actual-main verification when completed |
+
+The compiler checkpoint uses the actual three contract files against the packed
+core and installed public GM declarations, with no Host aggregate or future type
+export. It fails TS2339 for missing `fixture/document/state` and three TS2344
+key/value/token parity assertions. The corrected gate must independently check
+the complete exported union and capability interface, separate omission controls,
+unused value/revision conflicts, identical overlap and collapsed-base controls.
+
+The denied-storage observation is native: the real getter throws twice, failure
+cleanup replaces the first exception and leaves one inserted root. The normal
+origin quota control passes on that same pre-fix source: calibration and Host
+failure are separate, and the Host removes its acquired root while preserving
+unrelated storage. The fix acquires the required Storage holder before DOM and
+keeps that holder for the existing operations. It does not add fallback, retry,
+a cleanup manager or destroyed-context recovery. Both remain TEST/reference
+evidence in one live execution context, without a new public runtime or npm release.
+
 ### Construction and full-root follow-up, 2026-11-26
 
 **41 tests passed, zero failures/skips/cancellations/todo**, including actual

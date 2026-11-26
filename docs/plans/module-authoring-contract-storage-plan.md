@@ -186,5 +186,15 @@ tests only to resolve a concrete remaining risk or a required repository gate.
 | Deeper audit | Three independent audits isolated the map and acquisition defects. Storage scope was narrowed from generic cleanup aggregation to early acquisition of the required native holder. |
 | Plan review 1 | module_vision_review and npm_release_audit required independent union/interface parity and separate omission controls; the pre-fix compiler checkpoint must fail the existing map, not a missing new export. npm_release_audit required observable original native error identity. lifecycle_gap_review required actual import, secure-context and UUID preconditions. Corrections are incorporated; DOM acceptance now names observable insertion, not every detached allocation. No maintained implementation has started. |
 | Plan review 2 | module_vision_review, npm_release_audit and lifecycle_gap_review reviewed exact corrected revision 29d1de176cf998b2af24276716cbb77e1fad0cde and returned GO with no blocker. Clarify that forbidden aliases mean path/resolution aliases, not the accepted descriptor-union type aliases. Collect delivered and outstanding native mutation records; distinguish quota calibration from the Host failure. Both rounds preceded maintained edits. |
-| P1 | Regression qualification in progress. The actual adapter contract files and Browser Host remain unchanged for the pre-fix checkpoint. |
-| P2–P5 | Pending preserved failing evidence. |
+| P1 | Preserved source fd33d09935e092221b1161369a7be0099096ee5e leaves the actual contracts and Host unchanged. Run 45832279729 / job 139951844778 executed 44 tests: 42 passed and exactly M4 plus native storage-denied failed, with no skips/cancellations/todo. The downloaded artifact 15122902308 matches SHA256 869d7f639a2bc69b45e95a27a6cf4b7fc94fafa1cae021acc0d93d8e15e7c29c. |
+| P2–P3 | Complete unions/separate bases and early native holder implemented after preserved failing evidence. The reference-code diff is 22 added / 15 removed lines across three contract files and Browser Host. All eight compiler programs produce their intended outcomes; the focused packed-consumer M4 passes. |
+| Implementation review | lifecycle_gap_review and npm_release_audit independently returned GO on source and compiler controls. The latter also checked the red hosted job, plan and matrix; its own README guidance was self-reviewed. Root reviewed that guidance and verified 68 local documentation links. No new runtime mechanism, source pin or dependency change. |
+| P4–P5 | Strict TypeScript plus actual Foundation/FMS/CMS checks pass locally. Corrected full Node/Chromium qualification and ordinary delivery remain pending. |
+
+The [pre-fix native run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45832279729/job/139951844778)
+used actual Chrome Headless Shell 159.0.8154.6 build 1255. Its retained observations
+show two native getter exceptions, replacement of the first exception, one root
+insertion and one retained root. The separate native quota case passed: the Host
+removed its acquired DOM and preserved unrelated keys and values. M4 failed with
+TS2339 for the missing transitive state and three TS2344 parity diagnostics,
+without resolution, missing-export or unrelated failures.

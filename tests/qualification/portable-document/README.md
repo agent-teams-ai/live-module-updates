@@ -15,6 +15,9 @@ the [original plan](../../../docs/plans/module-authoring-implementation-plan.md)
 and [critical follow-up plan](../../../docs/plans/module-authoring-critical-review-plan.md)
 own the bounded delivery scope. Final delivery and actual-main checks are linked
 from [PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5).
+The [contract/storage follow-up](../../../docs/plans/module-authoring-contract-storage-plan.md)
+and [PR #6](https://github.com/agent-teams-ai/live-module-updates/pull/6) retain the
+deeper review, original failures and qualification of the new boundaries below.
 
 These are maintained qualification packages, not an npm release or public
 LMU/EF runtime. The reference uses published GM APIs and contains no EF runtime
@@ -34,6 +37,30 @@ factory; [core/index.ts](core/index.ts) is the package entry. The
 [optional adapter root](adapter/src/composition/root.ts) connects the three
 features with public GM declarations, inputs, groups and factories. GM owns
 graph construction; the Host supplies state and delivery inputs.
+
+### Keep the feature contract complete
+
+Follow the pinned [CMS module-contract rule](https://github.com/agent-teams-ai/get-modular/blob/a5f41853200aed26d692e89d768185013d629a12/docs/architecture/common-assembly.md#module-packages-and-contracts)
+and [ADR-0041](https://github.com/agent-teams-ai/get-modular/blob/a5f41853200aed26d692e89d768185013d629a12/docs/decisions/0041-preserve-complete-feature-maps-with-descriptor-unions.md).
+Export a complete descriptor union from each feature's composition contracts:
+its own descriptors and each imported feature's complete contract union,
+including transitive contracts that the current factory does not directly use.
+Derive the capability interface from a separate `CapabilitiesOf` base for each
+imported union, plus the feature's own descriptors. Keep those two lists aligned.
+
+Read the [Document contracts](adapter/src/features/document/composition/document.contracts.ts),
+[Format contracts](adapter/src/features/format/composition/format.contracts.ts) and
+[Export contracts](adapter/src/features/export/composition/export.contracts.ts).
+Export must retain `DocumentState` through Document's complete contract even
+though its factory uses Document commands. Adding that state contract elsewhere
+in the Host aggregate does not repair Export's independent feature surface.
+
+Qualify both `ExportContracts` and `ExportCapabilities` against independent
+expected keys, values and compatibility tokens. The
+[feature compiler qualification](feature-contract-cases.ts) owns these checks.
+Require separate omission controls for the union and interface, plus unused
+value and revision conflicts. Identical overlaps remain valid; collapsing all
+imported contracts into one mapped base can hide a conflicting duplicate ID.
 
 ## Add or select a Format provider
 
@@ -103,6 +130,19 @@ Read [node-modular-host.ts](consumer/node-modular-host.ts) and
 native I/O and resource adapters are independent. Each retains a Resources
 scope before construction. A setup that fails before returning its acquired
 value must clean that value itself.
+
+Acquire required browser capabilities before acquiring native resources. This
+Host needs `const storage = localStorage` before creating or appending its owned
+DOM, then uses that captured holder for reads, writes and cleanup. A native
+getter denial must leave unrelated DOM intact, construct no provider and reach
+the caller as the original exception, without another lookup during cleanup.
+
+Obtaining a holder does not guarantee a successful write: native quota can
+reject the initial state write. Failed-open cleanup must remove only the Host's
+owned keys and DOM before rethrowing that write failure. Retain unrelated
+storage, and keep quota calibration bounded in the native tests. This reference
+qualifies one live execution context; recovery after context destruction needs
+separate evidence. No storage fallback or implicit retry is part of this Host.
 
 Construction itself is admitted through that same finite invocation owner.
 Pass the native cancellation signal to `prepared.run`, retain its raw flight,
