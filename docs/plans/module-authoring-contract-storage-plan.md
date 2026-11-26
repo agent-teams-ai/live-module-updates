@@ -1,6 +1,7 @@
 # Modular authoring: complete feature contracts and early storage acquisition
 
-Status: proposed for two independent review rounds, 2026-11-26. Maintained
+Status: corrected after independent review round 1; awaiting round 2, 2026-11-26.
+Maintained
 implementation and regression edits have not started. This follows the
 [completed construction/conformance review](module-authoring-critical-review-plan.md).
 
@@ -60,9 +61,11 @@ imports. No new runtime exports, descriptor revisions or feature framework are
 required. The existing root may continue composing complete feature interfaces.
 
 The maintained compiler qualification must examine the independent feature
-fragment, without the Host root. Split incompatible value and revision into
-separate cases; retain an identical-overlap positive case, omission control and
-collapsed-base control. Reject unrelated compiler failures as evidence.
+fragment, without the Host root. Qualify both the exported descriptor union and
+the maintained capability interface; either can hide an omission in the other.
+Split incompatible value and revision into separate cases; retain an identical
+overlap positive case, independent union/interface omission controls and
+collapsed-base controls. Reject unrelated compiler failures as evidence.
 
 ### B. Storage boundary before native acquisition
 
@@ -97,7 +100,7 @@ Package publication remains deferred by the owner.
 | Step | Deliverable | Acceptance |
 | --- | --- | --- |
 | P0 | Publish this Markdown plan and draft PR; conduct two independent critique/correction rounds | Both rounds recorded before maintained test or implementation edits |
-| P1 | Add bounded compiler and native denied-storage regression qualification | Preserve a published pre-fix source/run checkpoint that fails for the intended defects |
+| P1 | Add existing-interface parity and native denied-storage regression qualification | Preserve a published pre-fix source/run checkpoint that fails for the missing transitive map and native acquisition defect; missing new exports are not the intended failure |
 | P2 | Complete feature unions and separate imported capability bases | Independent Export map is complete; unused conflicts are rejected at the correct declaration |
 | P3 | Acquire and retain native storage before owned DOM | Native denial cannot leave an acquired Host resource or replace the original cause during cleanup |
 | P4 | Qualify successful and failing storage boundaries, all existing cases and packed artifacts; update the owning guide/matrix | Strict compiler, Node and real pinned Chromium pass without skips or fake native evidence |
@@ -108,12 +111,21 @@ Package publication remains deferred by the owner.
 - Compile disposable copies of the three actual contract source files against
   the installed packed core and public GM types. Do not mutate installed
   packages or introduce type shims, aliases or a consumer type framework.
-- Check complete keys, values and compatibility tokens for the independent
-  Export fragment, including transitive DocumentState.
-- Check separate unused value and revision conflicts. Require TS2320 at
-  ExportCapabilities naming the conflicting key, not just a nonzero exit.
-- An identical overlapping descriptor remains valid. Removing the transitive
-  descriptor fails parity. Collapsing the separate bases makes the conflict
+- The pre-fix checkpoint checks the existing ExportCapabilities surface, so
+  absence of a newly proposed export cannot masquerade as the original defect.
+  After introducing complete unions, check exact keys, values and compatibility
+  tokens of both ExportCapabilities and CapabilitiesOf<ExportContracts> against
+  an independent complete expected map, and against each other. Include
+  transitive DocumentState; derive neither expectation from the tested surface.
+- Introduce unused value and revision conflicts in Format separately: revision
+  1 with an incompatible value, and revision 2 with unchanged DocumentPort.
+  Require TS2320 at ExportCapabilities, naming the two imported bases and
+  conflicting key. Syntax, resolution, missing-export or unrelated errors fail
+  the test rather than count as the intended rejection.
+- An identical overlapping descriptor remains valid. Independently omit the
+  transitive descriptor from the exported union and from the interface's
+  inherited surface while the other remains complete; each must fail the
+  intended parity assertion. Collapsing the separate bases makes each conflict
   compile, proving why that source rule matters.
 - Use the existing strict TypeScript 7.0.2 qualification route. Include the
   maintained capability interfaces, not only a reconstructed example.
@@ -123,10 +135,21 @@ Package publication remains deferred by the owner.
 - Extend the existing pinned Chromium harness with a real opaque/sandboxed
   document. Serve the actual compiled Host and installed package ESM. If that
   origin requires test-only CORS headers, retain exact asset byte/hash checks.
-- Require successful module loading before testing Host.open. Observe a native
-  SecurityError, no owned DOM allocation or provider construction, and preserved
-  unrelated DOM. Module loading or CORS failure must not satisfy the regression.
-  Preserve the failing pre-fix run.
+- Require successful module loading before testing Host.open. Transparently
+  observe the actual native storage getter: call the original getter, retain
+  each native thrown object and rethrow it unchanged. Require one SecurityError
+  and rejection identity equal to that first exception. Do not synthesize a
+  storage failure or replace native storage semantics.
+- Observe body insertions with the actual MutationObserver, and require no
+  owned DOM insertion, no retained root, no provider construction and preserved
+  unrelated DOM. This does not claim to detect every detached DOM allocation.
+  Restore the observation wrapper in finally. Before Host invocation, require
+  successful actual imports, isSecureContext === true and callable
+  crypto.randomUUID: the old Host reaches UUID creation before storage. A
+  loopback document with CSP sandbox allow-scripts and test-only CORS on
+  unchanged assets is the initial native setup to qualify. Missing primitives,
+  module loading or CORS failure cannot satisfy the regression. Preserve the
+  failing pre-fix run.
 - In a normal origin, use a bounded native-storage calibration to provoke a
   QuotaExceededError on the Host's initial write after obtaining a holder.
   Require no returned Host, no constructed provider, no retained owned DOM or
@@ -161,6 +184,6 @@ tests only to resolve a concrete remaining risk or a required repository gate.
 | Round / step | Review and resulting correction |
 | --- | --- |
 | Deeper audit | Three independent audits isolated the map and acquisition defects. Storage scope was narrowed from generic cleanup aggregation to early acquisition of the required native holder. |
-| Plan review 1 | Pending; no maintained implementation has started. |
+| Plan review 1 | module_vision_review and npm_release_audit required independent union/interface parity and separate omission controls; the pre-fix compiler checkpoint must fail the existing map, not a missing new export. npm_release_audit required observable original native error identity. lifecycle_gap_review required actual import, secure-context and UUID preconditions. Corrections are incorporated; DOM acceptance now names observable insertion, not every detached allocation. No maintained implementation has started. |
 | Plan review 2 | Pending; review the corrected plan before implementation. |
 | Implementation and delivery | Not started. |
