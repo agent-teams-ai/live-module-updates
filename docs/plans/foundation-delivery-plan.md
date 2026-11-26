@@ -49,6 +49,78 @@ implementation handoff; this page remains the cross-foundation dependency map.
 - Use strict TS 7.0.2+ and inspect emitted declarations, public imports and the
   actual embedded compiler graph. Preserve historical inputs and failures.
 
+## Two-executor assignment, 2026-11-26
+
+The owner expanded the next task from the small independent-consumer experiment
+to two substantive foundation implementation streams. This section coordinates
+their existing owning plans; it does not duplicate their technical steps,
+accept unresolved production choices or claim that the work is implemented.
+The paired Draft PRs contain the proposed assignments until merged.
+
+| Executor | Owning plan and responsibility | Explicit boundary |
+| --- | --- | --- |
+| A: author of the coordinated plans | [EF delivery plan](https://github.com/agent-teams-ai/extension-foundation/blob/main/docs/architecture/plugin-delivery-plan.md): package-evidence verifier, admitted contribution/compatibility core, artifact verification and EF consumers; small GM adoption follow-up | No LMU update algorithm, product canonical store or simultaneous edits to B's fixture |
+| B: continuation of LMU #8 | [Complete-operation plan](first-operation-implementation-plan.md#workstream-b-complete-module-updates-2026-11-26): external consumer, invocation/state boundary, L0–L7 operation, independent Hosts and final cross-library scenario | No duplicate artifact verification, GM graph engine or new cleanup framework |
+| Existing product owners | Product-specific contracts, actual grants/state/custody, selected pins and later useful-behavior integration | This programme does not migrate or begin business implementation in their repositories |
+| Existing tooling owners | Managed cohort and repository admission where actually required | Do not rewrite another agent's active upgrade or infer its completion from a plan |
+
+The existing [PR #8](https://github.com/agent-teams-ai/live-module-updates/pull/8)
+remains B's bounded initial checkpoint. It is based on the delivered navigation
+from #7. A supplies proposed contracts/artifacts through the EF workstream rather
+than editing B's branch. Every shared-file handoff records current source SHA,
+changed paths, owner and next unfinished step. Review an existing implementation
+before adding an overlapping one; published plans do not disclose unpublished
+work in another agent's workspace.
+
+### Work that can start together
+
+1. A compares and records the existing EF-A/C/V/P candidates, builds the genuine
+   evidence-verifier route and corrects the GM copyable adoption profile.
+2. B completes #8, selects its fixture/profile packet and runs L1's real
+   invocation/authority/cleanup discriminators. It reports only actual missing
+   public mechanisms to A or their semantic owner.
+3. A develops the admitted EF core/artifact path while B develops the standalone
+   complete operation over qualified narrow ports. Neither core waits for an
+   entire application, catalog service or the other's optional integration.
+4. After both artifacts qualify, B owns one installed combined scenario; A
+   reviews artifact/compatibility/authority facts. It must use the real EF and
+   LMU implementations and preserve independent external witnesses.
+
+The shared contract review fixes distinct semantic, artifact, generation,
+attempt and authoritative-revision identities; whole-operation ownership;
+compatibility/refusal/unknown/debt meanings; and who enforces current effects.
+Use existing owners and ordinary narrow ports. No universal context, duplicate
+manifest or shared mutable authority is added to connect the two libraries.
+
+### When projects can use the result
+
+| Capability a project needs | Required foundation checkpoint | Later work it need not await |
+| --- | --- | --- |
+| Ordinary static modules and independent feature consumers | Existing admitted GM/CMS/FMS, complete public contracts, the applicable #8/adoption proof and the project's real boundary checks | Artifact installation, live updates, isolation and universal UI |
+| Replaceable entry designed for later updates | Qualified invocation/state/ownership facade from B1/B2 plus the project's accepted profile | Every stronger runtime profile; full update behavior is not claimed before B3–B6 |
+| Typed contributions from verified artifacts | A's admitted compatibility/artifact path plus the selected trusted Node Host authority and applicable package/profile gates | A catalog product or full live replacement when restart is sufficient; durable installation is a separate E4/E5 obligation |
+| Complete cooperative updates | B's L0–L7 qualification for the selected actual target | Durable recovery, hostile-code isolation or streams unless the product needs them |
+| Updates of EF-verified artifacts in a trusted Node Host | Both artifacts and the separate combined B7 evidence | Durable extension installation and unrelated stronger profiles, neither of which this row claims |
+
+A checkpoint means actual accepted contracts, substantive code and executed
+evidence for that scope. Empty types or a mock do not make an API ready. Product
+pins and adoption are never changed centrally by these examples. The same
+semantic feature ports should survive stronger implementations because their
+state, effects and lifetime owners were explicit at the initial boundary.
+
+The detailed non-overlapping estimates belong to the two owner plans. Their
+current combined investigation band is approximately **15,400–30,500 handwritten
+production/integration/test lines**, including the existing #8 estimate once.
+This is not a target or measured remaining work. Source reuse can reduce it;
+missing upstream primitives, bootstrap, durable authorities or native profiles
+have separate estimates before dependent commitments. Do not sum older
+overlapping estimates or create code to reach the range.
+
+Two independent plan-review rounds cover the pair and their join. The paired PR
+descriptions retain exact reviewed heads, findings, fixes and documentation
+checks. Runtime evidence, ordinary implementation merge and actual-main checks
+belong to the later substantive delivery; this planning task creates none.
+
 ## 1. Dependencies between claims
 
 | Stage | Entry and result | What it does not wait for |
