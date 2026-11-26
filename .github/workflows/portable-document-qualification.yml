@@ -2,6 +2,7 @@ name: Packed headless fixture qualification
 
 # Representative ordinary-library proof, not LMU/EF production admission.
 on:
+  workflow_dispatch:
   pull_request:
     branches: [main]
     paths:
