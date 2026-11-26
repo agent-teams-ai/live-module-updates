@@ -158,6 +158,25 @@ Both reviewers found no remaining critical or material issue in those corrected
 sources and the refreshed local Node receipt. That source review does not substitute for
 the actual hosted browser run or final-source qualification.
 
+### First hosted B6 failure: the shared fixture lifetime
+
+The first [exact-head B6 job](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45912637899/job/140224383016)
+on `bfea5e59dccc3c909e196343c78536473b29a1bf` passed 50 of 51 tests. The packed
+Node campaign passed; native Chromium 159.0.8154.6 was installed and launched,
+then could not read `consumer/out/browser`: the directory had already been
+removed. The [exact failing excerpt](../research/evidence/cooperative-operation-20261126/bfea5e5-browser-fixture-lifetime-failure.log)
+and original artifact `15160418606` preserve that result. Its artifact ZIP digest
+is `sha256:11557e62851fd5975821318848377acd680a53c82664355a3fb6633da15aad73`.
+It proves no successful browser operation.
+
+An independent minimal Node 24.22.3 reproduction confirmed that a global
+`after` hook can run between sequential awaited top-level test registrations.
+The first test finished before the second was registered; the shared fixture
+had no parent owning both target lifetimes. The correction gives the fixture
+one explicit parent test and awaited target subtests, with cleanup after both.
+The browser must still execute every positive case and exact negative oracle;
+no missing-directory, setup or import failure can count as a passed target.
+
 ## Author-facing contract review
 
 A separate implementation-to-documentation review corrected overclaims at the

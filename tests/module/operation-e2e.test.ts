@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { cp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import test, { after } from "node:test";
+import test from "node:test";
 import { chromium } from "playwright";
 import { checkRows, cohort, javascriptInventory, prepareOperationFixture } from "./operation-fixture.ts";
 import { createOperationMutant, faultyHostProfiles, packedOperationMutants, type OperationCaseName } from "./operation-mutants.ts";
@@ -9,8 +9,7 @@ import { digest, object, run } from "./pack-operation.ts";
 
 type FaultOptions = { readonly unsafeEffects?: boolean; readonly unsafeRemoval?: boolean };
 type NativeRunner = (consumer: string, caseName?: OperationCaseName, faults?: FaultOptions) => Promise<Record<string, unknown>>;
-const fixture = await prepareOperationFixture();
-after(() => fixture.dispose());
+type OperationFixture = Awaited<ReturnType<typeof prepareOperationFixture>>;
 
 function invocation(caseName?: OperationCaseName, faults: FaultOptions = {}): string {
   return caseName === undefined ? "await runHostCases(createHost)"
@@ -53,13 +52,13 @@ async function runChromium(browser: Awaited<ReturnType<typeof chromium.launch>>,
   caseName?: OperationCaseName, faults: FaultOptions = {}): Promise<Record<string, unknown>> {
   const context = await browser.newContext();
   const origin = "https://complete-operation.fixture.invalid";
-  const files = await browserAssets(consumer);
   const served = new Map<string, string>();
   const program = 'import { runHostCase, runHostCases } from "/out/host-cases.js";\n'
     + 'import { createBrowserHost as createHost } from "/out/browser-host.js";\n'
     + 'const finish = value => { document.querySelector("#result").textContent = JSON.stringify(value); document.documentElement.dataset.complete = "yes"; };\n'
     + reportProgram(invocation(caseName, faults), "finish");
   try {
+    const files = await browserAssets(consumer);
     await context.route(origin + "/**", async route => {
       const path = new URL(route.request().url()).pathname;
       if (path === "/") {
@@ -86,7 +85,7 @@ async function runChromium(browser: Awaited<ReturnType<typeof chromium.launch>>,
   } finally { await context.close(); }
 }
 
-async function campaign(target: string, execute: NativeRunner): Promise<void> {
+async function campaign(fixture: OperationFixture, target: string, execute: NativeRunner): Promise<void> {
   const baseline = await execute(fixture.consumer);
   assert.equal(baseline["status"], "passed", JSON.stringify(baseline)); checkRows(baseline["rows"]);
   const negative: unknown[] = [];
@@ -116,13 +115,17 @@ async function campaign(target: string, execute: NativeRunner): Promise<void> {
   await writeFile(join(fixture.destination, target + ".json"), JSON.stringify({ ...fixture.identities, target, baseline, negative }, null, 2) + "\n");
 }
 
-await test("packed complete operation runs in native Node and rejects all six named defects", { timeout: 90_000 }, async () => {
-  await campaign("node", runNode);
-});
-await test("same packed complete operation runs in native Chromium with independent Storage and DOM owners", { timeout: 120_000 }, async () => {
-  const browser = await chromium.launch({ headless: true });
-  try {
-    await campaign("chromium", (consumer, name, faults) => runChromium(browser, consumer, name, faults));
-    await writeFile(join(fixture.destination, "browser-version.json"), JSON.stringify({ version: browser.version(), launch: { browser: "chromium", headless: true, selection: "Playwright pinned default" } }) + "\n");
-  } finally { await browser.close(); }
+await test("packed complete operation qualifies in both native targets", { timeout: 240_000 }, async context => {
+  const fixture = await prepareOperationFixture();
+  context.after(() => fixture.dispose());
+  await context.test("native Node rejects all six named defects", { timeout: 90_000 }, async () => {
+    await campaign(fixture, "node", runNode);
+  });
+  await context.test("native Chromium uses independent Storage and DOM owners", { timeout: 120_000 }, async () => {
+    const browser = await chromium.launch({ headless: true });
+    try {
+      await campaign(fixture, "chromium", (consumer, name, faults) => runChromium(browser, consumer, name, faults));
+      await writeFile(join(fixture.destination, "browser-version.json"), JSON.stringify({ version: browser.version(), launch: { browser: "chromium", headless: true, selection: "Playwright pinned default" } }) + "\n");
+    } finally { await browser.close(); }
+  });
 });
