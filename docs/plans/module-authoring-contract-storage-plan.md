@@ -1,8 +1,7 @@
 # Modular authoring: complete feature contracts and early storage acquisition
 
-Status: corrected after independent review round 1; awaiting round 2, 2026-11-26.
-Maintained
-implementation and regression edits have not started. This follows the
+Status: reviewed for implementation, 2026-11-26. Two independent critique and
+correction rounds preceded maintained implementation and regression edits. This follows the
 [completed construction/conformance review](module-authoring-critical-review-plan.md).
 
 ## 1. Outcome and limits
@@ -110,7 +109,8 @@ Package publication remains deferred by the owner.
 
 - Compile disposable copies of the three actual contract source files against
   the installed packed core and public GM types. Do not mutate installed
-  packages or introduce type shims, aliases or a consumer type framework.
+  packages or introduce type shims, path/resolution aliases or a consumer type
+  framework.
 - The pre-fix checkpoint checks the existing ExportCapabilities surface, so
   absence of a newly proposed export cannot masquerade as the original defect.
   After introducing complete unions, check exact keys, values and compatibility
@@ -185,5 +185,5 @@ tests only to resolve a concrete remaining risk or a required repository gate.
 | --- | --- |
 | Deeper audit | Three independent audits isolated the map and acquisition defects. Storage scope was narrowed from generic cleanup aggregation to early acquisition of the required native holder. |
 | Plan review 1 | module_vision_review and npm_release_audit required independent union/interface parity and separate omission controls; the pre-fix compiler checkpoint must fail the existing map, not a missing new export. npm_release_audit required observable original native error identity. lifecycle_gap_review required actual import, secure-context and UUID preconditions. Corrections are incorporated; DOM acceptance now names observable insertion, not every detached allocation. No maintained implementation has started. |
-| Plan review 2 | Pending; review the corrected plan before implementation. |
+| Plan review 2 | module_vision_review and npm_release_audit reviewed exact corrected revision 29d1de176cf998b2af24276716cbb77e1fad0cde and returned GO with no blocker. Clarify that forbidden aliases mean path/resolution aliases, not the accepted descriptor-union type aliases. Both rounds preceded maintained edits. |
 | Implementation and delivery | Not started. |
