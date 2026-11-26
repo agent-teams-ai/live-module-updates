@@ -3,9 +3,10 @@ import { cp, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/p
 import { tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import test from "node:test";
-import { compiler, digest, evidence, object, pack, root, run } from "./pack-operation.ts";
+import { compiler, compilerVersion, digest, evidence, object, pack, root, run } from "./pack-operation.ts";
 
 await test("packed ordinary root and optional Resources entry work in separate artifact-only installations", async () => {
+  const actualCompiler = compilerVersion();
   await mkdir(evidence, { recursive: true });
   const temporary = await mkdtemp(join(tmpdir(), "lmu-installed-consumers-"));
   try {
@@ -66,10 +67,11 @@ await test("packed ordinary root and optional Resources entry work in separate a
     assert.deepEqual(observations["ordinary"], { value: 42, refusedAfterClose: true, releases: 1 });
     assert.deepEqual(observations["resources"], { value: 7, closed: true });
     await cp(artifact.path, join(evidence, basename(artifact.path)));
+    await cp(peer.path, join(evidence, basename(peer.path)));
     await writeFile(join(evidence, "packed-consumers.json"), JSON.stringify({
-      source: process.env["QUALIFICATION_SOURCE_SHA"] ?? "local-unpublished", node: process.version, compiler: "7.0.2",
+      source: process.env["QUALIFICATION_SOURCE_SHA"] ?? "local-unpublished", node: process.version, compiler: actualCompiler,
       artifact: { filename: basename(artifact.path), sha256: artifact.sha256, integrity: artifact.integrity, files: artifact.files },
-      peer: { package: "@get-modular/resources", version: "0.2.2", sha256: peer.sha256 },
+      peer: { package: "@get-modular/resources", version: "0.2.2", filename: basename(peer.path), sha256: peer.sha256 },
       rootLockSha256: digest(await readFile(join(root, "pnpm-lock.yaml"))), observations,
     }, null, 2) + "\n");
   } finally { await rm(temporary, { recursive: true, force: true }); }

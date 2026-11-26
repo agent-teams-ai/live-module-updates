@@ -109,6 +109,76 @@ references are removed; this test validates transitive lifetime after the
 change. Neither observation claims a total heap-byte bound or measured garbage
 collection. Capability-owned returned data has its separate ownership contract.
 
+## Packed complete-operation review
+
+The B6 runner installs the actual LMU tarball and exact public GM artifacts in a
+new consumer directory. It compiles distinct Node and browser consumers with
+TypeScript 7.0.2 and no source/workspace links. The unchanged operation runs
+through separate Map/file-descriptor and sessionStorage/DOM owners. The browser
+loads the captured installed JavaScript inventory in its own realm; its served
+hashes, actual version and selected launch profile are recorded.
+
+The first local packed Node campaign passed 28 named scenarios and rejected all
+six deliberate defects at their specified runtime oracles. It identifies itself
+as `local-unpublished`; native exact-commit Chromium remains a separate exit.
+Four controls mutate one executable file in isolated installed-package copies;
+two controls break the actual native receiver/removal adapter with LMU bytes
+unchanged. A useful A operation must succeed before each negative scenario, so a
+setup, import or compiler error cannot satisfy a mutant's named oracle.
+
+The two production implementers independently reviewed this integration. Their
+material findings were corrected before publication:
+
+| Finding | Correction and independent witness |
+| --- | --- |
+| One pending publication cell could overwrite another attempt | Exact request-bound pending entries and independent completion controls |
+| Native head and receipt changes could become separate mutations | One complete authority record replaces the Map or Storage value at publication |
+| Candidate preparation could replace a live registration before publication | Acquire a generation-specific native resource; canonical useful invocation establishes its exact registration |
+| The removal defect originally changed only an annotation | Deliberately damage B's actual descriptor/listener and retain the useful native failure plus teardown detail |
+| Separate receipt/pending limits could admit twice the intended history | One combined 32-identity budget; the mixed 16-terminal/16-pending test rejects the thirty-third and preserves all original lookups |
+| First-Host teardown could prevent second-Host cleanup | Attempt both independent disposals and preserve the original scenario error |
+| A default executable hint could be mistaken for the launched browser | Record the actual reported version and requested pinned launch profile without inventing an executable path |
+
+A final applicability review added synchronous reentrant shutdown to the packed
+campaign. The actual provider closes its runtime, remains held across a native
+event-loop turn, then completes a bound nested A call after `await` before native
+cleanup. This had previously been covered only by the precursor and source tests.
+The refreshed local campaign passed 29 named positive rows and all six negative
+oracles. The retained archive SHA256 is
+`5d088d203597ecf9da15797f0ebf974629f68984583984e340132ce3168dceb5`;
+an independent reviewer checked that archive, consumer lock and every retained
+mutant file against the reported hashes and exact replacements.
+
+The receipt-capacity rows directly qualify the native authority primitive after
+useful A setup; they are not 32 complete module replacements. Runtime attempt
+capacity has its own row. The closure catalogue uses actual GM compositions;
+arbitrary dynamic artifact admission belongs to B7.
+
+Both reviewers found no remaining critical or material issue in those corrected
+sources and the refreshed local Node receipt. That source review does not substitute for
+the actual hosted browser run or final-source qualification.
+
+## Author-facing contract review
+
+A separate implementation-to-documentation review corrected overclaims at the
+public boundary. A generic result can contain caller-owned functions or data;
+LMU does not sanitize it, automatically reject all detached work, or grant an
+implicit generation lease. Unsupported candidates and conditions are rejected
+where the actual Host contract can identify them. Public type documentation,
+the selected-profile ADR and the usage guide now agree.
+
+The guide also records two necessary ownership conditions: one live runtime per
+activation domain/session, and a continuation scoped to its own provider's return
+settlement. Pending descendants retain aggregate lifetime through their own
+contexts; they do not reopen a completed parent's context. Construction neither
+arbitrates other runtime owners nor discovers unregistered canonical generations.
+These clarify existing implemented behavior without adding a global registry,
+new runtime API or stronger execution claim. The Host must also qualify the
+initial closure before transfer, then leave its native owner under LMU custody.
+The factory does not re-run artifact or compatibility admission for that initial
+owner. A publication refusal is documented as definitive; uncertain original
+requests must remain unknown because refusal permits candidate retirement.
+
 ## Observed CI installation corrections
 
 The new root workspace initially captured the L1 precursor's dependency install.

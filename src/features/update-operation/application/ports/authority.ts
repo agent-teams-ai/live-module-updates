@@ -8,6 +8,8 @@ export interface UpdateAuthority {
    * Atomically checks head and every relevant owner-defined basis condition,
    * mutates the same head read by invocation, and stores the original receipt.
    * No candidate callback may run in the owner's conditional section.
+   * A refusal is definite: that exact request cannot later commit. A timeout,
+   * missing receipt or still-pending request must remain unknown.
    */
   readonly publish: (request: PublicationRequest) => PublicationResult | PromiseLike<PublicationResult>;
   /** Unknown is nonterminal while the original request may still commit. */

@@ -13,7 +13,10 @@ import type { CompatibilityPort, PreparationPort } from "../application/ports/pr
 export interface InitialGeneration<Args extends readonly unknown[], Result> {
   readonly candidate: CandidateDescription;
   readonly invoke: ModuleEntry<Args, Result>;
-  /** Its existing Host-owned native lifetime transfers only on successful construction. */
+  /**
+   * The Host admits/qualifies this initial closure before construction. Its
+   * native owner transfers only on success and must not be independently released.
+   */
   readonly release: () => Promise<CleanupReport>;
 }
 

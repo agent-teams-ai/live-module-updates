@@ -39,6 +39,13 @@ not await. Their semantic success or failure still belongs to the provider's
 contract; retaining a child does not automatically turn its result into the
 parent's business result.
 
+Each context belongs to the particular provider invocation that received it.
+Once LMU observes that provider's own return or Promise settlement, that context
+refuses new descendants with `continuation-closed`, even while already
+registered descendants keep the aggregate operation pending. Descendants use
+their own supplied contexts for further work; retaining the parent's context
+is not an alternative lifetime contract.
+
 ## Keep the owners distinct
 
 | Owner | Contract it must implement |
@@ -62,6 +69,20 @@ receiver must check their live conditions where their protected mutation happens
 already created initial lifetime **only on successful return**. The caller
 retains cleanup responsibility if construction throws. The authority's initial
 head must identify that exact generation.
+
+The Host qualifies and admits the initial closure, schema and artifact before
+construction. The factory validates identity and its match to the canonical
+head; it does not run candidate compatibility or artifact verification for this
+already active initial generation. After successful transfer, the former owner
+must not independently release it or transfer it to another runtime.
+
+The Host supplies exactly one live runtime owner per activation domain/session.
+All replaceable calls and publications for that domain use this runtime and its
+registered generations. The constructor does not arbitrate a global registry,
+discover another runtime or rehydrate an arbitrary existing head. Creating two
+runtimes against one authority, or externally publishing an unregistered
+generation, violates this ownership contract; a canonical head alone does not
+make its callable/resources available to this runtime.
 
 The initial entry and each prepared entry have the same ordinary `ModuleEntry`
 shape. Use one coherent closure per generation. Keep durable or canonical state
@@ -130,6 +151,13 @@ A local mutex does not extend this guarantee to other processes or browser tabs.
 into a rejection merely because the current head differs. Once a terminal result
 exists it is immutable and bound to the original payload. A repeated attempt ID
 with changed candidate, contract, revision or basis must refuse.
+
+A publication `refused` result is a definite refusal of that exact request: it
+cannot later commit. LMU may retire the candidate on that evidence. A queue
+timeout, missing receipt or original request still capable of committing must
+remain `unknown`; an adapter cannot use a refusal to terminate an inconvenient
+wait. A rejected immutable receipt likewise establishes a terminal original
+outcome rather than merely reporting that the current head differs.
 
 The candidate is registered before publication. Therefore, if publication
 commits but its reply is lost, new calls can already use B. LMU retains B and

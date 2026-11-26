@@ -37,7 +37,10 @@ targets. Their physical execution, IPC, resource-limit and stop boundaries need
 separate adapters and evidence. They do not inherit this cooperative envelope.
 Streams, unregistered detached work, arbitrary independently replaced helpers,
 incompatible state migration and durable installation are not supported by this
-first profile. An unsupported request receives an explicit refusal.
+first profile. Identified incompatible candidates or unsupported conditions
+refuse at the owning compatibility/receiver boundary. Generic return values and
+unregistered detached tasks cannot be inspected or automatically rejected by
+LMU; authors must obey the finite-operation contract.
 
 ## Invocation and custody discriminator
 
@@ -52,7 +55,9 @@ both actual targets before becoming the production contract:
    call is a new admission; ambient Node-only async context is not assumed.
 3. Every registered descendant retains its own actual work. Returning a parent
    or abandoning a caller's wait does not settle its descendants or release
-   their resources. A settled operation's escaped continuation refuses work.
+   their resources. Each provider's continuation closes when LMU observes its own return
+   settlement, even while its descendants keep the aggregate pending. Those
+   descendants use their own supplied continuations.
 4. Sealing admission refuses fresh calls but preserves admitted work. Native
    Resources close starts only after that work settles. Keep the original
    close flight and its report, including cleanup debt; a later authorized
@@ -71,6 +76,11 @@ original immutable attempt. Its condition binds the activation domain, expected
 head/revision, candidate generation/closure, state/schema basis and grant basis.
 Publication updates the canonical head used by admission. It does not require
 a later mirror activation after acknowledgement.
+
+One live runtime owns the domain's registered generations and update
+coordination. The Host routes that domain's replaceable calls and publications
+through it; construction is not global ownership arbitration or rehydration of
+another runtime's head. Independent runtimes must use independent domains.
 
 Committed, rejected and unknown are different outcomes. An exception, malformed
 reply or lost acknowledgement after invocation may mean that B already serves

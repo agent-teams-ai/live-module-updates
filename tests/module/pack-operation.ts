@@ -42,3 +42,9 @@ export async function pack(directory: string, destination: string) {
   return { path, files, sha256: digest(bytes), integrity: item["integrity"] };
 }
 
+
+export function compilerVersion(): string {
+  const actual = run(compiler, ["--version"], root).trim();
+  assert.equal(actual, "Version 7.0.2", "installed compiler differs from the qualified cohort");
+  return actual.slice("Version ".length);
+}
