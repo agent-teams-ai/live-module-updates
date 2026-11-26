@@ -1,65 +1,135 @@
-# Packed headless document fixture
+# Modular authoring reference: portable document
 
-This maintained qualification fixture checks a useful ordinary-library seam
-before an application exists: read a document revision, validate an edit, and
-request an authorized conditional write. It is a test package, not a released
-Live Module Updates or Extension Foundation implementation.
+Write portable feature behavior, choose implementations at composition, and
+keep state, authority and resource ownership explicit. This TEST reference has
+three features—Document, Format and Export—and two private packed artifacts:
+an ordinary core and an optional Get Modular adapter.
 
-The portable core owns edit validation and use-case coordination. Each test
-Host owns canonical state, the final grant/revision check, receipts and lifetime.
-The core imports no renderer, DOM, Node, Get Modular or organization runtime.
-Composition is qualified separately by Get Modular's public-package fixtures;
-this test does not supply a second composition or update mechanism.
+The [full modular run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268)
+at `6b22e4b5a9ce07b9be3e861004c880e68b5b88de` passed **36 tests, zero
+failures/cancellations/skips**, including actual Chromium. Independent source
+reviews are complete for this bounded reference, including the peer-policy and
+browser-harness cleanup corrections.
+The [evidence matrix](../../../docs/research/foundation-qualification-matrix.md#modular-authoring-checkpoint-2026-11-26)
+owns exact results; the [reviewed plan](../../../docs/plans/module-authoring-implementation-plan.md)
+owns the delivery scope.
 
-## Exact artifact through two real runtime boundaries
+These are maintained qualification packages, not an npm release or public
+LMU/EF runtime. The reference uses published GM APIs and contains no EF runtime
+integration, private lifecycle-kernel import or live A/B overlap.
 
-`pack-consumer.ts` compiles the core with strict TypeScript and ES-only libraries,
-emits its public declarations, packs it with `npm pack`, and installs that tarball
-offline into a fresh directory outside the source checkout. Package installation
-disables lifecycle scripts. Node and browser consumers compile against the
-installed public export and declarations, without source aliases or shims.
-Compiler-only Node declarations come from the exact tool graph; the installed
-fixture artifact has no runtime or peer dependencies. The three regular package
-files are captured before packing and compared byte-for-byte after installation
-and consumer compilation. The actual tarball integrity must match both the pack
-report and the isolated consumer lock; the dependency inventory is closed.
+## Start with the owning feature
 
-The Node Host imports that installed package by name and uses an owned temporary
-file. The independently wired browser Host imports the same package name through
-an explicit import map and executes the installed ESM bytes in real Chromium.
-It owns browser storage, DOM listeners and its grant switch. The test hashes the
-actual browser module response and the Node-resolved installed entry and requires
-the same recorded SHA256. It is not a browser frontend calling a Node copy.
+| Feature | Portable responsibility | First source to read |
+| --- | --- | --- |
+| Document | Query, edit validation and a conditional write request; the Host owns the document | [Document port](core/features/document/application/ports/document.ts), [use case](core/features/document/application/use-cases/create-document-commands.ts) |
+| Format | Pure, stable `title(revision)` and `body(text)` functions | [Format port](core/features/format/application/ports/format.ts), [plain](core/features/format/application/use-cases/create-plain-format.ts) and [marked](core/features/format/application/use-cases/create-marked-format.ts) providers |
+| Export | Capture the document revision, format it, await delivery preparation and request a final conditional export | [Export-owned ports](core/features/export/application/ports/export.ts), [use case](core/features/export/application/use-cases/create-export-commands.ts) |
 
-## Cases and independent observations
+`core/features/*/application` imports narrow semantic ports, never GM, Node, DOM
+or a renderer. Each feature's `composition` surface exposes its ordinary
+factory; [core/index.ts](core/index.ts) is the package entry. The
+[optional adapter root](adapter/src/composition/root.ts) connects the three
+features with public GM declarations, inputs, groups and factories. GM owns
+graph construction; the Host supplies state and delivery inputs.
 
-| Case | Observable acceptance and rejection |
+## Add or select a Format provider
+
+[consumer/author-format.ts](consumer/author-format.ts) is provider C, authored
+outside both artifacts using the public adapter type:
+
+```ts
+import type { FormatProvider } from "@fixture/portable-document-gm";
+
+export const authorFormatProvider: FormatProvider = {
+  implementationId: "fixture/format/author",
+  create: () => ({
+    title: revision => "Author revision " + revision,
+    body: text => "By author: " + text,
+  }),
+};
+```
+
+Pass the provider to `prepareDocumentComposition(provider)` at a composition
+root, or to the supplied Node/browser Host's open or `restart` method. Built-in
+`plainFormatProvider` and `markedFormatProvider` select A and B through that
+same parameter. Document and Export implementations do not change.
+
+Implementation identity is separate from semantic contract `fixture/format`
+revision 1. The [installed-consumer contract probe](consumer/composition-contract.ts)
+checks revision/text preservation, stable results, handwritten wiring and useful
+A/B/C output. A compatible TypeScript shape alone does not establish those
+semantics. Missing dependencies or incompatible revisions must fail actual GM
+preparation before factories run. A structurally valid but incorrectly selected
+provider is detected by the independent wiring oracle.
+
+For a new feature, place behavior and consumer-owned ports in the ordinary core
+and GM declarations/factories in the adapter. Update the explicit
+[source profile](source-profile.ts), [dependency policy](architecture/foundation/source-dependencies.yaml)
+and [package inventory](package-inventory.ts) when adding governed files or
+changing feature boundaries. This fixture has three flat features per artifact;
+it does not qualify a new nested feature profile.
+
+## State and lifetime belong to the Host
+
+| Responsibility | Node Host | Independently wired browser Host |
+| --- | --- | --- |
+| Canonical document and export receipts | Owned JSON files | Owned browser-storage keys |
+| Final effect receiver | Current grant/revision check followed by synchronous file write | Current grant/revision check followed by storage write |
+| Module-owned resource | Async `FileHandle` for a staging file | Export button and its actual DOM listener |
+| Delivery preparation | Write through the acquired handle, then await the optional finite barrier | Native `Blob.text()` work, then await the optional finite barrier |
+
+Read [node-modular-host.ts](consumer/node-modular-host.ts) and
+[browser-modular-host.ts](consumer/browser-modular-host.ts). They share only the
+[finite invocation owner](consumer/invocation-owner.ts); their state, authority,
+native I/O and resource adapters are independent. Each retains a Resources
+scope before construction. A setup that fails before returning its acquired
+value must clean that value itself.
+
+Controlled restart closes ingress, requests cooperative cancellation, waits for
+admitted raw operations to settle, then awaits the original Resources close.
+B is constructed only after `settled: true` and `complete: true`. Pending work
+or cleanup keeps restart pending; incomplete cleanup refuses it. Cancellation
+does not prove settlement, and a second close does not retry failed cleanup.
+
+Old Host methods—including saved methods—reject new work. Pure Format values
+are not revoked. Document data and accepted export receipts survive A-close-B
+under the same borrowed Host owner. Explicit `dispose()` is test teardown: it
+reclaims the Host's remaining native resources and canonical namespace without
+rewriting an earlier incomplete close report.
+
+## Two artifacts and real package boundaries
+
+- `@fixture/portable-document` has no runtime or peer dependencies. Its ordinary
+  consumer works with GM absent.
+- `@fixture/portable-document-gm` has the fixture core as its ordinary dependency.
+  It declares public GM peers: Core/Assembly **^0.8.0**, Resources **^0.2.2**,
+  with exact development pins. The consuming Host selects Core/Assembly **0.8.0**
+  and Resources **0.2.2**, so composition uses one physical runtime identity.
+
+[pack-consumer.ts](pack-consumer.ts) builds the ES-only core, packs it and installs
+it outside the checkout. [pack-modular.ts](pack-modular.ts) builds and separately
+packs the optional adapter against that installed core, then compiles the
+modular consumers through installed public exports. No source aliases or
+declaration shims supply missing runtime behavior.
+
+The [closed inventory](package-inventory.ts) names every nested JavaScript and
+declaration output. The packers check archive integrity, installed bytes, lock
+bindings and physical GM package identity. The modular browser path serves
+those installed ESM assets to actual Chromium. The full-suite result above binds
+the executed artifacts, dependency policy and native lifecycle observations.
+
+## Run the current qualification
+
+Run from `tests/qualification/portable-document` with the exact frozen cohort:
+
+| Role | Pin |
 | --- | --- |
-| F2 artifact control | The actual installed package matches pre-pack manifest, JavaScript and declaration bytes. Independent substitutions, an extra file and an omitted file in disposable copies must be rejected by the exact byte/inventory oracle. |
-| Q1 | Isolated packed consumer and emitted declarations work; initial query, normalized accepted edit, stale revision, invalid edit and revoked grant match handwritten expectations. The actual file and receipt ledger contain exactly one accepted edit. Closing removes only the owned root, leaves a borrowed owner's file intact and prevents later operations. Fresh construction repeats from the initial state. |
-| Q2 | The same artifact executes in Node then browser, and browser then Node, with fresh state ownership for each run. DOM actions, actual browser storage and the receipt ledger match independent expected outcomes. After close, another click cannot change the output or state. Contexts and the owned HTTP listener are closed. |
-| Q1b | Caller mutation of a returned result or receipt read cannot alter the owner's actual recorded receipt. A deliberately aliased compiled Node adapter must fail that precise oracle. |
-| Q3 | Four separate compiled browser-adapter mutations omit Save, Query, Revoke or Close listener removal. Actual post-close DOM dispatch with a distinct output marker must detect each omission, including a repeated close or a query error. A closed/grant guard cannot hide a retained listener. |
-| F2 authority control | Prepare an action before revocation, then dispatch after revocation; check actual state and receipts after each denial. Separately omit revision and grant checks in the compiled browser adapter and require the corresponding rejecting oracle. |
-
-Repeated runs prove the specified reset/order controls, not additional unique
-features. The expected results are handwritten in the test, rather than generated
-from the core or Host transition logic. Receipts here are a bounded observation
-of accepted writes, not a durable distributed acknowledgement protocol.
-The expanded cases also reject unsafe, fractional and non-finite revisions and
-oversized text in both Hosts, observing canonical state and receipts after each
-attempt. These are single-Host controls, not generation fencing, hostile-code
-containment or atomic multi-process state transitions. The original Q1–Q3
-result remains tied to its prior exact source; this extension needs fresh CI.
-
-## Run and retained evidence
-
-Use Node **24.22.3**, pnpm **11.25.0**, TypeScript **7.0.2**, `@types/node`
-**24.19.1** and Playwright **1.65.1**. The frozen graph is the exact reviewed
-cross-tier research cohort (lock SHA256
-`c70e5d8e78d46a37a623729838b19215fc63b514a728684d419924900bedae2a`);
-the historical source fixture remains unchanged. This reuse does not adopt a
-production tooling profile or a new public package.
+| Runtime / package manager | Node 24.22.3 / pnpm 11.25.0 |
+| Compiler / Node declarations | TypeScript 7.0.2 / `@types/node` 24.19.1 |
+| Browser tooling | Playwright 1.65.1; use its pinned Chromium build |
+| Host runtime selection | Core 0.8.0 / Assembly 0.8.0 / Resources 0.2.2 |
+| Development checks | Engineering Foundation 3.0.0 / FMS tooling 0.3.0 / GM Conformance 0.5.2 |
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies
@@ -69,32 +139,40 @@ pnpm exec playwright install --with-deps chromium --only-shell
 pnpm qualify
 ```
 
-For a deliberately Node-only local check, use
-`node --test --test-name-pattern=Q1 qualification.test.ts`. It does not establish
-Q2/Q3 or browser qualification. The workflow
-[portable-document-qualification.yml](../../../.github/workflows/portable-document-qualification.yml)
-runs all cases on pull requests and main when this fixture changes. A failing
-or queued workflow is not a successful qualification result.
+`pnpm check` runs strict TypeScript and the actual installed Foundation/FMS/GM
+source checks. [source-profile.ts](source-profile.ts) pins FMS v1.1 and the
+adopted CMS source; it also checks the initialized Foundation compiler version.
+These are fixture-local checks, not admission of the whole research repository
+to a production tooling profile. The current tool lock SHA256 is
+`93c6f1d17b2606aedb4ac2c95c8f15cb8c6f0705875f5149f60e13065993f700`.
 
-The retained artifact contains exact source inputs, tool lock, compiler/runtime
-versions, packed tarball, generated consumer lock, installed core/declarations,
-independently compiled Hosts, browser build identity, native test log and observed
-results. Browser contexts, temporary consumer/state directories and the HTTP
-listener are owned by the test and closed on its normal success/failure paths.
-No arbitrary sleep or test retry stands in for a lifecycle observation.
+`pnpm qualify` executes the modular contract/artifact, Node/browser lifecycle,
+retained ordinary document, P1 and source-guard cases. A later source or package
+change needs its own exact-source result.
+The [workflow](../../../.github/workflows/portable-document-qualification.yml)
+checks the actual PR head, installs real Chromium and retains source, tool
+identities, packed bytes, installed declarations and native logs even on failure.
 
-## Boundaries still requiring their own evidence
+## Evidence and remaining limits
 
-These Hosts are trusted, single-process/single-context test owners. The file
-write is synchronous and has no crash-durability claim. A browser run uses a fresh
-context/origin with one Host; it does not qualify concurrent tabs or multi-process
-compare-and-swap. A browser grant switch does not contain malicious code.
+The retained ordinary tests still check normalized edits, invalid/stale/denied
+writes, receipt aliasing, both Host orders, installed-byte mutations and all four
+physical browser-listener cleanup omissions. Source mutations reject Node I/O
+or GM in ordinary application code, sibling implementation access and ungoverned
+source placement. The modular suite additionally checks A/B/C useful
+outputs, independent Node/Chromium execution, raw-work drain, partial setup,
+original cleanup debt, final receiver races and discriminating broken controls.
 
-Raw DOM interaction checks one presentation/lifetime path, not a headless UI
-library, accessibility/focus conformance or a Desktop shell. Two independently
-wired Hosts are not two independently authored plugin SPI implementations.
-Plugin admission/install/remove, actual isolation, authority fencing across
-processes, stream custody, live replacement and migration remain separate rows
-in the [foundation delivery plan](../../../docs/plans/foundation-delivery-plan.md).
-No product implementation is required to design and execute those additional
-representative fixtures when their owning mechanism/profile is selected.
+The recorded native job runs on Ubuntu 24.04 with the pinned Node and Chromium.
+All claims are bounded to trusted finite work, one Host at a time in one Node
+process or browser context, one document and bounded exports. Synchronous writes
+have no crash-durability or multi-process guarantee; browser storage is not
+multi-tab compare-and-swap. Raw DOM demonstrates one interaction/lifetime path,
+not a renderer, accessibility qualification or Desktop shell. Host permission
+checks do not contain hostile code.
+
+EF contribution compatibility remains separately owned and qualified in EF.
+Production plugin admission, installed-plugin lifecycle, isolation, streams,
+state migration and the complete LMU update operation retain their separate
+[delivery-plan](../../../docs/plans/foundation-delivery-plan.md) evidence.
+npm publication is postponed. No product or consumer pin migration is implied.

@@ -1,0 +1,146 @@
+schemaVersion: 3
+workspace:
+  kind: pnpm
+  manifest: pnpm-workspace.yaml
+rootPackage: true
+packageRoots: [adapter]
+governedRoots: [core, adapter/src]
+boundaries:
+  - id: core-document-application
+    roots: [core/features/document/application]
+    entrypoints:
+      - core/features/document/application/ports/document.ts
+      - core/features/document/application/use-cases/create-document-commands.ts
+    allow:
+      boundaries: []
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: core-document-composition
+    roots: [core/features/document/composition]
+    entrypoints: [core/features/document/composition/document.ts]
+    allow:
+      boundaries: [core-document-application]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: core-format-application
+    roots: [core/features/format/application]
+    entrypoints:
+      - core/features/format/application/ports/format.ts
+      - core/features/format/application/use-cases/create-plain-format.ts
+      - core/features/format/application/use-cases/create-marked-format.ts
+    allow:
+      boundaries: []
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: core-format-composition
+    roots: [core/features/format/composition]
+    entrypoints: [core/features/format/composition/format.ts]
+    allow:
+      boundaries: [core-format-application]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: core-export-application
+    roots: [core/features/export/application]
+    entrypoints:
+      - core/features/export/application/ports/export.ts
+      - core/features/export/application/use-cases/create-export-commands.ts
+    allow:
+      boundaries: []
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: core-export-composition
+    roots: [core/features/export/composition]
+    entrypoints: [core/features/export/composition/export.ts]
+    allow:
+      boundaries: [core-export-application]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: core-public
+    roots: [core/index.ts]
+    entrypoints: [core/index.ts]
+    allow:
+      boundaries: [core-document-composition, core-format-composition, core-export-composition]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: adapter-document-contract
+    roots: [adapter/src/features/document/composition/document.contracts.ts]
+    entrypoints: [adapter/src/features/document/composition/document.contracts.ts]
+    allow:
+      boundaries: []
+      packages: ["@fixture/portable-document", "@get-modular/assembly"]
+      builtins: []
+      runtimeReferences: []
+  - id: adapter-document-composition
+    roots:
+      - adapter/src/features/document/composition/document.declaration.ts
+      - adapter/src/features/document/composition/document.module.ts
+      - adapter/src/features/document/composition/document.group.ts
+      - adapter/src/features/document/composition/document.inputs.ts
+    entrypoints:
+      - adapter/src/features/document/composition/document.module.ts
+      - adapter/src/features/document/composition/document.group.ts
+      - adapter/src/features/document/composition/document.inputs.ts
+    allow:
+      boundaries: [adapter-document-contract]
+      packages: ["@fixture/portable-document", "@get-modular/assembly", "@get-modular/core", "@get-modular/resources"]
+      builtins: []
+      runtimeReferences: []
+  - id: adapter-format-contract
+    roots: [adapter/src/features/format/composition/format.contracts.ts]
+    entrypoints: [adapter/src/features/format/composition/format.contracts.ts]
+    allow:
+      boundaries: []
+      packages: ["@fixture/portable-document", "@get-modular/assembly"]
+      builtins: []
+      runtimeReferences: []
+  - id: adapter-format-composition
+    roots:
+      - adapter/src/features/format/composition/format.declaration.ts
+      - adapter/src/features/format/composition/format.module.ts
+      - adapter/src/features/format/composition/format.group.ts
+    entrypoints:
+      - adapter/src/features/format/composition/format.module.ts
+      - adapter/src/features/format/composition/format.group.ts
+    allow:
+      boundaries: [adapter-format-contract]
+      packages: ["@fixture/portable-document", "@get-modular/assembly", "@get-modular/core", "@get-modular/resources"]
+      builtins: []
+      runtimeReferences: []
+  - id: adapter-export-contract
+    roots: [adapter/src/features/export/composition/export.contracts.ts]
+    entrypoints: [adapter/src/features/export/composition/export.contracts.ts]
+    allow:
+      boundaries: [adapter-document-contract, adapter-format-contract]
+      packages: ["@fixture/portable-document", "@get-modular/assembly", "@get-modular/resources"]
+      builtins: []
+      runtimeReferences: []
+  - id: adapter-export-composition
+    roots:
+      - adapter/src/features/export/composition/export.declaration.ts
+      - adapter/src/features/export/composition/export.module.ts
+      - adapter/src/features/export/composition/export.group.ts
+      - adapter/src/features/export/composition/export.inputs.ts
+    entrypoints:
+      - adapter/src/features/export/composition/export.module.ts
+      - adapter/src/features/export/composition/export.group.ts
+      - adapter/src/features/export/composition/export.inputs.ts
+    allow:
+      boundaries: [adapter-export-contract, adapter-document-contract, adapter-format-contract]
+      packages: ["@fixture/portable-document", "@get-modular/assembly", "@get-modular/core", "@get-modular/resources"]
+      builtins: []
+      runtimeReferences: []
+  - id: adapter-root
+    roots: [adapter/src/index.ts, adapter/src/composition]
+    entrypoints: [adapter/src/index.ts, adapter/src/composition/root.ts]
+    allow:
+      boundaries: [adapter-document-contract, adapter-document-composition, adapter-format-contract, adapter-format-composition, adapter-export-contract, adapter-export-composition]
+      packages: ["@fixture/portable-document", "@get-modular/assembly", "@get-modular/core", "@get-modular/resources"]
+      builtins: []
+      runtimeReferences: []

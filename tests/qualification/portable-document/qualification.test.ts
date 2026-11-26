@@ -8,6 +8,9 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { after, before, test } from "node:test";
 import { chromium, type Browser, type BrowserContext } from "playwright";
 import { evidenceRoot, packConsumer, sha256, verifyPackageBytes } from "./pack-consumer.ts";
+import { packModularConsumer } from "./pack-modular.ts";
+import { registerNodeModularCases } from "./node-modular-cases.ts";
+import { registerBrowserModularCases } from "./browser-modular-cases.ts";
 
 interface Snapshot { readonly revision: number; readonly text: string }
 interface NodeHost {
@@ -40,17 +43,63 @@ const expectedResults = [
   { revision: 1, text: "reviewed draft" },
 ];
 let packed: Awaited<ReturnType<typeof packConsumer>>;
+let modular: Awaited<ReturnType<typeof packModularConsumer>>;
 const observations: object[] = [];
-before(async () => { packed = await packConsumer(); });
+before(async () => {
+  packed = await packConsumer();
+  modular = await packModularConsumer(packed);
+});
 after(async () => {
   try { await writeFile(join(evidenceRoot, "observations.json"), JSON.stringify(observations, null, 2) + "\n"); }
   finally {
-    if (packed) {
-      await packed.dispose();
-      assert.equal(existsSync(packed.root), false, "isolated installed consumer root remains");
+    try {
+      if (modular) {
+        await modular.dispose();
+        assert.equal(existsSync(modular.root), false, "isolated modular consumer root remains");
+      }
+    } finally {
+      if (packed) {
+        await packed.dispose();
+        assert.equal(existsSync(packed.root), false, "isolated installed consumer root remains");
+      }
     }
   }
 });
+
+test("M1 installed public composition contracts reject wrong wiring, revision and missing dependencies", async () => {
+  const entry = pathToFileURL(join(modular.root, "dist/node/composition-contract.js")).href;
+  const { verifyCompositionContracts }: { verifyCompositionContracts: () => Promise<unknown> } = await import(entry);
+  const result = await verifyCompositionContracts();
+  assert.deepEqual(result, {
+    providers: ["fixture/format/plain", "fixture/format/marked", "fixture/format/author"], contractCases: 6,
+    namespaceRejected: true, wrongSelectionRejected: true, wrongRevisionRejected: true, missingDependencyRejected: true,
+    effectsBeforeRun: 0, positiveControl: { factories: 1, acquired: 1, effects: 1, released: 1 },
+  });
+  observations.push({ profile: "modular-composition", result });
+});
+
+test("M2 optional adapter artifact oracle rejects changed nested bytes and extra files", async () => {
+  await verifyPackageBytes(modular.adapterRoot, modular.adapterBuilt);
+  for (const [path, reason] of [
+    ["dist/features/format/composition/format.module.js", "package bytes differ:"],
+    ["dist/extra.js", "package dist inventory"],
+  ] as const) {
+    const root = await mkdtemp(join(tmpdir(), "modular-artifact-control-"));
+    try {
+      const candidate = join(root, "package");
+      await cp(modular.adapterRoot, candidate, { recursive: true, errorOnExist: true });
+      await writeFile(join(candidate, path), "deliberate adapter substitution");
+      await assert.rejects(verifyPackageBytes(candidate, modular.adapterBuilt), error =>
+        error instanceof AssertionError && error.message.includes(reason));
+      observations.push({ control: "adapter-" + path, rejectedBy: reason });
+    } finally { await rm(root, { recursive: true, force: true }); }
+  }
+  await verifyPackageBytes(modular.adapterRoot, modular.adapterBuilt);
+  await verifyPackageBytes(modular.coreRoot, packed.built);
+});
+
+registerNodeModularCases(() => modular, observations);
+registerBrowserModularCases(() => modular, observations);
 
 async function nodeCase(label: string, aliasReceipt = false) {
   const parent = await mkdtemp(join(tmpdir(), "document-node-case-"));
@@ -141,6 +190,8 @@ type BrowserMutation = CleanupControl | "revision" | "grant";
 
 async function browserCase(browser: Browser, label: string, mutation?: BrowserMutation) {
   const entryBytes = await readFile(packed.entry);
+  const packageAssets = new Map([...packed.built].filter(([path]) => path.startsWith("dist/") && path.endsWith(".js"))
+    .map(([path, bytes]) => ["/package/" + path.slice(5), bytes]));
   let hostBytes = await readFile(join(packed.root, "dist", "browser", "browser-host.js"), "utf8");
   if (mutation === "revision") {
     hostBytes = mutateOnce(hostBytes, "if (current.revision !== expectedRevision)", "if (false)");
@@ -151,7 +202,7 @@ async function browserCase(browser: Browser, label: string, mutation?: BrowserMu
   }
   const server = createServer((request, response) => {
     const path = request.url;
-    const body = path === "/" ? html : path === "/host.js" ? hostBytes : path === "/package/index.js" ? entryBytes : undefined;
+    const body = path === "/" ? html : path === "/host.js" ? hostBytes : packageAssets.get(path ?? "");
     if (body === undefined) { response.writeHead(404); response.end(); return; }
     response.writeHead(200, { "Content-Type": path === "/" ? "text/html; charset=utf-8" : "text/javascript; charset=utf-8", "Cache-Control": "no-store" });
     response.end(body);
