@@ -1,6 +1,6 @@
 # Modular authoring: critical construction and conformance review
 
-Status: plan draft for independent critique, 2026-11-26. No maintained
+Status: corrected plan after independent round 1, 2026-11-26. No maintained
 implementation change precedes this plan. Continue the existing bounded TEST
 reference; this is not a new production runtime or another foundation roadmap.
 
@@ -99,11 +99,37 @@ Core business behavior and external semantic contract revisions remain unchanged
 | Step | Deliverable and observable exit |
 | --- | --- |
 | P0 | Publish this Markdown plan and draft PR; perform at least two independent critique/correction rounds before maintained implementation. Record findings and dispositions below. |
-| P1 | Add focused construction/disposal regression cases to the existing packed Node and actual Chromium harnesses. Hold B after real resource acquisition, request disposal, verify closed ingress, retained native resource while work is held, actual construction cancellation, and complete release after settlement. Include reentrant disposal during factory construction where needed to distinguish the missing signal. Preserve red evidence at its actual revision. |
+| P1 | Add separate cancellation and raw-custody regression observations in the existing packed Node/Chromium harnesses. Hold B's real acquisition, request disposal, await an explicit setup-abort barrier, retain native/state witnesses and no published B facade, then release and inspect the actual Assembly cancellation result. A small typed TEST probe in separately compiled Host copies observes the original run Promise and records the actual scope-close boundary; its signal-preserving omit-custody control must fail the intended ordering assertion. Preserve red evidence at its actual revision. |
 | P2 | Track construction with the existing invocation owner, forward the native signal, and retain the original close/report semantics. Failure handling runs after tracked construction settles. No duplicated drain mechanism, hidden retry or public lifecycle API. |
-| P3 | Use the real root with public Conformance smoke, all three selections, independent expected step identities and closure checks. Add one prototype-port rejection and one deliberate cleanup failure control so false-green qualification is rejected. Preserve wiring, installed-byte and native lifetime oracles. |
+| P3 | Use the real root with public Conformance smoke: seven independently expected steps per A/B/C selection (normal plus fail/abort at Document, selected Format and Export), all reports settled and complete. Require actual delivery acquisitions/releases with no remaining TEST leases; calibrate the deterministic fake before fixing its exact counts. Prototype rejection must be conformance.ports.prototype-member after complete cleanup. The cleanup control must be conformance.smoke.failed with the intentional failed debt and retained TEST lease, reclaimed separately in finally. Preserve wiring, installed-byte and native lifetime oracles. |
 | P4 | Correct arrow-port authoring, explicit fixture profile identities, the reviewed CMS coordinate and maintained navigation. Keep the same business outputs and package cohort. |
 | P5 | Run strict TypeScript 7.0.2 and installed source gates, the full packed suite including actual Chromium, and independent implementation review. Fix substantive findings, then verify exact-head CI, ordinary squash merge with an explicit Conventional Commit subject, final source/attribution and actual-main CI. |
+
+### Discriminating construction observation
+
+Holding `afterAcquire` alone is not a custody proof: Resources already waits for
+pending setup. Keep the explicit setup-abort event separate from the run result.
+An acquired-resource failure may be an actual `failed` Assembly outcome carrying
+cancellation, rather than `cancelled`; neither an arbitrary failure nor an
+unstarted-run sentinel counts as cancellation evidence.
+
+A small typed TEST helper observes the actual raw Promise, starts its pending
+observation before invoking run and returns that identical Promise. Both
+fulfillment and rejection clear the observation; synchronous throws clear it
+before propagation. Separately compiled Host copies record that observation
+immediately before the real scope close and always perform the real close.
+The probe does not throw, delay cleanup, replace the returned Promise or claim
+native release. Assert ordering only after both restart and disposal settle.
+Core/adapter artifacts and native FD/DOM observations remain independent.
+
+A compiled control bypasses only construction's `ingress.invoke`, retaining
+the same signal, resource adapter and observer. It must complete teardown and
+then fail the exact premature-close assertion. This demonstrates that forwarding
+cancellation alone cannot make the custody gate pass. Passing the setup signal
+to the existing TEST `afterAcquire` hook is a bounded argument addition for an
+explicit abort barrier. Resolve every barrier and drain every started flight
+in `finally`; a reentrant factory requests disposal and returns without awaiting
+its own disposal.
 
 Construction regression observations must come from actual outcome/cancellation,
 native file descriptors or DOM listeners, and explicit barriers. They must not
@@ -122,7 +148,7 @@ before calling it evidence of the fix.
 ## Estimate and risks
 
 Incremental handwritten reference/integration changes: 50–120 LOC.
-Tests/qualification changes: 120–260 LOC. Documentation: 100–180 LOC.
+Tests/qualification changes: 260–440 LOC. Documentation: 140–220 LOC.
 Production runtime: 0 LOC. No dependency, lockfile, native-code or release work.
 Focused engineering estimate: 1–3 days including review and native CI; not a
 delivery promise. Fitness 9/10, expected reliability in the selected finite TEST
@@ -141,6 +167,6 @@ a synthetic browser substitute.
 | Round | Findings and disposition |
 | --- | --- |
 | Audit | Three independent source reviews completed across LMU, GM and EF. Corrected the invalid class-port interpretation against the exact CMS before implementation. No GM/EF production change selected. |
-| Plan round 1 | Pending review of this exact published draft. |
-| Plan round 2 | Pending review after material corrections. |
+| Plan round 1 | Three independent reviewers read 51cc72b. Accepted their correction: pending setup does not distinguish raw-run drain. Added unchanged-Promise/real-close observation, the signal-preserving omit-custody control, precise cancellation evidence, seven smoke steps per selection and exact negative-control reasons. Kept distinct captured profile IDs and existing package ownership. |
+| Plan round 2 | Pending independent review of this corrected plan before implementation. |
 | Implementation / E2E | Not started. |
