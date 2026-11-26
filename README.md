@@ -74,7 +74,7 @@ for the current executable slice and the remaining discriminating tests.
 | What is available, published or still awaiting qualification? | [Dated status and source map](docs/status.md) |
 | How can the same behavior work across apps with optional custom/declarative UI? | [Headless plugins and UI](docs/architecture/headless-plugins-and-ui.md) |
 | What work unblocks applications before full live replacement? | [Foundation delivery plan](docs/plans/foundation-delivery-plan.md) |
-| How should I write and qualify a modular feature now? | [Maintained authoring reference](tests/qualification/portable-document/README.md), [critical construction/conformance review](docs/plans/module-authoring-critical-review-plan.md) |
+| How should I write and qualify a modular feature now? | [Maintained authoring reference](tests/qualification/portable-document/README.md), [critical construction/conformance review](docs/plans/module-authoring-critical-review-plan.md), [complete contracts and storage boundary](docs/plans/module-authoring-contract-storage-plan.md) |
 | Which choices need the owner and which need another experiment? | [Concrete decision packet](docs/decisions/open-decisions.md#decision-packet-for-the-first-useful-delivery) |
 | Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |

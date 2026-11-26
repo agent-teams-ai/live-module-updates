@@ -31,6 +31,8 @@ export class BrowserHostOpenError extends Error {
 
 /** Independent browser-local state, authority, native preparation and DOM ownership. */
 export async function openBrowserModularHost(provider: FormatProvider, initialHooks: BrowserModularHooks = {}) {
+  // A denied required capability must fail before the Host acquires owned DOM.
+  const storage = localStorage;
   const namespace = "modular-document-" + crypto.randomUUID();
   const stateKey = namespace + "/document";
   const exportsKey = namespace + "/exports";
@@ -51,14 +53,14 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
   let disposeFlight: Promise<void> | undefined;
 
   function readState(): DocumentSnapshot {
-    const value: unknown = JSON.parse(localStorage.getItem(stateKey) ?? "null");
+    const value: unknown = JSON.parse(storage.getItem(stateKey) ?? "null");
     if (typeof value !== "object" || value === null || !("revision" in value) || !("text" in value)
       || typeof value.revision !== "number" || !Number.isSafeInteger(value.revision)
       || value.revision < 0 || typeof value.text !== "string") throw new Error("invalid browser document");
     return { revision: value.revision, text: value.text };
   }
   function readExports(): { readonly revision: number; readonly content: string }[] {
-    const value: unknown = JSON.parse(localStorage.getItem(exportsKey) ?? "null");
+    const value: unknown = JSON.parse(storage.getItem(exportsKey) ?? "null");
     if (!Array.isArray(value)) throw new Error("invalid browser export receipts");
     return value.map((entry: unknown) => {
       if (typeof entry !== "object" || entry === null || !("revision" in entry) || !("content" in entry)
@@ -78,8 +80,8 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
         await Promise.all(closing);
         // Explicit TEST teardown never rewrites an original incomplete close report.
         for (const release of [...native.values()]) release();
-        localStorage.removeItem(stateKey);
-        localStorage.removeItem(exportsKey);
+        storage.removeItem(stateKey);
+        storage.removeItem(exportsKey);
         root.remove();
         completion.resolve();
       } catch (error) { completion.reject(error); }
@@ -131,7 +133,7 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
               if (!granted) return { status: "rejected", reason: "denied" };
               if (readState().revision !== expectedRevision) return { status: "rejected", reason: "conflict" };
               const receipt = { revision: expectedRevision, content };
-              localStorage.setItem(exportsKey, JSON.stringify([...readExports(), receipt]));
+              storage.setItem(exportsKey, JSON.stringify([...readExports(), receipt]));
               return { status: "published", ...receipt };
             },
           };
@@ -167,7 +169,7 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
               const previous = readState();
               if (previous.revision !== expectedRevision) return { status: "rejected", reason: "conflict" };
               const snapshot = { revision: previous.revision + 1, text };
-              localStorage.setItem(stateKey, JSON.stringify(snapshot));
+              storage.setItem(stateKey, JSON.stringify(snapshot));
               return { status: "saved", snapshot };
             },
           } },
@@ -203,8 +205,8 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
 
   let current: BrowserModularSession;
   try {
-    localStorage.setItem(stateKey, JSON.stringify({ revision: 0, text: "seed" }));
-    localStorage.setItem(exportsKey, "[]");
+    storage.setItem(stateKey, JSON.stringify({ revision: 0, text: "seed" }));
+    storage.setItem(exportsKey, "[]");
     current = await construct(provider, initialHooks);
   } catch (cause) {
     if (cause instanceof BrowserHostOpenError) throw cause;

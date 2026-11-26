@@ -9,7 +9,7 @@ import type { ConstructionObservation } from "./consumer/construction-probe.ts";
 
 type Packed = Awaited<ReturnType<typeof packModularConsumer>>;
 type Scenario = "normal" | "held" | "cooperative" | "pending-cleanup" | "debt" | "partial"
-  | "conflict" | "denied" | "reentrant" | "construction";
+  | "conflict" | "denied" | "reentrant" | "construction" | "storage-denied" | "storage-quota";
 interface Report { readonly settled: boolean; readonly complete: boolean; readonly debts: readonly unknown[] }
 interface Provider { readonly implementationId: string; readonly create: () => {
   readonly title: (revision: number) => string; readonly body: (text: string) => string;
@@ -68,7 +68,14 @@ async function browserCase(browser: Browser, packed: Packed, scenario: Scenario,
     const path = request.url ?? "";
     const body = path === "/" ? html : assets.get(path);
     if (body === undefined) { response.writeHead(404); response.end(); return; }
-    response.writeHead(200, { "Content-Type": path === "/" ? "text/html; charset=utf-8" : "text/javascript; charset=utf-8", "Cache-Control": "no-store" });
+    response.writeHead(200, {
+      "Content-Type": path === "/" ? "text/html; charset=utf-8" : "text/javascript; charset=utf-8",
+      "Cache-Control": "no-store",
+      ...(scenario === "storage-denied" ? {
+        "Access-Control-Allow-Origin": "*",
+        ...(path === "/" ? { "Content-Security-Policy": "sandbox allow-scripts" } : {}),
+      } : {}),
+    });
     response.end(body);
   });
   await new Promise<void>((resolve, reject) => { server.once("error", reject); server.listen(0, "127.0.0.1", resolve); });
@@ -100,6 +107,117 @@ async function browserCase(browser: Browser, packed: Packed, scenario: Scenario,
       const providers: { plainFormatProvider: Provider; markedFormatProvider: Provider } = await import(adapterPath);
       const authorPath = "/hosts/dist/browser/author-format.js";
       const author: { authorFormatProvider: Provider } = await import(authorPath);
+      if (scenario === "storage-denied" || scenario === "storage-quota") {
+        if (!isSecureContext || typeof crypto.randomUUID !== "function") {
+          throw new Error("native storage setup requires a secure context and randomUUID");
+        }
+        if (typeof hostModule.openBrowserModularHost !== "function" || typeof providers.plainFormatProvider.create !== "function") {
+          throw new Error("actual storage Host or provider did not load");
+        }
+        const sentinel = document.createElement("aside");
+        sentinel.textContent = "unrelated DOM survives";
+        document.body.append(sentinel);
+        const records: MutationRecord[] = [];
+        const observer = new MutationObserver(batch => { records.push(...batch); });
+        observer.observe(document.body, { childList: true, subtree: true });
+        let factories = 0; let acquisitions = 0; let opened: Owner | undefined;
+        let getterCalls = 0; const getterErrors: unknown[] = [];
+        let descriptor: PropertyDescriptor | undefined; let storage: Storage | undefined;
+        const ownedKeys: string[] = []; const baseline = new Map<string, string>();
+        let writes = 0; let quotaFailures = 0; let filledCharacters = 0;
+        const counted: Provider = {
+          implementationId: providers.plainFormatProvider.implementationId,
+          create: () => { factories += 1; return providers.plainFormatProvider.create(); },
+        };
+        try {
+          if (scenario === "storage-denied") {
+            descriptor = Object.getOwnPropertyDescriptor(window, "localStorage");
+            const nativeGetter = descriptor?.get;
+            if (!descriptor?.configurable || !nativeGetter) throw new Error("native storage getter is not observable");
+            Object.defineProperty(window, "localStorage", { ...descriptor, get: function (this: Window) {
+              getterCalls += 1;
+              try { return Reflect.apply(nativeGetter, this, []); }
+              catch (error) { getterErrors.push(error); throw error; }
+            } });
+          } else {
+            // Calibrate native capacity before measuring the Host. A rejected large
+            // write alone is insufficient: retain the largest successful fill.
+            storage = window.localStorage;
+            const prefix = "storage-qualification-" + crypto.randomUUID();
+            const sentinelKey = prefix + "/sentinel"; const fillKey = prefix + "/fill";
+            const probeKey = prefix + "/capacity-probe";
+            ownedKeys.push(sentinelKey, fillKey, probeKey);
+            storage.setItem(sentinelKey, "unrelated storage survives");
+            storage.setItem(fillKey, "");
+            const holder = storage;
+            const fill = (characters: number): boolean => {
+              if (++writes > 26) throw new Error("native quota calibration exceeded its write bound");
+              try { holder.setItem(fillKey, "x".repeat(characters)); return true; }
+              catch (error) {
+                if (!(error instanceof DOMException) || error.name !== "QuotaExceededError") throw error;
+                quotaFailures += 1; return false;
+              }
+            };
+            // At most 8 Mi characters per attempted value and 26 calibration writes.
+            let upper = 8 * 1024 * 1024;
+            if (fill(upper)) throw new Error("native quota exceeds this bounded qualification setup");
+            while (upper - filledCharacters > 1) {
+              const middle = Math.floor((upper + filledCharacters) / 2);
+              if (fill(middle)) filledCharacters = middle; else upper = middle;
+            }
+            if (filledCharacters === 0 || holder.getItem(fillKey)?.length !== filledCharacters) {
+              throw new Error("native quota calibration did not retain its successful fill");
+            }
+            let probeDenied = false;
+            try { holder.setItem(probeKey, "x"); }
+            catch (error) {
+              if (!(error instanceof DOMException) || error.name !== "QuotaExceededError") throw error;
+              probeDenied = true;
+            }
+            if (!probeDenied) throw new Error("native quota calibration left room for a new storage key");
+            for (let index = 0; index < holder.length; index += 1) {
+              const key = holder.key(index);
+              const value = key === null ? null : holder.getItem(key);
+              if (key === null || value === null) throw new Error("native storage changed during calibration");
+              baseline.set(key, value);
+            }
+          }
+          // Only this separately observed call may supply the Host failure.
+          let failure: unknown;
+          try { opened = await hostModule.openBrowserModularHost(counted, {
+            afterAcquire: async () => { acquisitions += 1; },
+          }); } catch (error) { failure = error; }
+          records.push(...observer.takeRecords());
+          const summary = {
+            nativeError: failure instanceof DOMException,
+            errorName: failure instanceof DOMException ? failure.name : String(failure),
+            returnedHost: opened !== undefined, factories, acquisitions,
+            insertions: records.reduce((count, record) => count + record.addedNodes.length, 0),
+            removals: records.reduce((count, record) => count + record.removedNodes.length, 0),
+            retainedRoots: document.querySelectorAll('section[id^="modular-document-"]').length,
+            sentinelPreserved: sentinel.parentElement === document.body && sentinel.textContent === "unrelated DOM survives",
+          };
+          if (scenario === "storage-denied") return [summary, {
+            getterCalls, getterErrors: getterErrors.map(error => error instanceof DOMException ? error.name : String(error)),
+            firstExceptionPreserved: getterErrors.length > 0 && failure === getterErrors[0],
+          }];
+          if (!storage) throw new Error("missing acquired native storage holder");
+          const holder = storage;
+          const keys = Array.from({ length: holder.length }, (_, index) => holder.key(index)).sort();
+          return [summary, { writes, quotaFailures, filledCharacters }, [
+            JSON.stringify(keys) === JSON.stringify([...baseline.keys()].sort()),
+            [...baseline].every(([key, value]) => holder.getItem(key) === value),
+          ]];
+        } finally {
+          observer.disconnect();
+          if (descriptor) Object.defineProperty(window, "localStorage", descriptor);
+          try { await opened?.dispose(); }
+          finally {
+            for (const key of ownedKeys) storage?.removeItem(key);
+            sentinel.remove();
+          }
+        }
+      }
       const entered = Promise.withResolvers<void>(); const release = Promise.withResolvers<void>();
       const cleanupEntered = Promise.withResolvers<void>(); const cleanupRelease = Promise.withResolvers<void>();
       let cleanupCalls = 0; let successorFactories = 0; let aborts = 0;
@@ -324,8 +442,32 @@ function assertConstructionResult(values: unknown[]): void {
   assertConstructionTrace(values[1], "Browser");
 }
 
+function assertStorageResult(values: unknown[], scenario: "storage-denied" | "storage-quota"): void {
+  const denied = scenario === "storage-denied";
+  assert.deepEqual(values[0], {
+    nativeError: true, errorName: denied ? "SecurityError" : "QuotaExceededError",
+    returnedHost: false, factories: 0, acquisitions: 0,
+    insertions: denied ? 0 : 1, removals: denied ? 0 : 1, retainedRoots: 0, sentinelPreserved: true,
+  }, "native storage boundary must preserve unrelated DOM and release only acquired Host ownership");
+  if (denied) {
+    assert.deepEqual(values[1], {
+      getterCalls: 1, getterErrors: ["SecurityError"], firstExceptionPreserved: true,
+    }, "native storage denial must preserve the first exception without cleanup reacquisition");
+  } else {
+    const calibration = values[1];
+    assert.ok(calibration !== null && typeof calibration === "object", "missing native quota calibration evidence");
+    assert.ok("writes" in calibration && typeof calibration.writes === "number"
+      && calibration.writes > 0 && calibration.writes <= 26, "native quota write bound");
+    assert.ok("quotaFailures" in calibration && typeof calibration.quotaFailures === "number"
+      && calibration.quotaFailures > 0, "native quota was not reached during setup");
+    assert.ok("filledCharacters" in calibration && typeof calibration.filledCharacters === "number"
+      && calibration.filledCharacters > 0 && calibration.filledCharacters < 8 * 1024 * 1024, "native quota retained-fill bound");
+    assert.deepEqual(values[2], [true, true], "Host quota refusal changed unrelated storage or retained owned keys");
+  }
+}
+
 export function registerBrowserModularCases(getPacked: () => Packed, observations: object[]): void {
-  const expectations: Record<Exclude<Scenario, "normal" | "construction">, unknown[]> = {
+  const expectations: Record<Exclude<Scenario, "normal" | "construction" | "storage-denied" | "storage-quota">, unknown[]> = {
     held: [[1, false, true, 0, 0, true, closed, closed, true], true, cancelled, complete, { status: "started" }, 1, false, []],
     reentrant: [[1, false, true, 0, 0, true, closed, closed, true], true, cancelled, complete, { status: "started" }, 1, false, []],
     cooperative: [cancelled, complete, 1, 0, false, []],
@@ -335,7 +477,7 @@ export function registerBrowserModularCases(getPacked: () => Packed, observation
     conflict: [{ status: "rejected", reason: "conflict" }, { revision: 1, text: "changed" }, []],
     denied: [{ status: "rejected", reason: "denied" }, { revision: 0, text: "seed" }, []],
   };
-  const scenarios: Scenario[] = ["normal", "held", "cooperative", "pending-cleanup", "debt", "partial", "conflict", "denied", "reentrant", "construction"];
+  const scenarios: Scenario[] = ["normal", "held", "cooperative", "pending-cleanup", "debt", "partial", "conflict", "denied", "reentrant", "construction", "storage-denied", "storage-quota"];
   for (const scenario of scenarios) {
     void test("B modular Chromium: " + scenario, { timeout: 45000 }, async context => {
       const browser = await ownedBrowser(context);
@@ -343,6 +485,7 @@ export function registerBrowserModularCases(getPacked: () => Packed, observation
       observations.push({ host: "browser-modular", scenario, ...result });
       if (scenario === "normal") assertNormal(result.values);
       else if (scenario === "construction") assertConstructionResult(result.values);
+      else if (scenario === "storage-denied" || scenario === "storage-quota") assertStorageResult(result.values, scenario);
       else assert.deepEqual(result.values, expectations[scenario], "independent browser lifecycle oracle: " + scenario);
     });
   }

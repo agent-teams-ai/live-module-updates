@@ -1,8 +1,8 @@
 # Foundation qualification through representative fixtures
 
 Status: maintained qualification design; current checkpoint refreshed 2026-11-26.
-The scoped modular suite and independent source reviews passed at `6b22e4b`.
-Earlier exact results remain preserved below.
+The current exact-source result and independent review are recorded below.
+Earlier exact results remain preserved as separate checkpoints.
 The owner's clarified sequence is foundation first, applications afterward.
 This matrix names falsifiable claims and their evidence; it is not another
 repository admission policy, universal test framework or stable public API.
@@ -57,6 +57,44 @@ requirements at EF. Product adoption retains its own accepted pins and gates.
 Neither claim is silently inherited from successful test Hosts.
 
 ## 3. Exact portable-document result
+
+### Complete feature contracts and storage acquisition, 2026-11-26
+
+The [bounded follow-up plan](../plans/module-authoring-contract-storage-plan.md)
+completed two independent review rounds before implementation. This slice
+corrects an incomplete standalone Export contract map and Browser Host storage
+acquisition after owned DOM creation. **44 tests passed, zero failures, skips,
+cancellations or todo**, including actual Chromium, at
+`7ff1b0492e955b1df0ff9846986c305c8798438b`. The exact original failures remain preserved.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Preserved pre-fix source | [`fd33d09935e092221b1161369a7be0099096ee5e`](https://github.com/agent-teams-ai/live-module-updates/commit/fd33d09935e092221b1161369a7be0099096ee5e), [run 45832279729 / job 139951844778](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45832279729/job/139951844778): 44 tests, 42 passed, exactly independent feature parity and native storage denial failed; zero skips/cancellations/todo |
+| Pre-fix evidence | [Artifact 15122902308](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45832279729/artifacts/15122902308), downloaded archive SHA256 `869d7f639a2bc69b45e95a27a6cf4b7fc94fafa1cae021acc0d93d8e15e7c29c` |
+| Corrected source | [`7ff1b0492e955b1df0ff9846986c305c8798438b`](https://github.com/agent-teams-ai/live-module-updates/commit/7ff1b0492e955b1df0ff9846986c305c8798438b), [run 45833913782 / job 139957585454](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45833913782/job/139957585454): all 44 passed |
+| Corrected evidence | [Artifact 15124201132](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45833913782/artifacts/15124201132), downloaded archive SHA256 `a08e0fb26966ceff46f1a67d8e32e31b5f4fdc0dd8f1575ef120e85786174d7a` |
+| Native execution | Unchanged pinned Chrome Headless Shell 159.0.8154.6 build 1255 on Ubuntu 24.04; actual installed ESM bytes checked for both storage scenarios |
+| Review / final delivery | Two independent implementation reviewers reconfirmed the published source. [PR #6](https://github.com/agent-teams-ai/live-module-updates/pull/6) retains final documentation/head checks, merge attribution and actual-main verification; later prose revisions do not rename these executions |
+
+The pre-fix compiler checkpoint uses the actual three contract files against the packed
+core and installed public GM declarations, with no Host aggregate or future type
+export. It fails TS2339 for missing `fixture/document/state` and three TS2344
+key/value/token parity assertions. The corrected M4 gate runs eight compiler
+programs: complete union/interface parity, two independent omissions, separate
+unused value/revision conflicts, their collapsed-base controls and identical
+overlap. Four programs compile; four reject only the specified diagnostics.
+
+The pre-fix denied-storage observation is native: the real getter throws twice, failure
+cleanup replaces the first exception and leaves one inserted root. The normal
+origin quota control passes on that same pre-fix source: calibration and Host
+failure are separate, and the Host removes its acquired root while preserving
+unrelated storage. The fix acquires the required Storage holder before DOM and
+keeps that holder for the existing operations. Corrected native denial observes
+one getter exception, preserves its identity, constructs no provider and observes
+zero owned DOM insertions and zero retained roots. The quota case still removes its acquired root and
+preserves unrelated keys/values. This does not add fallback, retry,
+a cleanup manager or destroyed-context recovery. Both remain TEST/reference
+evidence in one live execution context, without a new public runtime or npm release.
 
 ### Construction and full-root follow-up, 2026-11-26
 
