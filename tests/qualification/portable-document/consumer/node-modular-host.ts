@@ -13,7 +13,7 @@ import { createInvocationOwner } from "./invocation-owner.js";
 /** TEST hooks surround actual acquisition, asynchronous work and release. */
 export interface NodeModularHooks {
   readonly wait?: (signal: AbortSignal) => Promise<"ready" | "cancelled">;
-  readonly afterAcquire?: () => Promise<void>;
+  readonly afterAcquire?: (signal: AbortSignal) => Promise<void>;
   readonly beforeRelease?: () => Promise<void>;
 }
 
@@ -129,7 +129,7 @@ export async function openNodeModularHost(
         nativeHandles.set(handle, stagePath);
         stagePaths.push(stagePath);
         try {
-          await hooks.afterAcquire?.();
+          await hooks.afterAcquire?.(signal);
           await handle.writeFile("acquired\n");
           if (signal.aborted) throw new Error("Node setup was cancelled");
           return {

@@ -7,6 +7,8 @@ import { test } from "node:test";
 import { setImmediate as turn } from "node:timers/promises";
 import { pathToFileURL } from "node:url";
 import type { packModularConsumer } from "./pack-modular.ts";
+import { assertConstructionTrace, constructionTrace } from "./construction-controls.ts";
+import type { ConstructionObservation } from "./consumer/construction-probe.ts";
 
 type Packed = Awaited<ReturnType<typeof packModularConsumer>>;
 interface Snapshot { readonly revision: number; readonly text: string }
@@ -16,7 +18,7 @@ interface Provider { readonly implementationId: string; readonly create: () => {
 } }
 interface Hooks {
   readonly wait?: (signal: AbortSignal) => Promise<"ready" | "cancelled">;
-  readonly afterAcquire?: () => Promise<void>; readonly beforeRelease?: () => Promise<void>;
+  readonly afterAcquire?: (signal: AbortSignal) => Promise<void>; readonly beforeRelease?: () => Promise<void>;
 }
 interface Session {
   query(): Snapshot; edit(revision: number, text: string): unknown; publish(): Promise<unknown>;
@@ -123,6 +125,68 @@ async function heldDrainCase(packed: Packed, entry = "node-modular-host.js") {
     wait: async () => { entered.resolve(); await release.promise; return "ready"; },
     beforeRelease: async () => { cleanupStarted = true; },
   } });
+}
+
+async function constructionCase(packed: Packed, signal: AbortSignal, entry = "node-modular-construction.js") {
+  const { constructionProbes }: { readonly constructionProbes: readonly { read: () => ConstructionObservation }[] } =
+    await import(pathToFileURL(join(packed.root, "dist/node", entry)).href);
+  const firstProbe = constructionProbes.length;
+  const entered = barrier(); const release = barrier(); const aborted = barrier();
+  const unblock = () => { release.resolve(); };
+  signal.addEventListener("abort", unblock, { once: true });
+  if (signal.aborted) unblock();
+  let trace: ReturnType<typeof constructionTrace> | undefined;
+  let setupReason: unknown;
+  try {
+    await withOwner(packed, async (owner, providers) => {
+      const a = owner.current();
+      assert.deepEqual(a.edit(0, "reviewed draft"), { status: "saved", snapshot: saved });
+      let restarting: Promise<unknown> | undefined; let disposing: Promise<void> | undefined;
+      try {
+        restarting = owner.restart(providers.markedFormatProvider, { afterAcquire: async setupSignal => {
+          const observeAbort = () => { setupReason = setupSignal.reason; aborted.resolve(); };
+          if (setupSignal.aborted) observeAbort();
+          else setupSignal.addEventListener("abort", observeAbort, { once: true });
+          entered.resolve();
+          await release.promise;
+        } });
+        await reached(entered.promise, restarting);
+        const stages = owner.stages().slice(1);
+        assert.equal(stages.length, 1, "B did not acquire its real stage");
+        disposing = owner.dispose();
+        await reached(aborted.promise, Promise.all([restarting, disposing]));
+        await liveStages(owner.root, stages);
+        assert.deepEqual(await json(owner.stateFile), saved, "disposal removed borrowed state before construction settled");
+        assert.deepEqual(await json(owner.exportsFile), []);
+        assert.equal(owner.current(), a, "pending B escaped as a published facade");
+        assert.equal(a.isOpen(), false);
+        assert.throws(a.query, /closed/);
+        assert.deepEqual(a.edit(1, "late"), { status: "rejected", reason: "closed" });
+        assert.deepEqual(await a.publish(), { status: "rejected", reason: "closed" });
+        release.resolve();
+        const failure: unknown = await restarting.then(
+          () => { throw new Error("cancelled construction unexpectedly published B"); }, error => error,
+        );
+        await disposing;
+        assert.equal(constructionProbes.length, firstProbe + 2);
+        const probe = constructionProbes[firstProbe + 1]; assert.ok(probe);
+        const observation = probe.read();
+        assert.ok(failure instanceof Error);
+        assert.equal(failure.cause, observation.outcome, "Host lost the actual Assembly construction outcome");
+        trace = constructionTrace(observation, setupReason);
+        assert.equal(owner.current(), a, "cancelled B became current");
+        await closedStages(owner.root, stages);
+        await noDescriptors(owner.root);
+        assert.equal(existsSync(owner.root), false, "explicit disposal left its owned root");
+        assert.deepEqual(await a.close(), complete);
+      } finally {
+        release.resolve();
+        await Promise.allSettled([restarting, disposing]);
+      }
+    }, { entry });
+  } finally { release.resolve(); signal.removeEventListener("abort", unblock); }
+  assert.ok(trace);
+  return trace;
 }
 
 export function registerNodeModularCases(getPacked: () => Packed, observations: object[]): void {
@@ -312,5 +376,11 @@ export function registerNodeModularCases(getPacked: () => Packed, observations: 
       await assert.rejects(heldDrainCase(packed, "node-modular-host-no-drain.js"), error =>
         error instanceof AssertionError && error.message.includes("resource cleanup started before raw operation settlement"));
     } finally { await rm(helper, { force: true }); await rm(host, { force: true }); }
+  });
+
+  void test("N11 disposal retains actual construction until cancellation settles", { timeout: 30000 }, async context => {
+    const trace = await constructionCase(getPacked(), context.signal);
+    observations.push({ host: "node-modular", scenario: "construction", trace });
+    assertConstructionTrace(trace, "Node");
   });
 }

@@ -1,6 +1,6 @@
 # Modular authoring: critical construction and conformance review
 
-Status: corrected plan after independent round 1, 2026-11-26. No maintained
+Status: approved after two independent review rounds, 2026-11-26. No maintained
 implementation change precedes this plan. Continue the existing bounded TEST
 reference; this is not a new production runtime or another foundation roadmap.
 
@@ -168,5 +168,6 @@ a synthetic browser substitute.
 | --- | --- |
 | Audit | Three independent source reviews completed across LMU, GM and EF. Corrected the invalid class-port interpretation against the exact CMS before implementation. No GM/EF production change selected. |
 | Plan round 1 | Three independent reviewers read 51cc72b. Accepted their correction: pending setup does not distinguish raw-run drain. Added unchanged-Promise/real-close observation, the signal-preserving omit-custody control, precise cancellation evidence, seven smoke steps per selection and exact negative-control reasons. Kept distinct captured profile IDs and existing package ownership. |
-| Plan round 2 | Pending independent review of this corrected plan before implementation. |
-| Implementation / E2E | Not started. |
+| Plan round 2 | Three independent reviewers read corrected revision 872b2534743f64d3155b0f7aa8f692722d141262 and reported GO before implementation. Their final clarification keeps expected smoke lease counts independent of measured output. No remaining plan blocker. |
+| P1 red checkpoint | After all round-two GOs, strict source checks passed. The packed Node N11 regression failed at `construction run did not observe cancellation`, after actual teardown. Its observed Assembly outcome was `failed` / `factory` / `assembly.run.factory-rejected` at `fixture/export/default`, with `Node setup was cancelled`, no cancellation metadata, and actual scope close recorded at `pending`. The analogous real-Chromium regression is included for hosted CI. No construction fix is included in this checkpoint. |
+| Implementation / E2E | P2–P5 and final exact-source E2E remain to be verified. |

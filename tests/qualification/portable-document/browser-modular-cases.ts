@@ -4,17 +4,19 @@ import { test, type TestContext } from "node:test";
 import { chromium, type Browser, type BrowserContext } from "playwright";
 import { sha256 } from "./pack-consumer.ts";
 import type { packModularConsumer } from "./pack-modular.ts";
+import { assertConstructionTrace } from "./construction-controls.ts";
+import type { ConstructionObservation } from "./consumer/construction-probe.ts";
 
 type Packed = Awaited<ReturnType<typeof packModularConsumer>>;
 type Scenario = "normal" | "held" | "cooperative" | "pending-cleanup" | "debt" | "partial"
-  | "conflict" | "denied" | "reentrant";
+  | "conflict" | "denied" | "reentrant" | "construction";
 interface Report { readonly settled: boolean; readonly complete: boolean; readonly debts: readonly unknown[] }
 interface Provider { readonly implementationId: string; readonly create: () => {
   readonly title: (revision: number) => string; readonly body: (text: string) => string;
 } }
 interface Hooks {
   readonly wait?: (signal: AbortSignal) => Promise<"ready" | "cancelled">;
-  readonly afterAcquire?: () => Promise<void>; readonly beforeRelease?: () => Promise<void>;
+  readonly afterAcquire?: (signal: AbortSignal) => Promise<void>; readonly beforeRelease?: () => Promise<void>;
 }
 interface Session {
   query(): unknown; edit(revision: number, text: string): unknown; publish(): Promise<unknown>;
@@ -51,8 +53,10 @@ async function ownedBrowser(context: TestContext): Promise<Browser> {
   return browser;
 }
 
-async function browserCase(browser: Browser, packed: Packed, scenario: Scenario, omitListenerCleanup = false) {
+async function browserCase(browser: Browser, packed: Packed, scenario: Scenario, omitListenerCleanup = false,
+  constructionEntry = "browser-modular-construction.js") {
   const assets = new Map(packed.assets);
+  const activeHostPath = scenario === "construction" ? "/hosts/dist/browser/" + constructionEntry : hostPath;
   if (omitListenerCleanup) {
     const original = assets.get(hostPath); assert.ok(original);
     const source = original.toString("utf8");
@@ -89,7 +93,10 @@ async function browserCase(browser: Browser, packed: Packed, scenario: Scenario,
     // The real browser imports independently compiled Host declarations and installed
     // public roots. These small test-facing interfaces do not import fixture source.
     const values: unknown[] = await page.evaluate(async ({ scenario, hostPath, adapterPath }) => {
-      const hostModule: { openBrowserModularHost: (provider: Provider, hooks?: Hooks) => Promise<Owner> } = await import(hostPath);
+      const hostModule: {
+        openBrowserModularHost: (provider: Provider, hooks?: Hooks) => Promise<Owner>;
+        readonly constructionProbes?: readonly { read: () => ConstructionObservation }[];
+      } = await import(hostPath);
       const providers: { plainFormatProvider: Provider; markedFormatProvider: Provider } = await import(adapterPath);
       const authorPath = "/hosts/dist/browser/author-format.js";
       const author: { authorFormatProvider: Provider } = await import(authorPath);
@@ -150,7 +157,59 @@ async function browserCase(browser: Browser, packed: Packed, scenario: Scenario,
         barrier, work.then(() => { throw new Error("operation settled before required browser barrier"); }),
       ]);
       let raw: Promise<unknown> | undefined; let restarting: Promise<unknown> | undefined;
+      let disposing: Promise<void> | undefined; let borrowedConstructionKey: string | undefined;
       try {
+        if (scenario === "construction") {
+          const probePath = "/hosts/dist/browser/construction-probe.js";
+          const probeModule: { constructionTrace: (observation: ConstructionObservation, reason: unknown) => unknown } =
+            await import(probePath);
+          const edited = a.edit(0, "reviewed draft");
+          const retainedKey = owner.stateKey + "/borrowed";
+          borrowedConstructionKey = retainedKey;
+          localStorage.setItem(retainedKey, "borrowed state survives");
+          const acquired = Promise.withResolvers<void>(); const aborted = Promise.withResolvers<void>();
+          let setupReason: unknown;
+          restarting = owner.restart(next, { afterAcquire: async setupSignal => {
+            const observeAbort = () => { setupReason = setupSignal.reason; aborted.resolve(); };
+            if (setupSignal.aborted) observeAbort();
+            else setupSignal.addEventListener("abort", observeAbort, { once: true });
+            acquired.resolve();
+            await release.promise;
+          } });
+          await reached(acquired.promise, restarting);
+          const stageId = owner.stages()[1];
+          const button = stageId === undefined ? null : document.getElementById(stageId);
+          if (!(button instanceof HTMLButtonElement)) throw new Error("B did not acquire its real export button");
+          disposing = owner.dispose();
+          await reached(aborted.promise, Promise.all([restarting, disposing]));
+          const during = {
+            edited, currentStayedA: owner.current() === a, rootConnected: owner.root.isConnected,
+            buttonConnected: button.isConnected, aOpen: a.isOpen(), state: readState(), receipts: readExports(),
+            queryClosed: queryClosed(a.query), edit: a.edit(1, "late"), publish: await a.publish(),
+          };
+          release.resolve();
+          const failure: unknown = await restarting.then(
+            () => { throw new Error("cancelled construction unexpectedly published B"); }, error => error,
+          );
+          await disposing;
+          if (hostModule.constructionProbes?.length !== 2) throw new Error("unexpected construction attempts");
+          const probe = hostModule.constructionProbes[1];
+          if (!probe) throw new Error("missing actual B construction observation");
+          const observation = probe.read();
+          if (!(failure instanceof Error) || failure.cause !== observation.outcome) {
+            throw new Error("Host lost the actual Assembly construction outcome");
+          }
+          const trace = probeModule.constructionTrace(observation, setupReason);
+          owner.output.value = "disposed construction marker";
+          button.click();
+          await a.publish();
+          return [during, trace, {
+            currentStayedA: owner.current() === a, rootConnected: owner.root.isConnected,
+            buttonConnected: button.isConnected, state: localStorage.getItem(owner.stateKey),
+            receipts: localStorage.getItem(owner.exportsKey), allStagesRemoved: allStagesRemoved(),
+            output: owner.output.value, borrowed: localStorage.getItem(retainedKey), previousClose: await a.close(),
+          }];
+        }
         if (scenario === "normal") {
           const query = a.query; const edit = a.edit; const publish = a.publish;
           const editResult = a.edit(0, "  reviewed draft  ");
@@ -217,13 +276,15 @@ async function browserCase(browser: Browser, packed: Packed, scenario: Scenario,
         return [await raw, readState(), readExports()];
       } finally {
         release.resolve(); cleanupRelease.resolve();
-        await Promise.allSettled([raw, restarting, reentrantClose]);
-        await owner.dispose();
+        await Promise.allSettled([raw, restarting, reentrantClose, disposing]);
+        try { await owner.dispose(); }
+        finally { if (borrowedConstructionKey !== undefined) localStorage.removeItem(borrowedConstructionKey); }
       }
-    }, { scenario, hostPath, adapterPath });
+    }, { scenario, hostPath: activeHostPath, adapterPath });
     await Promise.all(responses);
     for (const name of runtimeNames) assert.ok(requested.has("/packages/" + name + "/dist/index.js"), "browser did not execute " + name);
-    assert.ok(requested.has(hostPath));
+    assert.ok(requested.has(activeHostPath));
+    if (scenario === "construction") assert.ok(requested.has("/hosts/dist/browser/construction-probe.js"));
     assert.deepEqual(errors, [], "browser runtime failed independently of intended lifecycle oracle");
     return { values, browser: browser.version(), responses: requested.size };
   } finally {
@@ -250,8 +311,21 @@ function assertNormal(values: unknown[]) {
   ]);
 }
 
+function assertConstructionResult(values: unknown[]): void {
+  assert.deepEqual(values[0], {
+    edited: { status: "saved", snapshot: saved }, currentStayedA: true, rootConnected: true,
+    buttonConnected: true, aOpen: false, state: saved, receipts: [], queryClosed: true,
+    edit: closed, publish: closed,
+  }, "pending browser construction lost its native or canonical owner");
+  assert.deepEqual(values[2], {
+    currentStayedA: true, rootConnected: false, buttonConnected: false, state: null, receipts: null,
+    allStagesRemoved: true, output: "disposed construction marker", borrowed: "borrowed state survives", previousClose: complete,
+  }, "cancelled browser construction did not finish actual cleanup");
+  assertConstructionTrace(values[1], "Browser");
+}
+
 export function registerBrowserModularCases(getPacked: () => Packed, observations: object[]): void {
-  const expectations: Record<Exclude<Scenario, "normal">, unknown[]> = {
+  const expectations: Record<Exclude<Scenario, "normal" | "construction">, unknown[]> = {
     held: [[1, false, true, 0, 0, true, closed, closed, true], true, cancelled, complete, { status: "started" }, 1, false, []],
     reentrant: [[1, false, true, 0, 0, true, closed, closed, true], true, cancelled, complete, { status: "started" }, 1, false, []],
     cooperative: [cancelled, complete, 1, 0, false, []],
@@ -261,14 +335,15 @@ export function registerBrowserModularCases(getPacked: () => Packed, observation
     conflict: [{ status: "rejected", reason: "conflict" }, { revision: 1, text: "changed" }, []],
     denied: [{ status: "rejected", reason: "denied" }, { revision: 0, text: "seed" }, []],
   };
-  const scenarios: Scenario[] = ["normal", "held", "cooperative", "pending-cleanup", "debt", "partial", "conflict", "denied", "reentrant"];
+  const scenarios: Scenario[] = ["normal", "held", "cooperative", "pending-cleanup", "debt", "partial", "conflict", "denied", "reentrant", "construction"];
   for (const scenario of scenarios) {
     void test("B modular Chromium: " + scenario, { timeout: 45000 }, async context => {
       const browser = await ownedBrowser(context);
       const result = await browserCase(browser, getPacked(), scenario);
-      if (scenario === "normal") assertNormal(result.values);
-      else assert.deepEqual(result.values, expectations[scenario], "independent browser lifecycle oracle: " + scenario);
       observations.push({ host: "browser-modular", scenario, ...result });
+      if (scenario === "normal") assertNormal(result.values);
+      else if (scenario === "construction") assertConstructionResult(result.values);
+      else assert.deepEqual(result.values, expectations[scenario], "independent browser lifecycle oracle: " + scenario);
     });
   }
   void test("B native DOM oracle rejects omitted modular listener cleanup", { timeout: 45000 }, async context => {

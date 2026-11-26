@@ -7,7 +7,7 @@ import { createInvocationOwner } from "./invocation-owner.js";
 
 export interface BrowserModularHooks {
   readonly wait?: (signal: AbortSignal) => Promise<"ready" | "cancelled">;
-  readonly afterAcquire?: () => Promise<void>;
+  readonly afterAcquire?: (signal: AbortSignal) => Promise<void>;
   readonly beforeRelease?: () => Promise<void>;
 }
 export interface BrowserModularSession {
@@ -116,7 +116,7 @@ export async function openBrowserModularHost(provider: FormatProvider, initialHo
         };
         native.set(stageId, release);
         try {
-          await hooks.afterAcquire?.();
+          await hooks.afterAcquire?.(signal);
           if (signal.aborted) throw new Error("Browser setup was cancelled");
           return {
             async prepare(): Promise<ExportPreparation> {
