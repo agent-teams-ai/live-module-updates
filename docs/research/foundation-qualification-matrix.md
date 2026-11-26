@@ -58,6 +58,44 @@ Neither claim is silently inherited from successful test Hosts.
 
 ## 3. Exact portable-document result
 
+### Construction and full-root follow-up, 2026-11-26
+
+**41 tests passed, zero failures/skips/cancellations/todo**, including actual
+Chromium, at `926d474d031db630b81694c1659e435b9f016873`. The
+[critical review plan](../plans/module-authoring-critical-review-plan.md) records
+two independent plan-review rounds before implementation and the bounded changes.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Preserved pre-fix source | [`c701a6bd33475b1590c44588951e1fb358fa44c2`](https://github.com/agent-teams-ai/live-module-updates/commit/c701a6bd33475b1590c44588951e1fb358fa44c2), [run 45739825330 / job 139641793448](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45739825330/job/139641793448): 38 tests, 36 passed, exactly Node and Chromium construction failed at missing cancellation |
+| Pre-fix evidence | [Artifact 15080722133](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45739825330/artifacts/15080722133), archive SHA256 `afa8d61ba8c63301d2525aa8aaad683511820f6c48c3b87b5d6489eb1fea3136` |
+| Corrected source | [`926d474d031db630b81694c1659e435b9f016873`](https://github.com/agent-teams-ai/live-module-updates/commit/926d474d031db630b81694c1659e435b9f016873), [run 45740189099 / job 139642989290](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45740189099/job/139642989290): all 41 passed |
+| Corrected evidence | [Artifact 15080249368](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45740189099/artifacts/15080249368), archive SHA256 `6640021caf43e1d1ada1eadaeac626ba0827d826ad2f43e6cd54ecbd3220509e` |
+| Tools / native runtime | Unchanged frozen cohort: Node 24.22.3, pnpm 11.25.0, TypeScript 7.0.2, Playwright 1.65.1, actual Chrome Headless Shell 159.0.8154.6 build 1255 on Ubuntu 24.04 |
+| Review / final delivery | [PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5) retains exact final head, merge attribution and actual-main checks; later documentation revisions do not rename these executions |
+
+N11 and the browser construction case independently observe setup cancellation,
+the actual Assembly outcome, raw-run settlement before scope close, retained
+canonical state, and native FD/DOM cleanup. Signal-preserving controls omit only
+construction custody; both are rejected for the exact premature-close assertion
+after real teardown. The observer returns the same raw Promise, performs the
+real close, and lives only in separately typechecked TEST Host copies.
+
+M3 uses public Conformance with the actual root and its supplied typed API:
+seven expected steps per A/B/C provider, **21 smoke steps inside one named test**,
+nine delivery acquisitions/releases and no retained TEST leases. Its prototype
+control rejects `conformance.ports.prototype-member` after complete cleanup;
+its cleanup control rejects `conformance.smoke.failed` with three original failed
+debts and three held leases. Separate TEST reclamation preserves those reports.
+These are fake-lease observations; actual native lifetime remains independently
+qualified by the Node/Chromium cases. Handwritten wiring, profile identities,
+installed-byte controls and all prior source/authority cases remain required.
+
+The [maintained reference](../../tests/qualification/portable-document/README.md)
+still uses private fixture packages, controlled restart, trusted finite work and
+one Host at a time. No new production package, supported public plugin SPI, live
+A/B overlap, product migration or npm publication is established.
+
 ### Modular authoring checkpoint, 2026-11-26
 
 **Full scoped modular execution and independent source review passed at
@@ -70,7 +108,7 @@ integrated claim below.
 | Public-package P1 discriminator | [`7bb9aa85ef8d2867534ba59269d75e72606043c6`](https://github.com/agent-teams-ai/live-module-updates/commit/7bb9aa85ef8d2867534ba59269d75e72606043c6), [run 45721438195](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45721438195/job/139580479977) | Public Core/Assembly/Resources construction and close execute in Node and actual Chromium using the checked installed assets |
 | Earlier baseline/source checkpoint | [`bb270ead67ef3f985559ebdcfb0c7783dfce3c23`](https://github.com/agent-teams-ai/live-module-updates/commit/bb270ead67ef3f985559ebdcfb0c7783dfce3c23), [run 45726241258](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45726241258/job/139596712267) | 13 Node-runner tests passed; zero failed/skipped/cancelled. This count includes the source test's four subtests, the two P1 cases and the retained ordinary cases |
 | Earlier integrated modular result | [`1b1891679da90f13ab3e9ea2e57eb8b3e9627aa1`](https://github.com/agent-teams-ai/live-module-updates/commit/1b1891679da90f13ab3e9ea2e57eb8b3e9627aa1), [run 45727313854](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45727313854/job/139600310699) | 36 passed before the final metadata/harness corrections; retained as its own exact-source result |
-| Current corrected scoped reference | [`6b22e4b5a9ce07b9be3e861004c880e68b5b88de`](https://github.com/agent-teams-ai/live-module-updates/commit/6b22e4b5a9ce07b9be3e861004c880e68b5b88de), [run 45728069283](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268) | 36 passed, zero failed/skipped/cancelled: M1/M2, 11 Node cases, nine Chromium scenarios plus a listener-removal mutant, retained ordinary cases, P1 and source mutations |
+| Prior corrected scoped reference | [`6b22e4b5a9ce07b9be3e861004c880e68b5b88de`](https://github.com/agent-teams-ai/live-module-updates/commit/6b22e4b5a9ce07b9be3e861004c880e68b5b88de), [run 45728069283](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268) | 36 passed, zero failed/skipped/cancelled: M1/M2, 11 Node cases, nine Chromium scenarios plus a listener-removal mutant, retained ordinary cases, P1 and source mutations |
 
 The integrated result used Chrome Headless Shell **159.0.8154.6**, build **1255**,
 and retained [artifact 15074823866](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/artifacts/15074823866),

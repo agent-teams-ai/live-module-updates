@@ -5,21 +5,16 @@ keep state, authority and resource ownership explicit. This TEST reference has
 three features—Document, Format and Export—and two private packed artifacts:
 an ordinary core and an optional Get Modular adapter.
 
-The prior [full modular run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45728069283/job/139602862268)
-at `6b22e4b5a9ce07b9be3e861004c880e68b5b88de` passed **36 tests, zero
-failures/cancellations/skips**, including actual Chromium. Independent source
-reviews are complete for this bounded reference, including the peer-policy and
-browser-harness cleanup corrections.
-The [evidence matrix](../../../docs/research/foundation-qualification-matrix.md#modular-authoring-checkpoint-2026-11-26)
-owns exact results; the [reviewed plan](../../../docs/plans/module-authoring-implementation-plan.md)
-owns the delivery scope.
-
-The [critical follow-up plan](../../../docs/plans/module-authoring-critical-review-plan.md)
-adds explicit construction cancellation/custody and actual-root Conformance
-smoke. Its pre-fix [Node/Chromium run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45739825330/job/139641793448)
-at `c701a6b` passed the existing 36 tests and failed exactly the two new
-cancellation regressions. That red result is retained separately from the
-fixed implementation's pending full qualification.
+The [full modular run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45740189099/job/139642989290)
+at `926d474d031db630b81694c1659e435b9f016873` passed **41 tests, zero
+failures/cancellations/skips**, including actual Chromium. This adds construction
+cancellation/custody and complete-root smoke to the prior 36-test reference.
+The [evidence matrix](../../../docs/research/foundation-qualification-matrix.md#construction-and-full-root-follow-up-2026-11-26)
+owns exact results, including the preserved pre-fix failure;
+the [original plan](../../../docs/plans/module-authoring-implementation-plan.md)
+and [critical follow-up plan](../../../docs/plans/module-authoring-critical-review-plan.md)
+own the bounded delivery scope. Final delivery and actual-main checks are linked
+from [PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5).
 
 These are maintained qualification packages, not an npm release or public
 LMU/EF runtime. The reference uses published GM APIs and contains no EF runtime

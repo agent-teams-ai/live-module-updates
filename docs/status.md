@@ -1,7 +1,7 @@
 # Foundation status and source map
 
-Current update: 2026-11-25. The original source table retains the 2026-11-24
-consolidation observation; the delivered-fixture successor follows it. This is a
+Current update: 2026-11-26. The original source table retains the 2026-11-24
+consolidation observation; dated fixture successors follow it. This is a
 dated navigation snapshot, not a second package, admission or required-check
 registry. Re-read the linked owner before implementation, adoption or merge.
 The [delivery plan](plans/foundation-delivery-plan.md) records proposed work;
@@ -47,6 +47,19 @@ Observation are mechanisms for trusted same-process code, not a plugin SPI.
 Observation's inspected README does not claim a tested browser profile.
 
 ## Existing execution evidence
+
+### Maintained modular authoring reference, 2026-11-26
+
+The [authoring route](../tests/qualification/portable-document/README.md) now
+covers Document/Format/Export, an ordinary core, an optional GM adapter and
+independent Node/Chromium Hosts with controlled restart. The
+[canonical evidence matrix](research/foundation-qualification-matrix.md#construction-and-full-root-follow-up-2026-11-26)
+records the 41-test exact-source result, preserved construction regression,
+complete-root Conformance smoke and native cleanup controls. The
+[critical review plan](plans/module-authoring-critical-review-plan.md) records
+the reviewed scope; [PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5)
+owns the final delivery receipt. This adds bounded authoring evidence, not a
+production LMU/EF runtime or npm release.
 
 ### Delivered fixture successor, 2026-11-25
 

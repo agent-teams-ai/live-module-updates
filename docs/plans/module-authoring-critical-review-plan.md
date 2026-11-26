@@ -1,8 +1,11 @@
 # Modular authoring: critical construction and conformance review
 
-Status: approved after two independent review rounds, 2026-11-26. No maintained
-implementation change precedes this plan. Continue the existing bounded TEST
-reference; this is not a new production runtime or another foundation roadmap.
+Status: implementation, independent review and fixed-source E2E passed,
+2026-11-26. The plan and two independent review rounds preceded maintained
+implementation. Final merge and actual-main receipts belong to
+[PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5).
+Continue the existing bounded TEST reference; this is not a new production
+runtime or another foundation roadmap.
 
 ## Outcome and scope
 
@@ -155,6 +158,13 @@ delivery promise. Fitness 9/10, expected reliability in the selected finite TEST
 scope 8/10, implementation/maintenance complexity 4/10, estimate confidence 7/10.
 Scores are engineering judgments, not empirical probabilities.
 
+Measured implementation at `926d474` against the starting main: reference
+composition/ports/Hosts **+33 / -23 lines**; qualification and its source
+coordinate **+518 / -19 lines**. The test estimate was low: the independent
+construction probes and complete positive/negative smoke matrix account for
+the extra qualification code. No new runtime owner, dependency or production
+package was added. Documentation receipts are counted separately.
+
 The main risk is a construction/close self-wait cycle; tracked run settlement and
 outer failure handling must be visibly separate. A second risk is a vacuous
 smoke route that ignores the injected API; the existing Conformance guard and
@@ -172,4 +182,6 @@ a synthetic browser substitute.
 | P1 red checkpoint | After all round-two GOs, strict source checks passed. The packed Node N11 regression failed at `construction run did not observe cancellation`, after actual teardown. Its observed Assembly outcome was `failed` / `factory` / `assembly.run.factory-rejected` at `fixture/export/default`, with `Node setup was cancelled`, no cancellation metadata, and actual scope close recorded at `pending`. The analogous real-Chromium regression is included for hosted CI. No construction fix is included in this checkpoint. |
 | P1 hosted red | Exact source `c701a6bd33475b1590c44588951e1fb358fa44c2`, [run 45739825330 / job 139641793448](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45739825330/job/139641793448): 38 tests, 36 passed, exactly N11 and Chromium construction failed at the missing-cancellation assertion; zero cancellations/skips. Strict compilation, source gates and real Chromium installation passed. [Artifact 15080722133](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45739825330/artifacts/15080722133), archive SHA256 `afa8d61ba8c63301d2525aa8aaad683511820f6c48c3b87b5d6489eb1fea3136`. |
 | P2–P4 local | Both Hosts now admit raw construction through the existing invocation owner and forward cancellation; failure handling remains outside. Strictly compiled signal-preserving omit-custody controls fail only the intended ordering check. The actual root accepts the supplied typed Assembly API; A/B/C smoke expects 21 steps, 9 acquisitions/releases and zero retained leases. Arrow ports, captured profile identities and the reviewed CMS coordinate are implemented. Strict source checks and all 19 selected installed Node/contract/artifact cases passed, including the exact prototype and cleanup-debt controls. Local Chromium installation was denied by the network, so browser verification remains on the existing hosted workflow. |
-| P5 | Fixed-source hosted E2E, independent implementation review, ordinary merge and actual-main verification remain to be completed. |
+| P5 fixed-source E2E | Exact `926d474d031db630b81694c1659e435b9f016873`, [run 45740189099 / job 139642989290](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45740189099/job/139642989290): all 41 tests passed, zero failed/cancelled/skipped/todo, including actual Chromium and both signal-preserving omit-custody controls. Strict source/TypeScript and CodeQL checks passed. The [canonical matrix](../research/foundation-qualification-matrix.md#construction-and-full-root-follow-up-2026-11-26) retains both red and green artifact identities. |
+| Implementation review | Three source/evidence reviewers returned GO at `926d474`, with authorship separated: the lifecycle reviewer independently inspected the harness/probe and smoke authored by the other two reviewers; both others independently reviewed root/Host and integration changes. The earlier broad cancellation predicate is corrected. The package/source-policy reviewer also approved the final four-file documentation delta and independently confirmed the LOC counts and artifact digest. No blocking findings remain; these are engineering reviews, not formal GitHub approval or production admission. |
+| Delivery handoff | The final documentation-only head still requires its ordinary checks, followed by the normal expected-head squash merge and actual-main verification. Record those observed identities and results in [PR #5](https://github.com/agent-teams-ai/live-module-updates/pull/5); do not relabel the earlier exact-source runs. npm publication remains postponed. |
