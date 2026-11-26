@@ -14,6 +14,11 @@ earlier plan-only stopping point, while profile-specific acceptance and actual
 qualification remain obligations of the phases below. It does not select
 unrelated product defaults or authorize npm publication.
 
+The bounded L0 selection is [ADR-0001](../decisions/0001-cooperative-update-profile.md).
+It selects option A and exact fixture limits under this execution assignment;
+its common invocation recommendation still requires the real dual-target L1
+discriminator before production API acceptance.
+
 The [operation contract](../architecture/operation.md) owns the required semantics,
 the [decision register](../decisions/open-decisions.md) routes open choices to their
 owning decisions, and the

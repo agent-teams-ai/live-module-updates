@@ -1,6 +1,8 @@
 # Open implementation choices
 
-Status: proposed alternatives; no production defaults selected. The existing
+Status: product alternatives remain open; the bounded workstream B fixture
+profile is selected in [ADR-0001](0001-cooperative-update-profile.md).
+No product-wide production defaults are selected. The existing
 [EF owner decision](https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/open-decisions/OD-003-module-runtime-and-public-spi-choices.md)
 and [Q1-Q7 matrix](https://github.com/agent-teams-ai/extension-foundation/blob/f285333c5869b1f69070efee29b205da8fd19e49/docs/research/module-federation-update-boundaries-and-architecture-options-2026-11-22.md#owner-decision-matrix)
 are the source of owner direction. This page is a standalone navigation and

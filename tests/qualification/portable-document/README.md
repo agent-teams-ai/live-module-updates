@@ -64,6 +64,63 @@ Require separate omission controls for the union and interface, plus unused
 value and revision conflicts. Identical overlaps remain valid; collapsing all
 imported contracts into one mapped base can hide a conflicting duplicate ID.
 
+## Add an independently authored dependent feature
+
+[consumer/author-entry](consumer/author-entry/index.ts) supplies one application
+operation, `publishSummary()`. Its application owns a narrow publication port
+and maps a successful publication to its revision and content length. It retains
+the explicit rejection result. GM descriptors, dependency wiring and installed
+package imports stay in that feature's outer composition.
+
+Import the owner-maintained surface from the installed adapter root:
+
+```ts
+import { Export, type ExportContracts } from "@fixture/portable-document-gm";
+import type { CapabilitiesOf } from "@get-modular/assembly";
+
+export type SummaryContracts = ExportContracts;
+export interface SummaryCapabilities extends CapabilitiesOf<ExportContracts> {}
+```
+
+`Export.slot("publication", required())` connects the summary entry to the actual
+Export provider. Its composition adds one group to the public
+`documentComposition(provider)` and selects **only the summary entry as a root**.
+Document, Format and Export are constructed through that required dependency.
+The new operation needs no extra reusable descriptor, registry or lifecycle
+owner. Explicit public return types keep emitted consumer declarations nameable
+without exposing private provider capability interfaces.
+
+The [installed-feature qualification](installed-feature-cases.ts) installs the
+same packed artifacts in a second temporary directory outside the adapter build
+root. That directory contains only the consumer's maintained sources and
+installed packages; the existing M4 source-fragment root remains intact. Strict
+TypeScript 7.0.2 checks all seven authored module files and the separate TEST
+probe, emits declarations and records its actual input inventory. It checks the
+complete public union and interface against handwritten expected contracts,
+rejects independent value/revision conflicts, accepts identical overlaps and
+detects removal of the public exports. The intentional deep-import control first
+checks the hidden artifact's bytes, then requires Node's package-export error.
+
+The [one-shot caller](consumer/installed-feature-probe.ts) supplies borrowed state
+and a delivery lease, invokes the assembled entry and verifies
+`{ status: "published", revision: 7, contentLength: 22 }` alongside the exact
+delivery `"Document r7\nMiXeD text"`. Length counts JavaScript code units.
+Receiver denial produces no new delivery and stays a typed rejection. Removing
+the Export group fails actual GM preparation before factories or effects; the
+paired positive case exercises those same witnesses. The caller awaits its
+operation before closing Resources and checks both the close report and its
+own lease count.
+
+FMS/CMS covers the whole new authored module. Foundation's dependency policy
+covers its application subtree and rejects a real forbidden GM import there.
+The pinned Foundation resolver does not qualify `file:` declarations for the
+outer composition; its installed manifest, closed package inventory, compiler
+and execution own that separate proof. This addition qualifies trusted static
+Node consumption. Existing browser regression does not imply that the new
+summary entry has run in a browser. The [B0 plan](../../../docs/plans/installed-feature-consumer-plan.md)
+retains the bounded scope and acceptance requirements; exact execution receipts
+belong to the qualification matrix.
+
 ## Add or select a Format provider
 
 [consumer/author-format.ts](consumer/author-format.ts) is provider C, authored
@@ -213,7 +270,8 @@ These are fixture-local checks, not admission of the whole research repository
 to a production tooling profile. The current tool lock SHA256 is
 `93c6f1d17b2606aedb4ac2c95c8f15cb8c6f0705875f5149f60e13065993f700`.
 
-`pnpm qualify` executes standalone feature-map compiler controls, native storage
+`pnpm qualify` executes standalone feature-map and installed-dependent-feature
+compiler/runtime controls, native storage
 denial/quota cases, modular contract/artifact, Node/browser lifecycle,
 actual-root smoke, retained ordinary document, P1 and source-guard cases. A later source or package
 change needs its own exact-source result.

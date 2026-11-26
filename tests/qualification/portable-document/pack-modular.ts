@@ -41,6 +41,20 @@ async function scriptAssets(root: string, prefix: string, result: Map<string, Bu
   }
 }
 
+/** Each independently installed consumer must use its own one physical GM graph. */
+export async function verifyModularRuntimeIdentity(adapterEntry: string, consumerEntry: string): Promise<void> {
+  const resolveImport = (name: string, entry: string) => fileURLToPath(run(process.execPath,
+    ["--input-type=module", "--eval", "process.stdout.write(import.meta.resolve(" + JSON.stringify(name) + "))"],
+    dirname(entry)));
+  for (const name of runtimeNames) {
+    assert.equal(await realpath(resolveImport(name, adapterEntry)), await realpath(resolveImport(name, consumerEntry)),
+      "one physical public runtime identity: " + name);
+  }
+  const assemblyEntry = resolveImport("@get-modular/assembly", consumerEntry);
+  assert.equal(await realpath(resolveImport("@get-modular/core", assemblyEntry)),
+    await realpath(resolveImport("@get-modular/core", consumerEntry)), "Assembly uses the Host's physical Core");
+}
+
 /** Packs the optional adapter against an already packed core in a new external consumer. */
 export async function packModularConsumer(core: Awaited<ReturnType<typeof packConsumer>>) {
   const root = await mkdtemp(join(tmpdir(), "modular-document-consumer-"));
@@ -77,13 +91,36 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
     await cp(join(root, "adapter/dist"), join(staging, "dist"), { recursive: true });
     await cp(join(root, "adapter/package.json"), join(staging, "package.json"));
     const adapter = await packArtifact(staging, packagePaths(adapterSources));
-    await writeFile(join(root, "package.json"), JSON.stringify({
+    const consumerManifest = {
       ...manifest, dependencies: { ...manifest.dependencies, "@fixture/portable-document-gm": "file:" + adapter.tarball },
-    }, null, 2));
-    run("npm", installArgs, root);
-    const adapterRoot = join(root, "node_modules/@fixture/portable-document-gm");
-    await verifyPackageBytes(adapterRoot, adapter.built);
-    await verifyPackageBytes(coreRoot, core.built);
+    };
+    const expectedIntegrity = new Map([
+      ["node_modules/@fixture/portable-document", core.artifacts.tarball.integrity],
+      ["node_modules/@fixture/portable-document-gm", adapter.integrity],
+      ...published.map(item => ["node_modules/" + item.name, item.integrity] as const),
+    ]);
+    // One archive installation/identity routine serves the existing Host build
+    // and the source-free author consumer; packing still happens only once.
+    async function installInto(directory: string) {
+      await writeFile(join(directory, "package.json"), JSON.stringify(consumerManifest, null, 2));
+      run("npm", installArgs, directory);
+      const installedCore = join(directory, "node_modules/@fixture/portable-document");
+      const installedAdapter = join(directory, "node_modules/@fixture/portable-document-gm");
+      await verifyPackageBytes(installedCore, core.built);
+      await verifyPackageBytes(installedAdapter, adapter.built);
+      const lockBytes = await readFile(join(directory, "package-lock.json"));
+      const lock: unknown = JSON.parse(lockBytes.toString("utf8"));
+      assert.ok(typeof lock === "object" && lock !== null && "packages" in lock
+        && typeof lock.packages === "object" && lock.packages !== null);
+      assert.deepEqual(Object.keys(lock.packages).sort(), ["", ...inventory].sort(), "closed modular consumer dependency inventory");
+      for (const [path, integrity] of expectedIntegrity) {
+        const entry: unknown = Reflect.get(lock.packages, path);
+        assert.ok(typeof entry === "object" && entry !== null && "integrity" in entry);
+        assert.equal(entry.integrity, integrity, "installed archive binding: " + path);
+      }
+      return { coreRoot: installedCore, adapterRoot: installedAdapter, lockSha256: sha256(lockBytes) };
+    }
+    const { adapterRoot } = await installInto(root);
 
     const adapterManifest: unknown = JSON.parse(await readFile(join(adapterRoot, "package.json"), "utf8"));
     assert.ok(typeof adapterManifest === "object" && adapterManifest !== null);
@@ -94,21 +131,6 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
     assert.deepEqual(Reflect.get(adapterManifest, "peerDependencies"),
       Object.fromEntries(Object.entries(exactRuntime).map(([name, version]) => [name, "^" + version])), "CMS compatible GM peers");
     assert.deepEqual(Reflect.get(adapterManifest, "devDependencies"), exactRuntime, "CMS exact adapter test pins");
-
-    const lock: unknown = JSON.parse(await readFile(join(root, "package-lock.json"), "utf8"));
-    assert.ok(typeof lock === "object" && lock !== null && "packages" in lock
-      && typeof lock.packages === "object" && lock.packages !== null);
-    assert.deepEqual(Object.keys(lock.packages).sort(), ["", ...inventory].sort(), "closed modular consumer dependency inventory");
-    const expectedIntegrity = new Map([
-      ["node_modules/@fixture/portable-document", core.artifacts.tarball.integrity],
-      ["node_modules/@fixture/portable-document-gm", adapter.integrity],
-      ...published.map(item => ["node_modules/" + item.name, item.integrity] as const),
-    ]);
-    for (const [path, integrity] of expectedIntegrity) {
-      const entry: unknown = Reflect.get(lock.packages, path);
-      assert.ok(typeof entry === "object" && entry !== null && "integrity" in entry);
-      assert.equal(entry.integrity, integrity, "installed archive binding: " + path);
-    }
 
     const requiredSources = ["node-modular-host.ts", "browser-modular-host.ts",
       "invocation-owner.ts", "author-format.ts", "composition-contract.ts", "composition-smoke.ts", "construction-probe.ts"];
@@ -141,16 +163,7 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
 
     const adapterEntry = join(adapterRoot, "dist/index.js");
     const hostEntry = join(root, "dist/node/node-modular-host.js");
-    const resolveImport = (name: string, entry: string) => fileURLToPath(run(process.execPath,
-      ["--input-type=module", "--eval", "process.stdout.write(import.meta.resolve(" + JSON.stringify(name) + "))"],
-      dirname(entry)));
-    for (const name of runtimeNames) {
-      assert.equal(await realpath(resolveImport(name, adapterEntry)), await realpath(resolveImport(name, hostEntry)),
-        "one physical public runtime identity: " + name);
-    }
-    const assemblyEntry = resolveImport("@get-modular/assembly", hostEntry);
-    assert.equal(await realpath(resolveImport("@get-modular/core", assemblyEntry)),
-      await realpath(resolveImport("@get-modular/core", hostEntry)), "Assembly uses the Host's physical Core");
+    await verifyModularRuntimeIdentity(adapterEntry, hostEntry);
     const assets = new Map<string, Buffer>();
     for (const name of runtimeNames) {
       await scriptAssets(join(root, "node_modules", name), "/packages/" + name, assets);
@@ -169,7 +182,7 @@ export async function packModularConsumer(core: Awaited<ReturnType<typeof packCo
     await cp(join(root, "package-lock.json"), join(evidenceRoot, "modular-consumer-package-lock.json"));
     await cp(join(adapterRoot, "dist"), join(evidenceRoot, "adapter"), { recursive: true });
     await cp(join(root, "dist"), join(evidenceRoot, "modular-hosts"), { recursive: true });
-    return { root, coreRoot, adapterRoot, adapterBuilt: adapter.built, assets, artifacts,
+    return { root, coreRoot, adapterRoot, adapterBuilt: adapter.built, assets, artifacts, installInto,
       dispose: () => rm(root, { recursive: true, force: true }) };
   } catch (error) {
     await rm(root, { recursive: true, force: true });

@@ -14,38 +14,42 @@ const contractPath = (feature: Feature) => "features/" + feature + "/composition
 const contractPaths = (["document", "format", "export"] as const).map(contractPath);
 const fragmentProgram = 'import type { ExportCapabilities } from "./features/export/composition/export.contracts.js";\n'
   + "export type CheckedExport = ExportCapabilities;\n";
-const parityProgram = [
-  'import type { ExportCapabilities, ExportContracts } from "./features/export/composition/export.contracts.js";',
-  'import type { CapabilitiesOf } from "@get-modular/assembly";',
-  'import type { DocumentCommands, DocumentPort, ExportCommands, ExportDeliveryPort, FormatPort } from "@fixture/portable-document";',
-  'import type { SetupSpec } from "@get-modular/resources";',
-  "type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;",
-  "type Assert<T extends true> = T;",
-  "type ExpectedValues = {",
-  '  readonly "fixture/document": DocumentCommands;',
-  '  readonly "fixture/document/state": DocumentPort;',
-  '  readonly "fixture/format": FormatPort;',
-  '  readonly "fixture/export": ExportCommands;',
-  '  readonly "fixture/export/delivery": SetupSpec<ExportDeliveryPort>;',
-  "};",
-  "type ExpectedTokens = {",
-  '  readonly "fixture/document": "fixture/document/r1";',
-  '  readonly "fixture/document/state": "fixture/document/state/r1";',
-  '  readonly "fixture/format": "fixture/format/r1";',
-  '  readonly "fixture/export": "fixture/export/r1";',
-  '  readonly "fixture/export/delivery": "fixture/export/delivery/r1";',
-  "};",
-  'type ExpectedCompatibility = {[K in keyof ExpectedValues]: {readonly family: "exact"; readonly familyVersion: 1; readonly token: ExpectedTokens[K]}};',
-  "type UnionMap = CapabilitiesOf<ExportContracts>;",
-  'type TransitiveState = ExportCapabilities["fixture/document/state"];',
-  "type InterfaceKeys = Assert<Equal<keyof ExportCapabilities, keyof ExpectedValues>>;",
-  'type InterfaceValues = Assert<Equal<{[K in keyof ExportCapabilities]: ExportCapabilities[K]["value"]}, ExpectedValues>>;',
-  'type InterfaceCompatibility = Assert<Equal<{[K in keyof ExportCapabilities]: ExportCapabilities[K]["compatibility"]}, ExpectedCompatibility>>;',
-  "type UnionKeys = Assert<Equal<keyof UnionMap, keyof ExpectedValues>>;",
-  'type UnionValues = Assert<Equal<{[K in keyof UnionMap]: UnionMap[K]["value"]}, ExpectedValues>>;',
-  'type UnionCompatibility = Assert<Equal<{[K in keyof UnionMap]: UnionMap[K]["compatibility"]}, ExpectedCompatibility>>;',
-  "type SurfaceParity = Assert<Equal<ExportCapabilities, UnionMap>>;",
-].join("\n") + "\n";
+/** One handwritten oracle qualifies both source fragments and the installed public entry. */
+export function featureContractParityProgram(contractImport: string): string {
+  return [
+    'import type { ExportCapabilities, ExportContracts } from ' + JSON.stringify(contractImport) + ';',
+    'import type { CapabilitiesOf } from "@get-modular/assembly";',
+    'import type { DocumentCommands, DocumentPort, ExportCommands, ExportDeliveryPort, FormatPort } from "@fixture/portable-document";',
+    'import type { SetupSpec } from "@get-modular/resources";',
+    "type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;",
+    "type Assert<T extends true> = T;",
+    "type ExpectedValues = {",
+    '  readonly "fixture/document": DocumentCommands;',
+    '  readonly "fixture/document/state": DocumentPort;',
+    '  readonly "fixture/format": FormatPort;',
+    '  readonly "fixture/export": ExportCommands;',
+    '  readonly "fixture/export/delivery": SetupSpec<ExportDeliveryPort>;',
+    "};",
+    "type ExpectedTokens = {",
+    '  readonly "fixture/document": "fixture/document/r1";',
+    '  readonly "fixture/document/state": "fixture/document/state/r1";',
+    '  readonly "fixture/format": "fixture/format/r1";',
+    '  readonly "fixture/export": "fixture/export/r1";',
+    '  readonly "fixture/export/delivery": "fixture/export/delivery/r1";',
+    "};",
+    'type ExpectedCompatibility = {[K in keyof ExpectedValues]: {readonly family: "exact"; readonly familyVersion: 1; readonly token: ExpectedTokens[K]}};',
+    "type UnionMap = CapabilitiesOf<ExportContracts>;",
+    'type TransitiveState = ExportCapabilities["fixture/document/state"];',
+    "type InterfaceKeys = Assert<Equal<keyof ExportCapabilities, keyof ExpectedValues>>;",
+    'type InterfaceValues = Assert<Equal<{[K in keyof ExportCapabilities]: ExportCapabilities[K]["value"]}, ExpectedValues>>;',
+    'type InterfaceCompatibility = Assert<Equal<{[K in keyof ExportCapabilities]: ExportCapabilities[K]["compatibility"]}, ExpectedCompatibility>>;',
+    "type UnionKeys = Assert<Equal<keyof UnionMap, keyof ExpectedValues>>;",
+    'type UnionValues = Assert<Equal<{[K in keyof UnionMap]: UnionMap[K]["value"]}, ExpectedValues>>;',
+    'type UnionCompatibility = Assert<Equal<{[K in keyof UnionMap]: UnionMap[K]["compatibility"]}, ExpectedCompatibility>>;',
+    "type SurfaceParity = Assert<Equal<ExportCapabilities, UnionMap>>;",
+  ].join("\n") + "\n";
+}
+const parityProgram = featureContractParityProgram("./features/export/composition/export.contracts.js");
 
 function replaceSource(sources: Sources, feature: Feature, anchor: string, replacement: string): void {
   const path = contractPath(feature);
