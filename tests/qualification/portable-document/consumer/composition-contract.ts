@@ -63,18 +63,23 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 /** This probe is an installed consumer of public metadata and conformance tools only. */
 export async function verifyCompositionContracts() {
   const cases = [
-    { provider: plainFormatProvider, identity: "fixture/format/plain", title: "Document r7", body: "MiXeD text" },
-    { provider: markedFormatProvider, identity: "fixture/format/marked", title: "[Document r7]", body: "> MiXeD text" },
-    { provider: authorFormatProvider, identity: "fixture/format/author", title: "Author revision 7", body: "By author: MiXeD text" },
+    { provider: plainFormatProvider, identity: "fixture/format/plain",
+      profile: "fixture/portable-document/fixture/format/plain", title: "Document r7", body: "MiXeD text" },
+    { provider: markedFormatProvider, identity: "fixture/format/marked",
+      profile: "fixture/portable-document/fixture/format/marked", title: "[Document r7]", body: "> MiXeD text" },
+    { provider: authorFormatProvider, identity: "fixture/format/author",
+      profile: "fixture/portable-document/fixture/format/author", title: "Author revision 7", body: "By author: MiXeD text" },
   ];
   let contractCases = 0;
   for (const expected of cases) {
     const definition = documentComposition(expected.provider);
+    assert.equal(definition.profileId, expected.profile);
     const declarations = declarationsOf(definition);
     checkNamespaces({ namespace: "fixture", declarations });
     const preparation = await prepareDocumentComposition(expected.provider);
     assert.equal(preparation.status, "prepared");
     if (preparation.status !== "prepared") throw new Error("fixture.contract.prepare-failed");
+    assert.equal(preparation.composition.plan.profileId, expected.profile);
     checkWiring(preparation.composition, [wiring(expected.identity)], { declarations });
     const registered: { readonly name: string; readonly run: () => Promise<void> }[] = [];
     runContractSuite(formatSuite, {

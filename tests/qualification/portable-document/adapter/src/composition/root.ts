@@ -1,4 +1,4 @@
-import { assemblyFor } from "@get-modular/assembly";
+import { assemblyFor, type Assembly } from "@get-modular/assembly";
 import type { DocumentCapabilities } from "../features/document/composition/document.contracts.js";
 import { documentGroup, documentModule } from "../features/document/composition/document.group.js";
 import { documentStateInput } from "../features/document/composition/document.inputs.js";
@@ -14,7 +14,7 @@ export interface PortableDocumentCapabilities extends DocumentCapabilities, Form
 export function documentComposition(provider: FormatProvider) {
   const format = createFormatGroup(provider);
   return {
-    profileId: "fixture/portable-document",
+    profileId: "fixture/portable-document/" + format.module.declaration.implementationId,
     modules: [documentGroup, format.group, exportGroup] as const,
     roots: { document: documentModule, format: format.module, export: exportModule },
     inputs: { state: documentStateInput, delivery: exportDeliveryInput },
@@ -22,8 +22,11 @@ export function documentComposition(provider: FormatProvider) {
 }
 
 /** The Host supplies and retains its Resources scope, run inputs and drain policy. */
-export function prepareDocumentComposition(provider: FormatProvider) {
-  return assemblyFor<PortableDocumentCapabilities>().prepare(documentComposition(provider));
+export function prepareDocumentComposition(
+  provider: FormatProvider,
+  api: Assembly<PortableDocumentCapabilities> = assemblyFor<PortableDocumentCapabilities>(),
+) {
+  return api.prepare(documentComposition(provider));
 }
 
 export { plainFormatProvider, markedFormatProvider } from "../features/format/composition/format.group.js";

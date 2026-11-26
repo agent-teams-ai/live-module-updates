@@ -98,6 +98,22 @@ test("M2 optional adapter artifact oracle rejects changed nested bytes and extra
   await verifyPackageBytes(modular.coreRoot, packed.built);
 });
 
+test("M3 actual public composition root passes complete smoke and rejects invalid ports and cleanup", async () => {
+  const entry = pathToFileURL(join(modular.root, "dist/node/composition-smoke.js")).href;
+  const { verifyCompositionSmoke }: { verifyCompositionSmoke: () => Promise<unknown> } = await import(entry);
+  const result = await verifyCompositionSmoke();
+  assert.deepEqual(result, {
+    providers: ["fixture/format/plain", "fixture/format/marked", "fixture/format/author"],
+    smokeSteps: 21, acquisitions: 9, releases: 9, remainingLeases: 0,
+    prototype: { code: "conformance.ports.prototype-member", steps: 1,
+      acquisitions: 1, releases: 1, remainingLeases: 0 },
+    cleanup: { code: "conformance.smoke.failed", steps: 7, failedDebts: 3,
+      acquisitions: 3, cleanupAttempts: 3, releases: 0, heldLeases: 3,
+      reclaimedLeases: 3, remainingLeases: 0 },
+  });
+  observations.push({ profile: "modular-composition-smoke", result });
+});
+
 registerNodeModularCases(() => modular, observations);
 registerBrowserModularCases(() => modular, observations);
 
