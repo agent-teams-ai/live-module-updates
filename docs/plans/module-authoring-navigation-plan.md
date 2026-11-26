@@ -1,6 +1,6 @@
 # Modular authoring navigation
 
-Date: 2026-11-26. Status: reviewed; scoped documentation delivery.
+Date: 2026-11-26. Status: reviewed navigation plan.
 
 ## Goal and scope
 
@@ -63,4 +63,7 @@ runtime qualification or delivery-time guarantee.
   CMS/FMS authority, historical plan wording and normal postmerge check selection.
 - Round 2: the same three independent reviewers re-read the revised plan and
   found no blocker or necessary additional scope before guidance edits.
-- Delivery: in progress; exact PR/check receipts belong in the PR descriptions.
+- Delivery receipts: [LMU #7](https://github.com/agent-teams-ai/live-module-updates/pull/7),
+  [Get Modular #257](https://github.com/agent-teams-ai/get-modular/pull/257) and
+  [organization #440](https://github.com/agent-teams-ai/.github/pull/440).
+  Their descriptions own exact-head reviews, checks and merge observations.
