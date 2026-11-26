@@ -279,6 +279,43 @@ proves witness sensitivity; B6 must mutate the actual operation path or use a
 genuine faulty adapter with the same independent oracle. These limits remain
 explicit when the candidate is refined into production source.
 
+## 3b. First private production checkpoint
+
+The first substantive implementation and complete native source gates are
+published at
+[`97e051b73f42e485ca5479ecb06444edd548097c`](https://github.com/agent-teams-ai/live-module-updates/commit/97e051b73f42e485ca5479ecb06444edd548097c).
+[ADR-0002](../decisions/0002-production-source-adoption.md) owns the FMS/quality
+adoption and the [usage guide](../architecture/cooperative-operation-usage.md)
+owns the implemented authoring contract.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Native library gate | [Run 45909011622 / job 140212574365](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011622/job/140212574365), complete `pnpm check`: **38 passed**, zero failed/cancelled/skipped |
+| Source checks | Actual FMS, strict root/portable/tool/test compilers, unchanged typed and maintainability presets, build, full Foundation capabilities, development-only and registry assertions passed |
+| Ordinary consumer | Artifact-only installation with exactly the LMU package; ES-only declarations, useful result `42`, refusal after close and retained original work/cleanup |
+| Optional Resources consumer | Separate artifact-only installation with LMU and Resources 0.2.2; native setup, useful result `7`, exact cleanup and original close identity |
+| Package bytes | Tarball SHA256 `c5524d0e0926b5a3d3b8572e034fab3684cb48e77225474d0ee230c4028b2acb`; packed/installed files and both integrity receipts checked |
+| Raw receipt | [Unchanged CI consumer report](evidence/cooperative-operation-20261126/97e051b-packed-consumers.json) |
+| Archive | [Artifact 15159337684](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011622/artifacts/15159337684); downloaded ZIP independently checked against `872546e025c582b337ccce9a30ca28dc5ba405ed9696c6c81d092222537f69c5` |
+| Central configuration | [Run 45909012055 / job 140212576069](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909012055/job/140212576069) passed with `configured_not_qualified`, `issues: []`; this is not managed Docs, registration or remote-protection qualification |
+
+The 38-test total includes FMS controls, production feature tests and the two
+clean-consumer paths in one runner test. Chromium was installed by this job, but
+the new production artifact was not yet executed there. Its actual browser
+operation belongs to B6; the earlier native L1 result is not substituted for it.
+The existing B0 browser regression also passed on this source in
+[run 45909011570](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011570).
+
+The unchanged L1 precursor failed **before execution** at this same source in
+[run 45909011563 / job 140212574092](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011563/job/140212574092).
+The newly introduced parent workspace captured its dependency installation,
+leaving the fixture-local compiler absent. The
+[exact failing-step excerpt](evidence/cooperative-operation-20261126/97e051b-l1-install-failure.log)
+and [original artifact 15158838139](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011563/artifacts/15158838139)
+preserve this failure. Its repair gives the precursor its own empty workspace,
+preserving the exact frozen graph and checks until B6 supersedes it. No native
+L1 result is claimed for that failed run.
+
 ## 4. Independent oracles, negative controls and reset
 
 For each additional claim, record the useful result and a failure that would

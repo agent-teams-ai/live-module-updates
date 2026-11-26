@@ -1,0 +1,62 @@
+{
+  "source": "97e051b73f42e485ca5479ecb06444edd548097c",
+  "node": "v24.22.3",
+  "compiler": "7.0.2",
+  "artifact": {
+    "filename": "live-module-updates-0.1.0.tgz",
+    "sha256": "c5524d0e0926b5a3d3b8572e034fab3684cb48e77225474d0ee230c4028b2acb",
+    "integrity": "sha512-VQtYXzWqvlTO+VvqBh5LGwla6+AJTKsocx2CbGTwhIUxPO1qVql/+iKgDmpnKnVWG8RGEJ2BxPQdCvf9AR3cNQ==",
+    "files": [
+      "LICENSE",
+      "README.md",
+      "dist/features/update-operation/adapters/resources.d.ts",
+      "dist/features/update-operation/adapters/resources.js",
+      "dist/features/update-operation/application/cleanup-report.d.ts",
+      "dist/features/update-operation/application/cleanup-report.js",
+      "dist/features/update-operation/application/generation.d.ts",
+      "dist/features/update-operation/application/generation.js",
+      "dist/features/update-operation/application/invocation.d.ts",
+      "dist/features/update-operation/application/invocation.js",
+      "dist/features/update-operation/application/models.d.ts",
+      "dist/features/update-operation/application/models.js",
+      "dist/features/update-operation/application/operation-state.d.ts",
+      "dist/features/update-operation/application/operation-state.js",
+      "dist/features/update-operation/application/ports/adoption.d.ts",
+      "dist/features/update-operation/application/ports/adoption.js",
+      "dist/features/update-operation/application/ports/authority.d.ts",
+      "dist/features/update-operation/application/ports/authority.js",
+      "dist/features/update-operation/application/ports/invocation.d.ts",
+      "dist/features/update-operation/application/ports/invocation.js",
+      "dist/features/update-operation/application/ports/lifetime.d.ts",
+      "dist/features/update-operation/application/ports/lifetime.js",
+      "dist/features/update-operation/application/ports/preparation.d.ts",
+      "dist/features/update-operation/application/ports/preparation.js",
+      "dist/features/update-operation/application/update-operation.d.ts",
+      "dist/features/update-operation/application/update-operation.js",
+      "dist/features/update-operation/composition/create-update-runtime.d.ts",
+      "dist/features/update-operation/composition/create-update-runtime.js",
+      "dist/index.d.ts",
+      "dist/index.js",
+      "dist/resources.d.ts",
+      "dist/resources.js",
+      "package.json"
+    ]
+  },
+  "peer": {
+    "package": "@get-modular/resources",
+    "version": "0.2.2",
+    "sha256": "1752fe321b8f816933ad0bdd07d8b27511449e9fa98d88a318378a45dc227381"
+  },
+  "rootLockSha256": "3550572edd004a4b59bd1303267af954419b0c3edfad3dc1df9b1790b8927473",
+  "observations": {
+    "ordinary": {
+      "value": 42,
+      "refusedAfterClose": true,
+      "releases": 1
+    },
+    "resources": {
+      "value": 7,
+      "closed": true
+    }
+  }
+}

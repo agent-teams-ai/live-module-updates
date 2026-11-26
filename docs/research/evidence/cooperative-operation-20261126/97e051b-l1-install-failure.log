@@ -1,0 +1,33 @@
+2026-11-26T23:07:32.5340575Z ##[group]Run set -euo pipefail
+2026-11-26T23:07:32.5340937Z [36;1mset -euo pipefail[0m
+2026-11-26T23:07:32.5341233Z [36;1mmkdir -p .qualification/evidence/inputs[0m
+2026-11-26T23:07:32.5341575Z [36;1msource_sha="$(git rev-parse HEAD)"[0m
+2026-11-26T23:07:32.5341997Z [36;1mprintf 'QUALIFICATION_SOURCE_SHA=%s\n' "$source_sha" >> "$GITHUB_ENV"[0m
+2026-11-26T23:07:32.5342994Z [36;1mprintf 'source=%s\nevent=%s\npr_head=%s\npr_base=%s\nrun=%s\nattempt=%s\n' "$source_sha" "$GITHUB_SHA" "$QUALIFICATION_PR_HEAD" "$QUALIFICATION_PR_BASE" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > .qualification/evidence/run.txt[0m
+2026-11-26T23:07:32.5343904Z [36;1mtest "$(node --version)" = v24.22.3[0m
+2026-11-26T23:07:32.5344211Z [36;1mtest "$(pnpm --version)" = 11.25.0[0m
+2026-11-26T23:07:32.5344691Z [36;1mgit ls-files -z -- . | sort -z | xargs -0 sha256sum > .qualification/evidence/input-sha256.txt[0m
+2026-11-26T23:07:32.5345540Z [36;1msha256sum "$GITHUB_WORKSPACE/.github/workflows/update-operation-qualification.yml" >> .qualification/evidence/input-sha256.txt[0m
+2026-11-26T23:07:32.5346424Z [36;1mcp "$GITHUB_WORKSPACE/.github/workflows/update-operation-qualification.yml" .qualification/evidence/inputs/[0m
+2026-11-26T23:07:32.5347601Z [36;1mpnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies 2>&1 | tee .qualification/evidence/install.log[0m
+2026-11-26T23:07:32.5348331Z [36;1mtest "$(node_modules/.bin/tsc --version)" = 'Version 7.0.2'[0m
+2026-11-26T23:07:32.5350144Z [36;1mnode --input-type=module -e 'import fs from "node:fs"; import assert from "node:assert/strict"; const expected=JSON.parse(fs.readFileSync("package.json","utf8")).devDependencies; const actual=Object.fromEntries(Object.keys(expected).map(name=>[name,JSON.parse(fs.readFileSync(`node_modules/${name}/package.json`,"utf8")).version])); assert.deepEqual(actual,expected); fs.writeFileSync(".qualification/evidence/tool-versions.json",JSON.stringify(actual,null,2)+"\n");'[0m
+2026-11-26T23:07:32.5406120Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-26T23:07:32.5406466Z env:
+2026-11-26T23:07:32.5407019Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-11-26T23:07:32.5407449Z   QUALIFICATION_PR_HEAD: 97e051b73f42e485ca5479ecb06444edd548097c
+2026-11-26T23:07:32.5407873Z   QUALIFICATION_PR_BASE: a780597acd3fcae2936a2a258241f1da7ce62f94
+2026-11-26T23:07:32.5408206Z ##[endgroup]
+2026-11-26T23:07:33.7498900Z ? Verifying lockfile against supply-chain policies (162 entries)...
+2026-11-26T23:07:33.8538755Z ../../..                                 | Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-11-26T23:07:33.8733202Z ../../..                                 |  +62 ++++++
+2026-11-26T23:07:34.2415683Z Packages are hard linked from the content-addressable store to the virtual store.
+2026-11-26T23:07:34.2418034Z   Content-addressable store is at: /home/runner/setup-pnpm/node_modules/.bin/store/v11
+2026-11-26T23:07:34.2420179Z   Virtual store is at:             ../../../node_modules/.pnpm
+2026-11-26T23:07:34.8722198Z ../../..                                 | Progress: resolved 62, reused 0, downloaded 48, added 9
+2026-11-26T23:07:35.8768553Z ../../..                                 | Progress: resolved 62, reused 0, downloaded 60, added 60
+2026-11-26T23:07:35.9978781Z ../../..                                 | Progress: resolved 62, reused 0, downloaded 62, added 62, done
+2026-11-26T23:07:36.4288679Z ✓ Lockfile passes supply-chain policies (162 entries in 2.6s)
+2026-11-26T23:07:36.4784084Z Done in 3.2s using pnpm v11.25.0
+2026-11-26T23:07:36.5569295Z /home/runner/work/_temp/93e9409e-4d42-4eda-b0b0-3e546291433f.sh: line 12: node_modules/.bin/tsc: No such file or directory
+2026-11-26T23:07:36.5586372Z ##[error]Process completed with exit code 1.

@@ -41,7 +41,7 @@ export interface Attempt<Args extends readonly unknown[], Result> extends Owner<
   observationIssue: unknown;
 }
 
-export function cleanupSettled<Args extends readonly unknown[], Result>(owner: Owner<Args, Result> | undefined): boolean {
+export function originalCleanupObserved<Args extends readonly unknown[], Result>(owner: Owner<Args, Result> | undefined): boolean {
   if (!owner?.control) {return true;}
   const original = owner.control.snapshot().cleanup.original;
   return original.status === "settled" || original.status === "failed";
@@ -84,7 +84,7 @@ export function terminal<Args extends readonly unknown[], Result>(attempt: Attem
   if (attempt.pendingPreparation || attempt.pendingPublication || attempt.planning.status === "pending"
     || attempt.preparation.status === "pending" || attempt.adoption.status === "pending") {return false;}
   if (attempt.unregisteredCleanup && attempt.unregisteredCleanup.original.status !== "settled" && attempt.unregisteredCleanup.original.status !== "failed") {return false;}
-  return cleanupSettled(attempt.publication.status === "committed" ? attempt.predecessor : attempt);
+  return originalCleanupObserved(attempt.publication.status === "committed" ? attempt.predecessor : attempt);
 }
 
 /** One complete update use case. Host ports own authority and native resource semantics. */

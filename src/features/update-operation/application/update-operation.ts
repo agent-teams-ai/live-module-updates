@@ -11,7 +11,7 @@ import type { CleanupState, GenerationControl } from "./ports/lifetime.ts";
 import type { CompatibilityPort, PreparationPort } from "./ports/preparation.ts";
 import type { AdoptionProbe } from "./ports/adoption.ts";
 export type { AdoptionProbe } from "./ports/adoption.ts";
-import { cleanupSettled, snapshot, terminal, type Attempt, type OperationOwner, type Owner } from "./operation-state.ts";
+import { originalCleanupObserved, snapshot, terminal, type Attempt, type OperationOwner, type Owner } from "./operation-state.ts";
 
 export interface UpdateCoordinatorOptions<Args extends readonly unknown[], Result> {
   readonly domainId: string;
@@ -79,6 +79,9 @@ function inspect<Args extends readonly unknown[], Result>(coordinator: Operation
 
 function refresh<Args extends readonly unknown[], Result>(coordinator: OperationOwner<Args, Result>): void {
   const { attempts } = coordinator;
+  // Several native closes may settle in the same turn. Reclaim every eligible
+  // exact owner before publishing a terminal snapshot, regardless of callback order.
+  for (const owner of owners(coordinator)) { forget(coordinator, owner); }
   for (const attempt of attempts.values()) {
     if (!attempt.settled && terminal(attempt)) {
       attempt.settled = true;
@@ -86,7 +89,7 @@ function refresh<Args extends readonly unknown[], Result>(coordinator: Operation
     }
   }
   if (!coordinator.closeFlight) {return;}
-  if (owners(coordinator).some(owner => owner.pendingPreparation || owner.pendingPublication || !cleanupSettled(owner))) {return;}
+  if (owners(coordinator).some(owner => owner.pendingPreparation || owner.pendingPublication || !originalCleanupObserved(owner))) {return;}
   if ([...attempts.values()].some(attempt => attempt.unregisteredCleanup?.original.status === "pending")) {return;}
   const current = inspect(coordinator);
   const complete = owners(coordinator).every(owner => owner.control?.snapshot().retained !== true)

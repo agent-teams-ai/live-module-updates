@@ -15,9 +15,14 @@ qualification remain obligations of the phases below. It does not select
 unrelated product defaults or authorize npm publication.
 
 The bounded L0 selection is [ADR-0001](../decisions/0001-cooperative-update-profile.md).
-It selects option A and exact fixture limits under this execution assignment;
-its common invocation recommendation still requires the real dual-target L1
-discriminator before production API acceptance.
+It selects option A and exact fixture limits under this execution assignment.
+The actual dual-target L1 discriminator passed at `2f7392f`; the first private
+implementation and clean consumers passed the native library route at `97e051b`.
+The [qualification matrix](../research/foundation-qualification-matrix.md#3b-first-private-production-checkpoint)
+owns those exact results and limits. The complete packed Node/Chromium operation
+and the EF join still have their distinct B6/B7 exits below. The
+[usage guide](../architecture/cooperative-operation-usage.md) records the actual
+early authoring surface and Host obligations.
 
 The [operation contract](../architecture/operation.md) owns the required semantics,
 the [decision register](../decisions/open-decisions.md) routes open choices to their
