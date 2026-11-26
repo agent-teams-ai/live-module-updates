@@ -31,8 +31,8 @@ const cases: readonly {
   },
   {
     name: "new source cannot evade feature and descriptor placement", newFile: true,
-    path: "core/features/document/rogue.contracts.ts", append: "export const stray = 1;\n",
-    dependencyRule: "unclassified-source-file", fms: "entry-unmapped", cms: "descriptor-path",
+    path: "core/features/rogue.contracts.ts", append: "export const stray = 1;\n",
+    dependencyRule: "unclassified-source-file", fms: "container-file", cms: "descriptor-path",
   },
 ];
 

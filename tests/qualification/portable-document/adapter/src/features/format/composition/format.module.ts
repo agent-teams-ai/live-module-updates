@@ -11,7 +11,7 @@ export const markedFormatProvider = {
 } satisfies FormatProvider;
 
 export function createFormatModule({ implementationId, create }: FormatProvider) {
-  return implement<FormatCapabilities>()(declareFormatProvider(implementationId), () => {
+  return implement<FormatCapabilities>()(declareFormatProvider(implementationId), async () => {
     const port = create();
     return { instance: port, capabilities: { "fixture/format": port } };
   });

@@ -5,6 +5,6 @@ export const authorFormatProvider: FormatProvider = {
   implementationId: "fixture/format/author",
   create: () => ({
     title: revision => "Author revision " + revision,
-    body: text => text.toLowerCase(),
+    body: text => "By author: " + text,
   }),
 };

@@ -5,8 +5,13 @@
   "type": "module",
   "description": "Disposable qualification fixture; not an LMU or plugin runtime package",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
-  "files": ["dist/index.js", "dist/index.d.ts"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false
 }
