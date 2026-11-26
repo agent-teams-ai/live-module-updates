@@ -1,6 +1,6 @@
 # Modular authoring navigation
 
-Date: 2026-11-26. Status: revised plan for the second review, before edits.
+Date: 2026-11-26. Status: reviewed; scoped documentation delivery.
 
 ## Goal and scope
 
@@ -61,5 +61,6 @@ runtime qualification or delivery-time guarantee.
 
 - Round 1: three independent reviewers found no blocker. Clarified the accepted
   CMS/FMS authority, historical plan wording and normal postmerge check selection.
-- Round 2: pending.
-- Delivery: pending; exact PR/check receipts belong in the PR descriptions.
+- Round 2: the same three independent reviewers re-read the revised plan and
+  found no blocker or necessary additional scope before guidance edits.
+- Delivery: in progress; exact PR/check receipts belong in the PR descriptions.
