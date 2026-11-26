@@ -6,7 +6,8 @@ import type {
 
 interface Work<Result> {
   acceptingChildren: boolean;
-  readonly children: Promise<InvocationOutcome<Result>>[];
+  readonly children: Set<Promise<InvocationOutcome<Result>>>;
+  parentChildren: Set<Promise<InvocationOutcome<Result>>> | undefined;
   completion: ReturnType<typeof Promise.withResolvers<InvocationOutcome<Result>>> | undefined;
   raw: Promise<Result> | undefined;
 }
@@ -81,10 +82,10 @@ class GenerationOwner<Args extends readonly unknown[], Result> {
     if (!this.#entry) { return Promise.resolve({ status: "refused", reason: "generation-unavailable" }); }
     if (this.#sharedWork.size >= this.#maxActiveWork) { return Promise.resolve({ status: "refused", reason: "work-capacity" }); }
     const completion = Promise.withResolvers<InvocationOutcome<Result>>();
-    const record: Work<Result> = { acceptingChildren: true, children: [], completion, raw: undefined };
+    const record: Work<Result> = { acceptingChildren: true, children: new Set(), parentChildren: parent?.children, completion, raw: undefined };
     this.#active.add(record);
     this.#sharedWork.add(record);
-    parent?.children.push(completion.promise);
+    parent?.children.add(completion.promise);
     const context: BoundInvocation<Args, Result> = Object.freeze({
       generationId: this.#generationId,
       invoke: (...nested: Args) => this.start(nested, record),
@@ -111,7 +112,9 @@ class GenerationOwner<Args extends readonly unknown[], Result> {
       const completion = record.completion;
       // A closed escaped continuation keeps no raw promise, child result or resolver.
       record.raw = undefined;
-      record.children.length = 0;
+      record.children.clear();
+      if (completion) { record.parentChildren?.delete(completion.promise); }
+      record.parentChildren = undefined;
       record.completion = undefined;
       completion?.resolve(outcome);
       if (this.#active.size === 0) {

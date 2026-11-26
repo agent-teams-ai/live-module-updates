@@ -322,3 +322,51 @@ await test("an actually rejected original native close permits a separate retry 
   await assert.rejects(original, (cause) => cause === failure);
   assert.deepEqual(a.forget(), { status: "forgotten" });
 });
+
+await test("sequential completed children and an unawaited transitive child preserve the native owner until actual completion", async () => {
+  const scope = createScope({ name: "transitive-native-owner" });
+  const target = new EventTarget();
+  const entered = Promise.withResolvers<void>();
+  const resume = Promise.withResolvers<void>();
+  let events = 0;
+  await scope.resources.setup({ name: "native-listener", setup: () => {
+    const listener = () => { events += 1; };
+    target.addEventListener("pulse", listener);
+    return listener;
+  }, cleanup: (listener) => { target.removeEventListener("pulse", listener); } });
+  const boundary = createInvocationBoundary<readonly ["root" | "child" | "leaf" | "grandchild"], string>({
+    readCanonicalHead: () => ({ generationId: "A", revision: "r/A" }), maxActiveWork: 16, maxGenerationIdentities: 33,
+  });
+  const a = control(boundary.attachGeneration({ generationId: "A", invoke: async (context, operation) => {
+    if (operation === "root") { void context.invoke("child"); return "root"; }
+    if (operation === "child") {
+      for (let index = 0; index < 32; index += 1) { assert.equal(value(await context.invoke("leaf")), "leaf"); }
+      void context.invoke("grandchild");
+      return "child";
+    }
+    if (operation === "grandchild") { entered.resolve(); await resume.promise; }
+    const before = events;
+    target.dispatchEvent(new Event("pulse"));
+    assert.equal(events, before + 1, "native listener must survive every admitted descendant");
+    return operation;
+  }, release: () => scope.control.close() }));
+  try {
+    const root = boundary.invoke("root");
+    let settled = false;
+    void root.then(() => { settled = true; return; });
+    await entered.promise;
+    const closing = a.close();
+    assert.equal(events, 32);
+    assert.equal(boundary.pending(), 3, "only root, child and the actual pending grandchild remain active");
+    assert.equal(settled, false);
+    assert.equal(scope.resources.signal.aborted, false);
+    assert.equal(a.originalCleanup(), undefined);
+    resume.resolve();
+    assert.equal(value(await root), "root");
+    assert.equal((await closing).complete, true);
+    assert.equal(events, 33);
+    target.dispatchEvent(new Event("pulse"));
+    assert.equal(events, 33, "physical listener removal occurs after the transitive descendant finishes");
+    assert.equal(boundary.pending(), 0);
+  } finally { resume.resolve(); await a.close(); }
+});

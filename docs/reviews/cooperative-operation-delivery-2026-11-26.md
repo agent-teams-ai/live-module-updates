@@ -75,6 +75,40 @@ Application paths above are relative to `src/features/update-operation`.
 The records preserve this reviewed checkpoint if a later qualified change
 supersedes its bytes.
 
+That successor is published at
+[`d918f67`](https://github.com/agent-teams-ai/live-module-updates/commit/d918f674b8ffb7e27514a11d1a68fbe8c57fb442).
+Its [complete native library run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45910258035/job/140216639241)
+passed **48/48**, with zero failures, cancellations or skips. The
+[repaired L1 run](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45910258087/job/140216639473)
+also passed both actual Node/Chromium runner tests. Both logs confirm the fixed
+11.28.10 bootstrap selecting the unchanged requested pnpm 11.25.0. The initial
+L1 failure remains recorded rather than reclassified as success.
+
+## Successor: completed descendant references
+
+Independent operation review found that the generation owner's child array
+retained every completed child result until a long finite parent finished.
+The active-work limit counted unfinished calls correctly but did not remove
+those unnecessary completed-result references.
+
+The narrow correction tracks pending child aggregates in a Set and removes each
+exact completed flight. The parent's completion still waits for the pending
+snapshot after its continuation is sealed; every child aggregate includes its
+own later descendants. Closed records clear their raw promise, completion
+resolver and parent-Set reference. This is the same invocation owner, not an
+additional lifetime mechanism.
+
+Both peer implementers and the root reviewer inspected that reasoning. A new
+actual Resources/native-listener case runs 32 sequential children followed by
+an unawaited transitive child. The original parent and cleanup stay pending,
+the listener remains usable, and actual removal occurs only after the last
+descendant finishes. The focused native invocation/adapter suite passed 14/14
+both during implementation and the root repeat; strict TypeScript and both
+unchanged native lint presets passed. Source review establishes that completed
+references are removed; this test validates transitive lifetime after the
+change. Neither observation claims a total heap-byte bound or measured garbage
+collection. Capability-owned returned data has its separate ownership contract.
+
 ## Observed CI installation corrections
 
 The new root workspace initially captured the L1 precursor's dependency install.

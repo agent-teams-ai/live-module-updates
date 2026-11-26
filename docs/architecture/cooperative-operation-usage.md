@@ -145,6 +145,13 @@ a failed provider call.
 Returned and failed provider outcomes include their actual generation ID;
 pre-admission refusals do not invent one.
 
+Returned values follow the capability's own data-ownership contract. They may be
+ordinary owned data or borrowed data with a separate valid owner. The generic
+`Result` type does not inspect or sanitize that object graph. Returning a raw
+provider, resource or callback does not create a lease or extend generation
+custody beyond invocation completion; a longer-lived handle needs an explicit
+qualified ownership contract.
+
 `startUpdate` validates and reserves an attempt before candidate effects. A
 matching replay returns the same handle. A changed payload, exhausted limit,
 reused generation identity or closed runtime refuses before new acquisition.
