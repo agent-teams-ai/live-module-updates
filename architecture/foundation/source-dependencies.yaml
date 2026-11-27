@@ -47,13 +47,34 @@ boundaries:
       packages: []
       builtins: []
       runtimeReferences: []
+  - id: update-testing
+    dependencyMode: development
+    roots: [src/features/update-operation/testing]
+    entrypoints:
+      - src/features/update-operation/testing/authority-contract.ts
+      - src/features/update-operation/testing/authority-evidence.ts
+    allow:
+      boundaries: [update-application]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: module-testing
+    dependencyMode: development
+    roots: [src/testing.ts]
+    entrypoints: [src/testing.ts]
+    packageExports: ["./testing"]
+    allow:
+      boundaries: [update-testing]
+      packages: []
+      builtins: []
+      runtimeReferences: []
   - id: quality-tooling
     dependencyMode: development
     roots: [scripts]
-    entrypoints: [scripts/check-feature-module.ts]
+    entrypoints: [scripts/check-feature-module.ts, scripts/check-composed-source.ts]
     allow:
       boundaries: []
-      packages: ["@agent-teams/engineering-foundation", "@agent-teams/feature-module-standard", "stack-toolchain", "typescript"]
+      packages: ["@agent-teams/engineering-foundation", "@agent-teams/feature-module-standard", "@get-modular/conformance", "stack-toolchain", "typescript"]
       builtins: ["node:assert/strict", "node:child_process", "node:fs", "node:fs/promises", "node:module", "node:os", "node:path", "node:test", "node:url"]
       runtimeReferences: []
   - id: module-resources
@@ -79,7 +100,7 @@ boundaries:
     roots: [tests/module]
     entrypoints: []
     allow:
-      boundaries: [module-public, module-resources]
+      boundaries: [module-public, module-resources, module-testing, quality-tooling]
       packages: ["@get-modular/resources", "@get-modular/core", "@get-modular/assembly", "@get-modular/conformance", "@extension-foundation/node-artifact", "playwright"]
       builtins: ["node:assert/strict", "node:child_process", "node:crypto", "node:fs", "node:fs/promises", "node:net", "node:os", "node:path", "node:test", "node:timers/promises", "node:url", "node:util"]
       runtimeReferences: []

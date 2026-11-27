@@ -8,11 +8,29 @@ on:
     paths:
       - '.github/workflows/portable-document-qualification.yml'
       - 'tests/qualification/portable-document/**'
+      - 'tests/qualification/composed-document/**'
+      - 'tests/module/**'
+      - 'src/**'
+      - 'architecture/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig*.json'
+      - '.oxlintrc.json'
   push:
     branches: [main]
     paths:
       - '.github/workflows/portable-document-qualification.yml'
       - 'tests/qualification/portable-document/**'
+      - 'tests/qualification/composed-document/**'
+      - 'tests/module/**'
+      - 'src/**'
+      - 'architecture/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig*.json'
+      - '.oxlintrc.json'
 permissions:
   contents: read
 jobs:

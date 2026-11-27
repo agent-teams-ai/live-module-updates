@@ -243,6 +243,44 @@ Returning to old code is a new generation and new authorized transition against
 current state and grants. It does not reuse an old generation ID, erase an
 attempt, reverse already accepted effects or imply a data migration policy.
 
+## Qualifying an actual authority integration
+
+The optional `live-module-updates/testing` entry exports
+`authorityContractCases(createFixture)`. Each named case returns an async `run`
+function for the consumer's existing test runner. No runner, GM, Node or DOM
+dependency enters this portable test surface; an isolated ES-only consumer can
+import it without the optional Resources peer.
+
+The factory supplies a fresh disposable integration of the actual authority,
+two valid candidate descriptions, an independent read of the native routing
+head, and controls for pending publication, lost acknowledgement and a changed
+basis. The cases cover detached reads, canonical publication and replay,
+full original-payload binding, stale head, stale basis, pending original
+requests, recovery of a lost acknowledgement and immutable historical receipts.
+They execute public port behavior rather than the coordinator's private oracle.
+
+The basis control changes an actual owner condition while leaving the head and
+fresh-candidate admissibility intact. For example, perform an authorized state
+revision change while grants remain valid. Revoking permission would let an
+unrelated refusal hide a missing basis check; the law therefore also requires
+publication with the fresh basis to succeed. The native head observer must read
+the real routing/effect owner, not return the expected candidate or call the
+same authority reader under test.
+
+A held publication returns unknown until its original operation can be settled;
+a lost acknowledgement conceals only the response, not a fabricated commit.
+`releasePublication` safely settles held originals even after an assertion fails
+and is harmless when called again. `dispose` retains responsibility for real
+native owners even if release failed. The suite always attempts both teardown
+steps and preserves original and cleanup errors together when necessary.
+A named `AuthorityContractViolation` identifies a failed law; native setup and
+teardown errors retain their original causes.
+
+Run the cases against each independently wired actual Host. This suite does not
+prove physical cleanup, effect policy, isolation, persistence, arbitrary
+concurrency or product admission. Those remain native/application scenarios;
+passing a simulated fixture is not qualification of its proposed real adapter.
+
 ## Further adoption work
 
 Use the [phase plan](../plans/first-operation-implementation-plan.md) for the

@@ -22,7 +22,8 @@ merely to complete a folder template.
 | Feature domain, when materialized | Deterministic identities, outcomes and invariants from explicit facts |
 | Feature adapters | Narrow external bindings, including the optional public Resources cleanup mechanism; depend inward on application ports |
 | Feature composition | Bind actual ports and expose the feature's factory without a global container |
-| Curated module entries | Export the deliberately supported surfaces; ordinary root and optional resource integration remain separate |
+| Feature testing | Portable authority laws and independent observations; application contracts only, with no runner or native dependency |
+| Curated module entries | Export the supported ordinary root, optional resource integration and test-only contract suite separately |
 | `tests/features/update-operation` | Invocation, update, failure and adapter contracts owned by this feature |
 | `tests/module` | Public exports, declarations, packed external consumers and independently wired native Hosts |
 | `scripts` | Development-only source/quality checks and their focused rejection controls |
@@ -44,6 +45,17 @@ their own installed consumer proof. No code deep-imports a private lifecycle
 kernel or checkout source. Published artifacts exclude source tests and
 development tooling.
 
+The optional `live-module-updates/testing` export owns the runner-neutral Host
+authority cases. Its implementation belongs to the actual feature testing role,
+not module-level runtime behavior. The curated entry exposes the factory,
+fixture/case types and named violation; private law/oracle helpers remain behind
+package exports. The FMS profile marks these two authored feature files as both
+publicly available and testing surfaces so the curated package entry can expose
+them. The role remains testing. Foundation independently marks both boundaries
+as development-only and forbids their import from the ordinary runtime or
+application; real rejecting controls exercise both directions. This is an
+optional test kit for consumers, not a required application dependency.
+
 Add a feature only for another cohesive capability. Add a layer only with a real
 artifact. Update the profile, dependency policy, strict compiler scope and
 rejection controls together. A new module or ownership exception needs a
@@ -59,7 +71,8 @@ starts with no waivers. The
 binds those files to the real compiler projects, Stack type-aware lint preset
 and mandatory native script routes. `tsconfig.portable.json` additionally compiles
 the actual application/composition implementation with ES libraries only and no
-Node or DOM globals; the complete compiler also covers the optional Resources
+Node or DOM globals, including the testing entry and its implementation.
+The complete compiler also covers the optional Resources
 adapter and its native declaration requirements.
 
 ## Complete native route

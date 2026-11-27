@@ -1,5 +1,5 @@
 import type { AuthoritySnapshot, Head, PublicationReceipt, PublicationRequest, PublicationResult, ReceiptLookup } from "../../src/index.ts";
-import { publicationKey, type DocumentState, type Effect, type NativeAuthority, type PublicationMode } from "./host-contract.ts";
+import { publicationKey, type DocumentState, type Effect, type EffectPermission, type NativeAuthority, type PublicationMode } from "./host-contract.ts";
 
 interface OwnerRecord {
   readonly head: Head;
@@ -87,18 +87,25 @@ export function createNodeAuthority(domain: string, unsafeEffects = false): Nati
     return receipt !== undefined && publicationKey(receipt.request) === publicationKey(request)
       ? { status: "known", receipt: structuredClone(receipt) } : { status: "unknown" };
   }
-  function write(generation: string, expected: number, text: string): Effect {
-    const current = owned();
+  function permission(current: OwnerRecord, generation: string, expected: number): EffectPermission {
     if (!unsafeEffects && generation !== current.head.generationId) { return { status: "refused", reason: "stale-generation" }; }
     if (!unsafeEffects && !current.granted) { return { status: "refused", reason: "grant-denied" }; }
     if (current.schema !== "schema/1") { return { status: "refused", reason: "schema-conflict" }; }
     if (expected !== current.document.revision) { return { status: "refused", reason: "revision-conflict" }; }
+    return { status: "allowed" };
+  }
+  function write(generation: string, expected: number, text: string): Effect {
+    const current = owned();
+    const allowed = permission(current, generation, expected);
+    if (allowed.status === "refused") { return allowed; }
     const document = { revision: current.document.revision + 1, text };
     state.set(domain, { ...current, document });
     return { status: "written", revision: document.revision };
   }
   return {
     read, publish, lookup, write, document: () => ({ ...owned().document }),
+    observeHead: () => ({ ...owned().head }),
+    checkEffect: (generation, expected) => permission(owned(), generation, expected),
     grant: (allowed) => { const current = owned(); state.set(domain, { ...current, granted: allowed, grantRevision: current.grantRevision + 1 }); },
     schema: (value) => { state.set(domain, { ...owned(), schema: value }); },
     schemaVersion: () => owned().schema,

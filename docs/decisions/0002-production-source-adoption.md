@@ -93,6 +93,19 @@ make a check green, or claim a Docs exemption. This native source adoption does
 not manufacture positive registration, executable-specification qualification,
 Docs admission, package publication or production deployment evidence.
 
+## Programme C testing-role adoption
+
+The reviewed composed-module programme adds substantive Host authority contract
+laws to the existing feature's testing role. They are delivered through the
+separate optional `./testing` export, with no package, platform or runner imports.
+The same source profile, Foundation dependency policy, ES-only compiler and
+installed no-peer consumer cover the new surface. Actual FMS and Foundation
+controls reject inward use from production application and ordinary root. No
+second production feature, module, test framework or suppression is introduced.
+The [source ownership guide](../architecture/source-ownership.md) owns the
+testing/public surface mapping; the cases qualify native integrations only when
+their actual fixture drivers execute and preserve the declared scope.
+
 Revisit this decision when the central bootstrap contract evolves, an eligible
 Docs graph can be reconciled, a new production module/role is justified, or a
 real product requires a stronger execution profile than ADR-0001.

@@ -1,5 +1,5 @@
 import type { AuthoritySnapshot, PublicationReceipt, PublicationRequest, PublicationResult, ReceiptLookup } from "../../src/index.ts";
-import { publicationKey, type DocumentState, type Effect, type NativeAuthority, type PublicationMode } from "./host-contract.ts";
+import { publicationKey, type DocumentState, type Effect, type EffectPermission, type NativeAuthority, type PublicationMode } from "./host-contract.ts";
 
 interface StorageRecord {
   readonly owner: string;
@@ -115,18 +115,25 @@ export function createBrowserAuthority(storage: Storage, domain: string, unsafeE
     return receipt !== undefined && publicationKey(receipt.request) === publicationKey(request)
       ? { status: "known", receipt } : { status: "unknown" };
   }
-  function write(generation: string, expected: number, text: string): Effect {
-    const current = owned();
+  function permission(current: StorageRecord, generation: string, expected: number): EffectPermission {
     if (!unsafeEffects && generation !== current.snapshot.head.generationId) { return { status: "refused", reason: "stale-generation" }; }
     if (!unsafeEffects && !current.granted) { return { status: "refused", reason: "grant-denied" }; }
     if (current.schema !== "schema/1") { return { status: "refused", reason: "schema-conflict" }; }
     if (expected !== current.document.revision) { return { status: "refused", reason: "revision-conflict" }; }
+    return { status: "allowed" };
+  }
+  function write(generation: string, expected: number, text: string): Effect {
+    const current = owned();
+    const allowed = permission(current, generation, expected);
+    if (allowed.status === "refused") { return allowed; }
     const next = { ...current, document: { revision: current.document.revision + 1, text } };
     save({ ...next, snapshot: { ...next.snapshot, basis: basis(next) } });
     return { status: "written", revision: next.document.revision };
   }
   return {
     read: () => owned().snapshot, publish, lookup, write, document: () => owned().document,
+    observeHead: () => ({ ...owned().snapshot.head }),
+    checkEffect: (generation, expected) => permission(owned(), generation, expected),
     grant: (allowed) => { const current = owned(); const next = { ...current, granted: allowed, grantRevision: current.grantRevision + 1 };
       save({ ...next, snapshot: { ...next.snapshot, basis: basis(next) } }); },
     schema: (value) => { const next = { ...owned(), schema: value }; save({ ...next, snapshot: { ...next.snapshot, basis: basis(next) } }); },

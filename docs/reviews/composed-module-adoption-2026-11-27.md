@@ -111,3 +111,36 @@ adds per-attempt observation of the original publication response, reuses the
 existing reconciliation flight and derives current ownership once. No material
 contradiction remained in this bounded decision. It is permission to implement
 and test the correction, not a claim that the corrected native proof has run.
+
+### C5: portable authority laws and package boundary
+
+The optional `live-module-updates/testing` surface is implemented in the existing
+feature's substantive testing role. Its eight cases use public authority ports
+and independent native observations; no test runner, GM, platform or organization
+runtime dependency is added. Its private oracle spells out the public grammar
+instead of calling the coordinator's private binding logic.
+
+Independent review by operation_design corrected two material oracle gaps:
+require a fresh committed head revision and compare replay against a detached
+original receipt/head. invocation_contract then identified a masking control:
+revoking permission while changing basis can conceal a missing basis comparison.
+The corrected control performs an authorized state revision change with the same
+head and requires a later fresh-basis commit. Binding-preserving stale head/basis
+bypass controls now fail for the actual stale transition; a deliberately
+revoked-permission fixture is also rejected. Re-review found no remaining
+material issue in those corrections.
+
+Focused native law checks passed 22/22, including ten injected authority defects,
+combined teardown failures and the masking-fixture control. Three separate clean
+installed consumers pass: ordinary root, optional Resources and testing without
+peers. The testing consumer compiles with actual TS 7.0.2, ES libraries only and
+no Node/DOM declarations; its runtime entry preserves fixture-acquisition errors.
+The full laws execute in the native campaigns, not in that package-closure probe.
+
+FMS exposes the curated testing surface while retaining the testing role. Native
+FMS and Foundation controls reject inward runtime imports, including ordinary-root
+re-export. Foundation's full source/dependency/suppression checks and dev-only/
+registry assertions passed locally with no diagnostics. A development-only
+composed-source checker uses the existing Foundation/FMS/Conformance owners; it
+imports no test implementation. Chromium execution of the new composed consumer
+and final same-source qualification remain C6/C7 work.

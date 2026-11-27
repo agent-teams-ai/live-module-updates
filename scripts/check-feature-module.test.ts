@@ -14,19 +14,26 @@ function profile() {
     status: "adopted", standard: STANDARD, productionRoots: ["src"], applicationRoots: [],
     modules: [{
       id: "live-module-updates", role: "platform-library", root: ".", sourceRoot: "src",
-      featuresRoot: "src/features", moduleComposition: ["src/index.ts", "src/resources.ts"], ownershipExceptions: [],
+      featuresRoot: "src/features", moduleComposition: ["src/index.ts", "src/resources.ts", "src/testing.ts"], ownershipExceptions: [],
       features: [{ id: "update-operation", root: "src/features/update-operation", layers: [
         { role: "application", root: "src/features/update-operation/application" },
         { role: "adapters", root: "src/features/update-operation/adapters" },
         { role: "composition", root: "src/features/update-operation/composition" },
+        { role: "testing", root: "src/features/update-operation/testing" },
       ] }],
-      surfaces: { public: ["src/features/update-operation/adapters/resources.ts"], internalApi: [] as string[],
+      surfaces: { public: ["src/features/update-operation/adapters/resources.ts",
+        "src/features/update-operation/testing/authority-contract.ts", "src/features/update-operation/testing/authority-evidence.ts"],
+        testing: ["src/features/update-operation/testing/authority-contract.ts", "src/features/update-operation/testing/authority-evidence.ts"],
+        internalApi: [] as string[],
         compositionSurface: ["src/features/update-operation/composition/create-update-runtime.ts"] },
       useEdges: [], republications: [],
     }],
   };
 }
 const sources: Readonly<Record<string, string>> = {
+  "src/testing.ts": 'export { cases } from "./features/update-operation/testing/authority-contract.js";\nexport { Failure } from "./features/update-operation/testing/authority-evidence.js";\n',
+  "src/features/update-operation/testing/authority-contract.ts": 'import type { Snapshot } from "../application/models.js";\nexport const cases = (value: Snapshot) => [value];\n',
+  "src/features/update-operation/testing/authority-evidence.ts": 'export class Failure extends Error {}\n',
   "src/resources.ts": 'export { read } from "./features/update-operation/adapters/resources.js";\n',
   "src/features/update-operation/application/models.ts": "export interface Snapshot { readonly revision: number }\n",
   "src/features/update-operation/application/ports/adoption.ts": "export interface Adoption { readonly accept: () => boolean }\n",
@@ -60,7 +67,7 @@ async function fixture(run: (root: string, adopted: ReturnType<typeof profile>) 
 await test("the adopted platform-library topology has a substantive valid feature", async () => {
   await fixture(async root => {
     const result = await checkOwnedFeatureModule(root);
-    assert.equal(result.files, 12);
+    assert.equal(result.files, 15);
     assert.deepEqual(result.features.map(feature => feature.id), ["update-operation"]);
   });
 });
@@ -117,7 +124,15 @@ await test("cross-feature private access and an undeclared public dependency are
   }
 });
 
-await test("Foundation rejects a real external runtime dependency in application code", async () => {
+await test("FMS keeps the public testing role out of production application code", async () => {
+  await fixture(async root => {
+    await put(root, "src/features/update-operation/application/invocation.ts",
+      'import { cases } from "../testing/authority-contract.js";\nexport const operation = () => cases({ revision: 1 });\n');
+    await assert.rejects(checkOwnedFeatureModule(root), /layer-direction/u);
+  });
+});
+
+await test("Foundation enforces the ordinary runtime, optional testing and external package boundaries", async () => {
   await fixture(async root => {
     for (const path of ["package.json", "pnpm-workspace.yaml", "foundation.config.yaml", "architecture/foundation"]) {
       await mkdir(dirname(join(root, path)), { recursive: true });
@@ -132,6 +147,8 @@ await test("Foundation rejects a real external runtime dependency in application
     await put(root, "package.json", JSON.stringify(manifest));
     await cp(join(repositoryRoot, "scripts"), join(root, "scripts"), { recursive: true });
     await mkdir(join(root, "tests/module"));
+    await put(root, "tests/module/testing-consumer.ts",
+      'import { cases } from "../../src/testing.js";\nexport const observed = cases({ revision: 1 });\n');
     const cli = fileURLToPath(new URL("./dist/cli.js", import.meta.resolve("@agent-teams/engineering-foundation/package.json")));
     const check = () => spawnSync(process.execPath,
       [cli, "check", "architecture.source-dependencies", "--consumer", root, "--format", "json"],
@@ -139,11 +156,19 @@ await test("Foundation rejects a real external runtime dependency in application
     const before = check();
     assert.equal(before.error, undefined);
     assert.equal(before.status, 0, before.stdout + before.stderr);
-    const path = "src/features/update-operation/application/invocation.ts";
-    await put(root, path, await readFile(join(root, path), "utf8") + 'import "@get-modular/resources";\n');
-    const after = check();
-    assert.equal(after.error, undefined);
-    assert.equal(after.status, 1, after.stdout + after.stderr);
-    assert.match(after.stdout, /architecture\.source-dependencies\.forbidden-package-dependency/u);
+    const changes = [
+      { path: "src/features/update-operation/application/invocation.ts", content: 'import "@get-modular/resources";\n', rule: "forbidden-package-dependency" },
+      { path: "src/features/update-operation/application/invocation.ts", content: 'import "../testing/authority-contract.js";\n', rule: "runtime-boundary-imports-development-boundary" },
+      { path: "src/index.ts", content: 'export { cases } from "./features/update-operation/testing/authority-contract.js";\n', rule: "runtime-boundary-imports-development-boundary" },
+    ];
+    for (const change of changes) {
+      const original = await readFile(join(root, change.path), "utf8");
+      await put(root, change.path, original + change.content);
+      const after = check();
+      assert.equal(after.error, undefined);
+      assert.equal(after.status, 1, after.stdout + after.stderr);
+      assert.ok(after.stdout.includes("architecture.source-dependencies." + change.rule), after.stdout);
+      await put(root, change.path, original);
+    }
   });
 });

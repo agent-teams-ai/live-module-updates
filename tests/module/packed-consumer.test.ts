@@ -45,6 +45,7 @@ await test("packed ordinary root and optional Resources entry work in separate a
     const artifact = await pack(root, temporary);
     assert.ok(artifact.files.includes("dist/index.js") && artifact.files.includes("dist/index.d.ts"));
     assert.ok(artifact.files.includes("dist/resources.js") && artifact.files.includes("dist/resources.d.ts"));
+    assert.ok(artifact.files.includes("dist/testing.js") && artifact.files.includes("dist/testing.d.ts"));
     assert.ok(artifact.files.includes("dist/features/update-operation/application/invocation.js"), "deep-import refusal must address a real private implementation");
     assert.ok(artifact.files.every(path => path.startsWith("dist/") || ["LICENSE", "README.md", "package.json"].includes(path)));
     const peerRoot = await realpath(join(root, "node_modules/@get-modular/resources"));
@@ -54,7 +55,7 @@ await test("packed ordinary root and optional Resources entry work in separate a
     await cp(peerRoot, peerStage, { recursive: true });
     const peer = await pack(peerStage, temporary);
     const observations: Record<string, unknown> = {};
-    for (const kind of ["ordinary", "resources"] as const) {
+    for (const kind of ["ordinary", "resources", "testing"] as const) {
       const consumer = join(temporary, kind);
       await mkdir(consumer);
       const dependencies: Record<string, string> = { "live-module-updates": "file:" + artifact.path };
@@ -69,9 +70,9 @@ await test("packed ordinary root and optional Resources entry work in separate a
       for (const path of artifact.files) {
         assert.deepEqual(await readFile(join(installed, path)), await readFile(join(root, path)), "installed bytes differ: " + path);
       }
-      const filename = kind === "ordinary" ? "consumer-contract.ts" : "consumer-resources.ts";
-      const imported = kind === "ordinary" ? "../../src/index.ts" : "../../src/resources.ts";
-      const specifier = kind === "ordinary" ? "live-module-updates" : "live-module-updates/resources";
+      const filename = kind === "ordinary" ? "consumer-contract.ts" : "consumer-" + kind + ".ts";
+      const imported = kind === "ordinary" ? "../../src/index.ts" : "../../src/" + kind + ".ts";
+      const specifier = kind === "ordinary" ? "live-module-updates" : "live-module-updates/" + kind;
       const source = await readFile(join(root, "tests/module", filename), "utf8");
       assert.equal(source.split(imported).length, 2, "consumer needs exactly one deliberate public entry relink");
       await writeFile(join(consumer, filename), source.replace(imported, specifier));
@@ -84,15 +85,15 @@ await test("packed ordinary root and optional Resources entry work in separate a
       }
       await writeFile(join(consumer, "tsconfig.json"), JSON.stringify({
         compilerOptions: { target: "ES2024", module: "NodeNext", moduleResolution: "NodeNext",
-          lib: kind === "ordinary" ? ["ES2024"] : ["ES2024", "ESNext.Disposable", "DOM"], types: [],
+          lib: kind === "resources" ? ["ES2024", "ESNext.Disposable", "DOM"] : ["ES2024"], types: [],
           strict: true, noUncheckedIndexedAccess: true, exactOptionalPropertyTypes: true, verbatimModuleSyntax: true,
           erasableSyntaxOnly: true, skipLibCheck: false, declaration: true, outDir: "out" },
         include: sources,
       }));
       const listed = run(compiler, ["-p", "tsconfig.json", "--listFiles"], consumer).split(/\r?\n/u).filter(path => path.endsWith(".ts"));
-      assert.ok(listed.includes(join(installed, "dist", kind === "ordinary" ? "index.d.ts" : "resources.d.ts")), "compiler did not consume the installed public declarations");
+      assert.ok(listed.includes(join(installed, "dist", kind === "ordinary" ? "index.d.ts" : kind + ".d.ts")), "compiler did not consume the installed public declarations");
       assert.deepEqual(listed.filter(path => !path.endsWith(".d.ts")).toSorted(), sources.map(path => join(consumer, path)).toSorted(), "compiler consumed implementation source outside the isolated consumer");
-      const functionName = kind === "ordinary" ? "runOrdinaryConsumer" : "runResourcesConsumer";
+      const functionName = kind === "ordinary" ? "runOrdinaryConsumer" : kind === "resources" ? "runResourcesConsumer" : "runTestingConsumer";
       await writeFile(join(consumer, "run.mjs"), 'import { ' + functionName + ' } from "./out/' + filename.replace(".ts", ".js") + '";\nconsole.log(JSON.stringify(await ' + functionName + '()));\n');
       observations[kind] = JSON.parse(run(process.execPath, ["run.mjs"], consumer));
       if (kind === "ordinary") {
@@ -108,6 +109,10 @@ await test("packed ordinary root and optional Resources entry work in separate a
     }
     assert.deepEqual(observations["ordinary"], { value: 42, refusedAfterClose: true, releases: 1 });
     assert.deepEqual(observations["resources"], { value: 7, closed: true });
+    assert.deepEqual(observations["testing"], {
+      names: ["detached-read", "canonical-publication", "original-payload", "stale-head", "stale-basis", "pending-original", "lost-acknowledgement", "immutable-receipt"],
+      frozen: true, acquisitionFailurePreserved: true, diagnostic: "lmu.testing.authority.detached-read",
+    });
     await cp(artifact.path, join(evidence, basename(artifact.path)));
     await cp(peer.path, join(evidence, basename(peer.path)));
     await writeFile(join(evidence, "packed-consumers.json"), JSON.stringify({
