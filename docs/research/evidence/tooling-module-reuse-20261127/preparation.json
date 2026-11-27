@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "kind": "canonical-tooling-preparation",
+  "source": "75806d391c5fdaba0a512e79e3967823f7a7d29d",
+  "workflowRun": 46001466080,
+  "workflowJob": 140513886517,
+  "url": "https://github.com/agent-teams-ai/live-module-updates/actions/runs/46001466080",
+  "node": "v24.22.3",
+  "inputs": [
+    {
+      "path": "package.json",
+      "sha256": "04faa566b139694de8835606017a4851fd6f616f30afadac27b5042b0a0616b3"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha256": "2a7bb565634f8ac557ca5f9fbb6ef89c3affd4dbf83df164e567fb45417a23dd"
+    },
+    {
+      "path": "tests/qualification/portable-document/package.json",
+      "sha256": "fd6b5723ff6bcdb8585940b55a54f45ef5579f9f66f87b802888f69277d5e44d"
+    },
+    {
+      "path": "tests/qualification/portable-document/pnpm-workspace.yaml",
+      "sha256": "49f8585e60cac799fc8a1fda35a38ce546fbd389bdc3585a2ef307d390fd6d65"
+    },
+    {
+      "path": "foundation.config.yaml",
+      "sha256": "c5957181473f84ae901ed54890b8df5647790654afe12edec59f00dfb11579b8"
+    },
+    {
+      "path": "architecture/feature-module-profile.json",
+      "sha256": "4ebb0609e2f8ac62166ac2518d8765438ac1998c9e21029849173d33866f885e"
+    },
+    {
+      "path": "architecture/foundation/source-coverage.yaml",
+      "sha256": "48e88446497fd32373c77dca0e945f85a5b695e05386689a89362734f0827934"
+    },
+    {
+      "path": "toolchain.config.json",
+      "sha256": "cd8f173cba29f1afd0415755140a49d36184dea8d67d1b8cb419db7fe1d209ea"
+    },
+    {
+      "path": "scripts/check-quality-topology.ts",
+      "sha256": "35d0fe06b0a419d34bc7a2adda5e7087434b5112c62b00087f94bc04e56071bc"
+    },
+    {
+      "path": "scripts/prepare-tooling-upgrade.ts",
+      "sha256": "fba35fc5c83b6f1373d6de79872f77f3238edbac9368a7095cb36db44cac4d36"
+    },
+    {
+      "path": ".github/workflows/tooling-upgrade-preparation.yml",
+      "sha256": "499bdb09a910f58f553521529f6344e6b9c35d05211c84e2c7fd95d3e5723407"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 83767,
+      "sha256": "4545e10f80a59e14652beec6d75ce214c2138d9d4c986d214a286df35c0fce80",
+      "blob": "625cbf87b65831c4beb4d4fd7819d8846439debe"
+    },
+    {
+      "path": "tests/qualification/portable-document/pnpm-lock.yaml",
+      "bytes": 30793,
+      "sha256": "55775425c561910ab52cae530b4679f85c4e85a9af929249ef5bae191c4e46d9",
+      "blob": "53ddf7c7b52b1881d10b63496e6d49542af72e66"
+    },
+    {
+      "path": "architecture/foundation/source-topology.json",
+      "bytes": 673,
+      "sha256": "756407c415b48b2411cbfc9b0134b10b2188afb8031772060b0e21c1d5be8b09",
+      "blob": "ac58a2145984f0b59110ec1e03eedb52bfda5fc0"
+    }
+  ],
+  "verification": {
+    "nativePreparation": "success",
+    "compilerIdentity": "TypeScript 7.0.2 shared by root, Foundation and Stack",
+    "strictToolsCompilation": "passed before projection and receipt execution",
+    "canonicalOutputGitBlobs": "independently re-created through GitHub Git Data and matched exactly",
+    "sha256": "reported by the source-bound native receipt",
+    "finalFrozenQualification": "separate subsequent gate"
+  },
+  "temporaryHelpers": [
+    ".github/workflows/tooling-upgrade-preparation.yml",
+    "scripts/prepare-tooling-upgrade.ts"
+  ],
+  "notes": [
+    "Strict engine/peer lock generation and frozen root install used normal pnpm with lifecycle scripts disabled.",
+    "The public installed FMS quality-topology mapper produced the committed topology.",
+    "Preparation writes no Git refs and is not source admission, managed Docs acceptance or final native qualification."
+  ]
+}

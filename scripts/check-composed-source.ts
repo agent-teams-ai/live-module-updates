@@ -26,7 +26,7 @@ const publicPorts = [
   "src/features/export-summary/application/ports/export-summary.ts",
   "src/features/document-runtime/application/ports/document-operation.ts",
 ];
-const moduleComposition = ["src/index.ts", "src/summary.ts", "src/composition/closure.ts", "src/composition/root.ts"];
+const moduleComposition = ["src/index.ts", "src/summary.ts", "src/composition/closure.root.ts", "src/composition/runtime.root.ts"];
 const compositionSurface = [
   "src/features/export-summary/composition/export-summary.group.ts",
   "src/features/export-summary/composition/export-summary.module.ts",

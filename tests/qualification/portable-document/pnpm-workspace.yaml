@@ -1,3 +1,6 @@
 # Artifacts are packed/installed independently. Foundation's explicit packageRoots
 # still checks adapter/package.json as its source owner without a workspace link.
 packages: []
+minimumReleaseAgeExclude:
+  - '@agent-teams/engineering-foundation@4.0.3'
+  - '@agent-teams/feature-module-standard@0.4.4'

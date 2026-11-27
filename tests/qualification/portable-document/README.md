@@ -253,7 +253,7 @@ Run from `tests/qualification/portable-document` with the exact frozen cohort:
 | Compiler / Node declarations | TypeScript 7.0.2 / `@types/node` 24.19.1 |
 | Browser tooling | Playwright 1.65.1; use its pinned Chromium build |
 | Host runtime selection | Core 0.8.0 / Assembly 0.8.0 / Resources 0.2.2 |
-| Development checks | Engineering Foundation 3.0.0 / FMS tooling 0.3.0 / GM Conformance 0.5.2 |
+| Development checks | Engineering Foundation 4.0.3 / FMS tooling 0.4.4 / GM Conformance 0.5.2 |
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies

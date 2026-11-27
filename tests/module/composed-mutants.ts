@@ -19,20 +19,30 @@ interface ByteDefect {
   readonly edits: readonly { readonly marker: string; readonly replacement: string }[];
   readonly caseName: string;
   readonly oracle: string;
-  readonly baselineCase: "construction-plain";
+  readonly baselineCase: "construction-plain" | "whole-closure-transitions";
 }
 
 export const composedByteDefects = Object.freeze([
   Object.freeze({
     id: "wrong-provider-wiring", target: "packed-reference-package",
-    file: "node_modules/@fixture/composed-document/dist/composition/closure.js",
-    browserPath: "/packages/@fixture/composed-document/composition/closure.js",
+    file: "node_modules/@fixture/composed-document/dist/composition/closure.root.js",
+    browserPath: "/packages/@fixture/composed-document/composition/closure.root.js",
     edits: [
       { marker: 'import { documentComposition } from "@fixture/portable-document-gm";',
         replacement: 'import { documentComposition, plainFormatProvider } from "@fixture/portable-document-gm";' },
       { marker: "const base = documentComposition(provider);", replacement: "const base = documentComposition(plainFormatProvider);" },
     ],
     caseName: "construction-marked", oracle: "conformance.wiring.mismatch", baselineCase: "construction-plain",
+  }),
+  Object.freeze({
+    id: "manual-runtime-scope-name", target: "packed-reference-package",
+    file: "node_modules/@fixture/composed-document/dist/features/document-runtime/composition/document-runtime.module.js",
+    browserPath: "/packages/@fixture/composed-document/features/document-runtime/composition/document-runtime.module.js",
+    edits: [
+      { marker: "runtimeDeclaration,", replacement: 'runtimeDeclaration, scoped("document-runtime",' },
+      { marker: "}, scoped);", replacement: "}));" },
+    ],
+    caseName: "external-parent-cleanup-debt", oracle: "c.runtime-scope-identity", baselineCase: "whole-closure-transitions",
   }),
   Object.freeze({
     id: "mixed-closure-after-await", target: "emitted-test-consumer",

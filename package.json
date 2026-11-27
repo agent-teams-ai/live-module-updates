@@ -35,22 +35,23 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.portable.json --noEmit && tsc -p tsconfig.tools.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
+    "build": "stack-toolchain compile --project tsconfig.build.json",
+    "typecheck": "stack-toolchain compile --project tsconfig.json && stack-toolchain compile --project tsconfig.portable.json && stack-toolchain compile --project tsconfig.tools.json && stack-toolchain compile --project tsconfig.tests.json",
     "quality:compiler-floor": "node scripts/check-compiler-floor.ts",
     "quality:fms": "node scripts/check-feature-module.ts",
+    "quality:topology": "node scripts/check-quality-topology.ts --check",
     "quality:scope": "agent-teams-foundation quality check --consumer . --scope-only",
     "quality:typed": "agent-teams-foundation quality check --consumer .",
     "foundation:check": "agent-teams-foundation check",
     "foundation:assert-dev-only": "agent-teams-foundation assert-dev-only",
     "foundation:assert-registry": "agent-teams-foundation assert-registry",
     "test": "node scripts/run-tests.ts",
-    "check:fast": "pnpm run quality:compiler-floor && pnpm run quality:fms && pnpm run quality:scope && pnpm run typecheck",
+    "check:fast": "pnpm run quality:compiler-floor && pnpm run quality:fms && pnpm run quality:topology && pnpm run quality:scope && pnpm run typecheck",
     "check": "pnpm run check:fast && pnpm run quality:typed && pnpm run build && pnpm run test && pnpm run foundation:check && pnpm run foundation:assert-dev-only && pnpm run foundation:assert-registry"
   },
   "devDependencies": {
-    "@agent-teams/engineering-foundation": "3.0.0",
-    "@agent-teams/feature-module-standard": "0.3.0",
+    "@agent-teams/engineering-foundation": "4.0.3",
+    "@agent-teams/feature-module-standard": "0.4.4",
     "@extension-foundation/node-artifact": "https://raw.githubusercontent.com/agent-teams-ai/live-module-updates/f966e204c61e8f4474073449d879501769fc835e/tests/module/fixtures/ef/c0a8f2733b54323e2f85322b86167491a169af1d/extension-foundation-node-artifact-0.0.0.tgz",
     "@get-modular/assembly": "0.8.0",
     "@get-modular/conformance": "0.5.2",
@@ -60,8 +61,9 @@
     "oxlint": "1.83.0",
     "oxlint-tsgolint": "7.0.2001",
     "playwright": "1.65.1",
-    "stack-toolchain": "0.1.1",
-    "typescript": "7.0.2"
+    "stack-toolchain": "0.4.0",
+    "typescript": "7.0.2",
+    "yaml": "2.9.0"
   },
   "peerDependencies": {
     "@get-modular/resources": "^0.2.2"

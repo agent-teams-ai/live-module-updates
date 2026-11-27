@@ -100,10 +100,12 @@
   "architectureDocument": "docs/architecture/source-ownership.md",
   "decisionRecords": [
     "docs/decisions/0002-production-source-adoption.md",
-    "docs/decisions/0003-composed-runtime-ownership.md"
+    "docs/decisions/0003-composed-runtime-ownership.md",
+    "docs/decisions/0004-current-tooling-adoption.md"
   ],
   "enforcementCommands": [
     "pnpm run quality:fms",
+    "pnpm run quality:topology",
     "pnpm run quality:scope",
     "pnpm run typecheck",
     "pnpm run quality:typed",

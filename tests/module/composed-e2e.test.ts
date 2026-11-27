@@ -77,7 +77,9 @@ function requireMutatedBytes(target: "node" | "chromium", observed: Record<strin
     assert.equal(object(observed["emittedInventory"])["generation-owner.js"], receipt.mutatedFileSha256);
   } else {
     const reference = object(object(observed["packageJavascript"])["@fixture/composed-document"]);
-    assert.equal(reference["composition/closure.js"], receipt.mutatedFileSha256);
+    const prefix = "node_modules/@fixture/composed-document/dist/";
+    assert.ok(receipt.file.startsWith(prefix), "the changed file must belong to the measured reference package");
+    assert.equal(reference[receipt.file.slice(prefix.length)], receipt.mutatedFileSha256);
   }
 }
 
@@ -126,7 +128,7 @@ async function campaign(fixture: Fixture, target: "node" | "chromium", execute: 
       assert.deepEqual(await composedInventory(fixture.consumer), original, "native faulty profile changed installed or emitted code");
       negative.push({ ...profile, inputInventorySha256: digest(JSON.stringify(original)), observed });
     }
-    assert.equal(negative.length, 7);
+    assert.equal(negative.length, 8);
     assert.deepEqual(await composedInventory(fixture.consumer), original);
     await verifyArchives(fixture);
     complete = true;
@@ -140,10 +142,10 @@ async function campaign(fixture: Fixture, target: "node" | "chromium", execute: 
 await test("one installed composed module closure qualifies in Node and Chromium", { timeout: 300_000 }, async context => {
   const fixture = await prepareComposedFixture();
   context.after(() => fixture.dispose());
-  await context.test("native Node qualifies the whole closure and all seven independent controls", { timeout: 120_000 }, async () => {
+  await context.test("native Node qualifies the whole closure and all eight independent controls", { timeout: 120_000 }, async () => {
     await campaign(fixture, "node", (consumer, options) => runNode(consumer, fixture.artifactInputs, options));
   });
-  await context.test("native Chromium loads the same archives and rejects all seven controls", { timeout: 120_000 }, async () => {
+  await context.test("native Chromium loads the same archives and rejects all eight controls", { timeout: 120_000 }, async () => {
     const pin = await composedBrowserPin();
     const browser = await chromium.launch({ headless: true });
     try {

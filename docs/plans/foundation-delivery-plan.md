@@ -315,6 +315,11 @@ not work postponed until applications request it. Separate rows establish:
 - bounded long-lived work, streams and retention;
 - foundation/Host replacement through an outer qualified recovery owner.
 
+The [next-profile implementation readiness packet](first-operation-implementation-plan.md#11-next-profile-implementation-readiness-2026-11-27)
+owns E0–E5, mode-specific E2b and installed-lifecycle E4b, their rejecting
+cases, dependencies and estimates. Section 11 below owns required outcomes,
+not another implementation sequence.
+
 Research these independently where their dependencies allow. A supported static
 or cooperative row does not inherit unexecuted isolation or live-continuity
 claims. Choose explicit rejection, restart or defer behavior for unsupported

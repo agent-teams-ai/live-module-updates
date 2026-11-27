@@ -74,8 +74,8 @@ boundaries:
     entrypoints: [scripts/check-feature-module.ts, scripts/check-composed-source.ts]
     allow:
       boundaries: []
-      packages: ["@agent-teams/engineering-foundation", "@agent-teams/feature-module-standard", "@get-modular/conformance", "stack-toolchain", "typescript"]
-      builtins: ["node:assert/strict", "node:child_process", "node:fs", "node:fs/promises", "node:module", "node:os", "node:path", "node:test", "node:url"]
+      packages: ["@agent-teams/engineering-foundation", "@agent-teams/feature-module-standard", "@get-modular/conformance", "stack-toolchain", "typescript", "yaml"]
+      builtins: ["node:assert/strict", "node:child_process", "node:crypto", "node:fs", "node:fs/promises", "node:module", "node:os", "node:path", "node:test", "node:url"]
       runtimeReferences: []
   - id: module-resources
     roots: [src/resources.ts]

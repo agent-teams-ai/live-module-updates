@@ -25,6 +25,14 @@ current GM composition/adoption after completed B0–B7. Follow its phase and
 lifetime/abstraction discriminator before adding public APIs. Executor A retains
 EF and upstream GM mechanisms.
 
+The owner-requested tooling/reuse successor follows
+[Programme D](docs/plans/tooling-and-module-reuse-plan.md) and
+[ADR-0004](docs/decisions/0004-current-tooling-adoption.md). Read its exact
+Foundation/Stack migration, GM audit findings and native Effect decision before
+changing those boundaries. Package availability, native source checks and the
+owning Central bootstrap acceptance are separate; keep the existing upstream
+owner lane and all required checks intact.
+
 For writing or qualifying a modular feature, start with the
 [maintained authoring reference](tests/qualification/portable-document/README.md)
 for source, commands and scoped evidence. It covers private TEST packages,

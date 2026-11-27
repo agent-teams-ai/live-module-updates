@@ -14,9 +14,21 @@ the single [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9)
 [ADR-0001](decisions/0001-cooperative-update-profile.md) selects the bounded
 cooperative fixture profile. Stronger profiles remain scoped questions.
 
+## Current tooling and reuse audit, 2026-11-27
+
+[Programme D](plans/tooling-and-module-reuse-plan.md) in the single
+[Draft PR #12](https://github.com/agent-teams-ai/live-module-updates/pull/12)
+owns the requested Foundation upgrade and deeper module audit. It corrects
+concrete GM authoring/ownership findings, retains the cohesive operation feature,
+and records the exact next native Effect/Observation decision packet.
+The [review](reviews/tooling-and-module-reuse-2026-11-27.md) separates executed
+CMS regressions, canonical tooling preparation, final native qualification and
+the existing upstream admission prerequisite. No native Effect execution support
+or final merge is inferred from the plan.
+
 ## Composed-module successor, 2026-11-27
 
-[Programme C](plans/composed-module-adoption-plan.md) continues in the single
+[Programme C](plans/composed-module-adoption-plan.md) was delivered in the single
 [PR #11](https://github.com/agent-teams-ai/live-module-updates/pull/11),
 without changing executor A's EF/upstream-GM ownership. Its published checkpoints
 correct public function variance, preserve actual authority-call lifetime and

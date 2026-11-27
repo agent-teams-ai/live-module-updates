@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "censusRoots": [
+    "src"
+  ],
+  "packageRoots": [
+    "."
+  ],
+  "sourceRoots": [
+    "src"
+  ],
+  "testRoots": [
+    "tests/features",
+    "tests/module"
+  ],
+  "excludedRoots": [
+    "architecture",
+    "dist",
+    "docs",
+    "research",
+    "scripts",
+    "tests/qualification"
+  ],
+  "toolingFiles": [],
+  "derivedFrom": [
+    {
+      "path": "architecture/feature-module-profile.json",
+      "sha256": "4ebb0609e2f8ac62166ac2518d8765438ac1998c9e21029849173d33866f885e"
+    },
+    {
+      "path": "architecture/foundation/source-coverage.yaml",
+      "sha256": "48e88446497fd32373c77dca0e945f85a5b695e05386689a89362734f0827934"
+    }
+  ]
+}

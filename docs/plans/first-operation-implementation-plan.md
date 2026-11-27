@@ -743,3 +743,466 @@ implementation agrees with a model copied from itself.
 
 The [November 25 plan review](../reviews/implementation-plans-2026-11-25.md)
 retains the independent critiques and corrections for this planning delivery.
+
+## 10. Native Effect and Observation adoption packet, 2026-11-27
+
+Status: **audit recorded; native implementation proposed, not executed**.
+[Programme D](tooling-and-module-reuse-plan.md#d3--preserve-useful-effectobservation-paths)
+selects option A below for the current audit/tooling/CMS delivery. This section
+owns the subsequent implementation sequence; it does not reopen completed B/C,
+select a new execution profile or authorize a mandatory Effect coordinator.
+The [decision register](../decisions/open-decisions.md#native-execution-and-observation-follow-up-2026-11-27)
+routes the remaining owner choices here. Keep future results in the existing
+qualification matrix with their exact source and artifact identities.
+
+### Existing mechanisms and exact reuse points
+
+The inspected GM source is
+[27dfb4d](https://github.com/agent-teams-ai/get-modular/tree/27dfb4ddf67cead198fee6e781ab355c37782928).
+Its published `@get-modular/effect` 0.1.1 requires matched Core/Assembly 0.8.0
+and exact Effect 4.1.4. The newer Effect release observed during Programme D is
+not qualified by that peer declaration. Re-read the producer's actual release
+and peer contract before implementation; do not override it or silently migrate
+an accepted package graph.
+
+| Existing owner | Reuse point | Trigger and retained responsibility |
+| --- | --- | --- |
+| GM native construction | [Public Effect package](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/effect/README.md), `effectFor().prepare()` and prepared `.layer()` | A selected finite native provider needs actual Layer/Scope, typed construction errors and requirements; GM selects the graph, LMU still owns the update operation |
+| GM native usage guidance | [One packaged practices guide](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/effect/docs/practices.md) | Native execution, cancellation, caller context, ownership and cleanup evidence; this packet adds LMU-specific acceptance, not another copy of that standard |
+| Observation 0.2.1 | [Single-writer state contract](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/observation/README.md) | A concrete Host/module needs to follow replaceable state; its owner retains writes, while each subscriber owns its watch lifetime |
+| Existing neutral/native communication | [Callback bridge](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/tests/qualification/effect-communication/callback.ts), [state bridge](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/tests/qualification/effect-communication/state.ts) and [watch admission](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/tests/qualification/effect-communication/watch-progress.ts) | Reuse the relevant contract/recipe when that communication need is selected; do not introduce another event bus or claim every intermediate state is delivered |
+| GM lifecycle candidate | [Private package scope](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/lifecycle-kernel/README.md) and [private manifest](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/lifecycle-kernel/package.json) | Review only after public admission and a demonstrated semantic fit; no private import, copied kernel or second generation authority |
+
+The LMU integration maintainer owns this packet and the future native fixture.
+The Host owns canonical state, grants, workload/retention policy and effect
+receivers. Executor A retains EF and upstream GM mechanisms. A missing public
+mechanism is handed to its existing owner with a minimal failing case; ordinary
+LMU and independent tooling work continue.
+
+### Alternatives and selected current work
+
+The following are incremental alternatives, not additive delivery commitments.
+P includes authored production/integration code; T includes tests/fixtures.
+Estimates exclude docs, generated/vendor bytes, upstream changes, public release
+and stronger platforms. Days assume one experienced engineer and focused review.
+U is confidence in fit, N expected reliability within that stated scope, and
+C implementation/maintenance complexity; these are ordinal judgments, not SLA
+or execution evidence. Sizing confidence is 4/10.
+
+| Option | Result and principal risk | P / T LOC; engineer-days | U / N / C |
+| --- | --- | --- | --- |
+| A: keep the qualified runtime and record native decisions | Exact reuse points, scope, next steps and rejection criteria; does not supply native execution support | 0 / 0; 0.5-1.5 | 8 / 8 / 2 |
+| B: one concrete native Effect Host discriminator | Establish actual native lifetime compatibility with installed LMU before freezing a public API; unsupported cleanup semantics may reject the proposed bridge | 150-350 / 700-1,300; 3-6 | 8 / 8 / 5 |
+| C: optional public native integration after B | Reusable surface justified by actual consumers, preserving native Cause/context and ordinary dependency independence; premature abstraction can hide incompatible ownership | 450-900 / 1,200-2,200; 6-12 | 6 / 8 / 7 |
+
+**A is selected for Programme D. B is the next implementation proposal.**
+C requires successful B evidence, a selected contract and demonstrated consumer
+need. Mandatory Effect in the ordinary root is outside these alternatives.
+These estimates do not authorize executing B/C during the tooling upgrade.
+
+### B sequence before dependent public code
+
+1. **Select the narrow native fixture.** First propose one trusted finite Node
+   Host using a real native resource and the current installed LMU archive.
+   Keep native module-to-module operations connected; place a deliberate neutral
+   bridge only at the Host entry. Read the current GM practices and qualify the
+   exact public package/peer cohort. Node-only native evidence cannot qualify
+   native Browser, Desktop, streams or containment. Existing ordinary
+   Node/Chromium qualification remains required regression evidence.
+2. **Resolve ownership before adaptation.** Identify the original native owner
+   before any acquisition, the work it must outlive, and the initial-failure
+   recovery handle. Keep generation resources and still-borrowed publication
+   infrastructure distinct. Decide whether the native close contract can satisfy
+   LMU's public cleanup contract without changing its meaning. Reproduce any
+   mismatch before proposing a narrowly owned contract change.
+3. **Build the concrete discriminator.** Use genuine GM native Layers and
+   installed public roots, existing authority laws where applicable, barriers
+   and independent physical observations. Keep authority/state receiver
+   semantics intact. Do not add a generic Task/Fiber/Scope facade, another
+   supervisor, a second cleanup manager or one runtime per source module.
+4. **Qualify the ten cases below.** Establish useful valid setup before each
+   intended rejection. Preserve original causes and any cleanup failure together.
+   Observe leaked work/resources before test recovery releases them; counters
+   from the implementation alone cannot prove native release.
+5. **Review and decide the next surface.** Record exact package/source/input
+   identities, outcomes, unsupported behavior and the falsifying case. If the
+   existing neutral boundary is enough, retain the small concrete Host recipe.
+   Propose optional reusable integration only when its consumer need and
+   failure semantics are demonstrated. No native support claim follows from
+   typechecking, this plan or a wrapped Promise alone.
+
+### Ten required native cases
+
+| Case | Required observable result |
+| --- | --- |
+| 1. Installed useful native construction | Real GM Effect preparation/Layer construction and a useful operation use an actual resource; wrong carrier or invalid wiring fails before its prohibited acquisition |
+| 2. A work retained through B adoption | A remains coherent and usable across an awaited native operation; fresh work uses B; receiver grants/fences still decide protected writes |
+| 3. Interrupted observer and continuing work | Interrupting the waiting Effect does not retire a generation whose underlying admitted work is still running; its actual settlement releases the hold |
+| 4. Failed and late candidate acquisition | Partial acquisition and a candidate finishing after shutdown keep their original owner, publish no invalid root and release the exact acquired instance |
+| 5. Initial/dependent construction failure and parent close | Cleanup/recovery remains reachable even when construction publishes no application root; parent shutdown cannot invalidate resources still borrowed by admitted work |
+| 6. Original native finalization and repeated close | A held finalizer keeps release pending; failure preserves its original Cause/Exit; repeated disposal cannot turn that failed cleanup into successful physical recovery |
+| 7. Native caller context and failure channels | The selected boundary preserves its declared caller context and distinguishes expected typed failure, defect and interruption; a generic catch does not convert them all into success |
+| 8. Lost publication acknowledgement | Reconcile the same original attempt; native interruption never authorizes republishing or inferring rejection. Known logical outcome does not release infrastructure still used by an actual publish/lookup call |
+| 9. Exact retirement and borrowed ownership | Old cleanup preserves the new registration and borrowed state/resources; real resource access and any owned fiber/listener observations establish settlement within the claimed profile |
+| 10. Installed optionality and source contracts | Strict public declaration checks and a clean ordinary consumer still work without Effect; native-only requirements stay at their declared outer boundary and input/artifact identities are retained |
+
+Case 6 is a specific adoption discriminator. The native guide documents that
+repeated ManagedRuntime disposal does not necessarily replay the initiating
+caller's finalizer failure. Retain the original close flight/result at its owner.
+Native Scope closure is not Resources-style recoverable debt, and a second
+successful disposal is not proof that a previously failed physical cleanup
+recovered. Select an honest nonretryable-failure/retained-owner policy, or
+demonstrate the missing qualified native recovery contract, before publishing
+an adapter. Never mislabel settled native failure as an unsettled observation
+merely to suppress LMU retry.
+
+A returned Effect/Stream is a value under the current ordinary call contract;
+its later execution has no implicit LMU lease. Cancellation of a wrapper's wait,
+a cancellation request, work settlement and physical release remain distinct.
+Forward a signal only where the foreign contract supports it and retain
+ownership of late results; signal forwarding alone is not a release proof.
+The native guide owns these execution rules. LMU's authority still owns
+publication/lookup receipts; a native Scope or state projection cannot replace it.
+
+### Observation and lifecycle follow-up triggers
+
+Before a concrete subscriber is introduced, the adopting Host owner must decide
+whether the need is current state, occurrences, admitted work or durable receipt
+history. For latest state, reuse a single writer and the declared read-only
+Observation facet; `watch`/`load` may coalesce intermediate revisions. Register
+from the snapshot that was read, bind the actual subscriber owner, and qualify
+read/register races, budget refusal, cancellation and zero live subscriptions
+after native teardown. The existing GM state/communication recipes own the
+mechanics. Do not add Observation to the ordinary LMU runtime to duplicate
+canonical publication state or replace immutable receipts.
+
+A future public lifecycle package triggers a comparison of its actual admission,
+custody and retirement semantics with LMU's existing owner. Public availability
+alone is not adoption. Until that comparison and relevant native qualification,
+retain the current owner and do not copy or deep-import the private candidate.
+
+
+## 11. Next-profile implementation readiness, 2026-11-27
+
+Status: **reviewed implementation proposals, not selected guarantees or executed
+qualification**. The owner requested completion of the current delivery and a
+check that the next implementation can proceed without guessing. The existing
+F5 scope and Q1–Q7 remain authoritative. This packet orders the missing
+discriminators; it does not reopen completed B/C, expand Programme D into all
+future runtime implementation, select product policies, or admit a public SPI.
+
+### Consumer boundary check
+
+The current cooperative profile has one synchronous inert canonical-head reader,
+finite registered work and a session-local owner. Preserve that working profile.
+Do not mistake a module-generation identity for Agent Runtime's provider
+execution generation, an LMU update attempt for a RuntimeOperation, or either
+for a durable effect identity.
+
+- [Runtime execution generation model](https://github.com/agent-teams-ai/agent-runtime/blob/cae4d350c947cd9f74bc04130531527c9a36baeb/docs/architecture/execution-generation-model.md)
+  owns provider boot identity, execution epoch, fences, output sequencing,
+  reattach and successor authority. A module replacement must not automatically
+  restart a provider, replay an accepted input or promote stale output.
+- [Runtime S2 storage](https://github.com/agent-teams-ai/agent-runtime/blob/cae4d350c947cd9f74bc04130531527c9a36baeb/docs/architecture/agent-runtime-architecture-program-s2-operations-storage.md)
+  owns its PostgreSQL operation and transaction contracts. LMU is not that store
+  or a second dispatcher.
+- [Orchestrator ADR-0095](https://github.com/agent-teams-ai/agent-teams-orchestrator/blob/3dccf2c53bf11f3939a19734a58f5e64d96673d0/docs/decisions/0095-extension-safety-and-ownership-invariants.md)
+  forbids extension code inside transactions and blind retry after ambiguity.
+  [ADR-0116](https://github.com/agent-teams-ai/agent-teams-orchestrator/blob/3dccf2c53bf11f3939a19734a58f5e64d96673d0/docs/decisions/0116-native-temporal-for-fully-local-durable-workflows.md)
+  selects Temporal behind its own durable workflow ports; LMU must not become
+  another workflow engine. [OD-043](https://github.com/agent-teams-ai/agent-teams-orchestrator/blob/3dccf2c53bf11f3939a19734a58f5e64d96673d0/docs/open-decisions/OD-043-extension-lifecycle-catalog-and-hot-update.md)
+  still owns placement, trust, lifecycle and product adoption.
+- [Platform ADR-0008](https://github.com/agent-teams-ai/agent-teams-platform/blob/76fc9734f6128b78c7a8b1bc858859fb1cbe835a/docs/decisions/0008-composite-managed-project-scope-readiness.md)
+  requires a terminal composite readiness receipt plus current Platform
+  authority. An LMU publication/adoption observation is not project readiness
+  or authorization to run work.
+
+Use the exact inspected sources as boundary evidence, not as consumer pins or
+permission to change their repositories. These constraints agree with the LMU
+core; the next profiles must prove more than the current core can promise.
+
+### E0 — preflight, affected closure and management ownership
+
+**Proposed entry slice:** retain one coherent activation domain and reuse actual
+public GM composition results before selective live replacement. The new
+[owner-required outcomes](foundation-delivery-plan.md#11-owner-required-continuous-update-outcomes-2026-11-27)
+and [second research campaign](https://github.com/agent-teams-ai/engineering-research/blob/e2a5f6c47e008f93094dc88ed39ea9618722f28d/docs/lessons/preimplementation-decisions.md#second-campaign-discriminate-the-remaining-design-decisions)
+are target obligations, not qualification of a stronger profile.
+
+1. Inspect the actual old/new public GM `CompositionPlan`: roots, selections,
+   resolved bindings (including ordered provider lists), dependency order and
+   verified artifact identities. Compare these facts before candidate factory
+   execution. A semantic name or unchanged plan digest does not prove unchanged
+   code, state or native resource custody.
+2. Identify changed/removed/added implementation and binding identities.
+   For every active root, follow the union of old/new resolved dependencies in
+   the consumer direction until no affected consumer remains. Include the
+   whole ownership unit where shared state/provider/resource cannot safely be
+   split. Unknown facts refuse selective replacement; use a qualified coherent
+   whole-cohort path instead. Recompile only through GM; no second graph
+   compiler, incremental compiler or composition per agent.
+3. Prepare the coherent candidate without changing authority. Refuse a stale
+   affected set when the actual head/basis changes; recompute from authoritative
+   inputs. Borrowed owners survive; old cleanup cannot release B's resources.
+4. For self-update, an admitted callback submits an immutable typed intent to
+   the existing Host management executor, observes acceptance/refusal and
+   returns. The executor retains the intent independently of the old generation.
+   Refuse waiting for one's own retirement via that management path. Do not add
+   async-local detection, a new scheduler or arbitrary cycle analysis. Only
+   observers outside the retiring cohort may await completion. The Host owns
+   actual intent delivery and cancellation; known reentry must refuse before
+   quiescing or prohibited acquisition.
+
+Use a fixture with A providing to B and D, B providing to C, C and D active
+roots, and an independently borrowed owner. Exercise A replacement/removal,
+changed single and ordered-many bindings, added root, stale plan and unrelated
+owner. Mutate the affected-root census to omit D; the independent useful-work
+oracle must reject it. Test a self-update caller returning before retirement,
+cleanup attempting a prohibited self-wait, duplicate/refused intent and parent
+shutdown with an accepted intent. If the boundary cannot support the
+guarantee, keep whole-cohort replacement or explicit refusal.
+
+### E1 — bounded execution-session/stream (first missing work discriminator)
+
+**Proposed first target:** one installed trusted Node fixture, a deterministic
+provider emitting a finite sequence of useful chunks with a held native
+resource; B serves fresh requests while A's admitted stream is still consumed.
+Then qualify a real Chromium Host for that same contract. Compare a narrow
+explicit stream-admission adapter with a fully materialized finite result;
+choose the latter when no live stream is required. Do not hide a returned
+iterator/Effect in the existing Promise contract.
+
+Before any public API change, prove the following candidate semantics:
+
+- Reserve the exact module generation and bounded work slot before the stream
+  or lazy continuation escapes. One explicit consumption owner controls pull,
+  cancellation and settlement; multiple consumers, resumable replay and
+  detached work are out of scope unless separately specified.
+- Own every active pull, nested invocation and finalizer until native
+  settlement. Closing a consumer, calling return/abort, timing out or
+  interrupting the waiting observer is a request, not evidence of physical
+  stop. Define how never-started streams are disposed or refused, so a leaked
+  handle cannot silently become an unbounded retention policy.
+- Specify finite buffered items/bytes, active streams, retained generations
+  and an idle/backpressure policy in the Host fixture. Overload refuses or
+  waits under the chosen policy; it never silently drops required occurrences.
+  Use actual producer demand/receiver effects, not LMU counters alone.
+- Keep Runtime's output/effect fence with the actual receiver. Allowed old
+  stream reads are not permission for stale writes or canonical provider
+  output. Neither Observation coalescing nor a new LMU event bus is a stream
+  or durable receipt protocol.
+
+For the first fixture choose one consumer, one outstanding pull, bounded
+demand-driven buffering and explicit close. Hold the exact generation from
+successful open until terminal consumption and all native pull/finalizer work
+settle. On early return request cancellation once, refuse new pulls, retain
+outstanding work and observe original close. Never-opened requests acquire
+nothing; opened but abandoned streams remain visibly owned until close and
+settlement. Refuse further admission at capacity, not fabricate disposal after
+a timer. Use independent producer sequence/demand and a blocked native pull
+at shutdown to test this boundary.
+
+Native cases: useful A/B overlap across delayed next and nested calls; pull
+error; early break; explicit cancel and ignored cancel; never-consumed handle;
+reentrant or overlapping pulls; bounded slow consumer; publication ambiguity
+during a stream; shutdown with a held pull/finalizer; stale/revoked receiver
+effect; cleanup debt and exact borrowed-resource survival. Include deliberate
+early-release and overflow mutants that reach the intended oracle. A failure
+to bind actual settlement rejects the proposed adapter, not the existing
+finite profile. Preserve E1 findings in the qualification matrix. E1 does not
+implement provider reconnect or arbitrary infinite streams.
+
+### E2 — crash-durable publication and bounded restart
+
+**Proposed discriminator:** independent Node processes using one disposable
+real authority database; compare a single-host SQLite transaction for the
+smallest process-loss proof with a PostgreSQL adapter for the intended Runtime
+and Orchestrator environment. Prefer PostgreSQL for a server/multi-process
+claim and reuse the selected owner's transaction/receipt mechanism. No database,
+broker or Temporal dependency enters the ordinary LMU core. A local SQLite
+result may not qualify PostgreSQL, multiple writers or a product.
+
+Before implementation, resolve this specific contract mismatch: current
+UpdateAuthority.read is synchronous and inert and select/retain has no await
+between head read and work reservation. An async PostgreSQL query or a
+process-local mirror cannot be substituted and still claim atomic admission.
+Qualify either one exclusively fenced serving owner with restart admission
+closed until the exact canonical closure is reconstructed, or a genuinely
+authoritative async select-and-retain operation with receiver fencing. Compare
+both against races; if a different public port is required, version it and
+retain the ordinary API rather than weaken its semantics.
+
+Minimum actual owner obligations:
+
+- Persist immutable attempt/payload, expected head/basis, candidate identity and
+  artifact/closure references before ambiguous external work can occur; atomically
+  commit the canonical head and original terminal receipt at the selected store.
+  No provider, extension or broker call runs inside that transaction.
+- On restart, admission stays closed until the winning authority and applicable
+  fence are observed, the exact installed closure is available and its native
+  owner is constructed. Recover the original attempt; absence is not rejection
+  while an earlier transaction or effect can still commit.
+- Reconcile external provider acceptance through its existing owner. No automatic
+  redispatch of an accepted/unknown input; stable effect identity outlives the
+  technical attempt. Unprovable external custody remains unresolved or refuses
+  admission according to the owning policy, never fabricates physical cleanup.
+- Declare retention and compaction for durable receipts, tombstones and assets.
+  Never evict an unresolved attempt, reuse a retired generation identity or
+  discard bytes still needed by an admitted consumer. No distributed
+  exactly-once or fleet-wide atomic update promise.
+
+Execute actual process kills at four barriers: durable intent before prepare,
+prepared candidate before publication, committed publication before reply, and
+cleanup/receiver effect before acknowledgement. Add competing publishers,
+same-ID changed payload, old-owner fence rejection, restarted head
+reconstruction, missing artifact, double restart and cleanup debt recovery.
+Inspect the real database and receiver effect log independently; prove that
+only one head wins, no accepted effect is duplicated, and exact original
+receipts remain recoverable. Do not confuse killing the test process with
+verified termination of a foreign provider.
+
+### E2b — selected transfer modes and recyclable realm
+
+Choose the smallest mode that satisfies the owner-required guarantee. Keep
+ordinary pin-and-drain unchanged; no generic configurable state machine.
+
+| Mode | Concrete implementation proposal | First rejecting controls |
+| --- | --- | --- |
+| Safe-boundary handover | At an owner-defined safe step/turn boundary, stop new old work, observe outstanding effects and persist a versioned checkpoint with stable operation ID, pending effect/approval IDs and compatible state basis. Construct B, verify checkpoint/schema and transfer canonical authority/fence in its actual owner. Resume the same operation, not a replay of the input. | Unknown irreversible effect, partially executed opaque tool, incompatible checkpoint, competing handover, crash after checkpoint or authority transfer; no duplicate provider input or stale effect. |
+| Exclusive-resource transfer | Stage inert B metadata. Seal old admission and revoke old receiver authority. Observe drain and the actual resource owner's disposition receipt (release or authorized atomic handover); acquire B only with current grant/fence. Uncertain disposition stays visibly unavailable/deferred. | Held old writer, lost release acknowledgement, failed B acquisition after release, late stale effect, competing transfer; native resource proves at most one authorized owner. |
+| Recyclable realm | Place a coherent shared-trust closure behind typed Host RPC with exact incarnation and separate execution/asset custody. Stage new realm, preserve permitted old work, fence effects, stop old realm and independently reconcile foreign obligations. Prefer finite in-process restart when sufficient. | Late old-incarnation reply, realm stop with unknown external effect, failed evaluation after acquisition, ignored stop; realm exit alone cannot settle remote effects or descendants. |
+
+Runtime/product owns checkpoints and effect semantics; the resource/executor
+owns physical disposition; GM owns composition; EF owns verified artifacts.
+LMU coordinates the selected mode. No arbitrary JS continuation migration or
+new public checkpoint format. Test stable operation identity, useful old/new
+results and independent resource/effect observations at the failure barriers.
+Returning to A code is a fresh transition under current state/grants, not
+restoring old authority. Qualify restart/fix-forward when the guarantee permits.
+
+### E3 — actual Desktop and cross-tier continuity
+
+**Proposed discriminator:** one real Electron main/renderer Host with a
+disposable document or execution-session view and a privileged native receiver.
+Reuse the chosen desktop host's existing IPC and authority conventions. Compare
+main-owned trusted replacement with renderer restart/reconstruction; select the
+smaller guarantee that preserves the useful interaction. Do not make Electron,
+React or a renderer abstraction mandatory in LMU.
+
+Use a narrow versioned IPC contract; the renderer never owns canonical grants,
+process custody, database or raw privileged handles. Main/receiver validates
+actual sender, domain/installation, current grant, generation and expected
+revision. Verify useful B with a held A request, dirty-view state retained or
+explicit restart fallback, stale renderer response, malformed/denied IPC,
+window close/reopen, main loss and native listener/handle cleanup. Inspect
+actual IPC/event dispatch and native owners, not a boolean status. Qualify the
+selected shell/OS explicitly; Node plus Chromium is not Desktop qualification.
+Mac/Windows/Linux and offline/old-client asset retention are distinct gates.
+Use existing framework composition and immutable asset/version contracts;
+do not invent a universal UI DSL or share one module instance across realms.
+
+### E4 — untrusted execution (EF/executor owner lane)
+
+Signature verification, installation approval and manifest declarations are not
+sandboxing. Start with the smallest actual target that enforces denied
+filesystem/network/IPC and capability limits plus observed termination. Compare
+the existing owner-supported isolated process/runtime (or Wasm capability
+boundary when appropriate); a Worker or subprocess alone is insufficient.
+EF owns artifact/admission/grant mapping, the executor owns containment,
+termination and physical observations, the product receiver owns current
+authority, and LMU coordinates the qualified replacement. Do not implement a
+second sandbox, trust store, loader or permission engine in LMU.
+
+Adversarial cases: denied filesystem, network and privileged receiver access;
+malformed capability and stale/revoked grant; CPU/memory/output saturation;
+non-cooperative execution; descendants or leaked handles; failed candidate and
+revocation during use; verified stop before release or subsequent activation
+where exclusivity is required. Run actual positive permitted effects and
+negative attempted effects, independently inspect resources/processes and
+retain failure evidence. The owner selects OS/containment limits and acceptable
+stop policy before a support claim. Signed trusted Node evidence cannot pass
+these cases.
+
+### E4b — full installed plugin lifecycle with EF
+
+Extend the existing signed-artifact join through the actual qualified EF-owned
+installation/admission route and disposable Host. Use clean public package
+exports and one external headless plugin. No private EF import or second
+installation table; Host owns grants, canonical state and useful work.
+
+Install verified A, activate/invoke A, stage verified compatible B, update
+under the selected mode, disable (new admission refused), observe original
+drain/cleanup, uninstall, then restart and observe actual installation and
+authority state. Keep installation, active generation, artifact identity,
+grant and useful adoption distinct. Reject tampered/incompatible B before
+evaluation, revocation between verification and effect, interrupted install or
+update, changed replay payload, disable during work, uninstall with held
+custody and restart with unresolved receipt. Preserve unrelated user data and
+retained assets until the actual owner permits disposition. Unsupported durable
+or isolation claims remain open; trusted in-process lifecycle does not qualify
+hostile code. No marketplace or public SPI implementation in this slice.
+
+### E5 — scale, exhaustion and release/adoption
+
+Scale the smallest qualified profile first, independently of E2–E4. Keep one
+activation owner per domain, no global fleet lock and no allocation of an
+updater per agent invocation. Test repeated A/B/C updates, simultaneous
+independent domains, held predecessors, burst work, candidate/attempt budget
+exhaustion, exact refusals and recovery. The present finite-session attempt
+ledger deliberately refuses when full; long-lived use needs a selected session
+renewal or durable retention policy, not silent pruning/reuse.
+
+Track cumulative evaluations and loaded bytes in the actual loader/realm
+owner, even when top-level execution precedes failed export validation.
+Logical retirement is not ESM unloading. Compare one and multiple digests
+under Node 24/26; record evaluations, live owners, heap/RSS/ArrayBuffers,
+retained assets and actual stop. Set finite evaluation/byte limits before
+loading. Refuse or renew a qualified realm at exhaustion; no unbounded
+cache-busting or GC-only release proof. At saturated data capacity preserve
+honest refusal/deferred adoption. Evaluate separately bounded management or
+observation capacity only for an actual need; never bypass work limits or
+fake useful successor adoption.
+
+Record declared workload, baseline with ordinary static/rolling replacement,
+p50/p95/p99 admission/activation latency, throughput, retained generations,
+RSS/heap/FD/listeners, cleanup debt and saturation behavior. Test plateaus
+after repeated disposal with independent native measurements. The product's
+100/500/1,000-agent envelope is a separate integration workload, not a library
+test result. Set numeric acceptance limits from actual fixture/Host constraints
+before execution; do not invent performance SLA from small CI timings.
+
+Before a public package, qualify the clean packed consumer, public declaration
+and peer/optional entry surfaces, install provenance, supported Node/browser
+cohorts, compatibility/change policy and normal repository admission. A public
+SPI follows its owning independent implementation/conformance rule; it is not
+equivalent to npm publication of an ordinary library. Product integration
+selects and qualifies its own profile, receiver, budgets and fallback after the
+shared fixture proof. No product pin change or publication follows automatically.
+
+### Sequence and exit conditions
+
+| Packet | Entry / dependency | First discriminator estimate (P / T LOC) | Complexity / estimate confidence |
+| --- | --- | --- | --- |
+| E0 | Public GM plans and Host management ownership | 200–600 / 600–1,200 | 7/10 / 5/10 |
+| E1 | Current finite core and explicit stream ownership | 300–750 / 900–1,700 | 7/10 / 5/10 |
+| E2 | Owner-selected real transaction/receipt mechanism | 400–1,200 / 1,000–2,500 | 9/10 / 3/10 |
+| E2b | E0 and selected checkpoint/resource/realm owner; E2 for durability | 300–1,000 / 900–2,000 per mode | 9/10 / 3/10 |
+| E3 | Selected shell/IPC and supported placement | 300–850 / 900–1,800 | 7/10 / 4/10 |
+| E4 | Existing EF/executor enforcement mechanism and owner | 150–500 LMU adapter / 800–1,800 | 9/10 / 3/10 |
+| E4b | Qualified EF installation and selected Host guarantees | 200–650 / 800–1,600 | 8/10 / 4/10 |
+| E5 | Current bounded profile; add stronger profiles only after their qualification | 0–250 / 600–1,300 | 6/10 / 5/10 |
+
+These are authored production/integration and fixture/test estimates for the
+first discriminators, not full production implementation commitments. Upstream
+work, packaging, product adoption, performance infrastructure and docs are
+excluded. E0 resolves affected-set/self-update ownership before those claims; E1 may
+qualify a fixed whole closure independently. E2/E3/E4 may investigate
+mechanisms in parallel; no prerequisite is invented between unrelated claims.
+E2b qualifies one selected mode at a time; E4b depends on real EF/Host
+primitives for each promised lifecycle outcome. The native Effect experiment in section 10
+can run independently, but does not qualify E1 or E2. Do not implement all
+alternatives. After each smallest useful slice, review observed owner/API gaps,
+choose only the necessary extension, and record rejecting controls and exact
+native evidence. No claimed improvement without a working positive and a
+discriminating negative; no new shared abstraction unless the existing owner
+contract demonstrably cannot satisfy the selected guarantee.

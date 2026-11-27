@@ -1,9 +1,10 @@
-schemaVersion: 3
+schemaVersion: 5
+budgetMs: 300000
 sourcePolicyPath: architecture/foundation/source-dependencies.yaml
 suppressionPolicyPath: architecture/foundation/suppression-governance.yaml
-featureProfilePath: architecture/feature-module-profile.json
+topologyPath: architecture/foundation/source-topology.json
 lintConfigPath: .oxlintrc.json
-compilerProjects: [tsconfig.json, tsconfig.portable.json, tsconfig.tools.json, tsconfig.tests.json, scripts/tsconfig.json, tests/tsconfig.json]
+toolchainConfigPath: toolchain.config.json
 scripts:
   fast: check:fast
   full: check
