@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "kind": "complete-package-manager-output-reconciliation",
+  "preparationSource": "75806d391c5fdaba0a512e79e3967823f7a7d29d",
+  "preparationRun": 46001466080,
+  "preparationJob": 140513886517,
+  "priorReceipt": "preparation.json",
+  "failedFrozenSource": "6d5e6ee003b310ea66edc2e83f2160b6c616b515",
+  "failedFrozenRuns": [
+    46002040686,
+    46002040675
+  ],
+  "failure": "ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION",
+  "cause": "Normal resolution generated exact minimumReleaseAgeExclude entries in both workspace manifests; those two outputs were omitted when importing the locks and topology.",
+  "inputInterpretation": "The original preparation inputs array records post-generation working-tree bytes. Both workspace manifests had changed from checkout source; all other durable recorded inputs matched.",
+  "pnpm": {
+    "version": "11.25.0",
+    "source": "6d90c71efdffbc909b499490b64c66badc720327",
+    "contract": "https://github.com/pnpm/pnpm/blob/6d90c71efdffbc909b499490b64c66badc720327/pnpm11/pnpm/test/install/minimumReleaseAge.ts"
+  },
+  "recovery": {
+    "method": "Normal pnpm lock-only resolution in disposable copies, using previous b7d3f0b locks, current manifests and original workspace files; no age, strictness, trust or environment override.",
+    "workspaces": [
+      {
+        "path": "pnpm-workspace.yaml",
+        "original": {
+          "bytes": 13,
+          "sha256": "b379483d4293500af8e9d3e8d83b4b5a2ad1e844911cd7be7f7e274e4bb80666",
+          "gitBlob": "3334c0e4395f2f686be9a857b2aaa0a94bbc7541"
+        },
+        "restored": {
+          "bytes": 162,
+          "sha256": "2a7bb565634f8ac557ca5f9fbb6ef89c3affd4dbf83df164e567fb45417a23dd",
+          "gitBlob": "66ffdba3e1fd2e4f4850c2a53ac5733ee3801ddb"
+        },
+        "matchesPriorPostGenerationInput": true
+      },
+      {
+        "path": "tests/qualification/portable-document/pnpm-workspace.yaml",
+        "original": {
+          "bytes": 178,
+          "sha256": "adefeee5dc4af5ea69e5fa274ae05b20a6bb4a2a9b38d14ca8afc5fd594d588a",
+          "gitBlob": "9e488cd80ecbaa53990acca4470b6d557b888577"
+        },
+        "restored": {
+          "bytes": 301,
+          "sha256": "49f8585e60cac799fc8a1fda35a38ce546fbd389bdc3585a2ef307d390fd6d65",
+          "gitBlob": "bdfdcdded499fd8198c85c6befc1a7308dbb9475"
+        },
+        "matchesPriorPostGenerationInput": true
+      }
+    ],
+    "unchangedCanonicalOutputs": [
+      {
+        "path": "pnpm-lock.yaml",
+        "bytes": 83767,
+        "sha256": "4545e10f80a59e14652beec6d75ce214c2138d9d4c986d214a286df35c0fce80",
+        "blob": "625cbf87b65831c4beb4d4fd7819d8846439debe"
+      },
+      {
+        "path": "tests/qualification/portable-document/pnpm-lock.yaml",
+        "bytes": 30793,
+        "sha256": "55775425c561910ab52cae530b4679f85c4e85a9af929249ef5bae191c4e46d9",
+        "blob": "53ddf7c7b52b1881d10b63496e6d49542af72e66"
+      },
+      {
+        "path": "architecture/foundation/source-topology.json",
+        "bytes": 673,
+        "sha256": "756407c415b48b2411cbfc9b0134b10b2188afb8031772060b0e21c1d5be8b09",
+        "blob": "ac58a2145984f0b59110ec1e03eedb52bfda5fc0"
+      }
+    ],
+    "independentReview": "Both restored SHA-256 and Git blob identities independently recomputed; only the three root/two static exact selectors are present.",
+    "ordinaryLocalFrozenInstall": "passed all 259 root entries with no lifecycle scripts and strict engine/peer checks; final hosted source qualification remains separate"
+  },
+  "producer": {
+    "repository": "agent-teams-ai/engineering-foundation",
+    "source": "1b753d04847c1021dd5a485383c4df0714b27be7",
+    "releaseRun": 45959824462,
+    "releaseAttempt": 1,
+    "releaseConclusion": "success",
+    "registryVerification": "Independent reviewer cryptographically verified all six registry signatures for the three exact name@version:integrity payloads using npm public keys.",
+    "provenanceObservation": "Inspected SLSA statements bind the three package digests to this source and release workflow.",
+    "fullSigstoreCertificateAndTransparencyVerification": false
+  }
+}

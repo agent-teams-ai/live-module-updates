@@ -20,6 +20,17 @@ engine installation must pass. The accepted immutable FMS v1.1 content and its
 digest remain unchanged: tooling version and architectural standard version
 are distinct authorities.
 
+Deliver the package manager's complete generated state, including both workspace
+manifests. Under pnpm 11.25's implicit age policy, normal resolution records the
+selected fresh exact versions in minimumReleaseAgeExclude. Its
+[native round-trip contract](https://github.com/pnpm/pnpm/blob/6d90c71efdffbc909b499490b64c66badc720327/pnpm11/pnpm/test/install/minimumReleaseAge.ts)
+requires those entries for the later frozen install. The
+[preparation reconciliation](../research/evidence/tooling-module-reuse-20261127/preparation-reconciliation.json)
+records recovery of the actual generated three root/two reference entries after
+their initial omission. The default age, other dependencies, registry/integrity
+verification and ordinary frozen gates are retained. Only these exact versions
+are selected; this is not a package-wide or future-version exception.
+
 The npm publication records inspected on 2026-11-27 identify Foundation 3.0.0
 as published on 2026-10-25 at 11:42:09.678 UTC and Foundation 4.0.3 on
 2026-11-27 at 07:56:28.697 UTC. FMS 0.4.4 and Stack 0.4.0 were published that

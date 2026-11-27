@@ -113,3 +113,30 @@ bytes for review; it never commits or changes refs. Its temporary receipt helper
 is TypeScript and must pass the owning strict compiler before execution.
 Only after the canonical locks/topology are committed does ordinary frozen CI
 provide the new graph's qualification. Normal Central admission remains separate.
+
+## Complete package-manager output correction
+
+The first clean frozen runs on 6d5e6ee stopped during installation with
+ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION. Inspection of preparation job
+140513886517 showed that ordinary pnpm resolution had generated exact fresh
+version selectors in both pnpm-workspace.yaml files. The transfer had imported
+the two locks and topology but omitted those two generated manifests. The
+original receipt's inputs describe post-generation working-tree bytes, not only
+unchanged checkout inputs. Earlier review compared lock/topology and derivation
+hashes but missed this workspace correspondence.
+
+The original receipt and failed source remain unchanged. A separate
+[reconciliation](../research/evidence/tooling-module-reuse-20261127/preparation-reconciliation.json)
+records old and restored identities. Ordinary pnpm resolution from the previous
+locks and new manifests reproduced both workspace files exactly. An independent
+reviewer recomputed both SHA-256 and Git blob identities against the original
+post-generation observations. Root has three exact selectors; the static
+reference has two. The existing default age and all other checks remain intact.
+
+The exact pnpm 11.25 native tests document this fresh-resolution/frozen-install
+contract. Independent review checked the package metadata, registry signatures
+and stated provenance binding; the producer's release run 45959824462 succeeded
+at 1b753d04847c1021dd5a485383c4df0714b27be7. This records registry-signature
+verification and inspected provenance, not full Sigstore transparency verification.
+After recovery, ordinary local strict frozen installation passed all 259 root
+entries. Actual new-graph source/native checks remain the next gate.

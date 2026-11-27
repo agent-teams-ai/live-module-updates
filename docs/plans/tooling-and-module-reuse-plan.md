@@ -276,3 +276,10 @@ stronger profiles and protected upstream procedures are excluded. Confidence
   native execution and normal delivery remain pending.
 - D3 audit packet is recorded in the owning first-operation plan and decision
   register. Option A is delivered; proposed native option B remains separate.
+- The first clean frozen install at 6d5e6ee exposed incomplete preparation
+  delivery: pnpm had generated exact release-age selectors in both workspace
+  manifests, but only locks/topology had been imported. The original receipt's
+  inputs include those post-generation workspace bytes. Preserve that receipt
+  and refusal; recover both manifests through normal resolution and independently
+  match their previously recorded hashes. Two reviewers accepted the bounded
+  correction; no default age, strictness or other verification policy changes.
