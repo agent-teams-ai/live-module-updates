@@ -14,8 +14,8 @@ from native execution; source inspection is not an executed experiment.
 
 | Finding | Correction or decision | Qualification |
 | --- | --- | --- |
-| Foundation 3.0.0 is older than the current published release | Prepare the genuine Foundation 4.0.3/FMS 0.4.4/Stack 0.4.0 migration, including topology and compiler authorities | Pending new-graph native checks and legitimate Central acceptance |
-| Root and maintained static reference use separate development graphs | Upgrade both explicitly; keep their different adopted check scopes | Pending each frozen installation and existing complete route |
+| Foundation 3.0.0 is older than the current published release | Implement the genuine Foundation 4.0.3/FMS 0.4.4/Stack 0.4.0 migration, including topology and compiler authorities | Native route passed on 014815f5; legitimate Central acceptance remains pending |
+| Root and maintained static reference use separate development graphs | Upgrade both explicitly; keep their different adopted check scopes | Both frozen installations and complete routes passed on 014815f5; see the current checkpoint below |
 | New GM runtime module manually names its Resources scope | Use Assembly's third-argument scoped adapter, which uses the exact implementation identity | Local installed Node positive case plus rejecting old-wrapper mutation passed |
 | Group order and root filenames diverge from adopted CMS | Sort group members and use .root.ts; update source/mutation/hash references | Strict compilation and local installed Node campaign passed |
 | Three concrete Host constructions omit run.signal | Pass each actual owned scope's signal; generation scopes stay detached | Independent source reviews and complete hosted native route passed on b7d3f0b |
@@ -82,11 +82,14 @@ published on 2026-10-25; 4.0.3, FMS 0.4.4 and Stack 0.4.0 were published on
 Package freshness, native compatibility and Central admission are distinct.
 
 The existing Central [PR #447](https://github.com/agent-teams-ai/.github/pull/447)
-owns schema-v5 bootstrap recognition. Its inspected head 050d47e remains unmerged
-and recognizes an older exact graph. LMU must not copy the checker, introduce
-contradictory old/new fields, pin the unaccepted proposal or treat the native
-source result as managed Docs acceptance. Complete independent migration and
-qualification before the final live prerequisite check.
+owns schema-v5 bootstrap recognition. Initial inspection of 050d47e found only
+the older exact 4.0.2/0.4.3/0.3.1 graph. Follow-up source
+[4049391](https://github.com/agent-teams-ai/.github/commit/404939142f6e4bbd03fe53a1f710feed310971a3)
+retains that graph and recognizes LMU's 4.0.3/0.4.4/0.4.0 graph. It remains
+unmerged and unaccepted as an immutable workflow source. LMU must not copy the
+checker, introduce contradictory old/new fields, pin the unaccepted proposal
+or treat the native source result as managed Docs acceptance. Re-read the
+accepted upstream authority before delivery.
 
 Local focused validation of D2 passed all four strict compiler projects and
 the installed Node campaign. That local command did not select Chromium.
@@ -106,13 +109,13 @@ on that source. Two independent follow-up D2 source reviews found no critical or
 material issues. These results qualify the CMS changes on the previous tooling
 graph. They do not qualify the subsequent Foundation 4 migration.
 
-The new graph is prepared through normal package-manager lock generation and
-the installed public FMS projection. Because the local executor is temporarily
-unavailable, a branch-only, contents-read CI preparation emits exact source-bound
-bytes for review; it never commits or changes refs. Its temporary receipt helper
-is TypeScript and must pass the owning strict compiler before execution.
-Only after the canonical locks/topology are committed does ordinary frozen CI
-provide the new graph's qualification. Normal Central admission remains separate.
+The new graph was prepared through normal package-manager lock generation and
+the installed public FMS projection. While the local executor was unavailable,
+a branch-only, contents-read CI preparation emitted exact source-bound bytes
+for review without committing or changing refs. Its temporary TypeScript receipt
+helper passed the owning strict compiler. The generated state was committed
+and the preparation workflow/helper removed before ordinary frozen CI qualified
+the new graph. Normal Central admission remains separate.
 
 ## Complete package-manager output correction
 
@@ -139,7 +142,35 @@ and stated provenance binding; the producer's release run 45959824462 succeeded
 at 1b753d04847c1021dd5a485383c4df0714b27be7. This records registry-signature
 verification and inspected provenance, not full Sigstore transparency verification.
 After recovery, ordinary local strict frozen installation passed all 259 root
-entries. Actual new-graph source/native checks remain the next gate.
+entries. Actual new-graph source/native checks were the next gate at that
+checkpoint; the later completed runs are recorded below.
+
+## Current source review and native checkpoint
+
+An independent reviewer examined the 43-file change at
+[014815f5bb5fcd311d3c5e4054804ab265617c3f](https://github.com/agent-teams-ai/live-module-updates/commit/014815f5bb5fcd311d3c5e4054804ab265617c3f)
+against f38f2e634e7b9e28e4294f1ea8f7ead909e35ab9. The review covered GM scope
+identity and construction ownership, the two frozen tooling graphs, v5 topology
+and strict compiler coverage, independent rejection controls, and the boundary
+between current implementation and proposed Effect/E0–E5 profiles. It found no
+critical or material implementation issue within Programme D. It did identify
+stale delivery descriptions; this checkpoint updates those descriptions while
+preserving the earlier source observations and failures.
+
+The reviewer separately inspected the actual hosted job logs:
+
+| Exact-source gate | Result |
+| --- | --- |
+| [Native library run 46063626701](https://github.com/agent-teams-ai/live-module-updates/actions/runs/46063626701) | 114 tests passed, zero failures; all four strict compiler projects, build and v5 quality controls passed; Node and Chromium each passed all eight composed controls |
+| [Packed reference run 46063626661](https://github.com/agent-teams-ai/live-module-updates/actions/runs/46063626661) | 46 tests passed, zero failures and zero skips |
+| [Commit identity run 46063624666](https://github.com/agent-teams-ai/live-module-updates/actions/runs/46063624666) | Passed |
+| [Repository admission run 46063627535](https://github.com/agent-teams-ai/live-module-updates/actions/runs/46063627535) | Genuine refusal from the existing Central caller at 89b5d7c512d9c4b5ae63709857a0d71cb2e6d178; its legacy inspector requires compilerProjects and does not recognize the modern strict compiler route |
+
+These results are bound to 014815f5; they are not inherited final-head or
+actual-main evidence for a later commit. Accepted upstream publication, the
+legitimate immutable caller update, ordinary merge and actual-main verification
+remain pending. This review does not qualify native Effect, stronger profiles,
+public release, product adoption or an unaccepted upstream source.
 
 ## Follow-up plan review against owner-required outcomes
 

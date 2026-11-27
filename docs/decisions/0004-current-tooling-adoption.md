@@ -5,6 +5,8 @@ normal bootstrap admission are tracked by [Programme D](../plans/tooling-and-mod
 and [LMU PR #12](https://github.com/agent-teams-ai/live-module-updates/pull/12).
 This decision supersedes ADR-0002's initial tooling selection only after those
 gates succeed. Package availability alone is not accepted source admission.
+The [current native checkpoint](../reviews/tooling-and-module-reuse-2026-11-27.md#current-source-review-and-native-checkpoint)
+passed on 014815f5; ordinary Central admission remains pending.
 
 ## Current exact graph
 
@@ -71,12 +73,15 @@ also pass. Historical sealed fixtures and evidence remain unchanged.
 The currently pinned Central bootstrap implementation accepts the previous
 schema/Stack route. Its owning
 [PR #447](https://github.com/agent-teams-ai/.github/pull/447) proposes the schema-5
-reader, but the inspected unmerged head 050d47ec66717f0f177b586c36520eb09f3ab4e0
-recognizes Foundation 4.0.2/FMS 0.4.3/Stack 0.3.1, not this newer graph.
+reader. Initially inspected source 050d47ec66717f0f177b586c36520eb09f3ab4e0
+recognized Foundation 4.0.2/FMS 0.4.3/Stack 0.3.1. Follow-up source
+[4049391](https://github.com/agent-teams-ai/.github/commit/404939142f6e4bbd03fe53a1f710feed310971a3)
+retains that tuple and adds 4.0.3/0.4.4/0.4.0. It remains an unmerged proposal;
+its source compatibility does not establish accepted workflow authority.
 
-Complete the independent LMU migration and native qualification. Before normal
-merge, recheck the accepted upstream source and use its legitimately admitted
-immutable revision once it recognizes this graph. Do not copy its checker,
+The independent LMU migration passed its native and packed routes on 014815f5.
+Before normal merge, recheck the accepted upstream source and use its legitimately
+admitted immutable revision once available. Do not copy its checker,
 invent exceptions, duplicate deprecated fields, point to an unaccepted source
 or relax an existing check. The owning upstream workstream retains this change.
 Central registration, enforced protections and managed Docs admission remain

@@ -44,7 +44,7 @@ the immutable accepted FMS v1.1 profile, and GM CMS/practices before edits.
 | Accepted FMS content/adoption | profile at 89b5d7c512d9c4b5ae63709857a0d71cb2e6d178; unchanged v1.1 digest |
 | Get Modular CMS and packages | 27dfb4ddf67cead198fee6e781ab355c37782928 |
 | Engineering Foundation current source | 7438b7ee4429dc7798cf2b18c81e6bc7788f0f5b |
-| Existing Central v5 adapter proposal | #447, 050d47ec66717f0f177b586c36520eb09f3ab4e0; unmerged |
+| Existing Central v5 adapter proposal | Initial inspection: 050d47ec66717f0f177b586c36520eb09f3ab4e0; follow-up: 404939142f6e4bbd03fe53a1f710feed310971a3 in #447, still unmerged |
 
 Official npm metadata observed on 2026-11-27:
 
@@ -111,15 +111,18 @@ already exercise the same authoritative boundary.
 
 ### Actual upstream prerequisite
 
-Current accepted Central bootstrap requires old `featureProfilePath`,
-`compilerProjects` and Stack 0.1.1. Foundation 4 accepts coverage schema 5 only
-and rejects those obsolete fields. Existing Central
-[#447](https://github.com/agent-teams-ai/.github/pull/447) supplies the v5 adapter
-but currently recognizes only Foundation 4.0.2 / FMS 0.4.3 / Stack 0.3.1.
-Its protected-source acceptance is still pending.
+The pinned Central bootstrap requires old `featureProfilePath`, `compilerProjects`
+and Stack 0.1.1. Foundation 4 accepts coverage schema 5 only and rejects those
+obsolete fields. At initial inspection, Central
+[#447](https://github.com/agent-teams-ai/.github/pull/447) recognized only
+Foundation 4.0.2 / FMS 0.4.3 / Stack 0.3.1. Follow-up source
+[4049391](https://github.com/agent-teams-ai/.github/commit/404939142f6e4bbd03fe53a1f710feed310971a3)
+also recognizes LMU's exact 4.0.3 / 0.4.4 / 0.4.0 tuple while retaining the older
+tuple. That proposal remains unmerged and its protected-source acceptance is
+pending; recognition in its source is not accepted workflow authority.
 
-Prepare and qualify LMU's new graph independently. Final ordinary admission
-requires that owning lane to qualify the newest tuple and publish an accepted
+LMU's new graph passed the native and packed routes on 014815f5, as recorded
+below. Final ordinary admission requires the owning lane to publish an accepted
 immutable workflow revision. Never copy the checker, pin an unaccepted proposal,
 add contradictory fields or claim configured state as positive qualification.
 Retain any real rejected admission result. Re-read this dependency before the
@@ -257,7 +260,7 @@ stronger profiles and protected upstream procedures are excluded. Confidence
 - D2 local focused validation: all four strict compiler projects passed;
   the installed Node campaign passed 34 positive cases and eight negative
   controls. Chromium was not selected in this local focused run; complete
-  hosted qualification and new-tooling validation remain pending.
+  hosted qualification and new-tooling validation were pending at this checkpoint.
 - D2 hosted source b7d3f0b: complete native run 45999548017 passed 106 tests;
   installed Node and Chromium each passed 34 positive cases and eight controls.
   Static reference, admission and identity checks also passed. Two subsequent
@@ -272,8 +275,8 @@ stronger profiles and protected upstream procedures are excluded. Confidence
   Git blob identities matched independent re-import. The source-bound receipt
   is retained; the temporary preparation workflow/helper is removed afterward.
 - Native migration controls passed two source-review rounds. The typed-lint
-  witness now uses the same valid, defective and restored file. Actual new-graph
-  native execution and normal delivery remain pending.
+  witness uses the same valid, defective and restored file. Actual new-graph
+  native execution and normal delivery were pending at this checkpoint.
 - D3 audit packet is recorded in the owning first-operation plan and decision
   register. Option A is delivered; proposed native option B remains separate.
 - The first clean frozen install at 6d5e6ee exposed incomplete preparation
@@ -283,3 +286,14 @@ stronger profiles and protected upstream procedures are excluded. Confidence
   and refusal; recover both manifests through normal resolution and independently
   match their previously recorded hashes. Two reviewers accepted the bounded
   correction; no default age, strictness or other verification policy changes.
+- Native checkpoint at 014815f5bb5fcd311d3c5e4054804ab265617c3f:
+  [native run 46063626701](https://github.com/agent-teams-ai/live-module-updates/actions/runs/46063626701)
+  passed 114/114 tests and the complete frozen quality route;
+  [packed reference run 46063626661](https://github.com/agent-teams-ai/live-module-updates/actions/runs/46063626661)
+  passed 46/46 with no skips. Independent review found no critical or material
+  implementation issue within Programme D; its scope and exact evidence are in
+  the [review record](../reviews/tooling-and-module-reuse-2026-11-27.md#current-source-review-and-native-checkpoint).
+  The genuine old-checker
+  [admission refusal 46063627535](https://github.com/agent-teams-ai/live-module-updates/actions/runs/46063627535)
+  remains retained. Accepted upstream publication, the legitimate immutable
+  caller update, ordinary merge and actual-main verification are still pending.
