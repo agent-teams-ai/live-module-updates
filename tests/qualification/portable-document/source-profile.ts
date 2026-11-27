@@ -8,8 +8,8 @@ export const sourceAuthority = {
   },
   cms: "https://github.com/agent-teams-ai/get-modular/blob/a5f41853200aed26d692e89d768185013d629a12/docs/architecture/common-assembly.md#consumer-module-standard",
   tools: {
-    "@agent-teams/engineering-foundation": "3.0.0",
-    "@agent-teams/feature-module-standard": "0.3.0",
+    "@agent-teams/engineering-foundation": "4.0.3",
+    "@agent-teams/feature-module-standard": "0.4.4",
     "@get-modular/conformance": "0.5.2",
     typescript: "7.0.2",
   },
