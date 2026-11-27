@@ -1,0 +1,128 @@
+{
+  "kind": "index of the unchanged hosted artifact; individual source-bound results are inside the ZIP",
+  "source": "1d357f5e1f1366ee83b9f53b28935e01b7f4c12d",
+  "runId": 45931983864,
+  "jobId": 140286460094,
+  "overallJob": "failed after all native tests at the undeclared development node:module boundary",
+  "runner": {
+    "tests": 106,
+    "passed": 106,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "artifact": {
+    "id": 15168569620,
+    "file": "1d357f5-native.zip",
+    "bytes": 879616,
+    "sha256": "f76364e949428ba4a9678139ff3c924bd3068552b998d4144b9b4a32572b8357"
+  },
+  "cohort": {
+    "node": "v24.22.3",
+    "typescript": "7.0.2",
+    "gm": {
+      "@get-modular/core": "0.8.0",
+      "@get-modular/assembly": "0.8.0",
+      "@get-modular/resources": "0.2.2",
+      "@get-modular/conformance": "0.5.2"
+    },
+    "browser": {
+      "playwright": "1.65.1",
+      "playwrightCore": "1.65.1",
+      "revision": "1255",
+      "browserVersion": "159.0.8154.6",
+      "launch": {
+        "browser": "chromium",
+        "headless": true,
+        "selection": "Playwright pinned default"
+      },
+      "actualVersion": "159.0.8154.6"
+    }
+  },
+  "composed": {
+    "archives": 8,
+    "sourceInputs": 68,
+    "positiveCasesPerTarget": 34,
+    "negativeControlsPerTarget": 7,
+    "rootLockSha256": "ec399989959bf42deb545540a006eae9d798881b99615451832322e64c34cad7",
+    "consumerLockSha256": "6f645fddc27f32fb2312e71a5cda249d44fc30fe0717fe67d0fe741e56cfef6a",
+    "lmuArchive": {
+      "name": "live-module-updates",
+      "version": "0.1.0",
+      "files": [
+        "LICENSE",
+        "README.md",
+        "dist/features/update-operation/adapters/resources.d.ts",
+        "dist/features/update-operation/adapters/resources.js",
+        "dist/features/update-operation/application/cleanup-report.d.ts",
+        "dist/features/update-operation/application/cleanup-report.js",
+        "dist/features/update-operation/application/generation.d.ts",
+        "dist/features/update-operation/application/generation.js",
+        "dist/features/update-operation/application/invocation.d.ts",
+        "dist/features/update-operation/application/invocation.js",
+        "dist/features/update-operation/application/models.d.ts",
+        "dist/features/update-operation/application/models.js",
+        "dist/features/update-operation/application/operation-state.d.ts",
+        "dist/features/update-operation/application/operation-state.js",
+        "dist/features/update-operation/application/ports/adoption.d.ts",
+        "dist/features/update-operation/application/ports/adoption.js",
+        "dist/features/update-operation/application/ports/authority.d.ts",
+        "dist/features/update-operation/application/ports/authority.js",
+        "dist/features/update-operation/application/ports/invocation.d.ts",
+        "dist/features/update-operation/application/ports/invocation.js",
+        "dist/features/update-operation/application/ports/lifetime.d.ts",
+        "dist/features/update-operation/application/ports/lifetime.js",
+        "dist/features/update-operation/application/ports/preparation.d.ts",
+        "dist/features/update-operation/application/ports/preparation.js",
+        "dist/features/update-operation/application/update-operation.d.ts",
+        "dist/features/update-operation/application/update-operation.js",
+        "dist/features/update-operation/composition/create-update-runtime.d.ts",
+        "dist/features/update-operation/composition/create-update-runtime.js",
+        "dist/features/update-operation/testing/authority-contract.d.ts",
+        "dist/features/update-operation/testing/authority-contract.js",
+        "dist/features/update-operation/testing/authority-evidence.d.ts",
+        "dist/features/update-operation/testing/authority-evidence.js",
+        "dist/features/update-operation/testing/authority-laws.d.ts",
+        "dist/features/update-operation/testing/authority-laws.js",
+        "dist/index.d.ts",
+        "dist/index.js",
+        "dist/resources.d.ts",
+        "dist/resources.js",
+        "dist/testing.d.ts",
+        "dist/testing.js",
+        "package.json"
+      ],
+      "sha256": "b226b1ed7a6bbb27a76aec77ffb0db5595940d8836dc5c1c0bb8f63225734640",
+      "integrity": "sha512-PSlOkAgZKvD50/KmizFgWQOazszehdkBJLnnOataa/C66Y4m/D/BSAtLD1CJnsqtUkxuYTUISXbyJ5CWaHIr6Q==",
+      "filename": "live-module-updates-0.1.0.tgz"
+    },
+    "reportEntries": [
+      {
+        "path": "composed-document/identities.json",
+        "bytes": 217006,
+        "sha256": "d826e9fcf143e2f1aa1ab036f43dbf9aa16d88448e228dc58af27b0a625ebf69"
+      },
+      {
+        "path": "composed-document/node.json",
+        "bytes": 478947,
+        "sha256": "cdc4faeb063b086d1418ca2bc56c375e2c0b79f215de0171eb282c34acc21641"
+      },
+      {
+        "path": "composed-document/chromium.json",
+        "bytes": 1038941,
+        "sha256": "9636cb05776f7f2d5c3677efab4dcef53b9acfc50b71b00cf7755b6cba94df50"
+      },
+      {
+        "path": "composed-document/browser-version.json",
+        "bytes": 265,
+        "sha256": "12cf75d1f67b7c4beae9c38a26082fe52817fbfd3283b63c89c876022b0290a9"
+      },
+      {
+        "path": "composed-document/consumer-lock.json",
+        "bytes": 4804,
+        "sha256": "6f645fddc27f32fb2312e71a5cda249d44fc30fe0717fe67d0fe741e56cfef6a"
+      }
+    ]
+  },
+  "scope": "Finite trusted cooperative GM closure; original signed EF path remains separate. Full native job success requires the follow-up precise policy correction and ordinary final-head/main checks."
+}

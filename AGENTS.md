@@ -30,6 +30,12 @@ For writing or qualifying a modular feature, start with the
 for source, commands and scoped evidence. It covers private TEST packages,
 independent Node/Chromium Hosts and controlled restart. The consumer's accepted
 CMS/FMS and local adoption profile remain authoritative.
+For a live whole closure and a real GM-owned LMU runtime, use the
+[composed reference](tests/qualification/composed-document/README.md),
+[current ownership decision](docs/decisions/0003-composed-runtime-ownership.md)
+and [source-bound evidence](docs/research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu).
+Reuse its concrete ownership boundary; a product still owns its contracts,
+state, grants, selected workload and accepted package pins.
 
 The owner's 2026-11-24 clarification requires representative fixtures and
 independent test Hosts before dependent products. A first application is not

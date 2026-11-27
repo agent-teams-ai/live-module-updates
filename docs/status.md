@@ -17,17 +17,19 @@ cooperative fixture profile. Stronger profiles remain scoped questions.
 ## Composed-module successor, 2026-11-27
 
 [Programme C](plans/composed-module-adoption-plan.md) continues in the single
-[Draft PR #11](https://github.com/agent-teams-ai/live-module-updates/pull/11),
+[PR #11](https://github.com/agent-teams-ai/live-module-updates/pull/11),
 without changing executor A's EF/upstream-GM ownership. Its published checkpoints
 correct public function variance, preserve actual authority-call lifetime and
 expose current ownership separately from immutable original close results.
 The portable testing entry supplies actual Host authority laws and has its own
 clean installed consumer and forbidden inward runtime imports.
 
-The complete GM-owned Document/Format/Export/Summary composition, independent
-Node/Chromium Hosts and native adverse controls are being qualified. The
+The complete GM-owned Document/Format/Export/Summary composition passed its
+native campaign in independent Node and Chromium Hosts, including all intended
+adverse controls. The
 [canonical matrix](research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu)
-owns exact checkpoints, runs and current limits; the
+owns exact checkpoints, runs, the original later policy failure and current
+limits. Final-head and actual-main delivery checks belong to the same PR; the
 [review record](reviews/composed-module-adoption-2026-11-27.md) preserves the
 receiver and native-observation defects discovered during integration.
 The ordinary library remains portable, while actual selectable construction

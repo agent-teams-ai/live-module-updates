@@ -1,9 +1,12 @@
 # Programme C: composed modules and qualified Host integration
 
-Status: reviewed implementation programme, 2026-11-27; execution started after
+Status: implemented selected scope, 2026-11-27; source-bound native results are
+recorded in the [qualification matrix](../research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu).
+The [single delivery PR](https://github.com/agent-teams-ai/live-module-updates/pull/11)
+owns final-head, normal-merge and actual-main receipts. Execution started after
 two independent review rounds. The owner authorized
 planning, independent critique, implementation, review and delivery in one
-Draft PR. This document fixes scope before implementation; it is not execution
+Draft PR. This document fixed scope before implementation; it is not execution
 evidence or acceptance of a new production profile. Completed B0–B7 remains in
 [its owning plan](first-operation-implementation-plan.md).
 

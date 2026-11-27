@@ -464,12 +464,60 @@ the two plan rounds, native discriminators and material implementation findings.
 | Prepared receiver correction | `43ae5cc5b06b35b1838f4dba198f77d6456af3a3`, native run [45928918639](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45928918639): **103/103**, zero failures/cancellations/skips; static packed run [45928918721](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45928918721) and admission inspection [45928919115](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45928919115) successful |
 | Original receiver failure | [Actual failing report](evidence/composed-module-20261127/c4-prepared-receiver-receipt.json), [native error](evidence/composed-module-20261127/c4-prepared-receiver-node.json), [source/archive/compiler identities](evidence/composed-module-20261127/c4-prepared-receiver-identities.json); archive matches the C3 hosted bytes |
 
-These checkpoints run the existing native/browser/signed-EF regression routes.
-They do not establish the unfinished composed campaign. That campaign requires
-the exact installed reference and LMU archives, 34 positive named cases and
-seven intended defect rejections in each independent Node and real Chromium
-Host. The seventh negative follows review: missed physical disposal must remain
-observable even after the native owner's ledger claims retirement.
+Those preceding checkpoints run the existing native/browser/signed-EF routes.
+The complete composed campaign has its own result below; earlier green runs
+are not substituted for this join.
+
+### Complete composed campaign
+
+The actual installed closure passed at
+[`1d357f5e1f1366ee83b9f53b28935e01b7f4c12d`](https://github.com/agent-teams-ai/live-module-updates/commit/1d357f5e1f1366ee83b9f53b28935e01b7f4c12d).
+This is genuine GM construction of the runtime owner and whole capability
+closure, using one portable LMU implementation and independently wired Node
+file/Map and Chromium DOM/Storage Hosts.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Native test campaign | [Run 45931983864 / job 140286460094](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45931983864/job/140286460094): **106/106 tests**, zero failures/cancellations/skips; the overall job's later Foundation failure is retained below |
+| Composed case census | **34 positive named cases and seven exact defect rejections per target**, inside two native subtests and their parent; these rows are not additional runner tests |
+| Source and installation | Eight exact archives, 68 copied source inputs, complete ordered build and separate clean installed consumer; every copied source hash independently matched the immutable source |
+| Source gates | Strict Node/Browser projects, ES-only application, installed readonly TS2540; actual Foundation/FMS/CMS/dependency checks, stock typed quality and ten reference plus two Host rejecting controls |
+| Native browser | Playwright and its own core 1.65.1, Chromium 159.0.8154.6 revision 1255; **11 fresh contexts × 153 measured module responses = 1,683 responses**, each checked against original or the exact intended changed bytes |
+| LMU archive | SHA256 `b226b1ed7a6bbb27a76aec77ffb0db5595940d8836dc5c1c0bb8f63225734640`, 29,556 bytes; four retained copies are byte-identical and six consumer locks use the same SRI |
+| Composed reference archive | SHA256 `c06e1702a4a8999b7130d4d6642c56a8581e395571abc5d63e7f59c7a92b35d2` |
+| Locks | Root SHA256 `ec399989959bf42deb545540a006eae9d798881b99615451832322e64c34cad7`; installed composed consumer `6f645fddc27f32fb2312e71a5cda249d44fc30fe0717fe67d0fe741e56cfef6a` |
+| Preserved artifact | [Unchanged 879,616-byte CI ZIP](evidence/composed-module-20261127/1d357f5-native.zip), SHA256 `f76364e949428ba4a9678139ff3c924bd3068552b998d4144b9b4a32572b8357`; original artifact 15168569620; [entry/hash index](evidence/composed-module-20261127/1d357f5-hosted-campaign.json) |
+| Raw target reports inside ZIP | `composed-document/node.json`, SHA256 `cdc4faeb063b086d1418ca2bc56c375e2c0b79f215de0171eb282c34acc21641`; `composed-document/chromium.json`, SHA256 `9636cb05776f7f2d5c3677efab4dcef53b9acfc50b71b00cf7755b6cba94df50` |
+| Existing regressions | Complete B6 operation: 29 positive plus six rejecting controls per target; five signed/refusal EF Node cases; ordinary, Resources and testing consumers. Same LMU bytes throughout |
+| Same-source external checks | [Static packed regression 45931983850](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45931983850), [admission inspection 45931984196](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45931984196), Actions analysis and author identity successful; configured admission remains separate |
+
+Useful A/B/external-provider summaries are checked against handwritten text and
+actual accepted files/DOM deliveries. Held A work keeps the entire original
+provider closure across `await`, while current receiver checks can refuse its
+late effect. Initial revalidation, failed/partial/late preparation, retained
+recovery after failed GM root construction, original lost acknowledgement,
+work/candidate/retention limits, 32 complete replacements and finite history,
+independent domains and all eight public authority laws pass in both Hosts.
+
+Three controls mutate one installed or emitted JavaScript file each, preserving
+the source checkout and archives. Four select a faulty actual Host. Each has a
+useful setup and an exact first oracle; compilation/import or unrelated cleanup
+failure cannot satisfy it. The seventh follows review: omitted physical disposal
+must remain observable after bookkeeping claims retirement. Its primary
+`c.original-retirement` remains first even when teardown additionally reports
+`c.native-teardown-leak`. Real FD device/inode and exact DOM-listener delivery
+provide the independent native observations.
+
+The original overall job failed **after those 106 passing tests** because
+`module-tests` had not declared its actual `node:module` dependency. The
+[unaltered failure excerpt](evidence/composed-module-20261127/1d357f5-foundation-import-failure.log)
+is retained. The follow-up declares only that development builtin, used to
+resolve Playwright's own pinned metadata; no runtime boundary or suppression
+changes. Full Foundation/development-only/registry gates pass locally after
+that correction. The [single delivery PR](https://github.com/agent-teams-ai/live-module-updates/pull/11)
+tracks final-head, ordinary merge and actual-main hosted receipts, adding each
+only after its check or action finishes. They do not rewrite this first
+source-bound result or present its failed job as successful.
 
 `ownershipReleased` is a current observation derived once by the coordinator,
 including actual publish/lookup flights and unregistered custody. Its original

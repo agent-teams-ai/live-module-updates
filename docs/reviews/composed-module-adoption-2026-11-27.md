@@ -291,3 +291,58 @@ versus C additions), the exact reference/Host quality scopes and gate order.
 Generation retirement and borrowed Host authority lifetime are also described
 separately. Source review and local results do not replace the pending hosted
 Node/Chromium campaign on the final committed source.
+
+### First hosted complete campaign and precise development dependency
+
+At 1d357f5e1f1366ee83b9f53b28935e01b7f4c12d,
+[run 45931983864 / job 140286460094](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45931983864/job/140286460094)
+executed **106/106 tests**, with zero failures/cancellations/skips, including
+the composed 34 positive and seven rejecting cases in each actual Node and
+Chromium Host. Existing complete-operation and signed-EF regressions passed too.
+The overall job failed afterward: full Foundation correctly rejected the
+undeclared `node:module` import in the development `module-tests` boundary.
+The [original failure excerpt](../research/evidence/composed-module-20261127/1d357f5-foundation-import-failure.log)
+is preserved; a passed test campaign is not a passed full native gate.
+
+The correction declares only that existing native-test builtin dependency.
+`createRequire` resolves Playwright's own pinned dependency metadata rather
+than an unrelated global `playwright-core`; it does not evaluate arbitrary
+modules. operation_design independently reviewed the policy fit. Production,
+portable application and public/testing entry boundaries retain empty builtin
+allowlists. No suppression, skipped gate, broader runtime permission or new
+adapter is introduced. Full Foundation and same-source hosted checks remain
+required after this correction.
+
+The first hosted archive, artifact 15168569620, was downloaded and checked
+against ZIP SHA256 `f76364e949428ba4a9678139ff3c924bd3068552b998d4144b9b4a32572b8357`.
+Its raw results remain evidence for that exact source and the declared passing
+campaign, with the final Foundation failure explicitly retained.
+
+Full Foundation, its development-only assertion and its registry assertion pass
+locally after the precise policy correction, with no diagnostics or waivers.
+The [original hosted ZIP](../research/evidence/composed-module-20261127/1d357f5-native.zip)
+is preserved unchanged in git; its [entry/hash index](../research/evidence/composed-module-20261127/1d357f5-hosted-campaign.json)
+distinguishes the passing campaign from the overall job failure.
+
+### Final independent evidence review
+
+invocation_contract independently verified the ZIP SHA256 and CRC, all eight
+archive hashes/SRIs and complete file inventories. All 68 copied source hashes
+match immutable 1d357f5e source. Four retained LMU archives are byte-identical,
+and all six installed consumer locks use that same SRI. Existing B6 and signed
+EF results bind the same source and artifact.
+
+Both C4 reports contain exactly 34 unique passing rows and seven intended
+negative outcomes. The three mutated copies each pass useful construction
+first; only their named file changes. Across eleven fresh Chromium contexts,
+all 1,683 measured responses match served bytes and the expected original or
+mutated inventory. The seventh control preserves the exact original retirement
+failure before the independent native leak observed during teardown. No material
+contradiction remained in the source-bound evidence.
+
+The four documentation-attribution corrections were re-reviewed, as were the
+selected ownership, initial/candidate custody, source-quality and concrete GM
+boundaries. No critical or material source finding remains in the selected
+scope. Ordinary final-head and actual-main checks remain delivery evidence,
+recorded in PR #11 after they actually finish; they are not inferred from these
+agent reviews or local checks.
