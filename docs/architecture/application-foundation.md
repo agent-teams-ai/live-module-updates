@@ -192,3 +192,30 @@ The [operation proposal](operation.md) and [open decisions](../decisions/open-de
 own the remaining dynamic obligations. The [headless guide](headless-plugins-and-ui.md)
 adds reusable plugin and optional rendering boundaries without inventing another
 Host, resolver, resource stack or global event bus.
+
+## 8. Broad upgrade readiness without mandatory dynamic loading
+
+The organization [evolution-readiness proposal](https://github.com/agent-teams-ai/.github/blob/ea13fbfc7965fce16d9af3c4d7cf8dcca6ff6d29/docs/architecture/evolution-readiness.md)
+records the shared authoring baseline. Every substantive replaceable capability
+should preserve a stable owner, explicit dependencies, inert construction,
+independent state custody and a supported upgrade boundary from its first
+implementation. Static composition and a controlled restart satisfy the
+initial mode where they meet the owner's availability contract. Pure helpers
+need neither runtime identities nor an LMU dependency.
+
+At a real live seam, LMU owns the shared operation; product Hosts choose
+eligible cohorts and rollout policy, verify current authority and supply
+actual custody/receiver evidence. A versioned configuration change may require
+no code replacement. Long-running sessions, streams, UI state, durable schema
+migration and untrusted isolation are stronger profiles, not implied by
+ordinary replacement. Qualify retained admitted work, blocked stale effects,
+cleanup and recovery with a negative control before claiming the stronger
+guarantee. Do not implement another updater in a consumer.
+
+Keep `update-operation` cohesive while its phases share a single update
+transaction/operation owner. Extract internal responsibilities as complexity
+grows; promote an independent feature or package only when a separate
+capability, invariant, dependency/release or isolation boundary requires it.
+Do not split phases into competing authorities merely because each has a
+distinct file or state. Existing FMS/CMS and qualification gates remain in
+force; this clarification admits no new public SPI or runtime profile.
