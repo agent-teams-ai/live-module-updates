@@ -4,6 +4,10 @@ Status: adopted with the first substantive workstream B library implementation.
 This record and its gates are delivered with that implementation, not as an
 empty production package. Package publication remains a separate decision.
 
+The owner-requested current-tooling successor is
+[ADR-0004](0004-current-tooling-adoption.md). Its new graph and acceptance remain
+separately qualified; this record preserves the original compatible selection.
+
 ## Decision and source ownership
 
 The owner authorized the complete LMU workstream B in one PR. Adopt full

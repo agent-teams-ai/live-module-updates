@@ -18,7 +18,7 @@ from native execution; source inspection is not an executed experiment.
 | Root and maintained static reference use separate development graphs | Upgrade both explicitly; keep their different adopted check scopes | Pending each frozen installation and existing complete route |
 | New GM runtime module manually names its Resources scope | Use Assembly's third-argument scoped adapter, which uses the exact implementation identity | Local installed Node positive case plus rejecting old-wrapper mutation passed |
 | Group order and root filenames diverge from adopted CMS | Sort group members and use .root.ts; update source/mutation/hash references | Strict compilation and local installed Node campaign passed |
-| Three concrete Host constructions omit run.signal | Pass each actual owned scope's signal; generation scopes stay detached | Source review and existing local lifetime/cancellation campaign passed; hosted native route pending |
+| Three concrete Host constructions omit run.signal | Pass each actual owned scope's signal; generation scopes stay detached | Independent source reviews and complete hosted native route passed on b7d3f0b |
 | A feature's aggregate size could be mistaken for one large file | Retain one semantic owner and existing private components; record objective extraction triggers | Actual source and dependency review, not a new performance claim |
 | Optional Effect/Observation wording gives no concrete continuation | Add exact owner entrypoints, required semantics and a staged native discriminator to the existing owning plan | Documentation/source evidence only; native LMU Effect support remains unclaimed |
 | Native Effect close may not replay the first finalizer failure | A future owner must retain the first native flight/Cause and prove its cleanup contract | Required adverse case before an optional native adapter |
@@ -89,6 +89,27 @@ source result as managed Docs acceptance. Complete independent migration and
 qualification before the final live prerequisite check.
 
 Local focused validation of D2 passed all four strict compiler projects and
-the installed Node campaign. That command did not select Chromium. Complete
-hosted final-source checks, the new tooling graph and normal delivery remain
-pending; no new support or merge is inferred from this local observation.
+the installed Node campaign. That local command did not select Chromium.
+
+The subsequent complete hosted native run
+[45999548017](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45999548017)
+on exact source b7d3f0b60bf2eebf15a4a2c9635ad4db50835717 passed 106 tests,
+with zero failures. Installed Node and real Chromium each passed 34 positive
+cases and all eight intended mutations. The new scope-identity control performed
+its useful setup and rejected with c.runtime-scope-identity in both targets.
+The downloaded artifact 15197975761 contains 895,109 bytes and SHA-256
+b794c70315e75675aaa07dc1e84d313ba3a1c4f4051bd40756c4b89c8bf5d0e2;
+its ZIP entries and exact-source reports were independently verified.
+
+The maintained static reference, admission and identity workflows also passed
+on that source. Two independent follow-up D2 source reviews found no critical or
+material issues. These results qualify the CMS changes on the previous tooling
+graph. They do not qualify the subsequent Foundation 4 migration.
+
+The new graph is prepared through normal package-manager lock generation and
+the installed public FMS projection. Because the local executor is temporarily
+unavailable, a branch-only, contents-read CI preparation emits exact source-bound
+bytes for review; it never commits or changes refs. Its temporary receipt helper
+is TypeScript and must pass the owning strict compiler before execution.
+Only after the canonical locks/topology are committed does ordinary frozen CI
+provide the new graph's qualification. Normal Central admission remains separate.

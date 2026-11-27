@@ -13,8 +13,8 @@
     "qualify": "node --test *.test.ts"
   },
   "devDependencies": {
-    "@agent-teams/engineering-foundation": "3.0.0",
-    "@agent-teams/feature-module-standard": "0.3.0",
+    "@agent-teams/engineering-foundation": "4.0.3",
+    "@agent-teams/feature-module-standard": "0.4.4",
     "@get-modular/assembly": "0.8.0",
     "@get-modular/conformance": "0.5.2",
     "@get-modular/core": "0.8.0",

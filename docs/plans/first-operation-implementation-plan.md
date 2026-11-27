@@ -743,3 +743,140 @@ implementation agrees with a model copied from itself.
 
 The [November 25 plan review](../reviews/implementation-plans-2026-11-25.md)
 retains the independent critiques and corrections for this planning delivery.
+
+## 10. Native Effect and Observation adoption packet, 2026-11-27
+
+Status: **audit recorded; native implementation proposed, not executed**.
+[Programme D](tooling-and-module-reuse-plan.md#d3--preserve-useful-effectobservation-paths)
+selects option A below for the current audit/tooling/CMS delivery. This section
+owns the subsequent implementation sequence; it does not reopen completed B/C,
+select a new execution profile or authorize a mandatory Effect coordinator.
+The [decision register](../decisions/open-decisions.md#native-execution-and-observation-follow-up-2026-11-27)
+routes the remaining owner choices here. Keep future results in the existing
+qualification matrix with their exact source and artifact identities.
+
+### Existing mechanisms and exact reuse points
+
+The inspected GM source is
+[27dfb4d](https://github.com/agent-teams-ai/get-modular/tree/27dfb4ddf67cead198fee6e781ab355c37782928).
+Its published `@get-modular/effect` 0.1.1 requires matched Core/Assembly 0.8.0
+and exact Effect 4.1.4. The newer Effect release observed during Programme D is
+not qualified by that peer declaration. Re-read the producer's actual release
+and peer contract before implementation; do not override it or silently migrate
+an accepted package graph.
+
+| Existing owner | Reuse point | Trigger and retained responsibility |
+| --- | --- | --- |
+| GM native construction | [Public Effect package](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/effect/README.md), `effectFor().prepare()` and prepared `.layer()` | A selected finite native provider needs actual Layer/Scope, typed construction errors and requirements; GM selects the graph, LMU still owns the update operation |
+| GM native usage guidance | [One packaged practices guide](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/effect/docs/practices.md) | Native execution, cancellation, caller context, ownership and cleanup evidence; this packet adds LMU-specific acceptance, not another copy of that standard |
+| Observation 0.2.1 | [Single-writer state contract](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/observation/README.md) | A concrete Host/module needs to follow replaceable state; its owner retains writes, while each subscriber owns its watch lifetime |
+| Existing neutral/native communication | [Callback bridge](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/tests/qualification/effect-communication/callback.ts), [state bridge](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/tests/qualification/effect-communication/state.ts) and [watch admission](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/tests/qualification/effect-communication/watch-progress.ts) | Reuse the relevant contract/recipe when that communication need is selected; do not introduce another event bus or claim every intermediate state is delivered |
+| GM lifecycle candidate | [Private package scope](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/lifecycle-kernel/README.md) and [private manifest](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/lifecycle-kernel/package.json) | Review only after public admission and a demonstrated semantic fit; no private import, copied kernel or second generation authority |
+
+The LMU integration maintainer owns this packet and the future native fixture.
+The Host owns canonical state, grants, workload/retention policy and effect
+receivers. Executor A retains EF and upstream GM mechanisms. A missing public
+mechanism is handed to its existing owner with a minimal failing case; ordinary
+LMU and independent tooling work continue.
+
+### Alternatives and selected current work
+
+The following are incremental alternatives, not additive delivery commitments.
+P includes authored production/integration code; T includes tests/fixtures.
+Estimates exclude docs, generated/vendor bytes, upstream changes, public release
+and stronger platforms. Days assume one experienced engineer and focused review.
+U is confidence in fit, N expected reliability within that stated scope, and
+C implementation/maintenance complexity; these are ordinal judgments, not SLA
+or execution evidence. Sizing confidence is 4/10.
+
+| Option | Result and principal risk | P / T LOC; engineer-days | U / N / C |
+| --- | --- | --- | --- |
+| A: keep the qualified runtime and record native decisions | Exact reuse points, scope, next steps and rejection criteria; does not supply native execution support | 0 / 0; 0.5-1.5 | 8 / 8 / 2 |
+| B: one concrete native Effect Host discriminator | Establish actual native lifetime compatibility with installed LMU before freezing a public API; unsupported cleanup semantics may reject the proposed bridge | 150-350 / 700-1,300; 3-6 | 8 / 8 / 5 |
+| C: optional public native integration after B | Reusable surface justified by actual consumers, preserving native Cause/context and ordinary dependency independence; premature abstraction can hide incompatible ownership | 450-900 / 1,200-2,200; 6-12 | 6 / 8 / 7 |
+
+**A is selected for Programme D. B is the next implementation proposal.**
+C requires successful B evidence, a selected contract and demonstrated consumer
+need. Mandatory Effect in the ordinary root is outside these alternatives.
+These estimates do not authorize executing B/C during the tooling upgrade.
+
+### B sequence before dependent public code
+
+1. **Select the narrow native fixture.** First propose one trusted finite Node
+   Host using a real native resource and the current installed LMU archive.
+   Keep native module-to-module operations connected; place a deliberate neutral
+   bridge only at the Host entry. Read the current GM practices and qualify the
+   exact public package/peer cohort. Node-only native evidence cannot qualify
+   native Browser, Desktop, streams or containment. Existing ordinary
+   Node/Chromium qualification remains required regression evidence.
+2. **Resolve ownership before adaptation.** Identify the original native owner
+   before any acquisition, the work it must outlive, and the initial-failure
+   recovery handle. Keep generation resources and still-borrowed publication
+   infrastructure distinct. Decide whether the native close contract can satisfy
+   LMU's public cleanup contract without changing its meaning. Reproduce any
+   mismatch before proposing a narrowly owned contract change.
+3. **Build the concrete discriminator.** Use genuine GM native Layers and
+   installed public roots, existing authority laws where applicable, barriers
+   and independent physical observations. Keep authority/state receiver
+   semantics intact. Do not add a generic Task/Fiber/Scope facade, another
+   supervisor, a second cleanup manager or one runtime per source module.
+4. **Qualify the ten cases below.** Establish useful valid setup before each
+   intended rejection. Preserve original causes and any cleanup failure together.
+   Observe leaked work/resources before test recovery releases them; counters
+   from the implementation alone cannot prove native release.
+5. **Review and decide the next surface.** Record exact package/source/input
+   identities, outcomes, unsupported behavior and the falsifying case. If the
+   existing neutral boundary is enough, retain the small concrete Host recipe.
+   Propose optional reusable integration only when its consumer need and
+   failure semantics are demonstrated. No native support claim follows from
+   typechecking, this plan or a wrapped Promise alone.
+
+### Ten required native cases
+
+| Case | Required observable result |
+| --- | --- |
+| 1. Installed useful native construction | Real GM Effect preparation/Layer construction and a useful operation use an actual resource; wrong carrier or invalid wiring fails before its prohibited acquisition |
+| 2. A work retained through B adoption | A remains coherent and usable across an awaited native operation; fresh work uses B; receiver grants/fences still decide protected writes |
+| 3. Interrupted observer and continuing work | Interrupting the waiting Effect does not retire a generation whose underlying admitted work is still running; its actual settlement releases the hold |
+| 4. Failed and late candidate acquisition | Partial acquisition and a candidate finishing after shutdown keep their original owner, publish no invalid root and release the exact acquired instance |
+| 5. Initial/dependent construction failure and parent close | Cleanup/recovery remains reachable even when construction publishes no application root; parent shutdown cannot invalidate resources still borrowed by admitted work |
+| 6. Original native finalization and repeated close | A held finalizer keeps release pending; failure preserves its original Cause/Exit; repeated disposal cannot turn that failed cleanup into successful physical recovery |
+| 7. Native caller context and failure channels | The selected boundary preserves its declared caller context and distinguishes expected typed failure, defect and interruption; a generic catch does not convert them all into success |
+| 8. Lost publication acknowledgement | Reconcile the same original attempt; native interruption never authorizes republishing or inferring rejection. Known logical outcome does not release infrastructure still used by an actual publish/lookup call |
+| 9. Exact retirement and borrowed ownership | Old cleanup preserves the new registration and borrowed state/resources; real resource access and any owned fiber/listener observations establish settlement within the claimed profile |
+| 10. Installed optionality and source contracts | Strict public declaration checks and a clean ordinary consumer still work without Effect; native-only requirements stay at their declared outer boundary and input/artifact identities are retained |
+
+Case 6 is a specific adoption discriminator. The native guide documents that
+repeated ManagedRuntime disposal does not necessarily replay the initiating
+caller's finalizer failure. Retain the original close flight/result at its owner.
+Native Scope closure is not Resources-style recoverable debt, and a second
+successful disposal is not proof that a previously failed physical cleanup
+recovered. Select an honest nonretryable-failure/retained-owner policy, or
+demonstrate the missing qualified native recovery contract, before publishing
+an adapter. Never mislabel settled native failure as an unsettled observation
+merely to suppress LMU retry.
+
+A returned Effect/Stream is a value under the current ordinary call contract;
+its later execution has no implicit LMU lease. Cancellation of a wrapper's wait,
+a cancellation request, work settlement and physical release remain distinct.
+Forward a signal only where the foreign contract supports it and retain
+ownership of late results; signal forwarding alone is not a release proof.
+The native guide owns these execution rules. LMU's authority still owns
+publication/lookup receipts; a native Scope or state projection cannot replace it.
+
+### Observation and lifecycle follow-up triggers
+
+Before a concrete subscriber is introduced, the adopting Host owner must decide
+whether the need is current state, occurrences, admitted work or durable receipt
+history. For latest state, reuse a single writer and the declared read-only
+Observation facet; `watch`/`load` may coalesce intermediate revisions. Register
+from the snapshot that was read, bind the actual subscriber owner, and qualify
+read/register races, budget refusal, cancellation and zero live subscriptions
+after native teardown. The existing GM state/communication recipes own the
+mechanics. Do not add Observation to the ordinary LMU runtime to duplicate
+canonical publication state or replace immutable receipts.
+
+A future public lifecycle package triggers a comparison of its actual admission,
+custody and retirement semantics with LMU's existing owner. Public availability
+alone is not adoption. Until that comparison and relevant native qualification,
+retain the current owner and do not copy or deep-import the private candidate.

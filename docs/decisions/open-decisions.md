@@ -180,3 +180,36 @@ without the comparison would not resolve them. The owner's priority, required
 guarantees and supported product experience decide the scope. Unresolved public
 contract or policy disputes stay open with alternatives and an explicit blocker
 only for the affected claim.
+
+## Native execution and observation follow-up, 2026-11-27
+
+The owner requested a deeper audit so useful GM mechanisms are not forgotten.
+The current [Programme D](../plans/tooling-and-module-reuse-plan.md)
+selects documentation/audit option A alongside the tooling/CMS work.
+Its [owning implementation packet](../plans/first-operation-implementation-plan.md#10-native-effect-and-observation-adoption-packet-2026-11-27)
+records the three alternatives, estimates, responsibility, exact reuse points,
+ordered next steps and ten native acceptance cases. B is a proposed bounded
+Node Effect Host discriminator; C is a possible later public integration.
+Neither is implemented or selected as a runtime profile by this record.
+
+| Open item | Existing owner and decision trigger | Dependent claim |
+| --- | --- | --- |
+| Native Effect execution | LMU integration maintainer and concrete Host owner: a native provider needs Layer/Scope, caller context or typed native failures | An actual LMU/GM Effect profile; ordinary finite work remains qualified |
+| Native finalizer failure and retry | Actual lifetime owner: establish an honest original-close, failure retention and recovery contract before adaptation | Any reusable native cleanup adapter; repeated Scope disposal is not Resources debt retry |
+| Observable state | State owner and subscribing Host/module: a real latest-state consumer needs a read-only facet | Observation integration, subscriber ownership and its native cleanup evidence |
+| Occurrences, streams and backpressure | Communication/workload owner: choose the actual delivery and settlement contract | Event/stream support; Observation coalescing is not an event log |
+| Shared lifecycle bookkeeping | GM public-package owner and LMU maintainer: first public admission, then demonstrated semantic fit | Any future kernel reuse; the current private candidate cannot be imported or copied |
+
+Read the existing
+[GM Effect practices](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/effect/docs/practices.md)
+and [Observation contract](https://github.com/agent-teams-ai/get-modular/blob/27dfb4ddf67cead198fee6e781ab355c37782928/packages/observation/README.md)
+through that packet rather than creating another usage standard. Exact peer
+compatibility matters: the audited GM Effect package qualifies Effect 4.1.4;
+a newer npm version does not silently migrate it. A concrete producer update
+belongs to executor A/upstream GM, with LMU consuming the qualified result.
+
+A disputed native failure/recovery choice blocks only the native dependent
+contract. It does not reopen ADR-0001 or prevent the authorized tooling upgrade,
+ordinary package checks and concrete CMS corrections. Record the first failing
+native discriminator, alternatives and the required owner decision here before
+a future agent freezes a new public surface.

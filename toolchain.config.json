@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "profile": "typescript-node",
+  "typecheck": {
+    "projects": [
+      "tsconfig.json",
+      "tsconfig.portable.json",
+      "tsconfig.tools.json",
+      "tsconfig.tests.json"
+    ]
+  },
+  "lint": {
+    "config": ".oxlintrc.json",
+    "paths": [
+      "src"
+    ]
+  },
+  "format": {
+    "paths": [
+      "src"
+    ]
+  }
+}
