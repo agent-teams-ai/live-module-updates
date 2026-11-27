@@ -99,8 +99,15 @@ not a local compatibility imitation.
    the original reason for 3.0.0 and all dated evidence.
 
 Acceptance: exact new installed graph, strict no-script frozen installation,
-real source-policy/FMS/quality checks, valid and intended-invalid controls,
-unchanged required native behavior and source inventory.
+real source-policy/FMS/quality checks and unchanged required native behavior.
+Use finite migration controls after a valid setup:
+- changed FMS/profile bytes and stale topology bindings refuse;
+- newly unclassified production source and omitted actual compiler input refuse;
+- forbidden application dependency and protected lint-rule weakening still refuse;
+- corrected counterparts pass with the exact installed tools.
+Preserve every original source inventory and compiler scope; no test or fixture
+reclassification may hide production code. Reuse existing controls where they
+already exercise the same authoritative boundary.
 
 ### Actual upstream prerequisite
 
@@ -124,8 +131,15 @@ Correct only substantiated defects. First audit found the new C reference uses
 `implement(declaration, scoped("document-runtime", factory))`; the accepted CMS
 requires `implement(declaration, factory, scoped)`, deriving the scope name from
 the implementation identity. Verify actual API behavior and correct this narrow
-composition boundary. Review feature-group order and root naming under the same
-accepted CMS. Do not turn all ordinary helpers into graph nodes.
+composition boundary. Its native cleanup-debt path must identify
+reference/document-runtime/default; qualify this through the existing real
+Node/Chromium cleanup-debt scenario and retain a failing old-wrapper witness.
+Correct feature-group member order, the adopted .root.ts filename form and
+each dependent staging/mutant/hash path. Pass construction cancellation through
+the matching owned scope's signal in run({ signal, scope }); keep generation
+scopes detached from the outer parent. Preserve the old borrowed source and
+historical inventories. These source-contract omissions are not claimed as
+reproduced application failures. Do not turn ordinary helpers into graph nodes.
 
 Measure runtime code separately from tests, documentation and evidence. Current
 feature is approximately 1.5k runtime lines across application/ports, adapter and
@@ -153,23 +167,29 @@ integration; LMU owns a different update operation.
 
 | Option | Guarantee / principal risk | P / T LOC; effort | U / N / C |
 | --- | --- | --- | --- |
-| Preserve current runtime, qualify a concrete native Effect Host before a public adapter | Tests real Layers, Scope, E/R and ownership; no unsupported generic lifetime promise | 100–250 / 350–700; 2–4 days | 8 / 8 / 4 |
-| Add an optional public native Effect integration after that discriminator | Reusable exact qualified profile; must preserve failure/Cause, interruption and first cleanup flight | 250–550 / 650–1,100; 4–8 days | 6 / 8 / 6 |
-| Rewrite the ordinary coordinator around mandatory Effect | Native typed context everywhere; changes accepted ordinary dependency/API profile and all cancellation/resource semantics | 900–1,600 / 1,300–2,300; 8–15 days | 3 / 6 / 8 |
+| **A: preserve current runtime and record exact native integration decisions** | Concrete reuse entrypoints, triggers and qualification plan; no unexecuted native support claim | 0 / 0; 0.5–1.5 days | 8 / 8 / 2 |
+| **B: qualify a concrete native Effect Host discriminator** | Real native Layers/Scope/E/R and original owner against installed LMU; exposes lifecycle incompatibilities before a public API | 150–350 / 700–1,300; 3–6 days | 8 / 8 / 5 |
+| **C: optional public native integration after B** | Reusable qualified profile justified by real consumers; preserve Cause, interruption, custody and original cleanup evidence | 450–900 / 1,200–2,200; 6–12 days | 6 / 8 / 7 |
 
-These are alternatives, not additive scope commitments. No new runtime profile
-is selected by this audit. Estimates exclude docs/generated/vendor bytes and
+**Selected current scope is A.** B is the concrete next implementation proposal;
+C depends on B and demonstrated consumer need. These are alternatives, not
+additive scope commitments. A mandatory-Effect coordinator rewrite changes the
+accepted ordinary dependency and cancellation contract and is outside this task.
+No new runtime profile is selected by this audit. Estimates exclude docs/generated/vendor bytes and
 platform/publication work; fit U, expected reliability N and complexity C are
 ordinal judgments for the stated scope. Estimate confidence: 4/10.
 
-The bounded discriminator must establish:
+The proposed B discriminator must establish:
 - GM native Layer construction and useful finite module operation;
 - one real generation lifetime owner and effect receiver;
 - retained old work across replacement and cancellation of only an observer;
 - actual original Scope finalizer completion and Cause on failure;
 - no false complete report on repeated native disposal, which may not replay
   the first failure; no invented Resources-style retry on an Effect Scope;
-- no leaked fibers/listeners and unchanged application state/grant ownership.
+- caller context, typed failure, defect and interruption remain distinguishable;
+- initial failure and parent shutdown retain a reachable original owner;
+- no leaked fibers/listeners and unchanged application state/grant ownership;
+- no Effect dependency leaks into the ordinary installed consumer.
 
 A returned Effect/Stream is data under the current ordinary call contract; later
 execution gains no implicit LMU lease. A Promise wrapper around a native Effect
@@ -222,4 +242,9 @@ stronger profiles and protected upstream procedures are excluded. Confidence
 
 - 2026-11-27: published-version and actual-source audit; initial independent
   findings identified the genuine schema-v5 prerequisite and CMS scope naming.
-- Plan review, implementation, native results and delivery: pending.
+- Plan review round 1: three independent reviewers examined tooling/admission,
+  Effect/Observation lifetime and actual feature/GM ownership. Corrections added
+  exact migration controls, the four bounded CMS/Host changes, and selected
+  audit-only Effect option A with B explicitly deferred. No integration rewrite
+  is authorized by these estimates.
+- Plan review round 2, implementation, native results and delivery: pending.
