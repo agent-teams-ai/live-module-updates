@@ -10,6 +10,17 @@ Read [current status](../status.md) and the [delivery plan](../plans/foundation-
 The [vision](continuous-evolution-vision-2026-11-23.md) owns the long-term purpose;
 this guide separates initial foundation qualification from later product adoption.
 
+**IMPORTANT — before designing dependent public contracts:** use the
+[competitive extension implementation plan](../plans/competitive-extension-implementation-plan.md#2-critical-early-architecture-todos).
+Resolve the affected update cohort, exact durable authority/receipt and
+visibility boundary, retained work and compatibility, offered-tool identity,
+trust/physical custody and truthful management projection at their actual
+owners. The plan routes the [recyclable process](../plans/competitive-extension-implementation-plan.md#6-g--replace-a-coherent-group-in-a-recyclable-process),
+[agent self-update](../plans/competitive-extension-implementation-plan.md#7-h1--agent-requests-its-own-plugin-update-and-resumes-the-conversation),
+[continuing-turn handover, isolation and management UX](../plans/competitive-extension-implementation-plan.md#8-h2--safe-handover-of-a-continuing-turn-and-ij).
+These are selected-profile implementation TODOs, not automatic API changes,
+new runtime dependencies or extra gates for ordinary static modules.
+
 ## 1. The first useful milestone
 
 A representative capability uses actual public composition/package boundaries,
