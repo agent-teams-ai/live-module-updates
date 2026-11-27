@@ -315,7 +315,10 @@ not work postponed until applications request it. Separate rows establish:
 - bounded long-lived work, streams and retention;
 - foundation/Host replacement through an outer qualified recovery owner.
 
-The [next-profile implementation readiness packet](first-operation-implementation-plan.md#11-next-profile-implementation-readiness-2026-11-27) adds concrete stream, durable/restart, Desktop, isolation and scale discriminators, their owners and rejecting cases without selecting product policies.
+The [next-profile implementation readiness packet](first-operation-implementation-plan.md#11-next-profile-implementation-readiness-2026-11-27)
+owns E0–E5, mode-specific E2b and installed-lifecycle E4b, their rejecting
+cases, dependencies and estimates. Section 11 below owns required outcomes,
+not another implementation sequence.
 
 Research these independently where their dependencies allow. A supported static
 or cooperative row does not inherit unexecuted isolation or live-continuity
@@ -374,3 +377,80 @@ glue, duplicate logic, candidate-to-useful latency, interruption, lost/duplicate
 unauthorized effects, recovery and retained-resource bounds where relevant.
 Set thresholds for the fixture's declared envelope before qualification; product
 SLOs are selected later by each adopting owner.
+
+## 11. Owner-required continuous update outcomes, 2026-11-27
+
+The owner requires the target foundation to support substantive live changes,
+reusable plugins and continuous evolution across the greenfield products.
+The [fleet and plugin research](https://github.com/agent-teams-ai/engineering-research/blob/e2a5f6c47e008f93094dc88ed39ea9618722f28d/docs/lessons/preimplementation-decisions.md#second-campaign-discriminate-the-remaining-design-decisions)
+sharpens the existing F3-F5 work; it does not replace their owners or accepted gates.
+The complete install/use/update/disable/uninstall/restart outcome is required,
+not an optional research idea. These are target obligations: the selected
+[finite cooperative profile](../decisions/0001-cooperative-update-profile.md)
+and its executed evidence retain their narrower guarantees.
+
+### Replacement profiles and remaining delivery
+
+Use the existing [operation plan](first-operation-implementation-plan.md) and
+[Q1-Q7 decisions](../decisions/open-decisions.md) to select the applicable
+guarantee before dependent implementation. A capability may need more than one
+mode; do not silently substitute whole-Host restart for a promised live update.
+
+| Mode | Required boundary and observable acceptance |
+| --- | --- |
+| Pin and drain | Within the selected admitted-work budget, demonstrate fresh B work while admitted A retains its exact cohort; current receiver grants still govern effects; actual settlement and original cleanup release A. |
+| Safe-boundary handover | Transfer only an explicitly versioned checkpoint with pending effect/approval identities; preserve the original operation identity under successor authority without replaying settled effects; refuse arbitrary JS continuation or incompatible state. |
+| Exclusive-resource transfer | Close old admission, enforce receiver revocation and observe the selected resource disposition before granting the successor custody; a lease timeout alone cannot authorize overlap. |
+| Recyclable realm | Replace a compatible shared-trust cohort through a typed boundary and stable facade; observe realm stop and remaining external obligations separately; Worker placement alone is not hostile-code isolation. |
+
+Within F4/F5, route each promised guarantee to its applicable profile:
+
+- Retain a stream through its actual open/next/close/cancel lifetime, including
+  nested calls and borrowed providers. Returning an iterator, Effect or Stream
+  value does not grant an implicit lifetime. Reuse GM Resources or native Effect
+  where qualified; preserve native failure and finalization semantics.
+- Route self-update as a typed management intent to a separately owned executor.
+  The current callback can observe acceptance and finish; it must not await its
+  own retirement. Reject known reentry cycles before quiescing. Cleanup cannot
+  await completion that itself depends on that same cleanup.
+- Evaluate the affected set from the old and new public GM plans, changed
+  bindings, state compatibility and shared owners. When A supplies B and D and
+  B supplies C, replacing A cannot omit affected D merely because the calling
+  root is C. Keep coherent whole-cohort replacement available; do not add a
+  second graph compiler or require incremental compilation without evidence.
+- Keep canonical state with its actual owner. Compatible old readers/writers,
+  migration barriers and unknown effects constrain handover. Returning to old
+  code is a fresh authorized transition against current state, not restoration
+  of obsolete grants or reversal of external effects.
+- Have the actual loader/realm owner bound cumulative evaluations and bytes,
+  including failed validation after top-level execution, alongside retained
+  generations, work and cleanup debt. Logical retirement cannot subtract Node
+  ESM residency. Compare finite budget plus controlled restart with a recyclable
+  cohort; do not promise indefinite in-process cache-busting.
+- At saturated data capacity, qualify the selected bounded control/observation
+  path. Report deferred/refused adoption honestly; do not bypass work limits
+  merely to report a healthy successor.
+
+### Qualification and author handoff
+
+Extend the existing F4/F5 matrix with the cases that discriminate each promised
+profile: retained stream consumption for a stream profile, detached self-update
+where supported, and the applicable artifact-evaluation, partial-preparation,
+late-callback, state-compatibility and cleanup failures. Observe useful B,
+coherent permitted A work, denied stale effects and original release independently.
+For a Node realm claim, use supported Node 24/26 and record
+evaluation counts, memory/asset bounds and actual stop; no GC-only unload claim.
+Reset and repeat within a declared budget rather than infer continuous operation
+from one successful replacement.
+
+EF owns artifact/trust and installation contracts; authoritative installation
+and grant state remains with its selected owner. GM owns composition and existing
+resource mechanisms; LMU implements the complete shared update operation.
+Hosts provide narrow state, authority and physical execution ports, without
+copying the update state machine. Keep the
+[headless/UI contract](../architecture/headless-plugins-and-ui.md) and ordinary
+external-library path usable without optional UI, organization services or a
+runtime wrapper on every pure helper. Authoring qualification must exercise a
+useful external plugin in the applicable EF integration, actionable refusal
+diagnostics and the complete lifecycle, recording necessary glue and duplicated
+logic. Ordinary finite library qualification keeps its existing scope.

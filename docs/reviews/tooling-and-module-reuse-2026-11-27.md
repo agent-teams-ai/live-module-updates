@@ -140,3 +140,21 @@ at 1b753d04847c1021dd5a485383c4df0714b27be7. This records registry-signature
 verification and inspected provenance, not full Sigstore transparency verification.
 After recovery, ordinary local strict frozen installation passed all 259 root
 entries. Actual new-graph source/native checks remain the next gate.
+
+## Follow-up plan review against owner-required outcomes
+
+The new main delivery-plan section 11 and engineering-research second
+campaign identify omissions in the first next-profile packet. Six focused
+source-based self-review passes (not independent reviewers):
+
+| Pass | Finding and disposition |
+| --- | --- |
+| 1. Scope | Preserve finite core, one feature and actual product owners. Integrate main without discarding its lifecycle/replacement obligations. |
+| 2. Graph | Root-only closure can miss another active consumer. E0 compares public old/new GM plan facts, ownership and an omitted-root control, not another compiler. |
+| 3. Work and liveness | Self-retirement wait and escaped iterators can deadlock or release too early. E0/E1 specify Host intent acceptance, explicit stream ownership and honest saturation. |
+| 4. State and transfer | Overlap is wrong for exclusive resources or incompatible checkpoints. E2/E2b distinguish pin-and-drain, safe-boundary handover, exclusive transfer and recyclable realms. |
+| 5. Artifacts and scale | Logical release does not unload ESM; signed evaluation is not durable installation or isolation. E4b/E5 specify full external plugin lifecycle and loader-owned cumulative budgets. |
+| 6. Structure | One delivery programme, one implementation packet, existing decision register. Each selected mechanism has concrete native evidence, stop conditions and bounded estimates; no implementation claim or new mandatory architecture. |
+
+These corrections do not qualify the future profiles or replace independent
+final-head review of the tooling delivery.

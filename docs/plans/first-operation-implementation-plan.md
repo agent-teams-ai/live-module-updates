@@ -921,6 +921,47 @@ Use the exact inspected sources as boundary evidence, not as consumer pins or
 permission to change their repositories. These constraints agree with the LMU
 core; the next profiles must prove more than the current core can promise.
 
+### E0 — preflight, affected closure and management ownership
+
+**Proposed entry slice:** retain one coherent activation domain and reuse actual
+public GM composition results before selective live replacement. The new
+[owner-required outcomes](foundation-delivery-plan.md#11-owner-required-continuous-update-outcomes-2026-11-27)
+and [second research campaign](https://github.com/agent-teams-ai/engineering-research/blob/e2a5f6c47e008f93094dc88ed39ea9618722f28d/docs/lessons/preimplementation-decisions.md#second-campaign-discriminate-the-remaining-design-decisions)
+are target obligations, not qualification of a stronger profile.
+
+1. Inspect the actual old/new public GM `CompositionPlan`: roots, selections,
+   resolved bindings (including ordered provider lists), dependency order and
+   verified artifact identities. Compare these facts before candidate factory
+   execution. A semantic name or unchanged plan digest does not prove unchanged
+   code, state or native resource custody.
+2. Identify changed/removed/added implementation and binding identities.
+   For every active root, follow the union of old/new resolved dependencies in
+   the consumer direction until no affected consumer remains. Include the
+   whole ownership unit where shared state/provider/resource cannot safely be
+   split. Unknown facts refuse selective replacement; use a qualified coherent
+   whole-cohort path instead. Recompile only through GM; no second graph
+   compiler, incremental compiler or composition per agent.
+3. Prepare the coherent candidate without changing authority. Refuse a stale
+   affected set when the actual head/basis changes; recompute from authoritative
+   inputs. Borrowed owners survive; old cleanup cannot release B's resources.
+4. For self-update, an admitted callback submits an immutable typed intent to
+   the existing Host management executor, observes acceptance/refusal and
+   returns. The executor retains the intent independently of the old generation.
+   Refuse waiting for one's own retirement via that management path. Do not add
+   async-local detection, a new scheduler or arbitrary cycle analysis. Only
+   observers outside the retiring cohort may await completion. The Host owns
+   actual intent delivery and cancellation; known reentry must refuse before
+   quiescing or prohibited acquisition.
+
+Use a fixture with A providing to B and D, B providing to C, C and D active
+roots, and an independently borrowed owner. Exercise A replacement/removal,
+changed single and ordered-many bindings, added root, stale plan and unrelated
+owner. Mutate the affected-root census to omit D; the independent useful-work
+oracle must reject it. Test a self-update caller returning before retirement,
+cleanup attempting a prohibited self-wait, duplicate/refused intent and parent
+shutdown with an accepted intent. If the boundary cannot support the
+guarantee, keep whole-cohort replacement or explicit refusal.
+
 ### E1 — bounded execution-session/stream (first missing work discriminator)
 
 **Proposed first target:** one installed trusted Node fixture, a deterministic
@@ -950,6 +991,16 @@ Before any public API change, prove the following candidate semantics:
   stream reads are not permission for stale writes or canonical provider
   output. Neither Observation coalescing nor a new LMU event bus is a stream
   or durable receipt protocol.
+
+For the first fixture choose one consumer, one outstanding pull, bounded
+demand-driven buffering and explicit close. Hold the exact generation from
+successful open until terminal consumption and all native pull/finalizer work
+settle. On early return request cancellation once, refuse new pulls, retain
+outstanding work and observe original close. Never-opened requests acquire
+nothing; opened but abandoned streams remain visibly owned until close and
+settlement. Refuse further admission at capacity, not fabricate disposal after
+a timer. Use independent producer sequence/demand and a blocked native pull
+at shutdown to test this boundary.
 
 Native cases: useful A/B overlap across delayed next and nested calls; pull
 error; early break; explicit cancel and ignored cancel; never-consumed handle;
@@ -1010,6 +1061,25 @@ only one head wins, no accepted effect is duplicated, and exact original
 receipts remain recoverable. Do not confuse killing the test process with
 verified termination of a foreign provider.
 
+### E2b — selected transfer modes and recyclable realm
+
+Choose the smallest mode that satisfies the owner-required guarantee. Keep
+ordinary pin-and-drain unchanged; no generic configurable state machine.
+
+| Mode | Concrete implementation proposal | First rejecting controls |
+| --- | --- | --- |
+| Safe-boundary handover | At an owner-defined safe step/turn boundary, stop new old work, observe outstanding effects and persist a versioned checkpoint with stable operation ID, pending effect/approval IDs and compatible state basis. Construct B, verify checkpoint/schema and transfer canonical authority/fence in its actual owner. Resume the same operation, not a replay of the input. | Unknown irreversible effect, partially executed opaque tool, incompatible checkpoint, competing handover, crash after checkpoint or authority transfer; no duplicate provider input or stale effect. |
+| Exclusive-resource transfer | Stage inert B metadata. Seal old admission and revoke old receiver authority. Observe drain and the actual resource owner's disposition receipt (release or authorized atomic handover); acquire B only with current grant/fence. Uncertain disposition stays visibly unavailable/deferred. | Held old writer, lost release acknowledgement, failed B acquisition after release, late stale effect, competing transfer; native resource proves at most one authorized owner. |
+| Recyclable realm | Place a coherent shared-trust closure behind typed Host RPC with exact incarnation and separate execution/asset custody. Stage new realm, preserve permitted old work, fence effects, stop old realm and independently reconcile foreign obligations. Prefer finite in-process restart when sufficient. | Late old-incarnation reply, realm stop with unknown external effect, failed evaluation after acquisition, ignored stop; realm exit alone cannot settle remote effects or descendants. |
+
+Runtime/product owns checkpoints and effect semantics; the resource/executor
+owns physical disposition; GM owns composition; EF owns verified artifacts.
+LMU coordinates the selected mode. No arbitrary JS continuation migration or
+new public checkpoint format. Test stable operation identity, useful old/new
+results and independent resource/effect observations at the failure barriers.
+Returning to A code is a fresh transition under current state/grants, not
+restoring old authority. Qualify restart/fix-forward when the guarantee permits.
+
 ### E3 — actual Desktop and cross-tier continuity
 
 **Proposed discriminator:** one real Electron main/renderer Host with a
@@ -1053,6 +1123,25 @@ retain failure evidence. The owner selects OS/containment limits and acceptable
 stop policy before a support claim. Signed trusted Node evidence cannot pass
 these cases.
 
+### E4b — full installed plugin lifecycle with EF
+
+Extend the existing signed-artifact join through the actual qualified EF-owned
+installation/admission route and disposable Host. Use clean public package
+exports and one external headless plugin. No private EF import or second
+installation table; Host owns grants, canonical state and useful work.
+
+Install verified A, activate/invoke A, stage verified compatible B, update
+under the selected mode, disable (new admission refused), observe original
+drain/cleanup, uninstall, then restart and observe actual installation and
+authority state. Keep installation, active generation, artifact identity,
+grant and useful adoption distinct. Reject tampered/incompatible B before
+evaluation, revocation between verification and effect, interrupted install or
+update, changed replay payload, disable during work, uninstall with held
+custody and restart with unresolved receipt. Preserve unrelated user data and
+retained assets until the actual owner permits disposition. Unsupported durable
+or isolation claims remain open; trusted in-process lifecycle does not qualify
+hostile code. No marketplace or public SPI implementation in this slice.
+
 ### E5 — scale, exhaustion and release/adoption
 
 Scale the smallest qualified profile first, independently of E2–E4. Keep one
@@ -1062,6 +1151,17 @@ independent domains, held predecessors, burst work, candidate/attempt budget
 exhaustion, exact refusals and recovery. The present finite-session attempt
 ledger deliberately refuses when full; long-lived use needs a selected session
 renewal or durable retention policy, not silent pruning/reuse.
+
+Track cumulative evaluations and loaded bytes in the actual loader/realm
+owner, even when top-level execution precedes failed export validation.
+Logical retirement is not ESM unloading. Compare one and multiple digests
+under Node 24/26; record evaluations, live owners, heap/RSS/ArrayBuffers,
+retained assets and actual stop. Set finite evaluation/byte limits before
+loading. Refuse or renew a qualified realm at exhaustion; no unbounded
+cache-busting or GC-only release proof. At saturated data capacity preserve
+honest refusal/deferred adoption. Evaluate separately bounded management or
+observation capacity only for an actual need; never bypass work limits or
+fake useful successor adoption.
 
 Record declared workload, baseline with ordinary static/rolling replacement,
 p50/p95/p99 admission/activation latency, throughput, retained generations,
@@ -1083,17 +1183,23 @@ shared fixture proof. No product pin change or publication follows automatically
 
 | Packet | Entry / dependency | First discriminator estimate (P / T LOC) | Complexity / estimate confidence |
 | --- | --- | --- | --- |
+| E0 | Public GM plans and Host management ownership | 200–600 / 600–1,200 | 7/10 / 5/10 |
 | E1 | Current finite core and explicit stream ownership | 300–750 / 900–1,700 | 7/10 / 5/10 |
 | E2 | Owner-selected real transaction/receipt mechanism | 400–1,200 / 1,000–2,500 | 9/10 / 3/10 |
+| E2b | E0 and selected checkpoint/resource/realm owner; E2 for durability | 300–1,000 / 900–2,000 per mode | 9/10 / 3/10 |
 | E3 | Selected shell/IPC and supported placement | 300–850 / 900–1,800 | 7/10 / 4/10 |
 | E4 | Existing EF/executor enforcement mechanism and owner | 150–500 LMU adapter / 800–1,800 | 9/10 / 3/10 |
+| E4b | Qualified EF installation and selected Host guarantees | 200–650 / 800–1,600 | 8/10 / 4/10 |
 | E5 | Current bounded profile; add stronger profiles only after their qualification | 0–250 / 600–1,300 | 6/10 / 5/10 |
 
 These are authored production/integration and fixture/test estimates for the
 first discriminators, not full production implementation commitments. Upstream
 work, packaging, product adoption, performance infrastructure and docs are
-excluded. E2/E3/E4 may investigate mechanisms in parallel; no prerequisite is
-invented between unrelated claims. The native Effect experiment in section 10
+excluded. E0 resolves affected-set/self-update ownership before those claims; E1 may
+qualify a fixed whole closure independently. E2/E3/E4 may investigate
+mechanisms in parallel; no prerequisite is invented between unrelated claims.
+E2b qualifies one selected mode at a time; E4b depends on real EF/Host
+primitives for each promised lifecycle outcome. The native Effect experiment in section 10
 can run independently, but does not qualify E1 or E2. Do not implement all
 alternatives. After each smallest useful slice, review observed owner/API gaps,
 choose only the necessary extension, and record rejecting controls and exact
