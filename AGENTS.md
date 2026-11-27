@@ -20,6 +20,10 @@ Read [source ownership](docs/architecture/source-ownership.md) before changing
 its public surface and [usage contracts](docs/architecture/cooperative-operation-usage.md)
 before changing invocation or Host obligations. The root package is private; source implementation, native
 qualification, managed admission and public npm release remain separate.
+The successor [Programme C](docs/plans/composed-module-adoption-plan.md) owns
+current GM composition/adoption after completed B0–B7. Follow its phase and
+lifetime/abstraction discriminator before adding public APIs. Executor A retains
+EF and upstream GM mechanisms.
 
 For writing or qualifying a modular feature, start with the
 [maintained authoring reference](tests/qualification/portable-document/README.md)
