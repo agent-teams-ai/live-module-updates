@@ -137,7 +137,8 @@ they apply; do not invent a general test framework or a universal Map authority.
 3. **Executable identity.** GM plan digest identifies composition, not factory
    code. Prepared closure reuse must bind the original plan and factory-set/
    artifact identity. The owner supplies provenance; a caller label is not
-   verification. No cache keyed by plan digest alone and no new hash protocol.
+   verification. No cache keyed by plan digest alone and no new hash protocol. A control tests
+   actual candidate/factory binding; do not build a cache solely to mutate it.
 4. **Custody before effects.** Selection/compatibility are inert. A native owner
    is captured before construction evaluates/acquires. Partial and late
    results retain original custody and structured GM failure facts.
@@ -330,6 +331,16 @@ admission or physical release without an independent native witness.
   installed declarations, no checkout aliases. C evidence has its own directory;
   no mutable output is shared with the parallel old qualification workflow.
   Preserve the old child graph and accepted CMS authority unchanged.
+- The maintained authored reference lives under tests/qualification/composed-document
+  with its own explicit strict staged compiler/adoption route. Root runner files
+  under tests/module contain only orchestration and resolvable root imports.
+  No bare fixture package imports enter the root compiler, no declaration shim
+  masks missing installation, and no new maintained source is omitted from gates.
+- Extend the existing portable-document workflow path triggers to the new
+  composed-reference sources, native composed runner inputs and relevant LMU
+  public source so the promised static regression runs on the actual C revision.
+  Keep its existing native commands and old fixture graph unchanged; do not add
+  a separate workflow or relabel an older green run as new-head evidence.
 - Ordinary installation still has no GM/EF/organization runtime packages.
   Optional integration uses one physical copy of each exact necessary GM peer.
   Verify exports and reject private imports/missing required optional-entry peers.
