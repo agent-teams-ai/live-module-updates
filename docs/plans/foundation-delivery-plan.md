@@ -315,6 +315,8 @@ not work postponed until applications request it. Separate rows establish:
 - bounded long-lived work, streams and retention;
 - foundation/Host replacement through an outer qualified recovery owner.
 
+The [next-profile implementation readiness packet](first-operation-implementation-plan.md#11-next-profile-implementation-readiness-2026-11-27) adds concrete stream, durable/restart, Desktop, isolation and scale discriminators, their owners and rejecting cases without selecting product policies.
+
 Research these independently where their dependencies allow. A supported static
 or cooperative row does not inherit unexecuted isolation or live-continuity
 claims. Choose explicit rejection, restart or defer behavior for unsupported

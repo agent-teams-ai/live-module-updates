@@ -213,3 +213,10 @@ contract. It does not reopen ADR-0001 or prevent the authorized tooling upgrade,
 ordinary package checks and concrete CMS corrections. Record the first failing
 native discriminator, alternatives and the required owner decision here before
 a future agent freezes a new public surface.
+
+The [next-profile implementation readiness packet](../plans/first-operation-implementation-plan.md#11-next-profile-implementation-readiness-2026-11-27)
+adds concrete proposals for the remaining F5 guarantees, including the synchronous
+admission versus async durable-authority mismatch, stream settlement, Desktop
+IPC, containment and finite-session exhaustion. The Q1–Q7 decision owners and
+selected cooperative profile remain unchanged; qualify the relevant native
+mechanism before selecting or extending a public contract.
