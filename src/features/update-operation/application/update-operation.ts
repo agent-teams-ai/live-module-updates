@@ -282,7 +282,9 @@ async function prepare<Args extends readonly unknown[], Result>(coordinator: Ope
     attempt.preparation = Object.freeze({ status: "pending" });
     const prepared = await custody.prepare();
     if (isClosed(coordinator)) {throw new Error("Runtime closed while candidate preparation was outstanding");}
-    const installed = attempt.control.install(prepared.invoke);
+    const invoke = prepared.invoke;
+    if (typeof invoke !== "function") {throw new Error("Cannot install prepared generation: invalid-entry");}
+    const installed = attempt.control.install(invoke.bind(prepared));
     if (installed.status !== "installed") {throw new Error(`Cannot install prepared generation: ${installed.reason}`);}
     attempt.preparation = Object.freeze({ status: "ready" });
     attempt.pendingPreparation = false;

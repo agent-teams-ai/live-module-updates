@@ -167,3 +167,47 @@ focused feature tests without material findings. Root rechecked the shared
 predicate, terminal-versus-physical distinction and native witnesses. Strict
 test and ES-only projects, normal build and stock lint passed for the final
 local source. Same-source hosted qualification remains required for delivery.
+
+### C4 integration critique and prepared receiver correction
+
+Both independent reviewers inspected the concrete reference before qualification.
+They confirmed whole-closure GM construction, full public descriptor unions,
+one LMU owner and artifact-only consumption. Material corrections identified:
+
+| Finding | Required correction |
+| --- | --- |
+| Initial callbacks lost their original receiver during transfer | Capture original prepare/close/invoke with their owners before evaluation, including later property replacement. |
+| One Host input entry supplied four capabilities despite the adopted CMS | Four one-capability declarations/aliases with the complete owner map and independent wiring expectation. |
+| Failed GM construction could lose parent/runtime recovery ownership | Expose an inert Host owner before acquisition and retain narrow recovery controls before root publication. |
+| Initial A was prepared without explicit Host admission | Check owner compatibility before acquisition and again against current facts after async preparation; keep the core pre-admitted initial contract. |
+| Staged compilation/layout was not the complete adopted CMS gate | Add native typed/CMS controls, preserve borrowed Summary's profile, and prohibit concrete resource/test imports in application. |
+
+The new installed receiver-sensitive witness then found a core defect:
+a valid B PreparedGeneration method was installed without its original receiver.
+The actual failing archive SHA-256
+bb0fd20c5d379d51abec2e897126ffebe2dc55ddab20912def318003c0c21665
+is byte-identical to the C3 hosted archive from
+[run 45927030119](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45927030119).
+A succeeds and B publishes before the method fails. The correction captures
+the original callable once, validates it, and binds it to its prepared owner
+inside the existing owned failure path. It adds no owner or public mechanism.
+The focused regression failed before that change and passed after it, including
+later property mutation and an invalid entry whose acquired owner still closes.
+Strict test/portable compilation, native lint and build passed before the local
+executor became unavailable. The original method/custody semantics were
+independently reviewed by operation_design.
+
+The C5 checkpoint 6e81b2338074cf608acc818f06ea35735770e924 passed native run
+45926759858, static packed regression 45926759850 and admission 45926760412.
+C3 at 71099b14c7636533335c4a99f1f91b4e907aba58 passed native run 45927030119
+(101 tests, zero failures/skips), static packed regression 45927030016 and
+admission 45927030506. The C3 evidence ZIP, artifact 15166996561, has SHA-256
+53f155c0c06c517f73d8b862f1af01fffe0df3d3b2efbb61fbb2b4c3550adef7;
+its actual owned-runtime receipts were inspected. These are the existing
+native/browser/EF routes, not execution of the unfinished composed campaign.
+
+The C4 writer split now allows reference/Hosts, native runner and staged quality
+controls to proceed independently. During the executor interruption, exact known
+source is preserved through the existing GitHub route in this same Draft PR.
+Recovered or newly written source still needs source-bound native CI and final
+review; no unexecuted reconstruction is presented as a passed qualification.
