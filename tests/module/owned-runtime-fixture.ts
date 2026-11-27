@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { closeSync, fstatSync, mkdtempSync, openSync, rmSync } from "node:fs";
+import { closeSync, fstat, fstatSync, mkdtempSync, openSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { assemblyFor, declareModule, defineContract, group, implement, type CapabilitiesOf } from "@get-modular/assembly";
@@ -36,6 +36,8 @@ export interface OwnedRuntimeOptions {
   readonly dependentFailure?: boolean;
   readonly initialBarrier?: string;
   readonly publicationBarrier?: string;
+  /** Rejected old callback retained to discriminate immutable original reports. */
+  readonly originalCloseOnly?: boolean;
   /** Deliberately wrong native topology; a discriminator, never an offered integration. */
   readonly unsafeParentGenerations?: boolean;
 }
@@ -62,6 +64,15 @@ function nativeOwners(options: OwnedRuntimeOptions, parent: Scope, barriers: Ret
   let postAwaitPublishUses = 0;
   let postAwaitLookupUses = 0;
   function useBorrowed(): void { assert.ok(borrowedActive); fstatSync(descriptor); }
+  function probeBorrowed(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      fstat(descriptor, (failure, statistics) => {
+        if (failure) { reject(failure); return; }
+        try { assert.ok(borrowedActive); assert.equal(statistics.isFile(), true); resolve(); }
+        catch (cause) { reject(cause); }
+      });
+    });
+  }
   const publicationAuthority: UpdateAuthority = {
     read: () => { useBorrowed(); return authority.read(); },
     publish: request => {
@@ -133,7 +144,7 @@ function nativeOwners(options: OwnedRuntimeOptions, parent: Scope, barriers: Ret
     publicationSettled: publicationSettled.promise,
     pendingAuthority: () => ({ publish: pendingPublishes, lookup: pendingLookups }),
     nativeUsesAfterAwait: () => ({ publish: postAwaitPublishUses, lookup: postAwaitLookupUses }),
-    lookups: () => lookups, useBorrowed, lease: nativeLease,
+    lookups: () => lookups, useBorrowed, probeBorrowed, lease: nativeLease,
     publishAfter: (barrier: string) => { publishGate = barrier; },
     lookupAfter: (barrier: string) => { lookupGate = barrier; },
     prepareAfter: (generation: string, barrier: string) => { preparationGates.set(generation, barrier); },
@@ -156,9 +167,10 @@ function nativeOwners(options: OwnedRuntimeOptions, parent: Scope, barriers: Ret
 }
 
 /** This is only a native setup/transfer cell, not a second generation manager. */
-async function closeCell(cell: OwnerCell): Promise<void> {
+async function closeCell(cell: OwnerCell, originalCloseOnly: boolean): Promise<void> {
   const report = cell.runtime ? await cell.runtime.close() : await cell.initial?.close();
-  if (report && !report.complete) { throw new Error("c2.original-owner-close-incomplete", { cause: report }); }
+  const complete = cell.runtime && !originalCloseOnly ? cell.runtime.inspect().ownershipReleased : report?.complete !== false;
+  if (!complete) { throw new Error("c2.owner-custody-remains", { cause: report }); }
 }
 
 async function constructCell(resources: Resources, cell: OwnerCell, native: ReturnType<typeof nativeOwners>,
@@ -175,7 +187,7 @@ async function constructCell(resources: Resources, cell: OwnerCell, native: Retu
       resources.signal.throwIfAborted();
       const runtime = createUpdateRuntime<readonly [Command], Reply>({
         domainId: options.domain, authority: native.publicationAuthority,
-        initial: { candidate: candidate(options.constructorRefusal === true ? "different-initial" : "A"), invoke: prepared.invoke, release: initial.close },
+        initial: { candidate: candidate(options.constructorRefusal === true ? "different-initial" : "A"), invoke: prepared.invoke, release: () => initial.close() },
         preparation: native.preparation, compatibility: { check: () => ({ status: "compatible" }) },
         limits: { maxActiveWork: 16, maxAttempts: 32, maxCandidates: 2, maxRetainedPredecessors: 2 },
       });
@@ -184,7 +196,7 @@ async function constructCell(resources: Resources, cell: OwnerCell, native: Retu
       if (options.publicationBarrier !== undefined) { await barriers.wait(options.publicationBarrier); }
     } catch (cause) { cell.failure = { cause }; }
     return cell;
-  }, cleanup: closeCell });
+  }, cleanup: value => closeCell(value, options.originalCloseOnly === true) });
   if (built.failure) { throw built.failure.cause; }
   assert.ok(built.runtime);
   return Object.freeze({ invoke: built.runtime.invoke });

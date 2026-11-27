@@ -207,8 +207,9 @@ Read the independent facts rather than one success flag:
 | `publication` | Original authority result, including unresolved outcome |
 | `adoption` | Actual useful observation, failed probe, supersession or no requested probe |
 | Candidate/predecessor lifetime | Actual admission, work, original cleanup, latest cleanup and retained custody |
-| `holds` | Remaining preparation, publication, work, cleanup or reservation obligations |
-| `settled` | The original operation observation is terminal; cleanup debt may still remain |
+| `holds` | Remaining preparation, publication uncertainty, actual authority calls, work, cleanup or reservation obligations |
+| `settled` | The original logical operation observation is terminal; authority calls or cleanup debt may still remain |
+| `RuntimeSnapshot.ownershipReleased` | Current closed-runtime ownership is discharged according to captured native reports, including actual authority calls and unregistered custody |
 
 ## Retirement, retries and shutdown
 
@@ -232,12 +233,43 @@ the original update completion or original close result.
 
 `close()` closes new runtime admission and returns the same original close
 Promise on repeated calls. It retains in-flight preparation, unresolved
-publication and actual work. Its `complete` result requires all tracked native
+publication, actual authority response/lookup calls and actual work. Its `complete` result requires all tracked native
 owners to report complete cleanup and release their custody. Physical correctness
 belongs to each qualified native owner and its external witness. A terminal
 incomplete result records cleanup debt or invalid owner evidence; it does not
 permit discarding custody. Inspect the latest state and use the explicit
 retry action where the native contract permits it.
+
+`inspect().ownershipReleased` reports current ownership separately from that
+immutable original close result. It remains false for held authority calls even
+if their outcome is already known, and for unregistered or unproven native
+custody even if the registered generation list is empty. Successful explicit
+cleanup recovery can make it true without changing the first report. An
+`authority` hold describes a publish response or lookup still in flight;
+`publication` describes an unknown outcome. A logically completed update can
+therefore retain an authority hold until its original transport finishes.
+
+A concrete GM Host owns one runtime and exposes only its application invocation
+capability. At the beginning of Host shutdown, seal LMU before closing the
+Resources parent: parent abort listeners can otherwise reenter a fresh facade
+before cleanup callbacks run. Already-admitted bound work remains valid. Keep
+generation scopes and still-borrowed infrastructure outside an ancestor whose
+abort would invalidate them. The owner's cleanup callback uses the actual fact:
+
+```ts
+const original = await runtime.close();
+if (!runtime.inspect().ownershipReleased) {
+  throw new Error("LMU still retains native ownership", { cause: original });
+}
+```
+
+The existing Resources mechanism records that failed cleanup and performs an
+explicit eligible retry later. Returning an incomplete close report from the
+callback would falsely tell Resources that cleanup succeeded. This small glue
+belongs to the concrete owner; LMU adds no second resource manager. Initial
+preparation must already be owned before construction and transfer only on
+successful runtime creation. See [ADR-0003](../decisions/0003-composed-runtime-ownership.md)
+for the full failure and late-completion obligations.
 
 Returning to old code is a new generation and new authorized transition against
 current state and grants. It does not reuse an old generation ID, erase an

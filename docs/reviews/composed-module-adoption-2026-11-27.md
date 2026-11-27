@@ -144,3 +144,26 @@ registry assertions passed locally with no diagnostics. A development-only
 composed-source checker uses the existing Foundation/FMS/Conformance owners; it
 imports no test implementation. Chromium execution of the new composed consumer
 and final same-source qualification remain C6/C7 work.
+
+### C3: coordinator correction and native Host recovery
+
+The selected correction is implemented in the existing models, operation state
+and coordinator. One current predicate owns `ownershipReleased`; the original
+publication response flag and existing lookup flight describe actual calls.
+Original logical update completion remains independent, with an `authority`
+hold when needed. Original close results still record settled incomplete debt
+and never change after explicit recovery. No Resources wrapper was added.
+
+The complete feature family passed 40/40 locally, including actual unregistered
+Resources listener debt with no registered generations and an abandon-only
+owner report that remains unproven after external physical cleanup. The native
+GM campaign passed 16/16: both original authority calls now retain the parent
+until their final real FD use, and parent retry consumes the current fact while
+original LMU/parent reports remain false. Three wrong integrations remain
+explicit rejecting controls.
+
+invocation_contract independently reviewed all three production files and the
+focused feature tests without material findings. Root rechecked the shared
+predicate, terminal-versus-physical distinction and native witnesses. Strict
+test and ES-only projects, normal build and stock lint passed for the final
+local source. Same-source hosted qualification remains required for delivery.

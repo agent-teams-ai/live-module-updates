@@ -32,6 +32,7 @@ export interface Attempt<Args extends readonly unknown[], Result> extends Owner<
   publication: PublicationState;
   adoption: AdoptionState;
   publicationRequest: PublicationRequest | undefined;
+  publicationResponsePending: boolean;
   reconcileFlight: Promise<UpdateSnapshot> | undefined;
   candidateSlot: boolean;
   reservedPredecessor: string | undefined;
@@ -47,12 +48,18 @@ export function originalCleanupObserved<Args extends readonly unknown[], Result>
   return original.status === "settled" || original.status === "failed";
 }
 
+/** A known outcome does not settle another actual call still using Host ports. */
+export function authorityInFlight<Args extends readonly unknown[], Result>(attempt: Attempt<Args, Result>): boolean {
+  return attempt.publicationResponsePending || attempt.reconcileFlight !== undefined;
+}
+
 function holdsFor<Args extends readonly unknown[], Result>(
   attempt: Attempt<Args, Result>, candidateLifetime: GenerationSnapshot | undefined, predecessorLifetime: GenerationSnapshot | undefined,
 ): readonly UpdateHold[] {
   const holds: UpdateHold[] = [];
   if (attempt.pendingPreparation) {holds.push("preparation");}
   if (attempt.pendingPublication) {holds.push("publication");}
+  if (authorityInFlight(attempt)) {holds.push("authority");}
   if ((candidateLifetime?.pendingWork ?? 0) > 0 || (predecessorLifetime?.pendingWork ?? 0) > 0) {holds.push("work");}
   const needed = attempt.publication.status === "committed" ? predecessorLifetime : candidateLifetime;
   if ((needed?.cleanup.requested === true && !(needed.cleanup.latest.status === "settled" && needed.cleanup.latest.report.complete))

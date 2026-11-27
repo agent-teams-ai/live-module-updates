@@ -9,7 +9,7 @@ import { createOwnedRuntimeFixture, type OwnedRuntimeFixture, type OwnedRuntimeO
 
 interface Observation {
   readonly name: string;
-  readonly classification: "native-positive" | "rejected-integration" | "missing-current-ownership-fact";
+  readonly classification: "native-positive" | "rejected-integration";
   readonly facts: Readonly<Record<string, unknown>>;
 }
 type Case = (fixture: OwnedRuntimeFixture) => Promise<Readonly<Record<string, unknown>>>;
@@ -22,6 +22,7 @@ async function ready(fixture: OwnedRuntimeFixture): Promise<void> {
   assert.equal((await fixture.construct()).status, "succeeded");
   assert.equal(fixture.transferred(), true);
   assert.equal(fixture.hasPublishedRoot(), true);
+  assert.equal(fixture.runtime().inspect().ownershipReleased, false);
   view(await fixture.invoke({ kind: "view" }), "A");
 }
 function retained(fixture: OwnedRuntimeFixture, generation: string): void {
@@ -46,11 +47,13 @@ const heldContinuation: Case = async fixture => {
   await fixture.entered("held-A");
   const closing = fixture.closeParent();
   assert.deepEqual(await fixture.abortInvocation, { status: "refused", reason: "boundary-closed" });
+  assert.equal(fixture.runtime().inspect().ownershipReleased, false);
   retained(fixture, "A");
   fixture.resume("held-A");
   view(await held, "A");
   assert.equal((await closing).complete, true);
   assert.equal((await fixture.originalRuntimeClose())?.complete, true);
+  assert.equal(fixture.runtime().inspect().ownershipReleased, true);
   released(fixture, "A");
   return { abortListenerRegisteredBeforeConstruction: true, freshCall: "refused", postAwaitBoundCall: "A:seed", nativeReleases: 1 };
 };
@@ -140,6 +143,7 @@ const heldCandidate: Case = async fixture => {
   const closing = fixture.closeParent();
   retained(fixture, "B");
   assert.equal(update.inspect().preparation.status, "pending");
+  assert.equal(fixture.runtime().inspect().ownershipReleased, false);
   await fixture.runtime().retryCleanup();
   assert.equal(fixture.lease("B").cleanupCalls, 0);
   fixture.resume("candidate-preparation");
@@ -166,6 +170,7 @@ const unknownPublication: Case = async fixture => {
   const reconciliation = update.reconcile();
   await fixture.entered("original-receipt");
   assert.equal(parentSettled, false);
+  assert.equal(fixture.runtime().inspect().ownershipReleased, false);
   // A has no remaining admitted work; only the still-uncertain B must remain.
   released(fixture, "A"); retained(fixture, "B");
   fixture.resume("original-receipt");
@@ -192,6 +197,7 @@ const pendingCleanup: Case = async fixture => {
   assert.equal(fixture.lease("A").active, true);
   fstatSync(fixture.lease("A").descriptor);
   const current = await fixture.runtime().retryCleanup();
+  assert.equal(current.ownershipReleased, false);
   assert.equal(current.generations[0]?.cleanup.original.status, "pending");
   assert.equal(fixture.lease("A").cleanupCalls, 1);
   fixture.resume("native-close");
@@ -200,7 +206,7 @@ const pendingCleanup: Case = async fixture => {
   released(fixture, "A");
   return { concurrentNativeCleanupAttempts: 1, originalRuntimePromisePreserved: true, parentFlightCoalesced: true };
 };
-const cleanupRecoveryGap: Case = async fixture => {
+async function originalNativeDebt(fixture: OwnedRuntimeFixture) {
   await ready(fixture);
   fixture.failCleanup("A", true);
   const parentOriginal = await fixture.closeParent();
@@ -210,27 +216,54 @@ const cleanupRecoveryGap: Case = async fixture => {
   assert.equal(parentOriginal.complete, false);
   assert.equal(parentOriginal.settled, true);
   assert.equal(runtimeOriginal.complete, false);
+  assert.equal(fixture.runtime().inspect().ownershipReleased, false);
   assert.equal(fixture.lease("A").cleanupCalls, 1);
   fstatSync(fixture.lease("A").descriptor);
   const failedParentDebt = parentOriginal.debts.find(debt => debt.state === "failed");
   assert.ok(failedParentDebt?.state === "failed" && failedParentDebt.cause instanceof Error);
   assert.equal(failedParentDebt.cause.cause, runtimeOriginal);
+  return { parentOriginal, runtimeFlight, runtimeOriginal };
+}
+const originalCloseOnlyCounterexample: Case = async fixture => {
+  const { parentOriginal, runtimeFlight, runtimeOriginal } = await originalNativeDebt(fixture);
   fixture.failCleanup("A", false);
-  await fixture.runtime().retryCleanup();
+  const current = await fixture.runtime().retryCleanup();
+  assert.equal(current.ownershipReleased, true);
   released(fixture, "A");
   assert.equal(fixture.lease("A").cleanupCalls, 2);
   assert.equal(fixture.runtime().close(), runtimeFlight);
   assert.equal(await fixture.runtime().close(), runtimeOriginal);
   const parentRetry = await fixture.closeParent();
-  // The existing public original close is intentionally immutable. This
-  // assertion records the discriminator's API gap, not successful integration.
+  // The old callback deliberately ignores the now-available current fact.
+  // Preserve this as a rejected integration, not an unresolved API gap.
   assert.equal(parentRetry.complete, false);
   assert.equal(parentOriginal.complete, false);
   assert.equal(runtimeOriginal.complete, false);
   assert.equal(fixture.lease("A").cleanupCalls, 2);
   return { actualNativeRecovery: true, originalRuntimeComplete: false, originalParentComplete: false,
     parentRetryComplete: false, nativeCleanupAttempts: 2,
-    neededFact: "authoritative current ownership after explicit native cleanup recovery" };
+    currentOwnershipReleased: true, rejectedAdapter: "original-close-only" };
+};
+const currentOwnershipRecovery: Case = async fixture => {
+  const { parentOriginal, runtimeFlight, runtimeOriginal } = await originalNativeDebt(fixture);
+  fixture.failCleanup("A", false);
+  const current = await fixture.runtime().retryCleanup();
+  assert.equal(current.ownershipReleased, true);
+  released(fixture, "A");
+  assert.equal(fixture.lease("A").cleanupCalls, 2);
+  assert.equal(fixture.runtime().close(), runtimeFlight);
+  assert.equal(await runtimeFlight, runtimeOriginal);
+  assert.equal(runtimeOriginal.complete, false);
+  assert.equal(runtimeOriginal.snapshot.ownershipReleased, false);
+  const parentRetry = await fixture.closeParent();
+  assert.equal(parentRetry.complete, true);
+  assert.equal(parentRetry.settled, true);
+  assert.equal(parentOriginal.complete, false);
+  assert.equal(parentOriginal.debts.length, 1);
+  assert.equal(runtimeOriginal.complete, false);
+  assert.equal(fixture.lease("A").cleanupCalls, 2);
+  return { originalRuntimeComplete: false, originalParentComplete: false, currentOwnershipReleased: true,
+    parentRetryComplete: true, nativeCleanupAttempts: 2, nativeReleases: 1, originalReportsUnchanged: true };
 };
 
 async function run(context: TestContext, observations: Observation[], name: string, body: Case,
@@ -260,8 +293,10 @@ await test("C2 native GM owner discriminates admission, initial transfer and ori
   await run(context, observations, "held-candidate-preparation", heldCandidate);
   await run(context, observations, "lost-ack-during-parent-close", unknownPublication);
   await run(context, observations, "pending-native-cleanup", pendingCleanup);
-  await run(context, observations, "original-close-only-recovery-gap", cleanupRecoveryGap, { classification: "missing-current-ownership-fact" });
-  assert.equal(observations.length, 11, "every named discriminator must reach its final native assertions");
+  await run(context, observations, "original-close-only-adapter", originalCloseOnlyCounterexample,
+    { options: { originalCloseOnly: true }, classification: "rejected-integration" });
+  await run(context, observations, "current-ownership-explicit-recovery", currentOwnershipRecovery);
+  assert.equal(observations.length, 12, "every named discriminator must reach its final native assertions");
   await writeFile(directory + "node.json", JSON.stringify({ schema: 1, source: process.env.QUALIFICATION_SOURCE_SHA ?? "local-unpublished",
-    node: process.version, target: "actual-native-node", scope: "TEST discriminator; production handoff remains undecided", observations }, null, 2) + "\n");
+    node: process.version, target: "actual-native-node", scope: "ADR-0003 native GM handoff; explicit current ownership and unchanged original reports", observations }, null, 2) + "\n");
 });

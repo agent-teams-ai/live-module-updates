@@ -99,7 +99,8 @@
   "deviations": [],
   "architectureDocument": "docs/architecture/source-ownership.md",
   "decisionRecords": [
-    "docs/decisions/0002-production-source-adoption.md"
+    "docs/decisions/0002-production-source-adoption.md",
+    "docs/decisions/0003-composed-runtime-ownership.md"
   ],
   "enforcementCommands": [
     "pnpm run quality:fms",

@@ -2,13 +2,14 @@ import assert from "node:assert/strict";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import test, { type TestContext } from "node:test";
 import { fileURLToPath } from "node:url";
+import type { UpdateHandle } from "../../src/index.ts";
 import { createOwnedRuntimeFixture, type OwnedRuntimeFixture } from "./owned-runtime-fixture.ts";
 
 interface AuthorityObservation {
   readonly order: "lookup-overtakes-publish" | "publish-overtakes-lookup";
-  readonly classification: "premature-parent-completion";
-  readonly parentCompleteWhileNativeCallPending: boolean;
-  readonly nativePendingAtParentCompletion: { readonly publish: number; readonly lookup: number };
+  readonly classification: "native-positive";
+  readonly parentPendingUntilNativeCallSettled: boolean;
+  readonly nativePendingAtBorrowedProbe: { readonly publish: number; readonly lookup: number };
   readonly actualPostAwaitNativeUses: { readonly publish: number; readonly lookup: number };
 }
 
@@ -31,6 +32,26 @@ function usefulB(fixture: OwnedRuntimeFixture): Promise<void> {
   });
 }
 
+async function observeAuthorityHold(fixture: OwnedRuntimeFixture, update: UpdateHandle) {
+  const closing = fixture.closeParent();
+  let parentSettled = false;
+  void closing.then(() => { parentSettled = true; return null; });
+  // This is real asynchronous use of the separately owned native FD. The
+  // generation closes are already complete; no sleep or turn counter is used.
+  await fixture.probeBorrowed();
+  assert.equal(parentSettled, false, "parent completed while a real authority call still uses borrowed infrastructure");
+  const current = fixture.runtime().inspect();
+  assert.equal(current.closed, true);
+  assert.equal(current.generations.length, 0);
+  assert.equal(current.ownershipReleased, false);
+  assert.ok(update.inspect().holds.includes("authority"));
+  for (const generation of ["A", "B"]) {
+    assert.equal(fixture.lease(generation).active, false);
+    assert.equal(fixture.lease(generation).releases, 1);
+  }
+  return { closing, pending: fixture.pendingAuthority() };
+}
+
 await test("C2 actual authority-flight overlap distinguishes terminal receipt from native settlement", { timeout: 30_000 }, async context => {
   const directory = fileURLToPath(new URL("../../.qualification/evidence/owned-runtime/", import.meta.url));
   await mkdir(directory, { recursive: true });
@@ -44,22 +65,21 @@ await test("C2 actual authority-flight overlap distinguishes terminal receipt fr
     assert.equal((await update.reconcile()).publication.status, "committed");
     await update.completion;
     await usefulB(fixture);
-    // Expected counterexample in the pre-C3 implementation. It is not a
-    // supported parent-lifetime result: the original native call is still held.
-    const parent = await fixture.closeParent();
-    assert.equal(parent.complete, true);
-    assert.equal((await fixture.originalRuntimeClose())?.complete, true);
-    const nativePending = fixture.pendingAuthority();
-    assert.deepEqual(nativePending, { publish: 1, lookup: 0 });
+    const observed = await observeAuthorityHold(fixture, update);
+    assert.deepEqual(observed.pending, { publish: 1, lookup: 0 });
     assert.deepEqual(fixture.nativeUsesAfterAwait(), { publish: 0, lookup: 0 });
     fixture.useBorrowed();
     fixture.resume("actual-publication-response");
     await fixture.publicationSettled;
+    assert.equal((await observed.closing).complete, true);
+    assert.equal((await fixture.originalRuntimeClose())?.complete, true);
+    assert.equal(fixture.runtime().inspect().ownershipReleased, true);
+    assert.equal(update.inspect().holds.includes("authority"), false);
     assert.deepEqual(fixture.nativeUsesAfterAwait(), { publish: 1, lookup: 0 });
     assert.deepEqual(fixture.pendingAuthority(), { publish: 0, lookup: 0 });
     assert.equal(fixture.authority.publicationCalls(), 1);
-    observations.push({ order: "lookup-overtakes-publish", classification: "premature-parent-completion",
-      parentCompleteWhileNativeCallPending: parent.complete, nativePendingAtParentCompletion: nativePending,
+    observations.push({ order: "lookup-overtakes-publish", classification: "native-positive",
+      parentPendingUntilNativeCallSettled: true, nativePendingAtBorrowedProbe: observed.pending,
       actualPostAwaitNativeUses: fixture.nativeUsesAfterAwait() });
   });
   await context.test("original publish settles while an already-started lookup still uses borrowed native FD", async scenario => {
@@ -75,24 +95,25 @@ await test("C2 actual authority-flight overlap distinguishes terminal receipt fr
     const result = await update.completion;
     assert.equal(result.publication.status, "committed");
     await usefulB(fixture);
-    const parent = await fixture.closeParent();
-    assert.equal(parent.complete, true);
-    assert.equal((await fixture.originalRuntimeClose())?.complete, true);
-    const nativePending = fixture.pendingAuthority();
-    assert.deepEqual(nativePending, { publish: 0, lookup: 1 });
+    const observed = await observeAuthorityHold(fixture, update);
+    assert.deepEqual(observed.pending, { publish: 0, lookup: 1 });
     assert.deepEqual(fixture.nativeUsesAfterAwait(), { publish: 1, lookup: 0 });
     fixture.useBorrowed();
     fixture.resume("actual-lookup-response");
     assert.equal((await lookup).publication.status, "committed");
+    assert.equal((await observed.closing).complete, true);
+    assert.equal((await fixture.originalRuntimeClose())?.complete, true);
+    assert.equal(fixture.runtime().inspect().ownershipReleased, true);
+    assert.equal(update.inspect().holds.includes("authority"), false);
     assert.deepEqual(fixture.nativeUsesAfterAwait(), { publish: 1, lookup: 1 });
     assert.deepEqual(fixture.pendingAuthority(), { publish: 0, lookup: 0 });
     assert.equal(fixture.authority.publicationCalls(), 1);
-    observations.push({ order: "publish-overtakes-lookup", classification: "premature-parent-completion",
-      parentCompleteWhileNativeCallPending: parent.complete, nativePendingAtParentCompletion: nativePending,
+    observations.push({ order: "publish-overtakes-lookup", classification: "native-positive",
+      parentPendingUntilNativeCallSettled: true, nativePendingAtBorrowedProbe: observed.pending,
       actualPostAwaitNativeUses: fixture.nativeUsesAfterAwait() });
   });
   assert.equal(observations.length, 2, "both actual authority completion orders must reach the native witness");
   await writeFile(directory + "authority-overlap.json", JSON.stringify({ schema: 1,
     source: process.env.QUALIFICATION_SOURCE_SHA ?? "local-unpublished", node: process.version, target: "actual-native-node",
-    scope: "TEST counterexamples; terminal receipt alone did not prove native authority settlement", observations }, null, 2) + "\n");
+    scope: "ADR-0003 original authority calls retain borrowed Host lifetime until actual settlement", observations }, null, 2) + "\n");
 });
