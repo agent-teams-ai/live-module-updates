@@ -21,7 +21,7 @@ export type InvocationOutcome<Result> =
  */
 export interface BoundInvocation<Args extends readonly unknown[], Result> {
   readonly generationId: string;
-  invoke(...args: Args): Promise<InvocationOutcome<Result>>;
+  readonly invoke: (...args: Args) => Promise<InvocationOutcome<Result>>;
 }
 
 export type ModuleEntry<Args extends readonly unknown[], Result> =
@@ -32,5 +32,5 @@ export type ModuleEntry<Args extends readonly unknown[], Result> =
  * the capability contract; returned functions/resources receive no implicit lease.
  */
 export interface InvocationFacade<Args extends readonly unknown[], Result> {
-  invoke(...args: Args): Promise<InvocationOutcome<Result>>;
+  readonly invoke: (...args: Args) => Promise<InvocationOutcome<Result>>;
 }

@@ -1,0 +1,30 @@
+{
+  "schema": "composed-native-retirement-observer/1",
+  "scope": "standalone real Node FD discriminator; no composed campaign or Chromium execution claim",
+  "runtime": "Node v24.22.3",
+  "originalSource": {
+    "path": "tests/qualification/composed-document/hosts/node-environment.ts",
+    "gitBlob": "2eb5c3cefabc00c0db100fe190b3f6645d7069a6",
+    "observer": "if (lease === undefined || !lease.active) { return false; } fstatSync(lease.descriptor); return true;"
+  },
+  "schedule": [
+    "Open original native file descriptor and capture its dev/ino identity.",
+    "Set bookkeeping active=false while deliberately omitting native close.",
+    "Compare original observer with an independent fstat identity probe.",
+    "Actually close the original descriptor and probe it again.",
+    "Open a distinct replacement file; observe numeric descriptor reuse and prove original identity remains absent.",
+    "Close only the actual remaining owned replacement descriptor and remove the temporary directory."
+  ],
+  "observed": {
+    "omittedClose": {
+      "oldAlive": false,
+      "independentNativeAlive": true,
+      "nativeInode": 231907
+    },
+    "afterActualClose": false,
+    "numericDescriptorReused": true,
+    "originalAfterReplacement": false
+  },
+  "exitCode": 0,
+  "followup": "C6 adds unsafeOmitRelease at the real native Host release path; whole-closure-transitions must fail c.original-retirement in Node and hosted Chromium."
+}

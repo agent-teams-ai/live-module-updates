@@ -22,7 +22,8 @@ merely to complete a folder template.
 | Feature domain, when materialized | Deterministic identities, outcomes and invariants from explicit facts |
 | Feature adapters | Narrow external bindings, including the optional public Resources cleanup mechanism; depend inward on application ports |
 | Feature composition | Bind actual ports and expose the feature's factory without a global container |
-| Curated module entries | Export the deliberately supported surfaces; ordinary root and optional resource integration remain separate |
+| Feature testing | Portable authority laws and independent observations; application contracts only, with no runner or native dependency |
+| Curated module entries | Export the supported ordinary root, optional resource integration and test-only contract suite separately |
 | `tests/features/update-operation` | Invocation, update, failure and adapter contracts owned by this feature |
 | `tests/module` | Public exports, declarations, packed external consumers and independently wired native Hosts |
 | `scripts` | Development-only source/quality checks and their focused rejection controls |
@@ -44,12 +45,32 @@ their own installed consumer proof. No code deep-imports a private lifecycle
 kernel or checkout source. Published artifacts exclude source tests and
 development tooling.
 
+The optional `live-module-updates/testing` export owns the runner-neutral Host
+authority cases. Its implementation belongs to the actual feature testing role,
+not module-level runtime behavior. The curated entry exposes the factory,
+fixture/case types and named violation; private law/oracle helpers remain behind
+package exports. The FMS profile marks these two authored feature files as both
+publicly available and testing surfaces so the curated package entry can expose
+them. The role remains testing. Foundation independently marks both boundaries
+as development-only and forbids their import from the ordinary runtime or
+application; real rejecting controls exercise both directions. This is an
+optional test kit for consumers, not a required application dependency.
+
 Add a feature only for another cohesive capability. Add a layer only with a real
 artifact. Update the profile, dependency policy, strict compiler scope and
 rejection controls together. A new module or ownership exception needs a
 repository decision before its profile and gates change. Sub-features and
 composition contracts are absent from this initial profile; adopting either
 also adopts its v1.1 evidence obligations.
+
+The separate [composed reference](../../tests/qualification/composed-document/README.md)
+materializes an application-owned GM boundary without changing the ordinary
+library's profile. Its `document-runtime` feature owns the concrete invocation
+contract and composition; it reuses the existing `export-summary` feature and
+packed Document/Format/Export implementations. GM constructs this selectable
+closure and the actual runtime owner. Fixed private operation helpers remain
+ordinary imports. Full feature maps, one-capability declarations and explicit
+composition-contract surfaces belong to that reference's adopted CMS/FMS scope.
 
 The [source dependency policy](../../architecture/foundation/source-dependencies.yaml)
 owns inward import directions and exact allowed packages. The
@@ -59,7 +80,8 @@ starts with no waivers. The
 binds those files to the real compiler projects, Stack type-aware lint preset
 and mandatory native script routes. `tsconfig.portable.json` additionally compiles
 the actual application/composition implementation with ES libraries only and no
-Node or DOM globals; the complete compiler also covers the optional Resources
+Node or DOM globals, including the testing entry and its implementation.
+The complete compiler also covers the optional Resources
 adapter and its native declaration requirements.
 
 ## Complete native route
@@ -88,6 +110,28 @@ links immutable source and results. Root source coverage does not pretend that
 root resolution can compile isolated installed consumers; their actual separate
 compilations remain mandatory. Historical research and sealed archives retain
 their original identities.
+
+`tests/qualification/composed-document` has an explicit root-native staging
+route in [composed-fixture.ts](../../tests/module/composed-fixture.ts), using the
+root's pinned compiler and an exact source inventory. Borrowed core, adapter
+and Summary files are copied unchanged into isolated ordered builds; their
+original child compiler graph is not reused or modified. A second clean
+installation compiles only authored consumer sources and installed declarations.
+Actual `--listFiles` output establishes both compiler scopes.
+
+The [staged source gate](../../scripts/check-composed-source.ts) uses actual
+Foundation graph/dependency checks, FMS and GM Conformance layout checks. New
+maintained reference source also runs the pinned stock typed/maintainability
+rules and scoped CMS limits; native Host test infrastructure runs the stock
+quality rules in its own staged project. Exact valid and invalid inputs verify
+that the actual rules reject their named defects. The unchanged borrowed Summary
+retains its accepted source profile; a new reference does not relabel historical
+source as a new CMS adoption. The reference source gates precede its packing;
+installed-consumer gates run after the second installation and before native
+execution. Both are in the existing CI route, with no separate workflow or
+runner framework. LMU itself is emitted and packed in the isolated staging
+directory, so concurrent native consumers never read a shared `dist` while
+this campaign rewrites it.
 
 Full source conformance, same-source hosted checks, central registration,
 managed Docs admission, remote enforcement and public release are separate

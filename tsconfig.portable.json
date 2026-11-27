@@ -9,6 +9,8 @@
   "include": [
     "src/index.ts",
     "src/features/update-operation/application/**/*.ts",
-    "src/features/update-operation/composition/**/*.ts"
+    "src/features/update-operation/composition/**/*.ts",
+    "src/testing.ts",
+    "src/features/update-operation/testing/**/*.ts"
   ]
 }

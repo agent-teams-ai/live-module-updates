@@ -11,13 +11,18 @@ export interface DocumentState { readonly revision: number; readonly text: strin
 export type Effect =
   | { readonly status: "written"; readonly revision: number }
   | { readonly status: "refused"; readonly reason: "stale-generation" | "grant-denied" | "revision-conflict" | "schema-conflict" };
+export type EffectPermission = { readonly status: "allowed" } | Extract<Effect, { readonly status: "refused" }>;
 export type Reply =
   | { readonly kind: "view"; readonly generation: string; readonly text: string; readonly revision: number }
   | { readonly kind: "effect"; readonly effect: Effect };
 export type Entry = ModuleEntry<readonly [Command], Reply>;
 export type PublicationMode = "normal" | "lost-ack" | "delayed";
 export interface NativeAuthority extends UpdateAuthority {
+  /** TEST observation of the native routing record, independently of the port's read method. */
+  readonly observeHead: () => PublicationRequest["expectedHead"];
   readonly document: () => DocumentState;
+  /** The TEST receiver calls this immediately before its synchronous native effect. */
+  readonly checkEffect: (generation: string, expected: number) => EffectPermission;
   readonly write: (generation: string, expected: number, text: string) => Effect;
   readonly grant: (allowed: boolean) => void;
   readonly schema: (revision: string) => void;

@@ -9,14 +9,15 @@ export interface PreparationContext {
 }
 
 export interface PreparedGeneration<Args extends readonly unknown[], Result> {
+  /** LMU captures this original callable and its prepared receiver before installation. */
   readonly invoke: ModuleEntry<Args, Result>;
 }
 
 export interface PreparationCustody<Args extends readonly unknown[], Result> {
   /** Every acquisition and evaluation must be covered by this original owner. */
-  prepare(): PreparedGeneration<Args, Result> | PromiseLike<PreparedGeneration<Args, Result>>;
+  readonly prepare: () => PreparedGeneration<Args, Result> | PromiseLike<PreparedGeneration<Args, Result>>;
   /** Actual native close. LMU preserves the first flight and makes retries explicit. */
-  close(): Promise<CleanupReport>;
+  readonly close: () => Promise<CleanupReport>;
 }
 
 export interface PreparationPort<Args extends readonly unknown[], Result> {

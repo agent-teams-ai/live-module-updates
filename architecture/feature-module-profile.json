@@ -34,7 +34,8 @@
       "featuresRoot": "src/features",
       "moduleComposition": [
         "src/index.ts",
-        "src/resources.ts"
+        "src/resources.ts",
+        "src/testing.ts"
       ],
       "features": [
         {
@@ -52,6 +53,10 @@
             {
               "role": "composition",
               "root": "src/features/update-operation/composition"
+            },
+            {
+              "role": "testing",
+              "root": "src/features/update-operation/testing"
             }
           ]
         }
@@ -64,10 +69,16 @@
           "src/features/update-operation/application/ports/authority.ts",
           "src/features/update-operation/application/ports/invocation.ts",
           "src/features/update-operation/application/ports/lifetime.ts",
-          "src/features/update-operation/application/ports/preparation.ts"
+          "src/features/update-operation/application/ports/preparation.ts",
+          "src/features/update-operation/testing/authority-contract.ts",
+          "src/features/update-operation/testing/authority-evidence.ts"
         ],
         "compositionSurface": [
           "src/features/update-operation/composition/create-update-runtime.ts"
+        ],
+        "testing": [
+          "src/features/update-operation/testing/authority-contract.ts",
+          "src/features/update-operation/testing/authority-evidence.ts"
         ]
       },
       "useEdges": [],
@@ -88,7 +99,8 @@
   "deviations": [],
   "architectureDocument": "docs/architecture/source-ownership.md",
   "decisionRecords": [
-    "docs/decisions/0002-production-source-adoption.md"
+    "docs/decisions/0002-production-source-adoption.md",
+    "docs/decisions/0003-composed-runtime-ownership.md"
   ],
   "enforcementCommands": [
     "pnpm run quality:fms",

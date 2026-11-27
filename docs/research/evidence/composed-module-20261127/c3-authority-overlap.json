@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "source": "71099b14c7636533335c4a99f1f91b4e907aba58",
+  "node": "v24.22.3",
+  "target": "actual-native-node",
+  "scope": "ADR-0003 original authority calls retain borrowed Host lifetime until actual settlement",
+  "observations": [
+    {
+      "order": "lookup-overtakes-publish",
+      "classification": "native-positive",
+      "parentPendingUntilNativeCallSettled": true,
+      "nativePendingAtBorrowedProbe": {
+        "publish": 1,
+        "lookup": 0
+      },
+      "actualPostAwaitNativeUses": {
+        "publish": 1,
+        "lookup": 0
+      }
+    },
+    {
+      "order": "publish-overtakes-lookup",
+      "classification": "native-positive",
+      "parentPendingUntilNativeCallSettled": true,
+      "nativePendingAtBorrowedProbe": {
+        "publish": 0,
+        "lookup": 1
+      },
+      "actualPostAwaitNativeUses": {
+        "publish": 1,
+        "lookup": 1
+      }
+    }
+  ]
+}

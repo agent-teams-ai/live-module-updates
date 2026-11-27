@@ -18,6 +18,22 @@ supports finite trusted work in one Node process or Chromium realm, with
 explicit Host authority, generation-bound calls and borrowed state. The primary
 package entry has no mandatory GM, EF, UI, Node or DOM dependency. The optional
 `live-module-updates/resources` entry adapts public Resources cleanup.
+The optional `live-module-updates/testing` entry provides portable authority
+contract cases for a consumer's own test runner. Neither optional entry changes
+the ordinary root's dependency boundary.
+
+The successor [Programme C](docs/plans/composed-module-adoption-plan.md) in
+[PR #11](https://github.com/agent-teams-ai/live-module-updates/pull/11)
+adds sound public function-property contracts, current runtime ownership after
+cleanup recovery and actual authority-flight retention. Its
+[composed reference](tests/qualification/composed-document/README.md) joins the
+complete Document/Format/Export/Summary closure to a genuine GM-owned LMU runtime.
+The [source-bound evidence](docs/research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu)
+records 34 positive cases and seven intended defect rejections in each actual
+Node and Chromium Host, complete typed source gates and eight installed archives.
+The same delivery PR tracks final-head, normal-merge and actual-main receipts;
+each is added only after its check or action finishes. The original complete
+campaign's later policy failure is preserved separately.
 
 The installed dependent-feature checkpoint passed in Node with the existing
 browser regression. The invocation/authority discriminators passed on their
@@ -51,8 +67,9 @@ identity, authority and cleanup controls. The earlier six-test result at
 `6083e89` remains a historical ordinary-library checkpoint. This is bounded
 fixture evidence; it does not substitute for qualification of the new runtime.
 The [first-operation implementation plan](docs/plans/first-operation-implementation-plan.md)
-now breaks the remaining work into steps, dependencies, adverse checks, estimates
-and scoped open questions, and records the implementation assignment and exits.
+records completed B0–B7 steps, dependencies, adverse checks and scoped open
+questions. Programme C extends that result at actual GM composition and Host
+ownership boundaries; stronger profiles retain their separate owner decisions.
 
 The public [GitHub repository](https://github.com/agent-teams-ai/live-module-updates)
 was created by the owner on November 23, 2026. Initial main source is
@@ -97,7 +114,7 @@ for the current executable slice and the remaining discriminating tests.
 | Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
 | How does a project use the implemented cooperative operation? | [Usage and ownership contracts](docs/architecture/cooperative-operation-usage.md) |
-| How should an implementing agent proceed phase by phase? | [First-operation implementation plan](docs/plans/first-operation-implementation-plan.md) |
+| How should an implementing agent proceed phase by phase? | [Programme C: composition and Host ownership](docs/plans/composed-module-adoption-plan.md); [completed first-operation plan](docs/plans/first-operation-implementation-plan.md) |
 | Which experiment addresses a particular risk? | [Research and evidence map](docs/research/README.md) |
 | What changed after independent critique? | [Consolidation review](docs/reviews/foundation-consolidation-2026-11-24.md) |
 | What corrects the earlier product-first sequence? | [Fixture-first successor review](docs/reviews/fixture-first-foundation-2026-11-24.md) |

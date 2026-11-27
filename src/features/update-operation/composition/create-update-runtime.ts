@@ -31,12 +31,12 @@ export interface UpdateRuntimeOptions<Args extends readonly unknown[], Result> {
 }
 
 export interface UpdateRuntime<Args extends readonly unknown[], Result> {
-  invoke(...args: Args): Promise<InvocationOutcome<Result>>;
-  startUpdate(request: UpdateRequest): StartUpdateResult;
-  inspect(): RuntimeSnapshot;
-  close(): Promise<CloseSnapshot>;
+  readonly invoke: (...args: Args) => Promise<InvocationOutcome<Result>>;
+  readonly startUpdate: (request: UpdateRequest) => StartUpdateResult;
+  readonly inspect: () => RuntimeSnapshot;
+  readonly close: () => Promise<CloseSnapshot>;
   /** Explicitly retries settled native cleanup debt, including the initial owner. */
-  retryCleanup(): Promise<RuntimeSnapshot>;
+  readonly retryCleanup: () => Promise<RuntimeSnapshot>;
 }
 
 function captureAdoption<Args extends readonly unknown[], Result>(input: AdoptionProbe<Args, Result> | undefined): AdoptionProbe<Args, Result> | undefined {

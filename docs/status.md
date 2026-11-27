@@ -1,6 +1,6 @@
 # Foundation status and source map
 
-Current update: 2026-11-26. The original source table retains the 2026-11-24
+Current update: 2026-11-27. The original source table retains the 2026-11-24
 consolidation observation; dated fixture successors follow it. This is a
 dated navigation snapshot, not a second package, admission or required-check
 registry. Re-read the linked owner before implementation, adoption or merge.
@@ -14,7 +14,29 @@ the single [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9)
 [ADR-0001](decisions/0001-cooperative-update-profile.md) selects the bounded
 cooperative fixture profile. Stronger profiles remain scoped questions.
 
-## Current implementation checkpoint, 2026-11-26
+## Composed-module successor, 2026-11-27
+
+[Programme C](plans/composed-module-adoption-plan.md) continues in the single
+[PR #11](https://github.com/agent-teams-ai/live-module-updates/pull/11),
+without changing executor A's EF/upstream-GM ownership. Its published checkpoints
+correct public function variance, preserve actual authority-call lifetime and
+expose current ownership separately from immutable original close results.
+The portable testing entry supplies actual Host authority laws and has its own
+clean installed consumer and forbidden inward runtime imports.
+
+The complete GM-owned Document/Format/Export/Summary composition passed its
+native campaign in independent Node and Chromium Hosts, including all intended
+adverse controls. The
+[canonical matrix](research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu)
+owns exact checkpoints, runs, the original later policy failure and current
+limits. Final-head and actual-main delivery checks belong to the same PR; the
+[review record](reviews/composed-module-adoption-2026-11-27.md) preserves the
+receiver and native-observation defects discovered during integration.
+The ordinary library remains portable, while actual selectable construction
+and ownership boundaries use public GM mechanisms. No public npm release,
+product admission or stronger execution profile follows from this work.
+
+## Delivered implementation checkpoint, 2026-11-26
 
 The independent installed feature (B0) passed **46/46** native fixture tests at
 [`0721ffe`](https://github.com/agent-teams-ai/live-module-updates/commit/0721ffeee2fac54123592ea8c46f418eb801c4a4).

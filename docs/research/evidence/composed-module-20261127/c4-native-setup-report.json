@@ -1,0 +1,75 @@
+{
+  "scope": "local native initial foreign-write failure discriminator; no new supported profile or package qualification",
+  "inputEvidence": {
+    "historicalBlob": "2eb5c3cefabc00c0db100fe190b3f6645d7069a6",
+    "historicalBytes": 6596,
+    "historicalSha256": "ec814778771645da631713bbebe6677c32ccf7a7a8ed40e2b7ab3102bedb11be",
+    "emitted": [
+      {
+        "source": "/tmp/lmu-composed-document-XAtyBw/consumer/out/node/environment.js",
+        "copy": "/tmp/lmu-native-setup-proof/environment.js",
+        "sha256": "613f3ce8446c8eadb2662603bd783d0aaadc1e1b59ddcf047100586ee8d9c94c"
+      },
+      {
+        "source": "/tmp/lmu-composed-document-XAtyBw/consumer/out/node/authority/host-contract.js",
+        "copy": "/tmp/lmu-native-setup-proof/authority/host-contract.js",
+        "sha256": "e19c5173699e7eabc3383c01c92f09dddb9fac3a3d28a2cbe354b5fceed1e730"
+      },
+      {
+        "source": "/tmp/lmu-composed-document-XAtyBw/consumer/out/node/authority/native-node-authority.js",
+        "copy": "/tmp/lmu-native-setup-proof/authority/native-node-authority.js",
+        "sha256": "687b0aa848b5c0b4ca3a0cecdfc807ad21459fcc4e0143bc37c31f39dfaebd2c"
+      },
+      {
+        "source": "/tmp/lmu-composed-document-XAtyBw/consumer/out/node/node-environment.js",
+        "copy": "/tmp/lmu-native-setup-proof/after-node-environment.js",
+        "sha256": "80188bb35f77c6258fd9258f2bb16bab5d27e319713958b5cdf6980355971fe8"
+      }
+    ]
+  },
+  "currentSource": {
+    "path": "/workspace/scratch/ca959e150d7a/lmu/tests/qualification/composed-document/hosts/node-environment.ts",
+    "sha256": "687a890af9ac389c2b010cfbafde10e3c3037232f116b29a1cc0308b12a4d978",
+    "gitBlob": "ebc5bb9937e2ada068c2c4a2e052fd417e0c1a90"
+  },
+  "probeSha256": "bea1e8edfcc62e0917658b5fce6da1091f9227f155aaab045619ec9c0d53a4f3",
+  "observations": [
+    {
+      "variant": "before",
+      "node": "v24.22.3",
+      "source": "/tmp/lmu-native-setup-proof/before-node-environment.ts",
+      "sourceSha256": "ec814778771645da631713bbebe6677c32ccf7a7a8ed40e2b7ab3102bedb11be",
+      "successfulNativeSetupAndDisposal": true,
+      "fault": "real /dev/full write through synchronized node:fs open redirect",
+      "actualError": {
+        "code": "ENOSPC",
+        "syscall": "write",
+        "message": "ENOSPC: no space left on device, write"
+      },
+      "originalCausePreserved": true,
+      "descriptorClosed": false,
+      "descriptorStillOwned": true,
+      "nativeCloseCalls": 0,
+      "directoryExistsBeforeProbeCleanup": true
+    },
+    {
+      "variant": "after",
+      "node": "v24.22.3",
+      "source": "/tmp/lmu-native-setup-proof/after-node-environment.js",
+      "sourceSha256": "80188bb35f77c6258fd9258f2bb16bab5d27e319713958b5cdf6980355971fe8",
+      "successfulNativeSetupAndDisposal": true,
+      "fault": "real /dev/full write through synchronized node:fs open redirect",
+      "actualError": {
+        "code": "ENOSPC",
+        "syscall": "write",
+        "message": "ENOSPC: no space left on device, write"
+      },
+      "originalCausePreserved": true,
+      "descriptorClosed": true,
+      "descriptorStillOwned": false,
+      "nativeCloseCalls": 1,
+      "directoryExistsBeforeProbeCleanup": false
+    }
+  ],
+  "isolation": "separate Node child per variant; baseline native setup/dispose succeeds; unchanged copied emitted dependencies; actual staged consumer left read-only; probe restores builtins and releases only its own leftover FD/directory"
+}

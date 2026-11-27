@@ -20,12 +20,22 @@ Read [source ownership](docs/architecture/source-ownership.md) before changing
 its public surface and [usage contracts](docs/architecture/cooperative-operation-usage.md)
 before changing invocation or Host obligations. The root package is private; source implementation, native
 qualification, managed admission and public npm release remain separate.
+The successor [Programme C](docs/plans/composed-module-adoption-plan.md) owns
+current GM composition/adoption after completed B0–B7. Follow its phase and
+lifetime/abstraction discriminator before adding public APIs. Executor A retains
+EF and upstream GM mechanisms.
 
 For writing or qualifying a modular feature, start with the
 [maintained authoring reference](tests/qualification/portable-document/README.md)
 for source, commands and scoped evidence. It covers private TEST packages,
 independent Node/Chromium Hosts and controlled restart. The consumer's accepted
 CMS/FMS and local adoption profile remain authoritative.
+For a live whole closure and a real GM-owned LMU runtime, use the
+[composed reference](tests/qualification/composed-document/README.md),
+[current ownership decision](docs/decisions/0003-composed-runtime-ownership.md)
+and [source-bound evidence](docs/research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu).
+Reuse its concrete ownership boundary; a product still owns its contracts,
+state, grants, selected workload and accepted package pins.
 
 The owner's 2026-11-24 clarification requires representative fixtures and
 independent test Hosts before dependent products. A first application is not

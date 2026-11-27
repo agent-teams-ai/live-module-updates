@@ -117,6 +117,7 @@ export async function checkOwnedFeatureModule(root = repositoryRoot) {
     surfaces: {
       public: paths(surface["public"] ?? []),
       internalApi: paths(surface["internalApi"] ?? []),
+      testing: paths(surface["testing"] ?? []),
       compositionSurface: paths(surface["compositionSurface"]),
     },
     useEdges: records(module["useEdges"]).map(edge => ({ from: text(edge["from"]), to: text(edge["to"]) })),

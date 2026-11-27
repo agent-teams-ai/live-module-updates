@@ -82,7 +82,7 @@ export type AdoptionState =
   | { readonly status: "failed"; readonly cause: unknown }
   | { readonly status: "not-requested" };
 
-export type UpdateHold = "preparation" | "publication" | "work" | "cleanup" | "retirement-reservation";
+export type UpdateHold = "preparation" | "publication" | "authority" | "work" | "cleanup" | "retirement-reservation";
 
 export interface UpdateSnapshot {
   readonly attemptId: string;
@@ -97,20 +97,20 @@ export interface UpdateSnapshot {
   readonly unregisteredCleanup?: GenerationSnapshot["cleanup"];
   readonly predecessorLifetime?: GenerationSnapshot;
   readonly holds: readonly UpdateHold[];
-  /** Original operation observation settled; this does not imply zero cleanup debt. */
+  /** Logical original observation settled; cleanup debt or actual authority work may remain. */
   readonly settled: boolean;
   readonly observationIssue?: unknown;
 }
 
 export interface UpdateHandle {
   readonly attemptId: string;
-  inspect(): UpdateSnapshot;
-  /** The original terminal result; subsequent cleanup retries cannot rewrite it. */
+  readonly inspect: () => UpdateSnapshot;
+  /** Original logical result, possibly with authority/cleanup holds; later replies and retries cannot rewrite it. */
   readonly completion: Promise<UpdateSnapshot>;
   /** Consults the authority for this exact request, never creates a replacement attempt. */
-  reconcile(): Promise<UpdateSnapshot>;
+  readonly reconcile: () => Promise<UpdateSnapshot>;
   /** A separate action after a settled incomplete original cleanup. */
-  retryCleanup(): Promise<UpdateSnapshot>;
+  readonly retryCleanup: () => Promise<UpdateSnapshot>;
 }
 
 export type StartRefusal =
@@ -136,6 +136,12 @@ export interface UpdateLimits {
 export interface RuntimeSnapshot {
   readonly domainId: string;
   readonly closed: boolean;
+  /**
+   * Current closed-runtime custody and actual authority calls are discharged,
+   * according to the captured native reports. This neither proves physical
+   * release independently nor rewrites the original close observation.
+   */
+  readonly ownershipReleased: boolean;
   readonly attempts: readonly UpdateSnapshot[];
   readonly generations: readonly GenerationSnapshot[];
   readonly candidates: number;

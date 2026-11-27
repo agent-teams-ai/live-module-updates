@@ -11,7 +11,7 @@ import type { CleanupState, GenerationControl } from "./ports/lifetime.ts";
 import type { CompatibilityPort, PreparationPort } from "./ports/preparation.ts";
 import type { AdoptionProbe } from "./ports/adoption.ts";
 export type { AdoptionProbe } from "./ports/adoption.ts";
-import { originalCleanupObserved, snapshot, terminal, type Attempt, type OperationOwner, type Owner } from "./operation-state.ts";
+import { authorityInFlight, originalCleanupObserved, snapshot, terminal, type Attempt, type OperationOwner, type Owner } from "./operation-state.ts";
 
 export interface UpdateCoordinatorOptions<Args extends readonly unknown[], Result> {
   readonly domainId: string;
@@ -62,13 +62,20 @@ function retirementBudget<Args extends readonly unknown[], Result>(coordinator: 
   return ids;
 }
 
+function ownershipReleased<Args extends readonly unknown[], Result>(coordinator: OperationOwner<Args, Result>): boolean {
+  return coordinator.closed && coordinator.invocation.pending() === 0
+    && owners(coordinator).every(owner => !owner.pendingPreparation && !owner.pendingPublication
+      && owner.custody === undefined && owner.control?.snapshot().retained !== true)
+    && [...coordinator.attempts.values()].every(attempt => !authorityInFlight(attempt));
+}
+
 function inspect<Args extends readonly unknown[], Result>(coordinator: OperationOwner<Args, Result>): RuntimeSnapshot {
   const { domainId, invocation, attempts } = coordinator;
   const retained = owners(coordinator).filter(owner => owner.retiringPredecessor && owner.control?.snapshot().retained === true);
   const reserved = new Set<string>();
   for (const attempt of attempts.values()) {if (attempt.reservedPredecessor !== undefined) {reserved.add(attempt.reservedPredecessor);}}
   return Object.freeze({
-    domainId, closed: coordinator.closed,
+    domainId, closed: coordinator.closed, ownershipReleased: ownershipReleased(coordinator),
     attempts: Object.freeze([...attempts.values()].map(snapshot)),
     generations: Object.freeze(invocation.generations().map(control => control.snapshot())),
     candidates: candidateCount(coordinator),
@@ -89,12 +96,11 @@ function refresh<Args extends readonly unknown[], Result>(coordinator: Operation
     }
   }
   if (!coordinator.closeFlight) {return;}
+  if ([...attempts.values()].some(authorityInFlight)) {return;}
   if (owners(coordinator).some(owner => owner.pendingPreparation || owner.pendingPublication || !originalCleanupObserved(owner))) {return;}
   if ([...attempts.values()].some(attempt => attempt.unregisteredCleanup?.original.status === "pending")) {return;}
   const current = inspect(coordinator);
-  const complete = owners(coordinator).every(owner => owner.control?.snapshot().retained !== true)
-    && [...attempts.values()].every(attempt => !attempt.custody);
-  coordinator.closeFlight.resolve(Object.freeze({ complete, snapshot: current }));
+  coordinator.closeFlight.resolve(Object.freeze({ complete: current.ownershipReleased, snapshot: current }));
 }
 
 function forget<Args extends readonly unknown[], Result>(coordinator: OperationOwner<Args, Result>, owner: Owner<Args, Result>): void {
@@ -190,6 +196,11 @@ function uncertain<Args extends readonly unknown[], Result>(coordinator: Operati
   refresh(coordinator);
 }
 
+function finishPublicationResponse<Args extends readonly unknown[], Result>(coordinator: OperationOwner<Args, Result>, attempt: Attempt<Args, Result>): void {
+  attempt.publicationResponsePending = false;
+  refresh(coordinator);
+}
+
 function requestPublication<Args extends readonly unknown[], Result>(coordinator: OperationOwner<Args, Result>, attempt: Attempt<Args, Result>, baseline: AuthoritySnapshot): void {
   const { domainId, publish } = coordinator;
   const request: PublicationRequest = Object.freeze({
@@ -197,6 +208,7 @@ function requestPublication<Args extends readonly unknown[], Result>(coordinator
     expectedHead: baseline.head, basis: baseline.basis,
   });
   attempt.publicationRequest = request;
+  attempt.publicationResponsePending = true;
   attempt.pendingPublication = true;
   attempt.publication = Object.freeze({ status: "unknown" });
   try {
@@ -207,10 +219,18 @@ function requestPublication<Args extends readonly unknown[], Result>(coordinator
         if (!result) {uncertain(coordinator, attempt, new Error("Malformed or unbound publication response"));}
         else if (result.status === "unknown") {uncertain(coordinator, attempt);}
         else {acceptReceipt(coordinator, attempt, result);}
-      } catch (cause) { uncertain(coordinator, attempt, cause); }
+        return null;
+      } catch (cause) { uncertain(coordinator, attempt, cause); return null; }
+      finally { finishPublicationResponse(coordinator, attempt); }
+    }, (cause: unknown) => {
+      try { uncertain(coordinator, attempt, cause); }
+      finally { finishPublicationResponse(coordinator, attempt); }
       return null;
-    }, (cause: unknown) =>{  uncertain(coordinator, attempt, cause); });
-  } catch (cause) { uncertain(coordinator, attempt, cause); }
+    });
+  } catch (cause) {
+    try { uncertain(coordinator, attempt, cause); }
+    finally { finishPublicationResponse(coordinator, attempt); }
+  }
 }
 
 async function observeUnregisteredNative<Args extends readonly unknown[], Result>(attempt: Attempt<Args, Result>, retry: boolean): Promise<CleanupState> {
@@ -262,7 +282,9 @@ async function prepare<Args extends readonly unknown[], Result>(coordinator: Ope
     attempt.preparation = Object.freeze({ status: "pending" });
     const prepared = await custody.prepare();
     if (isClosed(coordinator)) {throw new Error("Runtime closed while candidate preparation was outstanding");}
-    const installed = attempt.control.install(prepared.invoke);
+    const invoke = prepared.invoke;
+    if (typeof invoke !== "function") {throw new Error("Cannot install prepared generation: invalid-entry");}
+    const installed = attempt.control.install(invoke.bind(prepared));
     if (installed.status !== "installed") {throw new Error(`Cannot install prepared generation: ${installed.reason}`);}
     attempt.preparation = Object.freeze({ status: "ready" });
     attempt.pendingPreparation = false;
@@ -297,8 +319,11 @@ function reconcile<Args extends readonly unknown[], Result>(coordinator: Operati
       else if (result.status === "known") {acceptReceipt(coordinator, attempt, result.receipt);}
       else {uncertain(coordinator, attempt);}
     } catch (cause) { uncertain(coordinator, attempt, cause); }
-    attempt.reconcileFlight = undefined;
-    done.resolve(snapshot(attempt));
+    finally {
+      attempt.reconcileFlight = undefined;
+      refresh(coordinator);
+      done.resolve(snapshot(attempt));
+    }
   })();
   return done.promise;
 }
@@ -391,7 +416,7 @@ function startUpdate<Args extends readonly unknown[], Result>(coordinator: Opera
     retirementRequested: false, retiringPredecessor: false, retirementFlight: undefined,
     planning: Object.freeze({ status: "pending" }), preparation: Object.freeze({ status: "not-started" }),
     publication: Object.freeze({ status: "not-requested" }), adoption: Object.freeze({ status: "not-started" }),
-    publicationRequest: undefined, reconcileFlight: undefined, candidateSlot: true,
+    publicationRequest: undefined, publicationResponsePending: false, reconcileFlight: undefined, candidateSlot: true,
     reservedPredecessor: baseline?.head.generationId, unregisteredCleanup: undefined, unregisteredOriginal: undefined,
     settled: false, observationIssue: undefined,
   };

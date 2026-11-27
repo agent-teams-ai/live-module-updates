@@ -1,0 +1,28 @@
+{
+  "observation": "Pre-existing emitted method-shaped declarations, before rebuilding C1 source; observed archive identity is authoritative, not a new source-build claim",
+  "compiler": "7.0.2",
+  "node": "v24.22.3",
+  "archive": {
+    "sha256": "58b63bff40c946599a314dc6a9c9339d7a75e4b87276241334ebdfa9423478fa",
+    "integrity": "sha512-0gB9qt1rNe2uskFWJjsYxFgPg6/p1mS2PtVDdd0sAWGa3sBSOk4bpAhKswAOhazNQmGIdPHNgOisMnknQRadXQ=="
+  },
+  "invocationDeclarationSha256": "3547935495cc7ed5ada4d9af5167a922c4d14bc9fb1790f0d01d6e8b6300739b",
+  "cases": [
+    {
+      "name": "narrow-facade",
+      "sourceSha256": "0c0d20182f648404a56af044bf6083e4b7deb0af516a9d48c569f75a3f4598dd",
+      "unexpectedlyAccepted": true
+    },
+    {
+      "name": "narrow-continuation",
+      "sourceSha256": "f60235174321e14275d81b37c024884683ae24747fd4ec984707fdea9b49c080",
+      "unexpectedlyAccepted": true
+    },
+    {
+      "name": "narrow-runtime",
+      "sourceSha256": "02773f271e5d1da7ac17bf0fda3a920600988e7727aea49da7cc0a174886591f",
+      "unexpectedlyAccepted": true
+    }
+  ],
+  "stdout": ""
+}

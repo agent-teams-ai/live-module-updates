@@ -22,6 +22,10 @@
     "./resources": {
       "types": "./dist/resources.d.ts",
       "import": "./dist/resources.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js"
     }
   },
   "files": [
