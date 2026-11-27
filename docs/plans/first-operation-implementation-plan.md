@@ -139,7 +139,7 @@ empty interfaces, successful stubs or a paper-only facade do not make it usable.
 | B4 / L4 | Conditional publication and original-attempt reconciliation | Lost acknowledgement stays unknown; changed replay payload refuses; racing updates use actual expected-revision authority |
 | B5 / L5 | Useful adoption, retained A work and exact retirement | Useful B plus coherent held A; current receiver rejects stale/revoked writes; cleanup debt and finite retention budgets remain observable |
 | B6 / L6–L7 | Packed operation through independent Hosts, review, ordinary merge and actual-main checks | All applicable complete-operation controls below execute against the real artifact; support and limitations are recorded from actual results |
-| B7 / shared join | Integrate executor A's admitted EF artifact through an outer adapter | Verified artifact → typed candidate → useful update → correct predecessor retention/cleanup, including a tampered or refused candidate; no second update coordinator |
+| B7 / shared join | Integrate executor A's qualified EF archive through an outer adapter; online package admission is a separate claim | Verified artifact → typed candidate → useful update → correct predecessor retention/cleanup, including a tampered or refused candidate; no second update coordinator |
 
 B1 investigations, A's verifier/core work and external-consumer packaging design
 can proceed in parallel. B2 dependent contracts wait for their real B1 findings;
@@ -509,22 +509,36 @@ the Host does not grow a second transition algorithm around it.
 
 ### B7 — one signed EF artifact through the existing Node operation
 
-The next joint fixture uses the actual private public-root API delivered in
-[EF #70 at 93178d8](https://github.com/agent-teams-ai/extension-foundation/tree/93178d893fdfff7812aa236002fba008f8ba6d26/packages/node-artifact),
-not its former plan-only surface. The [owner contract](https://github.com/agent-teams-ai/extension-foundation/blob/93178d893fdfff7812aa236002fba008f8ba6d26/packages/node-artifact/README.md)
-is Linux x64, trusted finite self-contained ESM. The package has no Node26 engine
-floor; its factory admits Linux x64. Select our existing Node24.22.3 Host and
+The joint fixture uses the actual private public-root API delivered in
+[EF #70 at c0a8f27](https://github.com/agent-teams-ai/extension-foundation/tree/c0a8f2733b54323e2f85322b86167491a169af1d/packages/node-artifact).
+The [owner contract](https://github.com/agent-teams-ai/extension-foundation/blob/c0a8f2733b54323e2f85322b86167491a169af1d/packages/node-artifact/README.md)
+is Linux x64, trusted finite self-contained ESM. Its producer qualified the same
+archive on Node24.22.3 and Node26.12.1. Select our existing Node24.22.3 Host and
 prove that actual combined target. This does not extend EF to Chromium.
 
-**Artifact gate:** source/API preparation may proceed now, but no B7 success
+**Artifact gate:** no B7 success
 uses a rebuilt substitute or the report's local archive hash. The producer's
 successful source-bound package-conformance run must supply the exact tested
 node-artifact archive, SHA256/SRI, source SHA, run/attempt/job/proof coordinates
-and its dependency closure. As checked on 2026-11-26, head 93178d8 has no such
-hosted archive: [push run 45912650620](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45912650620)
+and its dependency closure. The original observation at head 93178d8 remains:
+[push run 45912650620](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45912650620)
 failed the clean consumer's offline dependency resolution before the archive
-and proof steps. The producer owns that repair. Pin the genuine resulting
-archive identity when available; do not silently treat a later head as equal.
+and proof steps. Its producer-owned successor c0a8f27 passed
+[run 45914561543](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45914561543),
+including native conformance, the identical archive on both Node versions and
+source-bound proof collection. The unchanged archive, its original lexer
+dependency and the exact run/job/artifact/proof coordinates are retained in
+[package-inputs.json](../../tests/module/fixtures/ef/package-inputs.json).
+The isolated consumer installs only those inputs plus the actual LMU/GM archives;
+the development dependency remains test-only. No source alias or local EF repack
+replaces the producer's bytes.
+The development install uses the archive's real immutable HTTPS mirror, pinned
+to retention commit f966e204c61e8f4474073449d879501769fc835e and the original
+SHA512 integrity. Foundation rejects a local file: archive as an unproven
+external package identity; it accepts the actual remote delivery under the
+unchanged development boundary. Preserve that retention commit in main ancestry
+through an ordinary merge. The isolated operation consumer still installs the
+same retained archive offline, without checkout aliases or lifecycle scripts.
 The archive's conformance proof and the producer's online package-admission
 receipt are distinct. The former supplies a real input for our joint campaign;
 an admitted-EF-package claim additionally requires the latter. Record its actual
@@ -652,6 +666,18 @@ tested availability or a comparison of equal threat/failure envelopes.
 
 ## 7. Open items and exact blocked work
 
+**Current disposition:** for the selected trusted finite cooperative profile,
+[ADR-0001](../decisions/0001-cooperative-update-profile.md) and the
+[complete packed campaign](../research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+close the first-profile, invocation-affinity, original-cleanup and session
+publication/reconciliation choices below. The delivered operation uses ordinary
+typed functions; its implementation technique is no longer undecided.
+[ADR-0002](../decisions/0002-production-source-adoption.md) records actual native
+source adoption. Managed repository admission and public release remain their
+own axes. The table retains the original dependency map for an additional or
+stronger profile; it does not reopen qualified B1–B6 work. B7's exact EF input
+and separate online-admission limit are recorded in its subsection above.
+
 The [decision register](../decisions/open-decisions.md) routes Q1–Q7 to their
 owning decisions; it remains a discussion/navigation projection. Acceptance stays
 with the applicable scope, contract, authority and state owners. This table maps
@@ -676,6 +702,10 @@ the assigned scope. Never silently downgrade a promised guarantee to make a step
 appear complete.
 
 ## 8. Parallel confirmed-target work
+
+The finite single-realm Chromium operation now has the actual B6 result linked
+above. The Browser row below applies to a new loading/state/authority profile;
+it is not a request to repeat or substitute that completed campaign.
 
 | Required target | Next bounded work before its implementation claim | Stop condition for unsupported scope |
 | --- | --- | --- |

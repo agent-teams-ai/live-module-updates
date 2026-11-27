@@ -53,5 +53,12 @@
     "claim": "qualified conformance input for a development-only joint fixture",
     "onlinePackageAdmission": "not inferred from this receipt",
     "observation": "The producing push intentionally skips package-admission; its native package-conformance and collect-evidence jobs succeeded. Owner package-admission, full repository gates and product adoption remain separately observed."
+  },
+  "delivery": {
+    "kind": "immutable-https-mirror-of-qualified-test-archive",
+    "repository": "agent-teams-ai/live-module-updates",
+    "retentionCommit": "f966e204c61e8f4474073449d879501769fc835e",
+    "developmentDependencyUrl": "https://raw.githubusercontent.com/agent-teams-ai/live-module-updates/f966e204c61e8f4474073449d879501769fc835e/tests/module/fixtures/ef/c0a8f2733b54323e2f85322b86167491a169af1d/extension-foundation-node-artifact-0.0.0.tgz",
+    "history": "Retain this commit in main ancestry by ordinary merge. The mirror preserves producer bytes and is not an npm release or package-admission verdict."
   }
 }

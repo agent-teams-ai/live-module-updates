@@ -80,6 +80,6 @@ boundaries:
     entrypoints: []
     allow:
       boundaries: [module-public, module-resources]
-      packages: ["@get-modular/resources", "@get-modular/core", "@get-modular/assembly", "@get-modular/conformance", "playwright"]
-      builtins: ["node:assert/strict", "node:child_process", "node:crypto", "node:fs", "node:fs/promises", "node:os", "node:path", "node:test", "node:url"]
+      packages: ["@get-modular/resources", "@get-modular/core", "@get-modular/assembly", "@get-modular/conformance", "@extension-foundation/node-artifact", "playwright"]
+      builtins: ["node:assert/strict", "node:child_process", "node:crypto", "node:fs", "node:fs/promises", "node:net", "node:os", "node:path", "node:test", "node:timers/promises", "node:url", "node:util"]
       runtimeReferences: []

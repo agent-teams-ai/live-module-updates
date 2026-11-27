@@ -232,6 +232,63 @@ their internal setup dependency belongs to the central implementation owner.
 Frozen research source/results are not rewritten or requalified by a workflow
 setup-pin correction.
 
+## Signed artifact join: source, real inputs and local execution
+
+B7 adds one outer Node Host fixture around the existing operation. Its input is
+the unchanged EF node-artifact archive from producer c0a8f27 and successful
+[run 45914561543](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45914561543).
+The [retained receipt](../../tests/module/fixtures/ef/package-inputs.json)
+records producer source, workflow, proof, archive and dependency identities.
+The collected conformance proof is not an online package-admission verdict.
+
+Two independent source reviews and the root review examined the actual public
+types, native setup, preparation and failure paths. Material corrections were:
+
+| Finding | Correction |
+| --- | --- |
+| A mutable input could disconnect the verified bytes from the original candidate | Bind the captured request and verified digest to the original LMU candidate closureId |
+| A nested view could apply the signed formatter twice | Apply it only at the direct view/held-view provider boundary; nested results retain the child's formatted value |
+| A cleanup failure could prevent independent foreign-resource cleanup | Attempt all independent owners, aggregate original errors and retain uncertain staging instead of deleting the whole root |
+| Runtime shutdown does not immediately abort a still-owned preparation scope | Evaluate current Host grant and runtime closed state at EF's actual authorize callback |
+| Corrupt registry bytes fail before EF can complete closure verification | Require the real ORAS transport refusal, without counting arbitrary setup/import failure as a negative result |
+| A failed preparation could leave a witness wait hanging | Race the required witness against original update completion and retain its actual failure cause |
+| Installed compilation could accidentally import implementation outside the consumer | Admit only the explicitly copied consumer inputs plus actual declaration files; require installed public EF/LMU declarations |
+
+The first local native execution passed all five signed/refusal cases
+(six runner tests) on Node24.22.3 with the producer's exact ORAS1.4.0,
+Cosign3.1.6 and Distribution3.1.2. The original
+[local report](../research/evidence/cooperative-operation-20261126/b7-first-local-node.json)
+is unchanged and explicitly says local-unpublished; it is not a hosted-source
+receipt. Limited scratch space initially interrupted native tool installation;
+the installer removed its temporary stage, then reused only complete
+checksum-verified binaries on ordinary continuation. No tool or test substitute
+was used.
+
+The subsequent full Foundation gate rejected four EF imports with
+architecture.source-dependencies.undeclared-external-dependency: a local file:
+archive does not establish an external package identity under this source
+profile. The initial successful native test did not make that gate successful.
+The correction publishes the original bytes at
+[retention commit f966e20](https://github.com/agent-teams-ai/live-module-updates/commit/f966e204c61e8f4474073449d879501769fc835e)
+and uses their real full-commit HTTPS address with the original SHA512 integrity.
+Normal pnpm downloaded the artifact; independent retrieval confirmed byte-for-byte
+equality and SHA256 151890f5a69798d4098cd557f03c249678c18f4feb77cdff7563202b935882f9.
+An ordinary final merge must retain that commit in main ancestry.
+
+The complete unchanged Foundation source/coverage/suppression checks,
+assert-dev-only and assert-registry then passed. EF remains solely a development
+dependency allowed by the test boundary. The native five-case campaign passed
+again with the actual remote dependency and updated lock. Root dependency audit
+reported no advisories for that observed 164-package development graph; this is
+a dated observation. Hosted full-operation/browser gates and final delivery
+remain separately observed below.
+
+The final documentation review also removed an unsupported stream-continuation
+promise from the selected finite-work phase, identified the original static
+checkpoint as historical, and marked already-qualified cooperative decisions as
+resolved. Broader Desktop, containment, streams and durable profiles remain scoped
+future work rather than implied capabilities of this package.
+
 ## Remaining delivery observations
 
 The complete packed Node/Chromium campaign passed at `6089f0a`: the
@@ -242,9 +299,10 @@ reviewer also checked every browser-served LMU hash and all retained mutated
 files against the actual archive. The superseded L1 candidate and workflow are
 now retired, with an immutable history route in their former profile note.
 
-The EF verified-artifact join and its final exact-source review remain a distinct
-exit. Executor A has published real public contracts in EF #70; actual qualified
-archive handoff and the combined native operation must establish that result.
+The EF verified-artifact join has passed locally against the real qualified
+archive as recorded above. Its hosted exact-source full route and final delivery
+review remain distinct exits; local execution is not a receipt for a future
+GitHub source or merge.
 
 Normal merge and actual-main checks belong to the final source. No pending
 case, unknown publication, cleanup debt, unexecuted browser test, external

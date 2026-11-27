@@ -192,17 +192,20 @@ replacement. Known browser/desktop/security boundaries remain design constraints
 even when the first executed row covers only Node.
 
 The [reviewed modular authoring plan](module-authoring-implementation-plan.md)
-selects the current bounded F1/F2 implementation in the
+selected the initial bounded F1/F2 implementation in the
 [portable-document reference](../../tests/qualification/portable-document/README.md):
 Document, Format and Export in an ordinary core, plus a separately packed adapter
 using public GM. Two built-in format providers and a consumer-authored third provider
 exercise selection without changing document/export behavior. Source checks
 govern three flat features per artifact; no new nested-profile result is claimed.
 The public-package discriminator, source guards and full modular Host/restart
-suite passed at corrected source `6b22e4b`; independent source reviews report GO
-within the declared profile. The
-[evidence matrix](../research/foundation-qualification-matrix.md#modular-authoring-checkpoint-2026-11-26)
-records current and historical results.
+suite passed at historical corrected source `6b22e4b`. Later successors
+corrected complete inherited contracts, canonical public exports and storage
+acquisition; their evidence belongs to their own source, not to `6b22e4b`.
+Current authoring readiness routes through the
+[independent installed feature at 0721ffe](../research/foundation-qualification-matrix.md#independent-installed-feature-2026-11-26)
+and the separately retained 44/41-test successors in that matrix. Independent
+reviews and actual runs support only each recorded profile.
 
 ## 4. F2 — independent test-Host portability
 
@@ -285,7 +288,7 @@ required; no mock may stand in for the guarantee being qualified.
 
 | Work | Required positive and rejecting result |
 | --- | --- |
-| F4.1 Atomic admission | One qualified select-and-retain boundary across reentrancy, nested calls, awaits and stream continuation |
+| F4.1 Atomic admission | One qualified select-and-retain boundary across reentrancy, nested calls and awaits within the selected finite-work profile; stream continuation needs its own explicitly qualified profile |
 | F4.2 Prepare | Custody precedes supported acquisition/evaluation; failed B preserves A where the profile promises it |
 | F4.3 Publish/reconcile | Expected-revision mutation binds the original attempt; lost reply remains unknown until authoritative original receipt resolves it |
 | F4.4 State/effects | Canonical owner checks current schema/grants/write fencing; stale writers and duplicate effects are rejected |

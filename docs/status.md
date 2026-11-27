@@ -159,8 +159,8 @@ whole-library E2E.
   including an actual browser for that claim?
 - Which native Desktop, containment and optional UI rows still need their own
   mechanisms and discriminating evidence?
-- Which supported mechanism can establish the first dynamic profile's atomic
-  operation admission, lifetime and reconciliation obligations?
+- Which additional guarantee or stronger dynamic profile needs evidence beyond
+  the qualified cooperative operation's admission, lifetime and reconciliation?
 
 The [decision register](decisions/open-decisions.md) records alternatives and
 evidence, including profile-specific Q1–Q7 choices. Static fixture work proceeds

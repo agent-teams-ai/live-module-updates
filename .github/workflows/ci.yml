@@ -27,6 +27,19 @@ jobs:
           run_install: false
       - name: Install the exact development graph
         run: pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies
+      - name: Read the qualified producer's native tool installer
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: agent-teams-ai/extension-foundation
+          ref: c0a8f2733b54323e2f85322b86167491a169af1d
+          path: .qualification/ef-native-source
+          sparse-checkout: tests/qualification/artifact
+          persist-credentials: false
+      - name: Install the exact verified artifact tools
+        shell: bash
+        run: |
+          node .qualification/ef-native-source/tests/qualification/artifact/install-native-tools.ts "$RUNNER_TEMP/lmu-ef-native-tools"
+          printf 'EF_ARTIFACT_TOOLS_DIR=%s/lmu-ef-native-tools\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
       - name: Install the pinned native browser
         run: pnpm exec playwright install --with-deps chromium --only-shell
       - name: Execute every native library gate
