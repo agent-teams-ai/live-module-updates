@@ -179,7 +179,8 @@ but concurrent writers own disjoint files; the root integrates shared files.
 | Area | Primary writer | Planned files and dependency |
 | --- | --- | --- |
 | C1 public contract correction | operation_design | Existing invocation/preparation/lifetime port types, UpdateRuntime/UpdateHandle signatures; new tests/module/contract-variance-cases.ts and its existing packed-consumer integration. Root integrates shared model/lint edits. |
-| C2 native discriminator and C3 justified lifetime integration | invocation_contract | New tests/module/owned-runtime-discriminator.test.ts and focused feature tests; only after evidence, existing coordinator/current ownership fact and a narrowly owned Resources adapter. Root serializes shared src/models/exports changes after C1. |
+| C2 native discriminator and C3 native Host controls | invocation_contract | tests/module/owned-runtime-*.ts; native GM lifetime and authority-flight controls. No production/shared-file edits. |
+| C3 justified coordinator correction | operation_design | After C2 and ADR-0003: existing coordinator, operation state, RuntimeSnapshot and focused ownership tests. The selected owner-defined callback needs no new Resources wrapper. |
 | C4 complete reference and C6 installed/native delivery | installed_consumer | New tests/qualification/composed-document/ maintained consumer/adoption slice; tests/module/composed-* staging, runner and evidence. Reuse existing portable core/adapter/Summary source unchanged; no edits to EF or old sealed evidence. |
 | C5 actual Host contract laws | root | src/features/update-operation/testing/, curated src/testing.ts, focused laws/negative controls and external consumer connection; no runner or platform dependency. |
 | Shared policy, plan, decisions and delivery | root | package exports, compiler scopes, existing FMS/Foundation/lint profiles, CI integration, owning docs/reviews and branch/PR operations. |
@@ -245,10 +246,20 @@ Exit: an executable discriminator and independently reviewed decision. If
 existing APIs suffice with trivial glue, publish the reference and explanation;
 C4–C7 still proceed. No universal GM descriptor, service locator or new catalog.
 
+### Selected C2 decision
+
+The actual GM/Resources lifecycle and two native authority-flight overlap
+counterexamples select option 2 plus one necessary coordinator correction.
+[ADR-0003](../decisions/0003-composed-runtime-ownership.md) owns the exact
+current ownership fact, actual-flight accounting, source boundaries and controls.
+The owner-defined handoff remains small consumer composition; no public wrapper
+or second lifetime manager is added. Original C2 failures remain sealed evidence.
+
 ### C3 — implement the qualified handoff and exact composition adoption
 
-- If C2 justifies it, extend the existing optional integration entry; keep one
-  private package and the ordinary root free of concrete GM dependencies.
+- Apply the selected ADR-0003 coordinator correction and use the existing
+  optional Resources preparation entry. Keep one private package and the
+  ordinary root free of concrete GM dependencies.
 - Build the real owner-defined GM module with narrow authority, compatibility,
   preparation and settings inputs. Preserve full descriptor unions, separate
   mapped bases and proper declaration/module/group ownership.

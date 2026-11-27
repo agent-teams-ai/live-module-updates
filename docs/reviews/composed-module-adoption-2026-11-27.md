@@ -94,3 +94,20 @@ C3 remains unimplemented at this checkpoint.
 The C1 checkpoint 6b2dee66cf42aaa5c16c9d0eee4bdc5cf1d340cf passed native CI
 45924590958 and repository-admission inspection 45924591299. Admission still
 retains its separate configured-versus-qualified meaning.
+
+### C2 follow-up and C3 decision
+
+Both real authority-flight overlap orders were reproduced, bringing the local
+native discriminator campaign to 15/15 tests with strict/lint checks passing.
+The [unaltered overlap observation](../research/evidence/composed-module-20261127/c2-authority-overlap.json)
+records parent completion while one actual publish or lookup still held a file
+descriptor; the same call used it after resumption. A genuine terminal receipt,
+useful B invocation and exactly one publication preceded each observation.
+
+operation_design independently reviewed the native witnesses and the existing
+coordinator; invocation_contract reviewed the finally/refresh and current-fact
+semantics. The selected [ADR-0003](../decisions/0003-composed-runtime-ownership.md)
+adds per-attempt observation of the original publication response, reuses the
+existing reconciliation flight and derives current ownership once. No material
+contradiction remained in this bounded decision. It is permission to implement
+and test the correction, not a claim that the corrected native proof has run.

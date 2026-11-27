@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "source": "local-unpublished",
+  "node": "v24.22.3",
+  "target": "actual-native-node",
+  "scope": "TEST counterexamples; terminal receipt alone did not prove native authority settlement",
+  "observations": [
+    {
+      "order": "lookup-overtakes-publish",
+      "classification": "premature-parent-completion",
+      "parentCompleteWhileNativeCallPending": true,
+      "nativePendingAtParentCompletion": {
+        "publish": 1,
+        "lookup": 0
+      },
+      "actualPostAwaitNativeUses": {
+        "publish": 1,
+        "lookup": 0
+      }
+    },
+    {
+      "order": "publish-overtakes-lookup",
+      "classification": "premature-parent-completion",
+      "parentCompleteWhileNativeCallPending": true,
+      "nativePendingAtParentCompletion": {
+        "publish": 0,
+        "lookup": 1
+      },
+      "actualPostAwaitNativeUses": {
+        "publish": 1,
+        "lookup": 1
+      }
+    }
+  ]
+}

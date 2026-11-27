@@ -53,22 +53,43 @@ function nativeOwners(options: OwnedRuntimeOptions, parent: Scope, barriers: Ret
   const cleanupFailures = new Set<string>();
   if (options.initialBarrier !== undefined) { preparationGates.set("A", options.initialBarrier); }
   const publicationObserved = Promise.withResolvers<void>();
+  const publicationSettled = Promise.withResolvers<void>();
   let lookups = 0;
+  let publishGate: string | undefined;
   let lookupGate: string | undefined;
+  let pendingPublishes = 0;
+  let pendingLookups = 0;
+  let postAwaitPublishUses = 0;
+  let postAwaitLookupUses = 0;
   function useBorrowed(): void { assert.ok(borrowedActive); fstatSync(descriptor); }
   const publicationAuthority: UpdateAuthority = {
     read: () => { useBorrowed(); return authority.read(); },
     publish: request => {
-      useBorrowed();
-      try { return authority.publish(request); }
-      finally { publicationObserved.resolve(); }
+      useBorrowed(); pendingPublishes += 1;
+      let held = false;
+      try {
+        const result = authority.publish(request);
+        if (publishGate !== undefined) {
+          held = true;
+          return barriers.wait(publishGate).then(() => {
+            useBorrowed(); postAwaitPublishUses += 1; return result;
+          }).finally(() => { pendingPublishes -= 1; publicationSettled.resolve(); });
+        }
+        return result;
+      } finally {
+        publicationObserved.resolve();
+        if (!held) { pendingPublishes -= 1; publicationSettled.resolve(); }
+      }
     },
     lookup: request => {
-      useBorrowed(); lookups += 1;
+      useBorrowed(); lookups += 1; pendingLookups += 1;
       if (lookupGate !== undefined) {
-        return barriers.wait(lookupGate).then(() => { useBorrowed(); return authority.lookup(request); });
+        return barriers.wait(lookupGate).then(() => {
+          useBorrowed(); postAwaitLookupUses += 1; return authority.lookup(request);
+        }).finally(() => { pendingLookups -= 1; });
       }
-      return authority.lookup(request);
+      try { return authority.lookup(request); }
+      finally { pendingLookups -= 1; }
     },
   };
   async function prepare(generation: string, resources: Resources) {
@@ -109,7 +130,11 @@ function nativeOwners(options: OwnedRuntimeOptions, parent: Scope, barriers: Ret
   }
   return {
     authority, publicationAuthority, preparation, publicationObserved: publicationObserved.promise,
+    publicationSettled: publicationSettled.promise,
+    pendingAuthority: () => ({ publish: pendingPublishes, lookup: pendingLookups }),
+    nativeUsesAfterAwait: () => ({ publish: postAwaitPublishUses, lookup: postAwaitLookupUses }),
     lookups: () => lookups, useBorrowed, lease: nativeLease,
+    publishAfter: (barrier: string) => { publishGate = barrier; },
     lookupAfter: (barrier: string) => { lookupGate = barrier; },
     prepareAfter: (generation: string, barrier: string) => { preparationGates.set(generation, barrier); },
     cleanupAfter: (generation: string, barrier: string) => { cleanupGates.set(generation, barrier); },
