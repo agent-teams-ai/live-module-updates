@@ -1,6 +1,7 @@
 # Programme C: composed modules and qualified Host integration
 
-Status: proposed implementation programme, 2026-11-27. The owner authorized
+Status: reviewed implementation programme, 2026-11-27; execution started after
+two independent review rounds. The owner authorized
 planning, independent critique, implementation, review and delivery in one
 Draft PR. This document fixes scope before implementation; it is not execution
 evidence or acceptance of a new production profile. Completed B0–B7 remains in
