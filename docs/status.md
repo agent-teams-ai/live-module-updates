@@ -34,8 +34,15 @@ packed operation passed the native route at `6089f0a`: **52/52 runner tests**,
 including 29 named scenarios and six exact defect controls per native target.
 The [matrix](research/foundation-qualification-matrix.md#3c-complete-packed-operation)
 retains original failures, archive identities and support limits. The preliminary
-L1 implementation is retired after this replacement proof. The EF artifact join,
-final delivery review and actual-main verification remain separate exits.
+L1 implementation is retired after this replacement proof. The actual signed EF
+join and complete Node/Chromium regression then passed at `47c17f9`: **58/58**
+runner tests, with the same LMU archive in every installed consumer. The
+[joint result](research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation)
+records its five native scenarios, exact producer input and original delivery
+failure. Independent source/evidence review found no remaining material issue
+within that profile. The [single delivery PR](https://github.com/agent-teams-ai/live-module-updates/pull/9)
+records final-head, normal-merge and actual-main check receipts; those observations
+belong to their exact source rather than this navigation snapshot.
 
 [ADR-0002](decisions/0002-production-source-adoption.md) and the
 [source ownership guide](architecture/source-ownership.md) define the native

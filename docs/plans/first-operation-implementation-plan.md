@@ -1,6 +1,7 @@
 # First complete operation: implementation plan
 
-Status: proposed execution plan, 2026-11-25. The owner requested detailed phases,
+Status: phase plan first proposed on 2026-11-25, now executed for the selected
+cooperative profile with the exact evidence below. The owner requested detailed phases,
 independent critique and recorded unresolved questions before risky implementation.
 This plan makes the existing F4 work executable; merging it does not select a
 runtime policy, publish an API or admit a production package.
@@ -25,9 +26,13 @@ passed 52/52 checks at `6089f0a46206b696e81dbe8756e7e71e00a93dd7`.
 The same packed library passed 29 positive cases and all six exact negative
 controls in each of Node and Chromium. Its
 [complete-operation evidence](../research/foundation-qualification-matrix.md#3c-complete-packed-operation)
-remains separate from the B7 EF join below. The
+remains separate from the B7 EF join below. B7 then passed the full native route
+at `47c17f95f7c8cf3650c907ac4ed52d6127febe5c`: 58/58 tests, including five
+actual signed/refusal cases and the complete Node/Chromium operation. The
+[joint evidence](../research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation)
+binds the same LMU archive to its real producer-qualified EF input. The
 [usage guide](../architecture/cooperative-operation-usage.md) records the actual
-early authoring surface and Host obligations.
+authoring surface and Host obligations.
 
 The [operation contract](../architecture/operation.md) owns the required semantics,
 the [decision register](../decisions/open-decisions.md) routes open choices to their

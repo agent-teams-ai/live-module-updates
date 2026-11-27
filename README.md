@@ -11,7 +11,7 @@ composition systems, resource scopes and executors retain their responsibilities
 
 ## Current status
 
-**Private source implementation under qualification in [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9).
+**Qualified private implementation delivered through [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9).
 No npm release or product adoption is claimed.** The selected
 [cooperative operation profile](docs/decisions/0001-cooperative-update-profile.md)
 supports finite trusted work in one Node process or Chromium realm, with
@@ -25,8 +25,12 @@ exact source in Node and actual Chromium.
 The complete packed production operation has now passed in both independent
 Node and Chromium Hosts: 29 named scenarios and six deliberate defect controls
 per target. The [qualification matrix](docs/research/foundation-qualification-matrix.md#3c-complete-packed-operation)
-binds that result to exact source, archive and native resources. The EF artifact
-join remains a separate integration result.
+binds that result to exact source, archive and native resources. The
+[signed EF artifact join](docs/research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation)
+also passed in the selected Linux x64 Node Host. Its full native run passed
+58/58 tests, including the Node/Chromium operation and five real signed/refusal
+scenarios. The producer's package-admission and product-adoption decisions remain
+with their owners.
 Native Effect, isolated execution and
 Wasm/Extism are separate candidate profiles. Module Federation, Piral,
 Native Federation and OpenComponents are considered at their actual delivery,

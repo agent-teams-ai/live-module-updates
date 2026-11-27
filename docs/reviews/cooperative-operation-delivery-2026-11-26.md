@@ -152,7 +152,7 @@ mutant file against the reported hashes and exact replacements.
 The receipt-capacity rows directly qualify the native authority primitive after
 useful A setup; they are not 32 complete module replacements. Runtime attempt
 capacity has its own row. The closure catalogue uses actual GM compositions;
-arbitrary dynamic artifact admission belongs to B7.
+the selected signed EF artifact path belongs to B7.
 
 Both reviewers found no remaining critical or material issue in those corrected
 sources and the refreshed local Node receipt. That source review does not substitute for
@@ -289,7 +289,7 @@ checkpoint as historical, and marked already-qualified cooperative decisions as
 resolved. Broader Desktop, containment, streams and durable profiles remain scoped
 future work rather than implied capabilities of this package.
 
-## Remaining delivery observations
+## Qualified delivery observations
 
 The complete packed Node/Chromium campaign passed at `6089f0a`: the
 [matrix](../research/foundation-qualification-matrix.md#3c-complete-packed-operation)
@@ -299,12 +299,25 @@ reviewer also checked every browser-served LMU hash and all retained mutated
 files against the actual archive. The superseded L1 candidate and workflow are
 now retired, with an immutable history route in their former profile note.
 
-The EF verified-artifact join has passed locally against the real qualified
-archive as recorded above. Its hosted exact-source full route and final delivery
-review remain distinct exits; local execution is not a receipt for a future
-GitHub source or merge.
+The full hosted route at
+[`47c17f9`](https://github.com/agent-teams-ai/live-module-updates/commit/47c17f95f7c8cf3650c907ac4ed52d6127febe5c)
+then passed **58/58**, including the five actual signed/refusal scenarios and
+the complete Node/Chromium operation. All four workflow runs on that source
+succeeded: native library, portable-document, repository admission and Actions
+CodeQL. The [matrix](../research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation)
+retains the three unchanged raw reports and exact archive/run identities.
 
-Normal merge and actual-main checks belong to the final source. No pending
-case, unknown publication, cleanup debt, unexecuted browser test, external
-artifact handoff, managed admission or public release is marked complete by this
-intermediate record.
+Root independently verified the downloaded ZIP, all original LMU/EF archive
+identities, eight retained mutated files and 70 browser-served LMU responses.
+The same LMU archive was used by ordinary, Resources, Node, Chromium and EF
+consumers. Separate final source/contract reviewers found no remaining material
+issue after the recorded corrections; this is agent review, not a GitHub approval
+submission. The selected profile's original errors and pending stronger-profile
+questions remain visible.
+
+The single [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9)
+records the final reviewed head, ordinary merge and actual-main check receipts.
+The merge preserves the immutable archive retention commit in main ancestry.
+Later documentation or merge commits retain their own package/check identities;
+they do not rewrite the qualified 47c17f9 reports. No managed admission, public
+npm release or product adoption is inferred from this fixture delivery.
