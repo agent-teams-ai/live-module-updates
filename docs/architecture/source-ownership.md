@@ -2,7 +2,8 @@
 
 The [single FMS profile](../../architecture/feature-module-profile.json) maps
 immutable FMS v1.1 to the production LMU library. Its adoption decision is
-[ADR-0002](../decisions/0002-production-source-adoption.md). The
+[ADR-0002](../decisions/0002-production-source-adoption.md); its current tooling
+successor is [ADR-0004](../decisions/0004-current-tooling-adoption.md). The
 [cooperative profile](../decisions/0001-cooperative-update-profile.md) owns the
 qualified operation's semantic limits.
 
@@ -77,8 +78,12 @@ owns inward import directions and exact allowed packages. The
 [suppression policy](../../architecture/foundation/suppression-governance.yaml)
 starts with no waivers. The
 [source coverage policy](../../architecture/foundation/source-coverage.yaml)
-binds those files to the real compiler projects, Stack type-aware lint preset
-and mandatory native script routes. `tsconfig.portable.json` additionally compiles
+binds those files to the generated neutral topology, Stack type-aware lint preset
+and mandatory native script routes. The [Stack configuration](../../toolchain.config.json)
+owns the four actual compiler projects. The [public FMS projection helper](../../scripts/check-quality-topology.ts)
+checks exact FMS/coverage input bytes and the complete committed topology.
+Foundation's typed production check and the strict tools/test compilers have
+different scopes; the former is not described as typed lint of every tool/test. `tsconfig.portable.json` additionally compiles
 the actual application/composition implementation with ES libraries only and no
 Node or DOM globals, including the testing entry and its implementation.
 The complete compiler also covers the optional Resources
@@ -87,7 +92,8 @@ adapter and its native declaration requirements.
 ## Complete native route
 
 `pnpm check:fast` executes the compiler cohort check, actual FMS graph/census,
-Foundation coverage scope and all root strict compiler projects. `pnpm check`
+topology freshness, Foundation coverage scope and all root strict compiler
+projects through public Stack compile. `pnpm check`
 also runs typed lint, the distributable build, native tests, complete Foundation
 policy checks and its development-only/registry assertions. The
 [CI workflow](../../.github/workflows/ci.yml) installs the exact native Chromium
@@ -99,7 +105,10 @@ source resolution to Foundation and architecture rules to FMS. Its local file
 census rejects source symlinks, unowned source formats, outside-feature files
 and empty directories. The [controls](../../scripts/check-feature-module.test.ts)
 exercise real filesystem inputs and exact rejecting rule families; they do not
-replace operation tests or semantic review.
+replace operation tests or semantic review. The [v5 migration controls](../../scripts/check-quality-topology.test.ts)
+exercise the actual installed Foundation against stale inputs, omitted source
+and compiler coverage, protected severity and same-file valid/defective/restored
+typed-lint input. Native setup failure cannot satisfy an intended rule oracle.
 
 `tests/qualification/portable-document` retains its separate exact dependency
 and compiler project. Its checks remain required for that authoring reference.

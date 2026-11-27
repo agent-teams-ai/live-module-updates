@@ -258,4 +258,21 @@ stronger profiles and protected upstream procedures are excluded. Confidence
   the installed Node campaign passed 34 positive cases and eight negative
   controls. Chromium was not selected in this local focused run; complete
   hosted qualification and new-tooling validation remain pending.
-- D1 migration, complete native results and delivery: pending.
+- D2 hosted source b7d3f0b: complete native run 45999548017 passed 106 tests;
+  installed Node and Chromium each passed 34 positive cases and eight controls.
+  Static reference, admission and identity checks also passed. Two subsequent
+  independent source reviews found no critical/material issue. This evidence
+  uses the previous tooling graph.
+- D1 source migration: schema 5, public topology generation, single Stack project
+  authority, exact current pins and separate maintained fixture prepared.
+  Independent review confirmed preserved compiler/lint scopes.
+- Canonical preparation at source 75806d3: run 46001466080 passed strict
+  no-script installation, initialized compiler identity and tools-project
+  compilation; actual pnpm/FMS produced both locks and the topology. Exact
+  Git blob identities matched independent re-import. The source-bound receipt
+  is retained; the temporary preparation workflow/helper is removed afterward.
+- Native migration controls passed two source-review rounds. The typed-lint
+  witness now uses the same valid, defective and restored file. Actual new-graph
+  native execution and normal delivery remain pending.
+- D3 audit packet is recorded in the owning first-operation plan and decision
+  register. Option A is delivered; proposed native option B remains separate.

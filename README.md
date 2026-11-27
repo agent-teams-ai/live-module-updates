@@ -35,6 +35,17 @@ The same delivery PR tracks final-head, normal-merge and actual-main receipts;
 each is added only after its check or action finishes. The original complete
 campaign's later policy failure is preserved separately.
 
+The current [Programme D](docs/plans/tooling-and-module-reuse-plan.md) in
+[Draft PR #12](https://github.com/agent-teams-ai/live-module-updates/pull/12)
+upgrades the maintained tooling graph and audits concrete GM reuse. The
+[review record](docs/reviews/tooling-and-module-reuse-2026-11-27.md) binds the
+additional scope-identity control and actual Node/Chromium results to their
+source. [ADR-0004](docs/decisions/0004-current-tooling-adoption.md) separates
+Foundation 4 migration, native qualification and ordinary Central admission.
+The next native Effect experiment has an explicit
+[owner and ten-case packet](docs/plans/first-operation-implementation-plan.md#10-native-effect-and-observation-adoption-packet-2026-11-27);
+it remains proposed native support.
+
 The installed dependent-feature checkpoint passed in Node with the existing
 browser regression. The invocation/authority discriminators passed on their
 exact source in Node and actual Chromium.
