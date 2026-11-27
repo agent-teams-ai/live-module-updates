@@ -63,6 +63,15 @@ repository decision before its profile and gates change. Sub-features and
 composition contracts are absent from this initial profile; adopting either
 also adopts its v1.1 evidence obligations.
 
+The separate [composed reference](../../tests/qualification/composed-document/README.md)
+materializes an application-owned GM boundary without changing the ordinary
+library's profile. Its `document-runtime` feature owns the concrete invocation
+contract and composition; it reuses the existing `export-summary` feature and
+packed Document/Format/Export implementations. GM constructs this selectable
+closure and the actual runtime owner. Fixed private operation helpers remain
+ordinary imports. Full feature maps, one-capability declarations and explicit
+composition-contract surfaces belong to that reference's adopted CMS/FMS scope.
+
 The [source dependency policy](../../architecture/foundation/source-dependencies.yaml)
 owns inward import directions and exact allowed packages. The
 [suppression policy](../../architecture/foundation/suppression-governance.yaml)
@@ -101,6 +110,28 @@ links immutable source and results. Root source coverage does not pretend that
 root resolution can compile isolated installed consumers; their actual separate
 compilations remain mandatory. Historical research and sealed archives retain
 their original identities.
+
+`tests/qualification/composed-document` has an explicit root-native staging
+route in [composed-fixture.ts](../../tests/module/composed-fixture.ts), using the
+root's pinned compiler and an exact source inventory. Borrowed core, adapter
+and Summary files are copied unchanged into isolated ordered builds; their
+original child compiler graph is not reused or modified. A second clean
+installation compiles only authored consumer sources and installed declarations.
+Actual `--listFiles` output establishes both compiler scopes.
+
+The [staged source gate](../../scripts/check-composed-source.ts) uses actual
+Foundation graph/dependency checks, FMS and GM Conformance layout checks. New
+maintained reference source also runs the pinned stock typed/maintainability
+rules and scoped CMS limits; native Host test infrastructure runs the stock
+quality rules in its own staged project. Exact valid and invalid inputs verify
+that the actual rules reject their named defects. The unchanged borrowed Summary
+retains its accepted source profile; a new reference does not relabel historical
+source as a new CMS adoption. The reference source gates precede its packing;
+installed-consumer gates run after the second installation and before native
+execution. Both are in the existing CI route, with no separate workflow or
+runner framework. LMU itself is emitted and packed in the isolated staging
+directory, so concurrent native consumers never read a shared `dist` while
+this campaign rewrites it.
 
 Full source conformance, same-source hosted checks, central registration,
 managed Docs admission, remote enforcement and public release are separate

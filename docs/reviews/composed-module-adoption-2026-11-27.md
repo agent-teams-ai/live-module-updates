@@ -211,3 +211,83 @@ controls to proceed independently. During the executor interruption, exact known
 source is preserved through the existing GitHub route in this same Draft PR.
 Recovered or newly written source still needs source-bound native CI and final
 review; no unexecuted reconstruction is presented as a passed qualification.
+
+### C4 second review: native retirement and actual source gates
+
+invocation_contract found a material native-observation gap in the unfinished
+reference: `alive()` returned false immediately when its local `active` flag
+was false. An owner that omitted actual FD/listener disposal could therefore
+pass retirement checks. The correction observes the exact native resource after
+logical retirement: Node compares the captured device/inode behind the FD,
+including safe handling of FD reuse; Chromium dispatches to the actual exact
+listener and observes its own pulse count. Final teardown must also detect the
+original native leak before releasing any remaining exact owner. It cannot trust
+the same bookkeeping or close a reused foreign FD.
+
+This finding justifies one additional rejecting native Host control, beyond
+the six originally planned: omit physical release but mark the owner retired,
+then require the exact retirement oracle to reject after useful A/B work.
+The planned 34 positive cases remain unchanged. The local counterexample,
+corrected native campaigns and final review belong to their actual source;
+this paragraph records the requirement, not an unexecuted passing result.
+The [standalone real-FD observation](../research/evidence/composed-module-20261127/c4-native-retirement-discriminator.json)
+reproduced `oldAlive=false` while independent native observation remained true.
+After actual close and numeric FD reuse by a different file, the original
+device/inode remained absent. This is a bounded Node observer discriminator,
+not execution of the composed campaign or a substitute for Chromium.
+
+operation_design independently audited the implemented C2/C3/C5 and the pending
+public documentation without new material findings. It rechecked the shared
+ownership predicate, actual authority flights, incomplete/unregistered custody,
+original receiver capture and immutable reports. The fixture factory now
+explicitly owns failed setup before returning its complete teardown handle;
+the suite can guarantee both teardown attempts only after that return.
+
+The prepared-receiver correction at 43ae5cc5b06b35b1838f4dba198f77d6456af3a3
+passed native run 45928918639 (**103/103**, zero failures/cancellations/skips),
+static packed regression 45928918721, admission inspection 45928919115 and
+author identity. The original failing [receiver report](../research/evidence/composed-module-20261127/c4-prepared-receiver-receipt.json),
+[native failure](../research/evidence/composed-module-20261127/c4-prepared-receiver-node.json)
+and [actual input identities](../research/evidence/composed-module-20261127/c4-prepared-receiver-identities.json)
+remain unchanged. The C3 hosted [owner result](../research/evidence/composed-module-20261127/c3-owned-runtime.json)
+and [authority-overlap result](../research/evidence/composed-module-20261127/c3-authority-overlap.json)
+are likewise preserved verbatim from the downloaded source-bound artifact.
+
+The next native review found a partial Node setup leak: opening the foreign
+FD and then failing its initial write left both FD and directory outside a
+returned owner. The small setup path now retains each original acquisition
+until handoff and cleans it on failure while preserving the original cause.
+The [actual ENOSPC report](../research/evidence/composed-module-20261127/c4-native-setup-report.json)
+compares exact historical source with the current emitted module in two separate
+Node 24.22.3 processes. Both first pass ordinary setup. A real `/dev/full` write
+then produces the same original native error: [before](../research/evidence/composed-module-20261127/c4-native-setup-before.json)
+leaves the FD/directory; [after](../research/evidence/composed-module-20261127/c4-native-setup-after.json)
+closes the exact original FD once and removes the directory. The read-only
+installed consumer was unchanged, and the probe reclaimed its own old leak.
+operation_design re-reviewed the final setup and physical observers without
+remaining material findings.
+
+### C6 actual local campaign and final integration review
+
+The complete staging route passed with eight archives and 68 copied source
+inputs: both strict native compiler projects, the ES-only application scope,
+installed readonly TS2540 control, real FMS/CMS/Foundation checks, stock typed
+quality and ten reference plus two Host rejecting controls. The actual Node
+runner then passed all 34 positive rows and all seven intended negative
+controls. Local Chromium launch was unavailable because its pinned executable
+is not installed; that overall local test command returned a failure, and no
+browser result is inferred from the Node subtest.
+
+Root's final orchestration review found one shared-output race: this campaign
+rebuilt root `dist` while other native test files could concurrently pack it.
+Its LMU build now belongs to the same isolated temporary package tree as the
+other staged artifacts. The existing CI's root build and other consumers retain
+their own routes. This changes staging ownership, not the runtime contract.
+
+invocation_contract re-reviewed whole-closure, initial/current compatibility,
+factory identity, independent domains, all bounds and native retirement after
+the corrections. Its documentation pass corrected version attribution (#9
+versus C additions), the exact reference/Host quality scopes and gate order.
+Generation retirement and borrowed Host authority lifetime are also described
+separately. Source review and local results do not replace the pending hosted
+Node/Chromium campaign on the final committed source.

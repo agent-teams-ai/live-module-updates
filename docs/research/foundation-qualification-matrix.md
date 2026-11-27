@@ -441,6 +441,48 @@ admission stay separate. The final [delivery PR](https://github.com/agent-teams-
 records normal merge and actual-main checks without rewriting these source-bound
 reports.
 
+## 3e. Composed modules and GM-owned LMU
+
+[Programme C](../plans/composed-module-adoption-plan.md) qualifies the join between
+complete modular authoring and the implemented cooperative update operation.
+Its concrete reference uses GM for the selectable Document/Format/Export/Summary
+closure and for the module owning LMU. The inner operation remains portable;
+the Host alone owns admission policy, canonical state and actual effects.
+The [review record](../reviews/composed-module-adoption-2026-11-27.md) preserves
+the two plan rounds, native discriminators and material implementation findings.
+
+### Published native checkpoints
+
+| Evidence field | Exact observation |
+| --- | --- |
+| Sound public contracts | C1 at `6b2dee66cf42aaa5c16c9d0eee4bdc5cf1d340cf`, native run [45924590958](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45924590958); installed TS 7.0.2 passes valid substitutions and rejects ten exact unsound programs |
+| Original unsafe archive | [Unchanged observation](evidence/composed-module-20261127/c1-unsafe-assignment.json) measures original main #9's archive, not a reconstructed old build |
+| C2 before correction | [Native owner discriminator](evidence/composed-module-20261127/c2-owned-runtime.json) and [actual publish/lookup overlap](evidence/composed-module-20261127/c2-authority-overlap.json); original false-completion observations retained |
+| C3 current ownership and actual flights | `71099b14c7636533335c4a99f1f91b4e907aba58`, native run [45927030119](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45927030119): **101/101**, zero failures/skips; actual [owner](evidence/composed-module-20261127/c3-owned-runtime.json) and [overlap](evidence/composed-module-20261127/c3-authority-overlap.json) reports copied unchanged |
+| C3 evidence archive | Artifact 15166996561; independently downloaded ZIP SHA256 `53f155c0c06c517f73d8b862f1af01fffe0df3d3b2efbb61fbb2b4c3550adef7` |
+| Public test kit | C5 at `6e81b2338074cf608acc818f06ea35735770e924`, native run [45926759858](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45926759858); eight portable laws, independent oracles, native rejecting variants and three isolated package consumers |
+| Prepared receiver correction | `43ae5cc5b06b35b1838f4dba198f77d6456af3a3`, native run [45928918639](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45928918639): **103/103**, zero failures/cancellations/skips; static packed run [45928918721](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45928918721) and admission inspection [45928919115](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45928919115) successful |
+| Original receiver failure | [Actual failing report](evidence/composed-module-20261127/c4-prepared-receiver-receipt.json), [native error](evidence/composed-module-20261127/c4-prepared-receiver-node.json), [source/archive/compiler identities](evidence/composed-module-20261127/c4-prepared-receiver-identities.json); archive matches the C3 hosted bytes |
+
+These checkpoints run the existing native/browser/signed-EF regression routes.
+They do not establish the unfinished composed campaign. That campaign requires
+the exact installed reference and LMU archives, 34 positive named cases and
+seven intended defect rejections in each independent Node and real Chromium
+Host. The seventh negative follows review: missed physical disposal must remain
+observable even after the native owner's ledger claims retirement.
+
+`ownershipReleased` is a current observation derived once by the coordinator,
+including actual publish/lookup flights and unregistered custody. Its original
+close report remains immutable after explicit recovery. The native witnesses
+establish exact FD/DOM ownership only for their tested integrations; a lying
+cleanup report is not physical release evidence by itself.
+
+This remains a finite trusted cooperative profile. A complete provider closure
+does not freeze borrowed business data, qualify hostile plugins or add durable
+recovery. A measured factory set is not a signature-verification result; the
+existing signed EF join above retains that separate boundary. Managed Docs,
+public release and product adoption keep their own owner routes.
+
 ## 4. Independent oracles, negative controls and reset
 
 For each additional claim, record the useful result and a failure that would

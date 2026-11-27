@@ -18,6 +18,18 @@ supports finite trusted work in one Node process or Chromium realm, with
 explicit Host authority, generation-bound calls and borrowed state. The primary
 package entry has no mandatory GM, EF, UI, Node or DOM dependency. The optional
 `live-module-updates/resources` entry adapts public Resources cleanup.
+The optional `live-module-updates/testing` entry provides portable authority
+contract cases for a consumer's own test runner. Neither optional entry changes
+the ordinary root's dependency boundary.
+
+The successor [Programme C](docs/plans/composed-module-adoption-plan.md) in
+[Draft PR #11](https://github.com/agent-teams-ai/live-module-updates/pull/11)
+adds sound public function-property contracts, current runtime ownership after
+cleanup recovery and actual authority-flight retention. Its
+[composed reference](tests/qualification/composed-document/README.md) joins the
+complete Document/Format/Export/Summary closure to a genuine GM-owned LMU runtime.
+The [current evidence](docs/research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu)
+distinguishes published native checkpoints from the unfinished composed campaign.
 
 The installed dependent-feature checkpoint passed in Node with the existing
 browser regression. The invocation/authority discriminators passed on their
@@ -97,7 +109,7 @@ for the current executable slice and the remaining discriminating tests.
 | Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
 | How does a project use the implemented cooperative operation? | [Usage and ownership contracts](docs/architecture/cooperative-operation-usage.md) |
-| How should an implementing agent proceed phase by phase? | [First-operation implementation plan](docs/plans/first-operation-implementation-plan.md) |
+| How should an implementing agent proceed phase by phase? | [Programme C: composition and Host ownership](docs/plans/composed-module-adoption-plan.md); [completed first-operation plan](docs/plans/first-operation-implementation-plan.md) |
 | Which experiment addresses a particular risk? | [Research and evidence map](docs/research/README.md) |
 | What changed after independent critique? | [Consolidation review](docs/reviews/foundation-consolidation-2026-11-24.md) |
 | What corrects the earlier product-first sequence? | [Fixture-first successor review](docs/reviews/fixture-first-foundation-2026-11-24.md) |

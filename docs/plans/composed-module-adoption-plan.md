@@ -338,7 +338,10 @@ admission or physical release without an independent native witness.
 - Keep the two maintained build scopes explicit. The new root-native staging
   route uses the already qualified root TS 7.0.2 compiler and an explicit
   unchanged input inventory from portable core, adapter and Summary. Build and
-  pack in dependency order in an isolated temporary tree; do not import the old
+  pack in dependency order in an isolated temporary tree. Emit LMU into its own
+  staged package as well: other native test files may pack the root build
+  concurrently, so this campaign must not rewrite that shared output.
+  Do not import the old
   child pack helpers or rely on that child's node_modules/.bin/tsc.
 - A second clean consumer contains only its authored files and the packed
   installations. Record compiler --listFiles inputs: consumer sources plus
@@ -362,7 +365,11 @@ admission or physical release without an independent native witness.
   Node EventTarget/source imports are not browser evidence.
 - Mutate real changed boundaries: wrong wiring, mixed-generation call,
   plan-only reuse, effect-fence removal, early parent close and wrong-instance
-  disposal. Require the intended witness, not an unrelated setup failure.
+  disposal. Implementation review additionally requires a native owner that
+  omits its own physical disposal while marking its bookkeeping retired. Exact
+  FD identity or actual listener delivery must expose that leak independently
+  of the retirement flag and final cleanup. Require the intended witness, not
+  an unrelated setup failure.
 - Run real FMS/Foundation/strict/type-aware gates, static authoring and B6/B7
   regressions. Preserve the original signed EF artifact route; do not take over
   A's independent EF release or tooling admission.

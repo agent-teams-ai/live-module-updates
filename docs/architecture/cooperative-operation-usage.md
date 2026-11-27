@@ -1,7 +1,12 @@
 # Using the cooperative update operation
 
-This guide describes the private implementation delivered through
-[LMU #9](https://github.com/agent-teams-ai/live-module-updates/pull/9).
+This guide describes the private implementation first delivered through
+[LMU #9](https://github.com/agent-teams-ai/live-module-updates/pull/9) and the
+[Programme C checkpoints](../research/foundation-qualification-matrix.md#3e-composed-modules-and-gm-owned-lmu)
+in [LMU #11](https://github.com/agent-teams-ai/live-module-updates/pull/11).
+The testing entry, current `ownershipReleased` fact, authority-flight retention
+and prepared-receiver correction require the corresponding C implementation;
+they are not present in the original #9 artifact.
 The [selected profile](../decisions/0001-cooperative-update-profile.md) and
 [qualification matrix](../research/foundation-qualification-matrix.md) own its
 support limits and executed evidence. The package is not published to npm.
@@ -16,6 +21,10 @@ without GM, EF, Node/DOM declarations or organization tooling in its runtime
 closure. The [ordinary installed consumer](../../tests/module/consumer-contract.ts)
 and [optional peer consumer](../../tests/module/consumer-resources.ts) are the
 executable starting points.
+The separate `live-module-updates/testing` entry is a development-time Host
+contract kit. It is not imported by either runtime entry; its
+[clean consumer](../../tests/module/consumer-testing.ts) compiles without the
+optional Resources peer or Node/DOM declarations.
 
 The stable call surface is `UpdateRuntime.invoke`. A module receives a
 `BoundInvocation` as its first argument and uses that context for nested work
@@ -112,6 +121,10 @@ contracts fail before preparation evaluates candidate code.
 and candidate evaluation start only inside its `prepare` method, after LMU has
 captured custody. `prepare` returns the generation's callable entry. If it fails,
 partially acquires or finishes late, the same actual owner remains responsible.
+LMU captures that original callable with its prepared receiver; later replacement
+of the object's `invoke` property does not change the installed entry. The Host
+must likewise retain original initial-generation callbacks and their receivers
+before evaluation or transfer.
 
 `createResourcesPreparation` supplies that owner using a public Resources scope.
 Its callback receives the ordinary preparation context and the native Resources
@@ -275,6 +288,41 @@ Returning to old code is a new generation and new authorized transition against
 current state and grants. It does not reuse an old generation ID, erase an
 attempt, reverse already accepted effects or imply a data migration policy.
 
+## Composing a complete replaceable capability with GM
+
+The [composed reference](../../tests/qualification/composed-document/README.md)
+shows the concrete ownership boundary. A real GM module owns one LMU runtime;
+the provided `DocumentInvocation` fixes the complete application's command and
+result union. Downstream modules receive that capability. The Host retains the
+update and recovery controls. A generic descriptor cannot supply the missing
+semantic identity of every possible application's operation.
+
+GM constructs Document, the selected Format provider, Export and the independent
+Summary feature as one closure. The entry captures that closure once for the
+generation. A bound nested call uses its original generation; a later facade
+call starts fresh admission. The already admitted operation may see changed
+business data through its borrowed state port: provider coherence does not
+establish a transaction or freeze state, grants or schema.
+
+The reference selects a different actual factory set even when its GM plan
+digest is unchanged. A composition digest identifies the plan, not executable
+code. Its candidate catalog binds original imported factories to the measured
+installed TEST artifacts. This is not signature verification or package
+admission; the separate signed EF path owns those checked artifact facts.
+
+The outer Host exists before acquisition and retains a cleanup/recovery handle
+even if a dependent GM module refuses or construction never publishes its roots.
+Initial compatibility is checked before preparation and again after asynchronous
+preparation against current Host facts. Initial custody transfers only after
+LMU construction succeeds. A failed or cancelled construction cannot leave its
+native owner reachable only through the root that failed to publish.
+
+The runtime owner itself is stable for the activation session. Replacing its
+selected capability closure does not replace the coordinator. Finite attempt
+history is retained to its explicit limit; exhausting it refuses a new update.
+Creating another session or designing durable recovery remains the outer
+owner's separate policy, with no implicit receipt eviction or renewal.
+
 ## Qualifying an actual authority integration
 
 The optional `live-module-updates/testing` entry exports
@@ -303,8 +351,11 @@ A held publication returns unknown until its original operation can be settled;
 a lost acknowledgement conceals only the response, not a fabricated commit.
 `releasePublication` safely settles held originals even after an assertion fails
 and is harmless when called again. `dispose` retains responsibility for real
-native owners even if release failed. The suite always attempts both teardown
-steps and preserves original and cleanup errors together when necessary.
+native owners even if release failed. After a complete fixture is returned, the
+suite always attempts both teardown steps and preserves original and cleanup
+errors together when necessary. The factory owns setup until that return: if it
+throws or rejects, it must release or retain recovery for every partially
+acquired native owner. The suite cannot tear down a fixture it never received.
 A named `AuthorityContractViolation` identifies a failed law; native setup and
 teardown errors retain their original causes.
 

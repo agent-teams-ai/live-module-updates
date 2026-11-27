@@ -40,6 +40,11 @@ export interface AuthorityContractCase {
   readonly run: () => Promise<void>;
 }
 
+/**
+ * Own setup until a complete fixture is returned. If setup throws or rejects,
+ * the factory must release or retain recovery for its partial native owners;
+ * the suite has no fixture whose teardown it could call yet.
+ */
 export type AuthorityContractFactory = (name: AuthorityLawName) =>
   AuthorityContractFixture | PromiseLike<AuthorityContractFixture>;
 

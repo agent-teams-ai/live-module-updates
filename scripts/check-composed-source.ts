@@ -5,9 +5,10 @@ import { fileURLToPath } from "node:url";
 import { observeSourceGraph } from "@agent-teams/engineering-foundation/source-graph";
 import { checkFeatureModule, STANDARD } from "@agent-teams/feature-module-standard";
 import { checkModuleLayout } from "@get-modular/conformance";
+import { checkComposedQuality, type QualityExecute } from "./composed-source-quality.ts";
 
 const repositoryRoot = fileURLToPath(new URL("../", import.meta.url));
-type Execute = (program: string, args: readonly string[], cwd: string) => string;
+type Execute = QualityExecute;
 
 export const composedAuthority = {
   fms: { id: "agent-teams.feature-module-standard", version: "v1.1",
@@ -25,12 +26,17 @@ const publicPorts = [
   "src/features/export-summary/application/ports/export-summary.ts",
   "src/features/document-runtime/application/ports/document-operation.ts",
 ];
-const moduleComposition = ["src/index.ts", "src/summary.ts", "src/composition/closure.ts"];
+const moduleComposition = ["src/index.ts", "src/summary.ts", "src/composition/closure.ts", "src/composition/root.ts"];
 const compositionSurface = [
   "src/features/export-summary/composition/export-summary.group.ts",
   "src/features/export-summary/composition/export-summary.module.ts",
   "src/features/document-runtime/composition/document-runtime.entry.ts",
+  "src/features/document-runtime/composition/document-runtime.group.ts",
+  "src/features/document-runtime/composition/document-runtime.module.ts",
+  "src/features/document-runtime/composition/document-client.module.ts",
+  "src/features/document-runtime/composition/document-runtime.inputs.ts",
 ];
+const allow = (boundaries: readonly string[], packages: readonly string[]) => ({ boundaries, packages, builtins: [], runtimeReferences: [] });
 
 async function dependencyCheck(directory: string, execute: Execute) {
   await writeFile(join(directory, "pnpm-workspace.yaml"), "packages: []\n");
@@ -38,7 +44,6 @@ async function dependencyCheck(directory: string, execute: Execute) {
     project: { id: "composed-document-reference" }, capabilities: {
       "architecture.source-dependencies": { configPath: "source-dependencies.yaml" },
     } }));
-  const allow = (boundaries: readonly string[], packages: readonly string[]) => ({ boundaries, packages, builtins: [], runtimeReferences: [] });
   await writeFile(join(directory, "source-dependencies.yaml"), JSON.stringify({ schemaVersion: 3,
     workspace: { kind: "pnpm", manifest: "pnpm-workspace.yaml" }, rootPackage: true, packageRoots: [], governedRoots: ["src"],
     boundaries: [
@@ -57,9 +62,10 @@ async function dependencyCheck(directory: string, execute: Execute) {
 }
 
 /** The exact staged files are parsed by Foundation and checked by the published FMS/CMS owners. */
-export async function checkComposedSource(directory: string, sources: readonly string[], execute: Execute) {
+export async function checkComposedSource(directory: string, sources: readonly string[], execute: Execute, maintained: readonly string[]) {
   assert.deepEqual(STANDARD, composedAuthority.fms);
   const files = sources.map(path => relative(directory, path)).toSorted();
+  assert.ok(maintained.every(path => sources.includes(path)), "maintained quality inputs must belong to the same actual staged source census");
   const graph = await observeSourceGraph({ consumerRoot: directory, roots: ["src"] });
   assert.deepEqual(graph.files, files, "every staged implementation belongs to the explicit source inventory");
   assert.deepEqual(graph.parseFailures, []);
@@ -72,7 +78,8 @@ export async function checkComposedSource(directory: string, sources: readonly s
       ...composition.map(path => ({ root: path, role: "composition" as const }))],
     moduleComposition,
     surfaces: { public: publicPorts, compositionSurface,
-      compositionContract: ["src/features/export-summary/composition/export-summary.contracts.ts"] },
+      compositionContract: ["src/features/export-summary/composition/export-summary.contracts.ts",
+        "src/features/document-runtime/composition/document-runtime.contracts.ts"] },
     useEdges: [{ from: "document-runtime", to: "export-summary" }],
     imports: graph.edges.map(edge => ({ from: edge.from, to: edge.to, mode: edge.mode, line: edge.line,
       reexport: edge.kind === "export" || edge.kind === "export-type" })),
@@ -86,5 +93,11 @@ export async function checkComposedSource(directory: string, sources: readonly s
     useCaseExports: Object.fromEntries(useCases.map(item => [item.path, item.exports])),
   });
   const dependencies = await dependencyCheck(directory, execute);
-  return { authority: composedAuthority, files, fms, cms, dependencies };
+  const quality = await checkComposedQuality(directory, maintained, "reference", execute);
+  return { authority: composedAuthority, files, fms, cms, dependencies, quality };
+}
+
+/** TEST Host infrastructure has stock typed quality; feature CMS limits remain scoped to adopted source. */
+export async function checkComposedConsumers(directory: string, maintained: readonly string[], execute: Execute) {
+  return checkComposedQuality(directory, maintained, "consumer", execute);
 }

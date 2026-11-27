@@ -9,6 +9,7 @@ export interface PreparationContext {
 }
 
 export interface PreparedGeneration<Args extends readonly unknown[], Result> {
+  /** LMU captures this original callable and its prepared receiver before installation. */
   readonly invoke: ModuleEntry<Args, Result>;
 }
 

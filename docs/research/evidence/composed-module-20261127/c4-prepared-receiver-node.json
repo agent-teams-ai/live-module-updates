@@ -1,0 +1,17 @@
+{
+  "outcome": "observed-defect",
+  "error": {
+    "name": "Error",
+    "message": "c.useful-summary",
+    "stack": "Error: c.useful-summary\n    at invoke (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/live-cases.js:5:15)\n    at async summary (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/live-cases.js:15:20)\n    at async Object.run (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/live-cases.js:197:9)\n    at async runHostCases (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/host-cases.js:49:73)\n    at async file:///tmp/lmu-composed-document-hhrnsa/consumer/[eval1]:1:61",
+    "cause": {
+      "status": "failed",
+      "generationId": "B",
+      "cause": {
+        "name": "TypeError",
+        "message": "Cannot read properties of undefined (reading 'original')",
+        "stack": "TypeError: Cannot read properties of undefined (reading 'original')\n    at invoke (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/runtime-host.js:15:96)\n    at GenerationOwner.start (file:///tmp/lmu-composed-document-hhrnsa/consumer/node_modules/live-module-updates/dist/features/update-operation/application/generation.js:62:41)\n    at Object.start (file:///tmp/lmu-composed-document-hhrnsa/consumer/node_modules/live-module-updates/dist/features/update-operation/application/generation.js:224:75)\n    at selectAndInvoke (file:///tmp/lmu-composed-document-hhrnsa/consumer/node_modules/live-module-updates/dist/features/update-operation/application/invocation.js:76:22)\n    at Object.invoke (file:///tmp/lmu-composed-document-hhrnsa/consumer/node_modules/live-module-updates/dist/features/update-operation/application/invocation.js:85:30)\n    at Object.invoke (file:///tmp/lmu-composed-document-hhrnsa/consumer/node_modules/@fixture/composed-document/dist/features/document-runtime/composition/document-client.module.js:5:79)\n    at invoke (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/live-cases.js:3:40)\n    at summary (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/live-cases.js:15:26)\n    at Object.run (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/live-cases.js:197:15)\n    at async runHostCases (file:///tmp/lmu-composed-document-hhrnsa/consumer/out/node/host-cases.js:49:73)"
+      }
+    }
+  }
+}

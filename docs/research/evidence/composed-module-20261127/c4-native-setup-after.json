@@ -1,0 +1,18 @@
+{
+  "variant": "after",
+  "node": "v24.22.3",
+  "source": "/tmp/lmu-native-setup-proof/after-node-environment.js",
+  "sourceSha256": "80188bb35f77c6258fd9258f2bb16bab5d27e319713958b5cdf6980355971fe8",
+  "successfulNativeSetupAndDisposal": true,
+  "fault": "real /dev/full write through synchronized node:fs open redirect",
+  "actualError": {
+    "code": "ENOSPC",
+    "syscall": "write",
+    "message": "ENOSPC: no space left on device, write"
+  },
+  "originalCausePreserved": true,
+  "descriptorClosed": true,
+  "descriptorStillOwned": false,
+  "nativeCloseCalls": 1,
+  "directoryExistsBeforeProbeCleanup": false
+}
