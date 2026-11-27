@@ -220,3 +220,31 @@ capability, invariant, dependency/release or isolation boundary requires it.
 Do not split phases into competing authorities merely because each has a
 distinct file or state. Existing FMS/CMS and qualification gates remain in
 force; this clarification admits no new public SPI or runtime profile.
+
+## 9. Impact explanation and agent-initiated updates (conditional design)
+
+Before the first product exposes a **live replacement management action**,
+qualify its narrow decision/result surface through the existing
+[F4/F5 owner plan](../plans/foundation-delivery-plan.md#11-owner-required-continuous-update-outcomes-2026-11-27)
+and [research scenarios](https://github.com/agent-teams-ai/engineering-research/pull/32).
+A read-only preflight may show old/new bindings, affected dependants and
+borrowed owners, held work, compatibility/permission changes, cleanup debt
+and restart-only limitations. It is an explanation of a candidate, not a
+separate resolver, permission grant, durable commitment or proof of useful B.
+The owner must reject a stale plan at the actual authoritative apply boundary.
+Static helpers do not need this surface or any per-call registry lookup.
+
+If a running agent requests an update of a plugin currently held by **its
+own turn**, do not block inside that turn waiting for its retirement. The
+product's execution/continuation owner may accept a detached, authorized
+management intent, settle the old turn and its real resources, then apply the
+LMU operation and resume the conversation only from the same actual success,
+failed or unknown receipt under fresh receiver authority. LMU does not own
+agent conversation persistence or invent a generic resume protocol. Prove
+that an interrupted handoff neither self-deadlocks nor repeats an uncertain
+external effect; unmatched old callback and unrelated plugin work must not
+acquire replacement authority or suffer collateral disposal.
+
+These are selected-Host acceptance examples, **not** publication of a new
+LMU method, longer-lived stream/realm capability, a universal dashboard, a
+new mandatory gate or an expansion of the current cooperative finite profile.
