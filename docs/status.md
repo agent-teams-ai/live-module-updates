@@ -8,9 +8,48 @@ The [delivery plan](plans/foundation-delivery-plan.md) records proposed work;
 the [evidence map](research/README.md) records what the research actually proves.
 
 The [first-operation implementation plan](plans/first-operation-implementation-plan.md)
-now provides phases, steps, prerequisite owners, failure controls, estimates and
-scoped unresolved questions. It is a proposed implementation handoff, not a
-selected runtime profile or completed production library.
+provides phases, steps, prerequisite owners, failure controls, estimates and
+scoped unresolved questions. The owner has authorized execution of B0–B7 in
+the single [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9).
+[ADR-0001](decisions/0001-cooperative-update-profile.md) selects the bounded
+cooperative fixture profile. Stronger profiles remain scoped questions.
+
+## Current implementation checkpoint, 2026-11-26
+
+The independent installed feature (B0) passed **46/46** native fixture tests at
+[`0721ffe`](https://github.com/agent-teams-ai/live-module-updates/commit/0721ffeee2fac54123592ea8c46f418eb801c4a4).
+The invocation and authority discriminator (L1) passed in actual Node and
+Chromium at
+[`2f7392f`](https://github.com/agent-teams-ai/live-module-updates/commit/2f7392f3b1a9541e84ece0a910a14c49cbacb62f),
+including nested and post-`await` affinity, original cleanup observation and
+lost acknowledgement after a native publication. Exact jobs, artifacts and
+scope are recorded once in the
+[qualification matrix](research/foundation-qualification-matrix.md).
+
+The first substantive private implementation now has the portable invocation
+boundary, owned preparation, conditional publication and reconciliation,
+useful-adoption observation and exact-generation retirement. Clean installed
+consumers exercise its ordinary root and optional Resources entry. The complete
+packed operation passed the native route at `6089f0a`: **52/52 runner tests**,
+including 29 named scenarios and six exact defect controls per native target.
+The [matrix](research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+retains original failures, archive identities and support limits. The preliminary
+L1 implementation is retired after this replacement proof. The actual signed EF
+join and complete Node/Chromium regression then passed at `47c17f9`: **58/58**
+runner tests, with the same LMU archive in every installed consumer. The
+[joint result](research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation)
+records its five native scenarios, exact producer input and original delivery
+failure. Independent source/evidence review found no remaining material issue
+within that profile. The [single delivery PR](https://github.com/agent-teams-ai/live-module-updates/pull/9)
+records final-head, normal-merge and actual-main check receipts; those observations
+belong to their exact source rather than this navigation snapshot.
+
+[ADR-0002](decisions/0002-production-source-adoption.md) and the
+[source ownership guide](architecture/source-ownership.md) define the native
+FMS/quality adoption. [Bootstrap status](../BOOTSTRAP.md) distinguishes those
+source checks from pending managed Docs/registration, unverified remote
+protection, npm publication and product adoption. The earlier plan-only and
+research-only observations below remain historical.
 
 ## Distinguish five kinds of progress
 
@@ -127,8 +166,8 @@ whole-library E2E.
   including an actual browser for that claim?
 - Which native Desktop, containment and optional UI rows still need their own
   mechanisms and discriminating evidence?
-- Which supported mechanism can establish the first dynamic profile's atomic
-  operation admission, lifetime and reconciliation obligations?
+- Which additional guarantee or stronger dynamic profile needs evidence beyond
+  the qualified cooperative operation's admission, lifetime and reconciliation?
 
 The [decision register](decisions/open-decisions.md) records alternatives and
 evidence, including profile-specific Q1–Q7 choices. Static fixture work proceeds

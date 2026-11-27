@@ -89,7 +89,7 @@ async function dependencyPolicy(directory: string, foundation: Awaited<ReturnTyp
   return report;
 }
 
-/** Checks actual source, with one independent FMS/CMS module per packed artifact. */
+/** Checks each independently authored module using the installed source owners. */
 export async function runSourceCheck(directory = import.meta.dirname) {
   const tools = await toolIdentity();
   const dependencies = await dependencyPolicy(directory, tools.foundation);

@@ -1,0 +1,70 @@
+{
+  "name": "live-module-updates",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portable cooperative update operations with explicit Host authority and resource ownership.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agent-teams-ai/live-module-updates.git"
+  },
+  "repositoryAdmission": 1,
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": "24.22.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./resources": {
+      "types": "./dist/resources.d.ts",
+      "import": "./dist/resources.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.portable.json --noEmit && tsc -p tsconfig.tools.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
+    "quality:compiler-floor": "node scripts/check-compiler-floor.ts",
+    "quality:fms": "node scripts/check-feature-module.ts",
+    "quality:scope": "agent-teams-foundation quality check --consumer . --scope-only",
+    "quality:typed": "agent-teams-foundation quality check --consumer .",
+    "foundation:check": "agent-teams-foundation check",
+    "foundation:assert-dev-only": "agent-teams-foundation assert-dev-only",
+    "foundation:assert-registry": "agent-teams-foundation assert-registry",
+    "test": "node scripts/run-tests.ts",
+    "check:fast": "pnpm run quality:compiler-floor && pnpm run quality:fms && pnpm run quality:scope && pnpm run typecheck",
+    "check": "pnpm run check:fast && pnpm run quality:typed && pnpm run build && pnpm run test && pnpm run foundation:check && pnpm run foundation:assert-dev-only && pnpm run foundation:assert-registry"
+  },
+  "devDependencies": {
+    "@agent-teams/engineering-foundation": "3.0.0",
+    "@agent-teams/feature-module-standard": "0.3.0",
+    "@extension-foundation/node-artifact": "https://raw.githubusercontent.com/agent-teams-ai/live-module-updates/f966e204c61e8f4474073449d879501769fc835e/tests/module/fixtures/ef/c0a8f2733b54323e2f85322b86167491a169af1d/extension-foundation-node-artifact-0.0.0.tgz",
+    "@get-modular/assembly": "0.8.0",
+    "@get-modular/conformance": "0.5.2",
+    "@get-modular/core": "0.8.0",
+    "@get-modular/resources": "0.2.2",
+    "@types/node": "24.19.1",
+    "oxlint": "1.83.0",
+    "oxlint-tsgolint": "7.0.2001",
+    "playwright": "1.65.1",
+    "stack-toolchain": "0.1.1",
+    "typescript": "7.0.2"
+  },
+  "peerDependencies": {
+    "@get-modular/resources": "^0.2.2"
+  },
+  "peerDependenciesMeta": {
+    "@get-modular/resources": {
+      "optional": true
+    }
+  }
+}

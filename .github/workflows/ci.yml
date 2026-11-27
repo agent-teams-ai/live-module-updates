@@ -1,0 +1,53 @@
+name: Native library checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    name: native-library
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      QUALIFICATION_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.22.3
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115
+        with:
+          version: 11.25.0
+          run_install: false
+      - name: Install the exact development graph
+        run: pnpm install --frozen-lockfile --ignore-scripts --engine-strict --strict-peer-dependencies
+      - name: Read the qualified producer's native tool installer
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: agent-teams-ai/extension-foundation
+          ref: c0a8f2733b54323e2f85322b86167491a169af1d
+          path: .qualification/ef-native-source
+          sparse-checkout: tests/qualification/artifact
+          persist-credentials: false
+      - name: Install the exact verified artifact tools
+        shell: bash
+        run: |
+          node .qualification/ef-native-source/tests/qualification/artifact/install-native-tools.ts "$RUNNER_TEMP/lmu-ef-native-tools"
+          printf 'EF_ARTIFACT_TOOLS_DIR=%s/lmu-ef-native-tools\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+      - name: Install the pinned native browser
+        run: pnpm exec playwright install --with-deps chromium --only-shell
+      - name: Execute every native library gate
+        run: pnpm check
+      - name: Retain actual qualification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-library-evidence
+          path: .qualification/evidence
+          if-no-files-found: ignore

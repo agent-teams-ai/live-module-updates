@@ -56,4 +56,24 @@ export const sourceProfiles = [
       useEdges: [{ from: "export", to: "document" }, { from: "export", to: "format" }],
     },
   },
+  {
+    id: "author-entry", root: "consumer/author-entry",
+    features: {
+      featuresRoots: ["consumer/author-entry/features"],
+      featureRoots: ["consumer/author-entry/features/export-summary"],
+      roleRoots: [
+        { root: "consumer/author-entry/features/export-summary/application", role: "application" },
+        { root: "consumer/author-entry/features/export-summary/composition", role: "composition" },
+      ],
+      surfaces: {
+        compositionContract: ["consumer/author-entry/features/export-summary/composition/export-summary.contracts.ts"],
+        compositionSurface: [
+          "consumer/author-entry/features/export-summary/composition/export-summary.group.ts",
+          "consumer/author-entry/features/export-summary/composition/export-summary.module.ts",
+        ],
+      },
+      moduleComposition: ["consumer/author-entry/index.ts"],
+      useEdges: [],
+    },
+  },
 ] satisfies readonly { readonly id: string; readonly root: string; readonly features: Structure }[];

@@ -21,8 +21,10 @@ A separately packed optional GM adapter supplies composition. The implemented
 controlled-restart profile has the bounded integrated result below, including
 the corrected package-peer policy and abort-aware browser-harness cleanup.
 
-Later fixtures can extend the family with bounded streams, candidate replacement
-or artifact admission when those discriminators are needed. Do not add all of
+The complete-operation successor below adds actual candidate replacement.
+The signed EF successor below qualifies one actual artifact path. Later fixtures
+can extend the family with bounded streams or stronger artifact profiles
+when those discriminators are needed. Do not add all of
 them to the first edit operation or copy the LMU coordinator into each Host.
 Expected outcomes and denied effects must be specified independently from the
 implementation under test. Reusing input types or encoding grammar is valid;
@@ -44,8 +46,8 @@ does not erase that requirement or block unrelated qualified static work.
 | Independent Node/browser use — test Hosts | One installed ESM artifact executes through independently wired file and browser-storage owners; response hashes agree; both execution orders reset to the expected initial state | `portable-document/Q2` passed in actual Chromium. These are two test Hosts using one core, not two production adoptions or independent plugin SPI implementations. |
 | Cleanup oracle — fixture lifetime owner | Independently omit Save, Query, Revoke or Close listener removal; actual post-close dispatch must fail the corresponding oracle, including query error/repeated close | Q3 passed all four rejecting controls in the `6083e89` result. A closed-state guard cannot hide the tested retained listener; no arbitrary leak freedom or hostile-code stop is claimed. |
 | Controlled restart — TEST Hosts and Resources | Stop ingress, retain raw asynchronous work until settlement, preserve canonical state, reject stale/revoked effects and refuse B while original cleanup is incomplete | The `6b22e4b` Node/Chromium suite passes the supported finite-work, actual resource and rejecting-control cases. No live overlap, stream custody, fleet publication or complete LMU operation follows. |
-| Installable contribution — EF and test Host | Actual verified artifact/import closure to admitted invocation, denied/tampered/incompatible/wrong-scope/stale/revoked paths, disable/uninstall and explicit data retention | [EF #66](https://github.com/agent-teams-ai/extension-foundation/pull/66) supplies the bounded trusted Node package-to-effect path. [EF #68](https://github.com/agent-teams-ai/extension-foundation/pull/68) adds EF-local TEST exact-revision compatibility work. Neither is an EF runtime integration in this LMU reference or proof of signed OCI trust, durable installation or production SPI. |
-| Full live update — LMU and actual authorities | Atomic select/retain, failed B preserving A, useful B adoption while admitted A work remains coherent, original-attempt reconciliation, stale-writer rejection and retirement holds | Operation proposal plus mechanism witnesses. No implemented complete LMU runtime; supported public admission/custody path must be established before claiming this row. |
+| Installable contribution — EF and test Host | Actual verified artifact/import closure to admitted invocation, denied/tampered/incompatible/wrong-scope/stale/revoked paths, disable/uninstall and explicit data retention | The selected B7 join in section 3d executes the actual EF verifier/evaluator and signed OCI artifact through LMU in Linux x64 Node. Earlier [EF #66](https://github.com/agent-teams-ai/extension-foundation/pull/66) and [EF #68](https://github.com/agent-teams-ai/extension-foundation/pull/68) retain their separate package-to-effect/compatibility results. Durable installation, a public production SPI, online package admission and other execution profiles are not inferred. |
+| Full live update — LMU and actual authorities | Atomic select/retain, failed B preserving A, useful B adoption while admitted A work remains coherent, original-attempt reconciliation, stale-writer rejection and retirement holds | The private complete operation passed the actual packed Node/Chromium campaign at `6089f0a`, including live overlap, original-attempt recovery and six defect controls per target; see section 3c. This is the selected finite session profile, not npm release, EF admission, durable recovery or automatic product adoption. |
 | Desktop — selected shell and privileged receiver | Actual renderer/main or native boundary, versioned IPC, malformed/denied calls, native resources, recovery and observed shutdown on selected OS | Required design boundary; exact shell/profile and native qualification remain open. Node plus browser tests do not qualify Desktop. |
 | Untrusted code — selected executor/authority | Denied file/network/IPC and privilege access, current grants at the real effect receiver, quotas and actual termination under adversarial behavior | Required design boundary; selected enforceable mechanism and native evidence remain open. A grant toggle, Worker, process label or signed artifact does not prove containment. |
 | Optional portable UI — semantic owner and presentation adapters | One declared interaction through independent presentations; unsupported required contribution, action identity, stale results, keyboard/focus and accessible behavior | Current raw DOM interaction is one bounded presentation. No shared UI vocabulary, renderer, vendor library or cross-presentation/a11y qualification is selected. |
@@ -57,6 +59,36 @@ requirements at EF. Product adoption retains its own accepted pins and gates.
 Neither claim is silently inherited from successful test Hosts.
 
 ## 3. Exact portable-document result
+
+### Independent installed feature, 2026-11-26
+
+The [B0 plan](../plans/installed-feature-consumer-plan.md) is implemented in
+workstream B's single PR. **46 tests passed, zero failures, skips or
+cancellations**, including actual Chromium regression, at
+`0721ffeee2fac54123592ea8c46f418eb801c4a4`.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Corrected source | [`0721ffeee2fac54123592ea8c46f418eb801c4a4`](https://github.com/agent-teams-ai/live-module-updates/commit/0721ffeee2fac54123592ea8c46f418eb801c4a4) |
+| Complete native execution | [Run 45903083884 / job 140193279968](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45903083884/job/140193279968): 46/46; strict compiler/source gates, frozen installation and pinned Chromium installation succeeded |
+| Input and observation archive | [Artifact 15156204421](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45903083884/artifacts/15156204421), including installed-consumer evidence and its actual package lock |
+| Preserved failure | [Pre-change compiler baseline](evidence/installed-feature-consumer-20261126/README.md): three missing canonical exports, exactly three TS2305 diagnostics after correcting the test's ambient configuration |
+| Scope | A new independently authored static Node feature and all previous Node/Chromium regression; no live-update or new browser-summary claim |
+
+M5 installs the verified core/adapter archives in a second clean directory
+outside the provider build root. The summary feature is the sole entry root;
+its required Export slot reaches the real provider graph. Complete inherited
+contracts, independent value/revision conflicts, identical overlaps, removal
+and restoration of the public exports, and the actual hidden-file export error
+are all discriminated. Useful publication returns revision 7 and 22 JavaScript
+code units for `"Document r7\nMiXeD text"`. Current receiver denial produces
+no extra delivery. Missing Export fails before factories or effects. Original
+Resources close agrees with the external lease count and preserves borrowed
+state. Whole-module FMS/CMS and the forbidden-GM application control pass.
+
+Root review checked each changed implementation file after the author's local
+positive and negative runs. Complete-operation independent reviews remain B6;
+this checkpoint does not claim their completion or repository admission.
 
 ### Complete feature contracts and storage acquisition, 2026-11-26
 
@@ -213,6 +245,202 @@ one synchronous file owner and one fresh browser context/origin. It does not
 qualify concurrent tabs, multiple writers/processes, transport recovery,
 discovery/admission, plugin removal, stream custody or live replacement.
 
+## 3a. Native invocation and authority discriminator
+
+[ADR-0001](../decisions/0001-cooperative-update-profile.md) selects the bounded
+cooperative fixture. L1 passed on both actual runtimes before production API
+implementation began. This is an invocation/authority feasibility result, not
+the complete update runtime or a production package admission.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Source | [`2f7392f3b1a9541e84ece0a910a14c49cbacb62f`](https://github.com/agent-teams-ai/live-module-updates/commit/2f7392f3b1a9541e84ece0a910a14c49cbacb62f) |
+| Native execution | [Run 45904704130 / job 140198533181](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45904704130/job/140198533181): both runner tests passed, no failures, cancellations or skips; strict TS and pinned browser installation passed |
+| Observations per target | Ten invocation cases, eighteen authority cases and one coupled lost-acknowledgement case; Chromium additionally checks its native Storage replacement cleanup |
+| Evidence archive | [Artifact 15158036050](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45904704130/artifacts/15158036050), uploaded ZIP SHA256 `f2fb808bfb7f3aa838abd685fa1b3664ee4f24d26c04296e237bd4c686e9b363` |
+| Runtime and bytes | Node 24.22.3, TS 7.0.2, Resources 0.2.2, Playwright 1.65.1 and its real pinned Chromium; Node and browser evidence bind the same compiled candidate hash and public Resources inventory |
+
+The explicit continuation retains A through nested/reentrant and post-await
+work while fresh requests observe B. Registered descendants outlive an
+unawaiting parent safely. Abandoning an observer does not release actual work.
+The original native close flight and debt remain identifiable after a distinct
+successful retry. One domain budget covers roots and descendants across
+generations.
+
+Independent Map and native Storage authorities condition publication at the
+actual mutation. They preserve the original receipt through later progress,
+refuse changed same-attempt input and retain nonterminal absence while the
+original request can still commit. A transport that throws after native commit
+does not prevent new calls using B. Retained A does not bypass current receiver
+authority. Browser head and receipt share one native replacement operation.
+
+The TEST candidate retains its two entries until session disposal. It does not
+prove repeated-update retention, safe registry forgetting or the complete
+prepare/publish/adopt/retire coordinator. Its split-selection negative control
+proves witness sensitivity; B6 must mutate the actual operation path or use a
+genuine faulty adapter with the same independent oracle. These limits remain
+explicit in the retained history. After the section 3c replacement passed, the
+precursor code/workflow was retired; its [navigation note](../../tests/qualification/update-operation/invocation-profile.md)
+links immutable source, runs and the earlier installation failure.
+
+## 3b. First private production checkpoint
+
+The first substantive implementation and complete native source gates are
+published at
+[`97e051b73f42e485ca5479ecb06444edd548097c`](https://github.com/agent-teams-ai/live-module-updates/commit/97e051b73f42e485ca5479ecb06444edd548097c).
+[ADR-0002](../decisions/0002-production-source-adoption.md) owns the FMS/quality
+adoption and the [usage guide](../architecture/cooperative-operation-usage.md)
+owns the implemented authoring contract.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Native library gate | [Run 45909011622 / job 140212574365](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011622/job/140212574365), complete `pnpm check`: **38 passed**, zero failed/cancelled/skipped |
+| Source checks | Actual FMS, strict root/portable/tool/test compilers, unchanged typed and maintainability presets, build, full Foundation capabilities, development-only and registry assertions passed |
+| Ordinary consumer | Artifact-only installation with exactly the LMU package; ES-only declarations, useful result `42`, refusal after close and retained original work/cleanup |
+| Optional Resources consumer | Separate artifact-only installation with LMU and Resources 0.2.2; native setup, useful result `7`, exact cleanup and original close identity |
+| Package bytes | Tarball SHA256 `c5524d0e0926b5a3d3b8572e034fab3684cb48e77225474d0ee230c4028b2acb`; packed/installed files and both integrity receipts checked |
+| Raw receipt | [Unchanged CI consumer report](evidence/cooperative-operation-20261126/97e051b-packed-consumers.json) |
+| Archive | [Artifact 15159337684](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011622/artifacts/15159337684); downloaded ZIP independently checked against `872546e025c582b337ccce9a30ca28dc5ba405ed9696c6c81d092222537f69c5` |
+| Central configuration | [Run 45909012055 / job 140212576069](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909012055/job/140212576069) passed with `configured_not_qualified`, `issues: []`; this is not managed Docs, registration or remote-protection qualification |
+
+The 38-test total includes FMS controls, production feature tests and the two
+clean-consumer paths in one runner test. Chromium was installed by this job, but
+the new production artifact was not yet executed there. Its actual browser
+operation belongs to B6; the earlier native L1 result is not substituted for it.
+The existing B0 browser regression also passed on this source in
+[run 45909011570](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011570).
+
+The unchanged L1 precursor failed **before execution** at this same source in
+[run 45909011563 / job 140212574092](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011563/job/140212574092).
+The newly introduced parent workspace captured its dependency installation,
+leaving the fixture-local compiler absent. The
+[exact failing-step excerpt](evidence/cooperative-operation-20261126/97e051b-l1-install-failure.log)
+and [original artifact 15158838139](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45909011563/artifacts/15158838139)
+preserve this failure. Its repair gives the precursor its own empty workspace,
+preserving the exact frozen graph and checks until B6 supersedes it. No native
+L1 result is claimed for that failed run.
+
+## 3c. Complete packed operation
+
+The actual private operation passed in independent Node and Chromium Hosts at
+[`6089f0a46206b696e81dbe8756e7e71e00a93dd7`](https://github.com/agent-teams-ai/live-module-updates/commit/6089f0a46206b696e81dbe8756e7e71e00a93dd7).
+The selected scope is [ADR-0001](../decisions/0001-cooperative-update-profile.md):
+trusted finite work in one process or realm/session, compatible borrowed state,
+explicit owner limits and receiver-side effects. The same complete operation
+runs in both targets; each Host independently owns authority and native resources.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Full native route | [Run 45913432029 / job 140226913006](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45913432029/job/140226913006): **52/52 passed**, zero failed/cancelled/skipped; all strict/FMS/stock Foundation gates passed |
+| Packed campaign counts | 29 positive named rows and six exact defect rejections **per target**, inside two subtests and their shared parent; these row counts are not additional runner tests |
+| Runtime/compiler | Node 24.22.3, TypeScript 7.0.2, pnpm 11.25.0, Playwright 1.65.1, actual Chrome Headless Shell 159.0.8154.6 build 1255 |
+| Public GM cohort | Core/Assembly 0.8.0, Resources 0.2.2, Conformance 0.5.2; actual complete GM composition and supplied Host ports |
+| LMU archive | SHA256 `5d088d203597ecf9da15797f0ebf974629f68984583984e340132ce3168dceb5`; same bytes in ordinary installed consumers, Node and Chromium |
+| Root / consumer locks | Root SHA256 `3550572edd004a4b59bd1303267af954419b0c3edfad3dc1df9b1790b8927473`; combined consumer SHA256 `82d57c3e1f303800368d8dcae78d689dd80c72539a23fc2d6197db78c4f33ef6` |
+| Raw reports | Unchanged [Node](evidence/cooperative-operation-20261126/6089f0a-node.json) and [Chromium](evidence/cooperative-operation-20261126/6089f0a-chromium.json) CI reports |
+| Evidence archive | [Artifact 15160973973](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45913432029/artifacts/15160973973), independently downloaded ZIP SHA256 `3e45d1bae6e9fc3707c9b3b4f6860eec61c40d22b49933928fbbb18d1fc94292` |
+| First failed run | `bfea5e5`, [run 45912637899 / job 140224383016](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45912637899/job/140224383016): 50/51, browser fixture removed before its test registration; [original excerpt](evidence/cooperative-operation-20261126/bfea5e5-browser-fixture-lifetime-failure.log) and [reviewed lifetime repair](../reviews/cooperative-operation-delivery-2026-11-26.md#first-hosted-b6-failure-the-shared-fixture-lifetime) remain available |
+
+The useful operation edits the actual Host-owned document. New B calls return
+`B:SEED`; admitted A work resumes coherently through its bound nested calls.
+Current receiver checks reject stale or revoked effects. Canonical Map or
+Storage replacement atomically records head and original receipt; a deliberately
+lost acknowledgement after that mutation stays unknown until original lookup.
+Failed/partial/late preparation, competing updates, current state/schema/grant
+changes, exact replay, independent domains, session budgets and cleanup debt
+retain their own observable outcomes.
+
+Node uses actual file descriptors. Chromium uses genuine DOM listeners and
+native sessionStorage, including foreign-resource preservation. Exact retirement,
+reentrant close and abandoned caller waits preserve the real native owner until
+admitted work ends. A later successful retry preserves the original debt report.
+Receipt-capacity rows directly exercise the Host authority primitive after useful
+A setup; they are not 32 complete replacements. Runtime attempt capacity has a
+separate row.
+
+The four library defects change one installed JavaScript file each: split
+selection/admission, premature cleanup, unknown publication classified as refusal,
+and overwrite of original cleanup debt. Two genuine faulty Host profiles bypass
+the effect guard or remove B's resource under A's stable name. Every negative
+performs useful A first and fails its exact named runtime oracle; compiler,
+import, setup and unrelated teardown failures cannot substitute. Independent
+review verified original archives, all eight retained mutated target files and
+every browser-served LMU hash against the expected original or exact mutation.
+
+This qualifies the declared fixture closure catalogue and selected ordinary
+library profile. It does not qualify EF artifact admission, untrusted execution,
+Desktop, Node ESM unloading, streams, cross-tab/process publication, durable
+recovery, managed repository admission, npm publication or another product.
+The EF join has its own B7 result and the final PR/actual-main source must retain
+its own checks. The preliminary L1 implementation is retired after this proof;
+historical findings, failures and immutable artifacts remain separately scoped.
+
+## 3d. Signed EF artifact through the complete operation
+
+The selected B7 integration and the complete operation both passed at
+[`47c17f95f7c8cf3650c907ac4ed52d6127febe5c`](https://github.com/agent-teams-ai/live-module-updates/commit/47c17f95f7c8cf3650c907ac4ed52d6127febe5c).
+One actual installed LMU archive is shared by the ordinary and optional-peer
+consumers, independent Node/Chromium Hosts and the signed EF Node Host.
+The EF integration selects trusted finite self-contained ESM on Linux x64 with
+Node24.22.3. It reuses the same operation and GM construction, not another update
+coordinator or a locally copied verifier.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Complete native route | [Run 45916966246 / job 140238419593](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45916966246/job/140238419593): **58/58**, zero failed/cancelled/skipped; all strict/FMS/stock Foundation gates passed |
+| Preserved operation campaign | 29 positive rows plus six exact defect rejections in each actual Node and Chromium Host; these rows are contained in the runner count |
+| Signed join | Five native cases in fresh Node processes: signed overlap, tampered signature, equal-length registry-blob corruption, evaluation grant revoked after real verification, runtime admission closed after real verification |
+| Original qualified EF input | Producer c0a8f2733b54323e2f85322b86167491a169af1d; [run 45914561543 / job 140230571298](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45914561543/job/140230571298); unchanged node-artifact tarball SHA256 `151890f5a69798d4098cd557f03c249678c18f4feb77cdff7563202b935882f9` |
+| Producer and delivery receipt | [package-inputs.json](../../tests/module/fixtures/ef/package-inputs.json) includes the original conformance proof, exact lexer input, immutable HTTPS mirror and original SHA512 integrities; the mirror is not a new EF build or an npm release |
+| LMU archive | SHA256 `c203f76561ac9d44b716ef6fc6131b10ae06f1f20212d012cc5bac9e400f0213`, identical across all five consumer paths |
+| Root / operation locks | Root SHA256 `ec399989959bf42deb545540a006eae9d798881b99615451832322e64c34cad7`; Node/Chromium consumer `70c51cd1b7703d32591d3d99b65c84a850bd4d7125548765dad44ab88b5fbc56`; EF consumer `aca878961aec55dd9709e1680781013c3c56e3c9f0e7c3b6188f718e1326d2f4` |
+| Actual native tools | ORAS1.4.0, Cosign3.1.6, Distribution3.1.2 from the read-only exact producer installer; executable SHA256 identities are in the raw EF report |
+| Runtime/compiler/browser | Node24.22.3, TypeScript7.0.2, pnpm11.25.0, Playwright1.65.1, actual Chromium159.0.8154.6 build1255; EF remains Node-only |
+| Unchanged raw reports | [Node operation](evidence/cooperative-operation-20261126/47c17f9-node.json), [Chromium operation](evidence/cooperative-operation-20261126/47c17f9-chromium.json), [signed EF Node join](evidence/cooperative-operation-20261126/47c17f9-ef-node.json) |
+| Evidence archive | [Artifact15163076062](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45916966246/artifacts/15163076062), independently downloaded 531620-byte ZIP; SHA256 `33a2c7c30dd6440ee1ecbfe35b8407303c9cbce8774b5527342bf43a22f10952` |
+| Other workflows on the same source | [Portable fixture45916966279](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45916966279), [repository admission45916966631](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45916966631), [Actions CodeQL45916962306](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45916962306): successful; admission retains its configured-not-qualified scope |
+
+The clean EF consumer installs exactly seven real archives offline without
+lifecycle scripts. Strict compilation requires installed public EF/LMU
+declarations and admits implementation inputs only from its explicitly copied
+consumer files. The real publisher signs the emitted self-contained formatter
+and places its bytes in the actual local OCI registry. Only the installed EF
+verifier/evaluator supplies the candidate's callable behavior.
+
+Useful B returns `signed:B:SEED` while the admitted A call retains its actual file
+descriptor and later returns `A:seed`. The evidence records one evaluation,
+three actual formatter calls, one A release, canonical head B and a surviving
+foreign owner. Exact B registration and borrowed document state survive A
+retirement. The manifest digest, evaluation identity and generation identity
+stay distinct; the original candidate closure binds the requested verified
+digest.
+
+The negative controls require specific public EF errors: artifact.signature for
+the changed signature, artifact.transport for the corrupted registry blob, and
+artifact.denied for both current-authorization controls. Each reports zero
+evaluation, no publication and one actual candidate release. A bad compiler,
+missing tool, import failure or arbitrary exception cannot satisfy these oracles.
+Closing admission after verification does not pretend the pending Resources
+scope has already aborted; the live evaluate callback observes actual runtime
+closure. Native cleanup uncertainty remains an owned debt.
+
+Root independently verified the ZIP and inner archives, all eight retained B6
+mutated files and 70 browser-served LMU responses against the original archive
+or exact single-file mutation. An independent reviewer checked the seven EF
+archive identities/SRIs, installed lock, compiled-consumer inventory, signed
+executable hash and all five outcome records. The
+[review record](../reviews/cooperative-operation-delivery-2026-11-26.md#signed-artifact-join-source-real-inputs-and-local-execution)
+preserves the original local file: dependency refusal and its actual HTTPS
+delivery correction, alongside earlier runtime and fixture failures.
+
+This result proves the selected signed update path. It does not prove EF online
+package admission, a plugin marketplace/install/uninstall manager, hostile-code
+containment, Desktop, an EF browser verifier, native ESM unloading, streams,
+durable recovery or product adoption. Conformance evidence and production
+admission stay separate. The final [delivery PR](https://github.com/agent-teams-ai/live-module-updates/pull/9)
+records normal merge and actual-main checks without rewriting these source-bound
+reports.
+
 ## 4. Independent oracles, negative controls and reset
 
 For each additional claim, record the useful result and a failure that would
@@ -258,10 +486,11 @@ controls (12 unique cases, 24 executions), X1–X4 browser/HTTP skew cases (fina
 artifact result or a complete foundation runtime. X4 is an application-level
 incomplete acknowledgement, not a TCP-reset proof.
 
-Next work follows the missing guarantee: public composition projection under GM;
-artifact-to-effect admission under EF; complete update admission/reconciliation
-under LMU; and real Desktop, untrusted-executor and optional UI profiles at their
-owners. These can progress in parallel when independent. Select a substantive
+Next work follows a missing guarantee beyond the qualified rows: broader public
+composition projection under GM; stronger artifact/installation profiles and
+production admission under EF; and real Desktop, untrusted-executor and optional
+UI profiles at their owners. The selected combined B7 operation is already
+recorded in section 3d. Independent follow-ups can progress in parallel. Select a substantive
 profile and its accepted mechanism before dependent implementation; use a
 discriminating spike for unresolved technical alternatives. No product launch
 is needed to run those fixtures, and no single passing row closes all of them.

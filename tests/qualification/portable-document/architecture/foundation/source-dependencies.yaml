@@ -4,8 +4,18 @@ workspace:
   manifest: pnpm-workspace.yaml
 rootPackage: true
 packageRoots: [adapter]
-governedRoots: [core, adapter/src]
+governedRoots: [core, adapter/src, consumer/author-entry/features/export-summary/application]
 boundaries:
+  - id: author-summary-application
+    roots: [consumer/author-entry/features/export-summary/application]
+    entrypoints:
+      - consumer/author-entry/features/export-summary/application/ports/export-summary.ts
+      - consumer/author-entry/features/export-summary/application/use-cases/create-export-summary.ts
+    allow:
+      boundaries: []
+      packages: []
+      builtins: []
+      runtimeReferences: []
   - id: core-document-application
     roots: [core/features/document/application]
     entrypoints:

@@ -1,0 +1,197 @@
+{
+  "source": "local-unpublished",
+  "node": "v24.22.3",
+  "compiler": "7.0.2",
+  "producerInputs": {
+    "schemaVersion": 1,
+    "producer": {
+      "repository": "agent-teams-ai/extension-foundation",
+      "sourceSha": "c0a8f2733b54323e2f85322b86167491a169af1d",
+      "workflow": ".github/workflows/package-conformance.yml",
+      "workflowBlobSha": "d8864f5a15e498031cc587eefc8d587422347aaa",
+      "runId": "45914561543",
+      "runAttempt": 1,
+      "jobId": "140230571298",
+      "proofStep": "Artifact conformance proof",
+      "proofStepNumber": 17,
+      "artifactId": "15161472710",
+      "artifactDigest": "sha256:407f177a3d6fe369d2c02e8fadae2b0b8804e3c3acae3de9ea69a66311279db1",
+      "collectorJobId": "140230964273",
+      "collectedEvidence": {
+        "evidence_reference": "https://api.github.com/repos/agent-teams-ai/extension-foundation/actions/jobs/140230571298/steps/17/logs#sha256=4d592a86eb5928cc4bea9cdaaea6d157f8c40e7b33cd27c69acfb961d3a96c2b",
+        "source_revision": "c0a8f2733b54323e2f85322b86167491a169af1d",
+        "proof": {
+          "schemaVersion": 1,
+          "packageId": "extension.node-artifact",
+          "repositoryId": 1333298097,
+          "sourceRevision": "c0a8f2733b54323e2f85322b86167491a169af1d",
+          "runId": 45914561543,
+          "runAttempt": 1,
+          "consumerId": "qualification.signed-artifact-host",
+          "implementationId": "extension.node-artifact.verified-artifact",
+          "conformanceVersion": "0.1.0",
+          "conformanceSha256": "sha256:9e0e168479f056a9454e1fd140b10a0cf80a21413a48f57464f64850a60ea624",
+          "sourceInputsSha256": "sha256:bb1f93a57518c316855d640833739b7733ee85e604ff4ee9342a4c76fad38524",
+          "artifactName": "extension-foundation-node-artifact-0.0.0.tgz",
+          "artifactSha256": "sha256:151890f5a69798d4098cd557f03c249678c18f4feb77cdff7563202b935882f9"
+        }
+      }
+    },
+    "archives": [
+      {
+        "name": "@extension-foundation/node-artifact",
+        "version": "0.0.0",
+        "file": "c0a8f2733b54323e2f85322b86167491a169af1d/extension-foundation-node-artifact-0.0.0.tgz",
+        "sha256": "151890f5a69798d4098cd557f03c249678c18f4feb77cdff7563202b935882f9",
+        "integrity": "sha512-H1Jdm4oT3+8MOn4wZWrLTaasskZc34qgSNO+OOWKQmWq5co7WPY5gS4pr+zqpAELqZ2GOidrLdC1eea4mZpyuA=="
+      },
+      {
+        "name": "es-module-lexer",
+        "version": "3.0.5",
+        "file": "c0a8f2733b54323e2f85322b86167491a169af1d/es-module-lexer-3.0.5.tgz",
+        "sha256": "a445e4f01c03194fc6957f7d83d05fb091f86534bebdf0aea3799866048e212e",
+        "integrity": "sha512-RNq2lKJw53c7z9QRHeiKeA6Ez0oikOqiBGdmxQhKDxEiOX1g5QJR4IoFVwicn8uCZcRWNrXC3NZaJihgK7aEbg=="
+      }
+    ],
+    "admission": {
+      "claim": "qualified conformance input for a development-only joint fixture",
+      "onlinePackageAdmission": "not inferred from this receipt",
+      "observation": "The producing push intentionally skips package-admission; its native package-conformance and collect-evidence jobs succeeded. Owner package-admission, full repository gates and product adoption remain separately observed."
+    }
+  },
+  "producerInputsSha256": "fcc7f6d6e8d484616052bab5a180fcb06e84105fbecfd7ec829886f87fb638e8",
+  "archives": {
+    "live-module-updates": {
+      "version": "0.1.0",
+      "sha256": "9904a9b7641f058026d3b46d08a927470443a3dd2354ecc9e4d9d33f43384efb",
+      "integrity": "sha512-xqCzR7O6nx4Nd2B+zX+4Y+5tESQpPwx3PDOZ2mBJWczDlWxi+oNY5YFvaEX4GyiQVLY/2JIfolOyATVU96Ys8A=="
+    },
+    "@extension-foundation/node-artifact": {
+      "version": "0.0.0",
+      "sha256": "151890f5a69798d4098cd557f03c249678c18f4feb77cdff7563202b935882f9",
+      "integrity": "sha512-H1Jdm4oT3+8MOn4wZWrLTaasskZc34qgSNO+OOWKQmWq5co7WPY5gS4pr+zqpAELqZ2GOidrLdC1eea4mZpyuA=="
+    },
+    "es-module-lexer": {
+      "version": "3.0.5",
+      "sha256": "a445e4f01c03194fc6957f7d83d05fb091f86534bebdf0aea3799866048e212e",
+      "integrity": "sha512-RNq2lKJw53c7z9QRHeiKeA6Ez0oikOqiBGdmxQhKDxEiOX1g5QJR4IoFVwicn8uCZcRWNrXC3NZaJihgK7aEbg=="
+    },
+    "@get-modular/core": {
+      "version": "0.8.0",
+      "sha256": "532bba3d1f092f7f4777f881a23135ec6ccbcc9ff6f4553c027cfaf8e730f098",
+      "integrity": "sha512-aBbkiFzsjBiLzhh0o6R6KDdCJwOkb/FPbv4gJtu15CXdcWNs+mj8nX2qMIonmK+2QnuqE0GVoh5M4QFeOP3Www=="
+    },
+    "@get-modular/assembly": {
+      "version": "0.8.0",
+      "sha256": "af2772ae67bbef08f9f857a11aa70e6c01d861a1b96e0c287ea69d000925c330",
+      "integrity": "sha512-63Z6UKtcNsE28wfxVwjkVYiRK7uzudyO7kcMFJUy1zdkpVgMzmBREwszyPAjVj35wOjuRNXEkanTU7pUEmfBTw=="
+    },
+    "@get-modular/resources": {
+      "version": "0.2.2",
+      "sha256": "1752fe321b8f816933ad0bdd07d8b27511449e9fa98d88a318378a45dc227381",
+      "integrity": "sha512-jzlxsuZRak8C25oSO7DFIDPiFMnDKT1dcgfONUmvFWIP4pyqiJj9wQRnvYJtJ+SbDwYm7M8n9SWFCjrIjWvfAA=="
+    },
+    "@get-modular/conformance": {
+      "version": "0.5.2",
+      "sha256": "4f2e5c9c86b344d9e586ba2fdf414c3ba7eb20c77fd7a2148a6a428dcffcd5b7",
+      "integrity": "sha512-DNjsSiGPoVL5WiaeQ7/tLTQjkhmMIPxy2Wul+Q3YyqRu3saPbwpdz0Zhufsl+BgZjsx4mmR8NupasMBWUl7qKw=="
+    }
+  },
+  "rootLockSha256": "71c1b63b4f220d44e68cf3c4e8b40f6f4961bc17764272519494e34e248c2722",
+  "consumerLockSha256": "59021326f9a33e78be3fb2a7caec90104c5f5f3abd8bf7eb8f8374e5135aacdf",
+  "consumers": {
+    "ef-consumer.js": "1861da550706ecb9c6d7f833716f6dc31c21feebb7791623b5b74893ebecdb2a",
+    "ef-contract.js": "b5b41681c8f085cd8330c580dd167fd8a2524e8e913149db7ca38fbc01e41936",
+    "ef-document.js": "e50d4f3c33e2474549e79fb7df59c231e93fd317b1fc3faaea7938900d3e91fd",
+    "ef-host.js": "3bb28c8462012985f29110f5852f479a6574e68f9abc8473c3c47dc9b14fce5f",
+    "generation-composition.js": "e9a167658b99136d8bb9c22bd7681323fcac2a43f4593edbf6bcc457bfe231dc",
+    "host-contract.js": "e19c5173699e7eabc3383c01c92f09dddb9fac3a3d28a2cbe354b5fceed1e730",
+    "native-node-authority.js": "164021ae868d7ab312422687a91922dae0ec3421fa3164826846fd76db066589"
+  },
+  "profile": "trusted-self-contained-esm/cooperative-operation-v1/linux-x64",
+  "tools": {
+    "oras": {
+      "version": "1.4.0",
+      "digest": "sha256:d1aea546c0f929151358925ff7b9693ea9c5ec9c13881ce13bcc71484a561ecd"
+    },
+    "cosign": {
+      "version": "3.1.6",
+      "digest": "sha256:318a99ade4156a0c4113aa983b46c0a0830fa7896a096c63121ee47b610a94c6"
+    },
+    "registry": {
+      "version": "3.1.2",
+      "digest": "sha256:7f9e0df42bd028efb1a11eb7f92ef494156bf308770303a256d3acdcadb378cd"
+    }
+  },
+  "artifact": {
+    "repository": "127.0.0.1:45565/lmu-document",
+    "digest": "sha256:d5a3faa2782fe1fa182e80e35e44d4a565908557aafe92f33c426fb5e480b377",
+    "executableSha256": "sha256:e50d4f3c33e2474549e79fb7df59c231e93fd317b1fc3faaea7938900d3e91fd",
+    "signatureSha256": "sha256:a8b60426122f7ead20cb020cd57200a7e8da29e7592d4e86ab62d8315c3e05bc",
+    "publisher": "publisher/lmu-joint-fixture",
+    "publisherKeyDigest": "sha256:f73a61b1cdb28e0bd60490d32758cb4cd2ee058fea178c782dcb2452fdc2c5c5",
+    "expected": {
+      "target": "node/linux/x64",
+      "scope": "lmu/document",
+      "contract": "lmu/document-formatter",
+      "revision": 1,
+      "loader": "lmu-document-formatter-v1"
+    }
+  },
+  "rows": [
+    {
+      "name": "signed-overlap",
+      "outcome": "passed",
+      "digest": "sha256:d5a3faa2782fe1fa182e80e35e44d4a565908557aafe92f33c426fb5e480b377",
+      "evaluationId": "3eca267f-b16a-4213-b9da-a6b6a93c09e1",
+      "generationId": "B",
+      "evaluations": 1,
+      "formatCalls": 3,
+      "authority": {
+        "domainId": "ef//tmp/lmu-ef-native-host-AxFzHP",
+        "head": {
+          "generationId": "B",
+          "revision": "node/head/1"
+        },
+        "basis": "[\"schema/1\",0,0]"
+      },
+      "retiredA": 1,
+      "foreignSurvived": true
+    },
+    {
+      "name": "tampered-signature",
+      "outcome": "passed",
+      "refusal": "artifact.signature",
+      "evaluations": 0,
+      "formatCalls": 0,
+      "releasedB": 1
+    },
+    {
+      "name": "revoked-evaluation",
+      "outcome": "passed",
+      "refusal": "artifact.denied",
+      "evaluations": 0,
+      "currentAdmission": "revoked",
+      "authorizationCalls": 1,
+      "releasedB": 1
+    },
+    {
+      "name": "closed-before-evaluation",
+      "outcome": "passed",
+      "refusal": "artifact.denied",
+      "evaluations": 0,
+      "currentAdmission": "closed",
+      "authorizationCalls": 1,
+      "releasedB": 1
+    },
+    {
+      "name": "tampered-bytes",
+      "outcome": "passed",
+      "refusal": "artifact.transport",
+      "evaluations": 0,
+      "formatCalls": 0,
+      "releasedB": 1
+    }
+  ],
+  "lifetime": "Fresh process per case; Node ESM cache remains process-owned until exit; no module unload claim"
+}

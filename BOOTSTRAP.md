@@ -1,5 +1,54 @@
 # Repository bootstrap status
 
+## Current production-source checkpoint, 2026-11-26
+
+The repository now contains substantive `update-operation` implementation and
+clean installed consumers in the single [LMU PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9).
+[ADR-0002](docs/decisions/0002-production-source-adoption.md) records the first
+production-source adoption, and the [source ownership guide](docs/architecture/source-ownership.md)
+defines its one immutable FMS v1.1 profile, complete compiler/source coverage,
+strict quality route and native positive/negative controls. `pnpm check` runs
+the complete native route; individual fixture results do not replace it.
+
+The private packed package contains substantive behavior. Its ordinary entry
+has no runtime dependencies; Resources is an optional peer for the separate
+adapter entry. The initial native tooling graph is Foundation 3.0.0, FMS 0.3.0,
+Stack 0.1.1 and TypeScript 7.0.2. Compiler resolution is checked through the
+actual tooling graph. No earlier production quality profile existed to downgrade.
+The attempted newer Foundation inspection was not adopted or represented as a
+managed Docs cohort. The ADR records why this exact graph fits the current
+native source-admission schema.
+
+The current central source inspected is
+[`89b5d7c`](https://github.com/agent-teams-ai/.github/tree/89b5d7c512d9c4b5ae63709857a0d71cb2e6d178).
+Its repository checker reports `configured_not_qualified` with no configuration
+issues for this source. That is not positive qualification. Separate facts:
+
+- The exact central repository-admission and commit-identity callers are
+  configured; hosted results belong to the actual source revision.
+- Central registration of this repository and managed Docs initialization are
+  still pending. The observed stable33 producer cohort is `QUALIFIED` for its
+  named canary, not `RECOMMENDED` for arbitrary consumers; it is not silently
+  adopted here. No Docs exemption or copied consumer identity is introduced.
+- The rulesets endpoint returns no rulesets. The GitHub integration cannot read
+  legacy branch protection (HTTP 403), so remote enforcement is unverified.
+  Successful CI does not establish enforced protection.
+- The missing tracked `CLAUDE.md` was added as a short route to `AGENTS.md` after
+  confirming it was absent in this checkout. No owner-local ignored file was
+  overwritten.
+- npm publication, stronger runtime profiles and product adoption remain
+  separate owner decisions and qualification tasks.
+
+The [qualification matrix](docs/research/foundation-qualification-matrix.md)
+owns runtime evidence. The source adoption, exact checks, managed Docs,
+registration, remote enforcement and public delivery are distinct axes.
+
+## Historical creation and research bootstrap, 2026-11-23
+
+The following observations describe the initial research packet. Their
+research-only status is superseded by the production-source checkpoint above;
+their original source identities and capability limitations remain historical.
+
 The original creation-capability check was **2026-11-23, 16:39 UTC**.
 The owner's subsequent real GitHub creation supersedes that original limitation.
 
@@ -79,7 +128,7 @@ guidance inspected for this preparation. Recheck current guidance when the
 repository actually enters that process; do not reinterpret a dated observation
 as permanent authorization of a changed tool graph.
 
-## Tooling graph remains an explicit qualification task
+## Historical tooling-graph observation
 
 The inspected central registry's last RECOMMENDED cohort is
 `docs-2026-10-03-stable31`: Docs Protocol 0.6.2, Agent Teams preset 0.3.2 and
@@ -95,7 +144,7 @@ profile, or declare a blanket Docs exemption to obtain a green bootstrap.
 Producer graph qualification and consumer admission have their existing owners.
 This research task changes neither the central registry nor existing pins.
 
-## What this packet does not assert
+## What the original research packet did not assert
 
 There is no accepted public API, package release, FMS conformance, managed Docs
 admission, production host adoption or whole-library comparative E2E here.

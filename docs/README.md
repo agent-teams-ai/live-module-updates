@@ -1,7 +1,8 @@
 # Documentation map
 
-Status: maintained navigation for a research and planning repository. No public
-LMU runtime, plugin SDK or product admission is established by this index.
+Status: maintained navigation for the private cooperative implementation and
+its retained research. Executed profiles are in the qualification matrix; no npm
+release, stable plugin SDK or product admission is established by this index.
 
 ## Choose a task
 
@@ -11,6 +12,9 @@ LMU runtime, plugin SDK or product admission is established by this index.
 | Adopt a qualified foundation in an application | Foundation guide, [delivery plan](plans/foundation-delivery-plan.md), the product's accepted profile | Preserve the product's own pins, integration and expansion gates |
 | Reuse a module or plugin across applications | [Headless plugins and UI](architecture/headless-plugins-and-ui.md), the consumer's pinned Get Modular CMS, [owner choices](decisions/open-decisions.md) | Separate portable behavior, host capabilities, composition and optional rendering |
 | Understand the long-term objective | [Continuous evolution vision](architecture/continuous-evolution-vision-2026-11-23.md), then the delivery plan | Preserve broad replaceability while choosing one bounded first delivery |
+| Coordinate the two foundation implementation streams | [Executor assignments and project milestones](plans/foundation-delivery-plan.md#two-executor-assignment-2026-11-26), then each owning plan | A owns EF/artifact/adoption work; B owns the external consumer and complete LMU operation; shared edits and the final join have one owner |
+| Use the implemented cooperative operation | [Usage and ownership contracts](architecture/cooperative-operation-usage.md), [selected profile](decisions/0001-cooperative-update-profile.md), [complete packed evidence](research/foundation-qualification-matrix.md#3c-complete-packed-operation) | Adopt the actual facade and narrow Host ports with their qualified limits |
+| Update a verified signed artifact in the selected Node Host | [Concrete B7 plan](plans/first-operation-implementation-plan.md#b7--one-signed-ef-artifact-through-the-existing-node-operation), [joint native evidence](research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation), [actual fixture](../tests/module/ef-host.ts) | Map real EF verification/evaluation into one existing LMU preparation owner and preserve exact-generation custody |
 | Design the update operation | [Operation](architecture/operation.md), owner choices, [evidence map](research/README.md) | Distinguish preparation, authoritative publication, useful adoption, old work and cleanup |
 | Implement the first complete operation | [Step-by-step plan](plans/first-operation-implementation-plan.md), its selected profile packet, then the current unfinished step | Qualify dependencies, implement one operation and retain exact adverse/packed-consumer evidence; keep unresolved policies scoped |
 | Write or qualify a modular feature | [Maintained example](../tests/qualification/portable-document/README.md), then the [original reviewed implementation plan](plans/module-authoring-implementation-plan.md) | Connect typed features, optional GM composition, explicit ownership and actual Node/browser evidence without inventing a public runtime |
@@ -40,7 +44,7 @@ live qualification ledger or turn a planning estimate into a readiness gate.
   resource mechanisms, plus separately qualified optional candidates.
 - **Extension Foundation:** extension artifact/trust/distribution and applicable
   host-protocol obligations. Its production package materialization is separate.
-- **Live Module Updates:** the proposed complete reusable update operation over
+- **Live Module Updates:** the complete cooperative update operation over
   those existing mechanisms; no second resolver or cleanup manager.
 - **Test Hosts, later products and executors:** the selected scope's semantic
   contract, grants, canonical state, active-head authority, execution and

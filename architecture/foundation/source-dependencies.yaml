@@ -1,0 +1,85 @@
+schemaVersion: 3
+workspace:
+  kind: pnpm
+  manifest: pnpm-workspace.yaml
+rootPackage: true
+packageRoots: []
+governedRoots: [src, scripts, tests/features, tests/module]
+boundaries:
+  - id: update-application
+    roots: [src/features/update-operation/application]
+    entrypoints:
+      - src/features/update-operation/application/models.ts
+      - src/features/update-operation/application/invocation.ts
+      - src/features/update-operation/application/update-operation.ts
+      - src/features/update-operation/application/ports/authority.ts
+      - src/features/update-operation/application/ports/adoption.ts
+      - src/features/update-operation/application/ports/preparation.ts
+      - src/features/update-operation/application/ports/invocation.ts
+      - src/features/update-operation/application/ports/lifetime.ts
+    allow:
+      boundaries: []
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: update-adapters
+    roots: [src/features/update-operation/adapters]
+    entrypoints: [src/features/update-operation/adapters/resources.ts]
+    allow:
+      boundaries: [update-application]
+      packages: ["@get-modular/resources"]
+      builtins: []
+      runtimeReferences: []
+  - id: update-composition
+    roots: [src/features/update-operation/composition]
+    entrypoints: [src/features/update-operation/composition/create-update-runtime.ts]
+    allow:
+      boundaries: [update-application, update-adapters]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: module-public
+    roots: [src/index.ts]
+    entrypoints: [src/index.ts]
+    packageExports: ["."]
+    allow:
+      boundaries: [update-application, update-composition]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: quality-tooling
+    dependencyMode: development
+    roots: [scripts]
+    entrypoints: [scripts/check-feature-module.ts]
+    allow:
+      boundaries: []
+      packages: ["@agent-teams/engineering-foundation", "@agent-teams/feature-module-standard", "stack-toolchain", "typescript"]
+      builtins: ["node:assert/strict", "node:child_process", "node:fs", "node:fs/promises", "node:module", "node:os", "node:path", "node:test", "node:url"]
+      runtimeReferences: []
+  - id: module-resources
+    roots: [src/resources.ts]
+    entrypoints: [src/resources.ts]
+    packageExports: ["./resources"]
+    allow:
+      boundaries: [update-application, update-adapters]
+      packages: []
+      builtins: []
+      runtimeReferences: []
+  - id: feature-tests
+    dependencyMode: development
+    roots: [tests/features]
+    entrypoints: []
+    allow:
+      boundaries: [update-application, update-adapters, update-composition, module-public]
+      packages: ["@get-modular/resources"]
+      builtins: ["node:assert/strict", "node:test", "node:timers/promises"]
+      runtimeReferences: []
+  - id: module-tests
+    dependencyMode: development
+    roots: [tests/module]
+    entrypoints: []
+    allow:
+      boundaries: [module-public, module-resources]
+      packages: ["@get-modular/resources", "@get-modular/core", "@get-modular/assembly", "@get-modular/conformance", "@extension-foundation/node-artifact", "playwright"]
+      builtins: ["node:assert/strict", "node:child_process", "node:crypto", "node:fs", "node:fs/promises", "node:net", "node:os", "node:path", "node:test", "node:timers/promises", "node:url", "node:util"]
+      runtimeReferences: []

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2024"
+    ],
+    "types": []
+  },
+  "include": [
+    "src/index.ts",
+    "src/features/update-operation/application/**/*.ts",
+    "src/features/update-operation/composition/**/*.ts"
+  ]
+}

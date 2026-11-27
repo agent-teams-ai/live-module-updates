@@ -15,6 +15,7 @@ const cases: readonly {
   readonly dependencyRule: string;
   readonly fms?: string;
   readonly cms?: string;
+  readonly module?: string;
 }[] = [
   {
     name: "application cannot acquire Node IO", path: application,
@@ -34,6 +35,11 @@ const cases: readonly {
     path: "core/features/rogue.contracts.ts", append: "export const stray = 1;\n",
     dependencyRule: "unclassified-source-file", fms: "container-file", cms: "descriptor-path",
   },
+  {
+    name: "independent consumer application cannot acquire GM", module: "author-entry",
+    path: "consumer/author-entry/features/export-summary/application/use-cases/create-export-summary.ts",
+    append: '\nimport "@get-modular/assembly";\n', dependencyRule: "forbidden-package-dependency",
+  },
 ];
 
 test("installed source owners reject real mutations and accept the restored reference", { timeout: 120_000 }, async t => {
@@ -41,7 +47,7 @@ test("installed source owners reject real mutations and accept the restored refe
   t.after(() => rm(directory, { recursive: true, force: true }));
   // Real source and canonical manifests, without build artifacts or a synthetic
   // dependency declaration. Policy execution needs no prepared runtime consumer.
-  for (const path of ["core", "adapter/src", "adapter/package.json", "architecture",
+  for (const path of ["core", "adapter/src", "adapter/package.json", "consumer/author-entry", "architecture",
     "package.json", "foundation.config.yaml", "pnpm-workspace.yaml"]) {
     await mkdir(dirname(join(directory, path)), { recursive: true });
     await cp(join(source, path), join(directory, path), { recursive: true });
@@ -51,6 +57,7 @@ test("installed source owners reject real mutations and accept the restored refe
   assert.deepEqual(baseline.modules.map(module => ({ id: module.id, features: module.fms.features.map(feature => feature.id).sort() })), [
     { id: "ordinary-core", features: ["document", "export", "format"] },
     { id: "gm-adapter", features: ["document", "export", "format"] },
+    { id: "author-entry", features: ["export-summary"] },
   ]);
   for (const mutation of cases) {
     await t.test(mutation.name, async () => {
@@ -63,7 +70,7 @@ test("installed source owners reject real mutations and accept the restored refe
         assert.equal(report.dependencies.outcome, "violations", JSON.stringify(report.dependencies));
         assert.ok(report.dependencies.capabilities[0]?.diagnostics.some(item =>
           item.ruleId === `architecture.source-dependencies.${mutation.dependencyRule}`), JSON.stringify(report.dependencies));
-        const core = report.modules.find(module => module.id === "ordinary-core")!;
+        const core = report.modules.find(module => module.id === (mutation.module ?? "ordinary-core"))!;
         assert.deepEqual(core.coverage, [], "The intended architecture rule must reject fully parsed source");
         if (mutation.fms) assert.ok(core.fms.diagnostics.some(item => item.code === mutation.fms), JSON.stringify(core.fms));
         if (mutation.cms) assert.ok(core.cms.report.violations.some(item => item.code === mutation.cms), JSON.stringify(core.cms));

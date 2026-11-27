@@ -1,0 +1,11 @@
+schemaVersion: 3
+sourcePolicyPath: architecture/foundation/source-dependencies.yaml
+suppressionPolicyPath: architecture/foundation/suppression-governance.yaml
+featureProfilePath: architecture/feature-module-profile.json
+lintConfigPath: .oxlintrc.json
+compilerProjects: [tsconfig.json, tsconfig.portable.json, tsconfig.tools.json, tsconfig.tests.json, scripts/tsconfig.json, tests/tsconfig.json]
+scripts:
+  fast: check:fast
+  full: check
+  scope: quality:scope
+  typed: quality:typed

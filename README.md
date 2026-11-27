@@ -3,17 +3,35 @@
 Controlled replacement of application modules and plugins while an application
 continues serving useful work.
 
-The project is being designed as a portable TypeScript library. Its central
-operation will plan and prepare an update, coordinate authoritative switching,
-reconcile uncertainty, manage supported continuity and report remaining cleanup.
+The project implements a portable TypeScript library. Its central operation
+plans and prepares an update, coordinates authoritative switching, reconciles
+uncertainty, manages supported continuity and reports remaining cleanup.
 Applications supply narrow authorization and state primitives. Existing loaders,
 composition systems, resource scopes and executors retain their responsibilities.
 
 ## Current status
 
-**Research and proposed specification. No public production package or accepted
-public API is delivered by this packet.** Ordinary TypeScript implementations
-are the confirmed first direction. Native Effect, isolated execution and
+**Qualified private implementation delivered through [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9).
+No npm release or product adoption is claimed.** The selected
+[cooperative operation profile](docs/decisions/0001-cooperative-update-profile.md)
+supports finite trusted work in one Node process or Chromium realm, with
+explicit Host authority, generation-bound calls and borrowed state. The primary
+package entry has no mandatory GM, EF, UI, Node or DOM dependency. The optional
+`live-module-updates/resources` entry adapts public Resources cleanup.
+
+The installed dependent-feature checkpoint passed in Node with the existing
+browser regression. The invocation/authority discriminators passed on their
+exact source in Node and actual Chromium.
+The complete packed production operation has now passed in both independent
+Node and Chromium Hosts: 29 named scenarios and six deliberate defect controls
+per target. The [qualification matrix](docs/research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+binds that result to exact source, archive and native resources. The
+[signed EF artifact join](docs/research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation)
+also passed in the selected Linux x64 Node Host. Its full native run passed
+58/58 tests, including the Node/Chromium operation and five real signed/refusal
+scenarios. The producer's package-admission and product-adoption decisions remain
+with their owners.
+Native Effect, isolated execution and
 Wasm/Extism are separate candidate profiles. Module Federation, Piral,
 Native Federation and OpenComponents are considered at their actual delivery,
 loading and contribution boundaries.
@@ -21,8 +39,8 @@ loading and contribution boundaries.
 Executed research includes the original Piral/Resources and Effect campaign,
 public Get Modular custody/identity controls, and actual browser/HTTP version
 skew. The [research map](docs/research/README.md) routes exact inputs, raw results,
-original failures and limits. The complete production library, real product
-cutover and common comparison with ready stacks remain unqualified.
+original failures and limits. Real product cutover, stronger execution profiles
+and common comparison with ready stacks remain separate qualification work.
 
 The maintained [modular authoring reference](tests/qualification/portable-document/README.md)
 shows Document, Format and Export, an ordinary core, an optional GM adapter and
@@ -31,10 +49,10 @@ independently wired Node/Chromium Hosts. The
 records its exact-source results, including construction, contracts, artifact
 identity, authority and cleanup controls. The earlier six-test result at
 `6083e89` remains a historical ordinary-library checkpoint. This is bounded
-fixture evidence, not an implemented update runtime.
+fixture evidence; it does not substitute for qualification of the new runtime.
 The [first-operation implementation plan](docs/plans/first-operation-implementation-plan.md)
 now breaks the remaining work into steps, dependencies, adverse checks, estimates
-and scoped open questions before production implementation.
+and scoped open questions, and records the implementation assignment and exits.
 
 The public [GitHub repository](https://github.com/agent-teams-ai/live-module-updates)
 was created by the owner on November 23, 2026. Initial main source is
@@ -42,7 +60,7 @@ was created by the owner on November 23, 2026. Initial main source is
 CLAUDE.md due to the owner's global gitignore. Creation is not admission:
 organization classification, applicable quality/Docs gates and production
 qualification remain distinct. Read [bootstrap status](BOOTSTRAP.md)
-before any adoption; no public runtime is shipped.
+before any adoption; no public npm runtime is shipped.
 
 ## Strategic direction and product scope
 
@@ -78,6 +96,7 @@ for the current executable slice and the remaining discriminating tests.
 | Which choices need the owner and which need another experiment? | [Concrete decision packet](docs/decisions/open-decisions.md#decision-packet-for-the-first-useful-delivery) |
 | Greenfield continuous evolution, future-trend evidence and concrete GM-first foundation | [Continuous evolution vision](docs/architecture/continuous-evolution-vision-2026-11-23.md) |
 | Complete operation, ports and failure outcomes | [Operation proposal](docs/architecture/operation.md) |
+| How does a project use the implemented cooperative operation? | [Usage and ownership contracts](docs/architecture/cooperative-operation-usage.md) |
 | How should an implementing agent proceed phase by phase? | [First-operation implementation plan](docs/plans/first-operation-implementation-plan.md) |
 | Which experiment addresses a particular risk? | [Research and evidence map](docs/research/README.md) |
 | What changed after independent critique? | [Consolidation review](docs/reviews/foundation-consolidation-2026-11-24.md) |
@@ -94,6 +113,14 @@ mandatory Effect.
 
 ## Implementation discipline
 
+Production source adopts the complete immutable standard through the
+[single FMS profile](architecture/feature-module-profile.json),
+[ADR-0002](docs/decisions/0002-production-source-adoption.md) and
+[source ownership guide](docs/architecture/source-ownership.md).
+The root `pnpm check` is its complete native quality route. Fixture qualification,
+managed Docs admission, required-check enforcement and npm publication retain
+their separate evidence and owners.
+
 Start with substantive representative behavior, independently specified
 acceptance and real package/runtime boundaries in purpose-built test Hosts.
 For the complete update operation, qualify its actual mechanisms in those
@@ -102,9 +129,11 @@ ownership evidence warrants them. Do not
 copy an upstream private lifecycle kernel, build another module resolver, or
 make every consumer reconstruct the update state machine.
 
-Public Resources already supplies cooperative cleanup. Profiles promising atomic
-invocation admission and generation custody need a separately qualified public
-mechanism. That availability gap remains explicit in the design.
+Public Resources supplies cooperative cleanup. LMU owns invocation admission and
+generation custody for its selected cooperative operation profile; the
+[dual-target mechanism evidence](docs/research/foundation-qualification-matrix.md#3a-native-invocation-and-authority-discriminator)
+records the precursor checks. Full operation qualification uses the packed
+implementation, including its retained-work and cleanup failure cases.
 
 The retained historical research is stored as separate immutable packets. New
 findings refine current proposals without rewriting old results or treating

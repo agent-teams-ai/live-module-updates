@@ -1,0 +1,10 @@
+name: Repository admission
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  admission:
+    uses: agent-teams-ai/.github/.github/workflows/repository-admission-check.yml@89b5d7c512d9c4b5ae63709857a0d71cb2e6d178

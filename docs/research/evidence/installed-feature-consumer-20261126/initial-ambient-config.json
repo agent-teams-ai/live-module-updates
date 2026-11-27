@@ -1,0 +1,41 @@
+{
+  "source": "7c3e2169ef4345c5769de79af01f9345ae22e2fe",
+  "compiler": "Version 7.0.2",
+  "adapter": {
+    "name": "fixture-portable-document-gm-0.0.0.tgz",
+    "sha256": "875744a7fba07ab38fd9036139359b57e8f828d6df379e17585ce8bdd99a04e5",
+    "integrity": "sha512-E4dpazNmn7E6pEZggJDt8neeuC7mp9D2k9QkeTV4jVHU7SEis/5nNbEgvPRaL9CCg+5V0boKlzJAc/el011oxQ=="
+  },
+  "core": {
+    "name": "fixture-portable-document-0.0.0.tgz",
+    "sha256": "9e3e1de436d1717126ecd7176ae9d8dbf84914874cd2a1e5d16c41031d20fe62",
+    "integrity": "sha512-6oJcfccM3ewRAcTij/B7kxSlde07df5pMOWQmmVEk6zb1KJGdHIZajSYz4yB0+h+7GNDXc8+p0UjPHOTvuLo7w=="
+  },
+  "program": "import { Export, type ExportContracts, type ExportCapabilities } from \"@fixture/portable-document-gm\";\nexport type Contracts = ExportContracts;\nexport type Capabilities = ExportCapabilities;\nexport const contract = Export;\n",
+  "config": {
+    "compilerOptions": {
+      "target": "ES2024",
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext",
+      "lib": [
+        "ES2024",
+        "ESNext.Disposable"
+      ],
+      "types": [],
+      "strict": true,
+      "skipLibCheck": false,
+      "noEmit": true
+    },
+    "files": [
+      "consumer.ts"
+    ]
+  },
+  "installedLockSha256": "8a12069f034620a79221617e49b168ca1f4be2a9ab95e6216add3a47e016a668",
+  "result": {
+    "status": 1,
+    "signal": null,
+    "stdout": "consumer.ts(1,10): error TS2305: Module '\"@fixture/portable-document-gm\"' has no exported member 'Export'.\nconsumer.ts(1,23): error TS2305: Module '\"@fixture/portable-document-gm\"' has no exported member 'ExportContracts'.\nconsumer.ts(1,45): error TS2305: Module '\"@fixture/portable-document-gm\"' has no exported member 'ExportCapabilities'.\nnode_modules/@get-modular/assembly/dist/features/construction/types.d.ts(201,22): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/assembly/dist/features/construction/types.d.ts(282,23): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/resources/dist/features/scope/scope.d.ts(8,22): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/resources/dist/features/scope/types.d.ts(5,25): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/resources/dist/features/scope/types.d.ts(6,24): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/resources/dist/features/scope/types.d.ts(24,22): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/resources/dist/features/scope/types.d.ts(28,24): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/resources/dist/features/scope/types.d.ts(46,22): error TS2304: Cannot find name 'AbortSignal'.\nnode_modules/@get-modular/resources/dist/features/scope/types.d.ts(60,22): error TS2304: Cannot find name 'AbortSignal'.\n",
+    "stderr": "",
+    "error": null
+  }
+}

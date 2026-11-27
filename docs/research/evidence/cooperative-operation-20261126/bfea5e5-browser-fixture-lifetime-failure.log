@@ -1,0 +1,39 @@
+2026-11-26T23:44:36.8051825Z ✔ shutdown retains a late preparation and cleans its actual owner without publishing it (12.67618ms)
+2026-11-26T23:44:36.8053387Z ✔ reentrant shutdown during inert open still captures and closes the real empty native owner (1.261934ms)
+2026-11-26T23:44:36.8054828Z ✔ synchronous preparation reentry sees the already reserved original attempt (8.736248ms)
+2026-11-26T23:44:40.1610087Z ✔ packed complete operation runs in native Node and rejects all six named defects (1449.299611ms)
+2026-11-26T23:44:41.6061773Z ✖ same packed complete operation runs in native Chromium with independent Storage and DOM owners (1450.233248ms)
+2026-11-26T23:44:41.6306993Z ✔ packed ordinary root and optional Resources entry work in separate artifact-only installations (3294.472033ms)
+2026-11-26T23:44:41.6311192Z ℹ tests 51
+2026-11-26T23:44:41.6311601Z ℹ suites 0
+2026-11-26T23:44:41.6311989Z ℹ pass 50
+2026-11-26T23:44:41.6312352Z ℹ fail 1
+2026-11-26T23:44:41.6312724Z ℹ cancelled 0
+2026-11-26T23:44:41.6313114Z ℹ skipped 0
+2026-11-26T23:44:41.6320325Z ℹ todo 0
+2026-11-26T23:44:41.6323926Z ℹ duration_ms 8499.370424
+2026-11-26T23:44:41.6324258Z 
+2026-11-26T23:44:41.6324461Z ✖ failing tests:
+2026-11-26T23:44:41.6324674Z 
+2026-11-26T23:44:41.6325009Z test at tests/module/operation-e2e.test.ts:122:7
+2026-11-26T23:44:41.6326340Z ✖ same packed complete operation runs in native Chromium with independent Storage and DOM owners (1450.233248ms)
+2026-11-26T23:44:41.6327671Z   Error: ENOENT: no such file or directory, scandir '/tmp/lmu-complete-operation-cExHwV/consumer/out/browser'
+2026-11-26T23:44:41.6328350Z       at async readdirRecursive (node:internal/fs/promises:1588:7)
+2026-11-26T23:44:41.6329150Z       at async javascriptInventory (file:///home/runner/work/live-module-updates/live-module-updates/tests/module/operation-fixture.ts:23:19)
+2026-11-26T23:44:41.6330465Z       at async browserAssets (file:///home/runner/work/live-module-updates/live-module-updates/tests/module/operation-e2e.test.ts:41:25)
+2026-11-26T23:44:41.6331470Z       at async runChromium (file:///home/runner/work/live-module-updates/live-module-updates/tests/module/operation-e2e.test.ts:56:17)
+2026-11-26T23:44:41.6333209Z       at async campaign (file:///home/runner/work/live-module-updates/live-module-updates/tests/module/operation-e2e.test.ts:90:20)
+2026-11-26T23:44:41.6335121Z       at async TestContext.<anonymous> (file:///home/runner/work/live-module-updates/live-module-updates/tests/module/operation-e2e.test.ts:125:5)
+2026-11-26T23:44:41.6336523Z       at async Test.run (node:internal/test_runner/test:1409:7)
+2026-11-26T23:44:41.6337508Z       at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+2026-11-26T23:44:41.6338914Z       at async file:///home/runner/work/live-module-updates/live-module-updates/tests/module/operation-e2e.test.ts:122:1 {
+2026-11-26T23:44:41.6340149Z     errno: -2,
+2026-11-26T23:44:41.6340507Z     code: 'ENOENT',
+2026-11-26T23:44:41.6340892Z     syscall: 'scandir',
+2026-11-26T23:44:41.6341523Z     path: '/tmp/lmu-complete-operation-cExHwV/consumer/out/browser'
+2026-11-26T23:44:41.6342153Z   }
+2026-11-26T23:44:41.6660354Z [ELIFECYCLE] Test failed. See above for more details.
+2026-11-26T23:44:41.7138466Z [ELIFECYCLE] Command failed with exit code 1.
+2026-11-26T23:44:41.7435658Z ##[error]Process completed with exit code 1.
+2026-11-26T23:44:41.7523243Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-26T23:44:41.7523670Z with:

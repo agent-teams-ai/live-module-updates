@@ -1,9 +1,38 @@
 # First complete operation: implementation plan
 
-Status: proposed execution plan, 2026-11-25. The owner requested detailed phases,
+Status: phase plan first proposed on 2026-11-25, now executed for the selected
+cooperative profile with the exact evidence below. The owner requested detailed phases,
 independent critique and recorded unresolved questions before risky implementation.
 This plan makes the existing F4 work executable; merging it does not select a
 runtime policy, publish an API or admit a production package.
+
+Execution assignment, 2026-11-26: the owner has authorized workstream B through
+implementation, E2E, independent review/corrections and ordinary merge. Deliver
+all B0–B7 changes in the existing [PR #9](https://github.com/agent-teams-ai/live-module-updates/pull/9);
+do not create phase PRs. The [installed-consumer plan](installed-feature-consumer-plan.md)
+from PR #8 is incorporated as B0. This execution authorization supersedes the
+earlier plan-only stopping point, while profile-specific acceptance and actual
+qualification remain obligations of the phases below. It does not select
+unrelated product defaults or authorize npm publication.
+
+The bounded L0 selection is [ADR-0001](../decisions/0001-cooperative-update-profile.md).
+It selects option A and exact fixture limits under this execution assignment.
+The actual dual-target L1 discriminator passed at `2f7392f`; the first private
+implementation and clean consumers passed the native library route at `97e051b`.
+The [qualification matrix](../research/foundation-qualification-matrix.md#3b-first-private-production-checkpoint)
+owns those early results and limits. B6's complete native run
+[45913432029 / job 140226913006](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45913432029/job/140226913006)
+passed 52/52 checks at `6089f0a46206b696e81dbe8756e7e71e00a93dd7`.
+The same packed library passed 29 positive cases and all six exact negative
+controls in each of Node and Chromium. Its
+[complete-operation evidence](../research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+remains separate from the B7 EF join below. B7 then passed the full native route
+at `47c17f95f7c8cf3650c907ac4ed52d6127febe5c`: 58/58 tests, including five
+actual signed/refusal cases and the complete Node/Chromium operation. The
+[joint evidence](../research/foundation-qualification-matrix.md#3d-signed-ef-artifact-through-the-complete-operation)
+binds the same LMU archive to its real producer-qualified EF input. The
+[usage guide](../architecture/cooperative-operation-usage.md) records the actual
+authoring surface and Host obligations.
 
 The [operation contract](../architecture/operation.md) owns the required semantics,
 the [decision register](../decisions/open-decisions.md) routes open choices to their
@@ -20,30 +49,211 @@ behavior and retains A's work/resources until their real owners permit release.
 Independently wired test Hosts provide narrow primitives; they do not each
 implement the update algorithm. No application must be implemented first.
 
-At LMU [6083e89](https://github.com/agent-teams-ai/live-module-updates/tree/6083e89ba7781b12571a102d273058052ad94148),
-the [packed document qualification](../research/foundation-qualification-matrix.md#3-exact-portable-document-result)
-proves bounded F2 behavior. There is no production update runtime. Its six tests
-and twelve rejecting controls do not prove A → B, atomic invocation admission,
-durable recovery or production plugin installation.
+The maintained [packed document qualification](../research/foundation-qualification-matrix.md#3-exact-portable-document-result)
+and [authoring reference](../../tests/qualification/portable-document/README.md)
+own the current static composition, complete-contract, storage and independent
+Node/Chromium controlled-restart results. The six-test result at
+[6083e89](https://github.com/agent-teams-ai/live-module-updates/tree/6083e89ba7781b12571a102d273058052ad94148)
+remains an earlier checkpoint. None of these proves live A → B overlap, atomic
+generation admission, durable recovery or production plugin installation.
+At that historical planning baseline there was no production update runtime;
+the later implementation and B6 checkpoint are recorded above.
 
-Use the current [GM public Assembly bridge](https://github.com/agent-teams-ai/get-modular/blob/330c28dbea1a3de812d3aee5ddb71ef829dee347/docs/decisions/0043-plan-optional-native-effect-composition.md)
-and [Resources](https://github.com/agent-teams-ai/get-modular/blob/330c28dbea1a3de812d3aee5ddb71ef829dee347/packages/resources/README.md)
+Use the inspected [GM public Assembly](https://github.com/agent-teams-ai/get-modular/blob/50a7148387a3c01163b319da76052ba07e0dbd84/packages/assembly/README.md)
+and [Resources](https://github.com/agent-teams-ai/get-modular/blob/50a7148387a3c01163b319da76052ba07e0dbd84/packages/resources/README.md)
 where appropriate. Runtime module lists and inert declaration/factory capture
 already exist. Artifact trust, grants and execution authority remain outside
 GM. Resources already joins its current close flight; an adapter must preserve
 the original completion, including debt, rather than invent another cleanup
-stack. The [lifecycle candidate](https://github.com/agent-teams-ai/get-modular/blob/330c28dbea1a3de812d3aee5ddb71ef829dee347/packages/lifecycle-kernel/README.md)
+stack. The [lifecycle candidate](https://github.com/agent-teams-ai/get-modular/blob/50a7148387a3c01163b319da76052ba07e0dbd84/packages/lifecycle-kernel/README.md)
 is private and does not itself select a current route or supervise asynchronous
 work. Qualify an existing supported path or request a narrowly justified change
 at its owner; a new public kernel is not an unconditional prerequisite.
 
 The maintained [EF plan](https://github.com/agent-teams-ai/extension-foundation/blob/main/docs/architecture/plugin-delivery-plan.md)
-owns artifact/installable-plugin work; its detailed implementation successor is
-tracked in [EF #67](https://github.com/agent-teams-ai/extension-foundation/pull/67).
-The inspected source baseline remains `86c01a9`, not a changed adoption pin.
+owns artifact/installable-plugin work. Its earlier detailed sequence was
+delivered through [EF #67](https://github.com/agent-teams-ai/extension-foundation/pull/67).
+The coordinated planning baseline is EF
+`a1b5007ae4777bb5b01adab35a9ee83546a62333`; the earlier `86c01a9` observation
+is historical. Neither this refresh nor the GM source links change adoption pins.
 Ordinary-library LMU qualification need
 not wait for a universal plugin Host. A profile that claims EF admission must
 use its actual admitted mechanisms and exact production-admission basis.
+
+## Workstream B: complete module updates, 2026-11-26
+
+The owner requested a substantial two-executor programme before broad module
+adoption. This is the proposed assignment for **executor B, the continuation of
+the installed-consumer work in [PR #8](https://github.com/agent-teams-ai/live-module-updates/pull/8)**.
+That 220–430-line TEST slice is the first checkpoint; this assignment continues
+through the complete L0–L7 operation below. Executor A owns EF artifact,
+contribution and package-admission work under its
+[existing delivery plan](https://github.com/agent-teams-ai/extension-foundation/blob/main/docs/architecture/plugin-delivery-plan.md).
+The [shared assignment](foundation-delivery-plan.md#two-executor-assignment-2026-11-26)
+owns the cross-stream schedule and authoring milestones. Detailed L0–L7 phases,
+failure cases and costs remain on this page, not in a competing lifecycle plan.
+
+This assignment records planned work, not an accepted production API/profile or
+permission to publish to npm. Read the paired Draft PRs while their changes are
+unmerged. Implementation must preserve the owning admission and acceptance
+boundaries; plan review does not count as their completion.
+
+### Concrete outcome
+
+Deliver one packaged, usable complete operation for the selected cooperative
+profile: prepare B, conditionally publish through the real authority, reconcile
+an unknown reply using the original attempt, serve useful new work with B,
+retain a previously admitted A operation coherently, and report retirement,
+cleanup debt and retention truthfully. Independent Hosts supply narrow state,
+authority and execution adapters; they share the operation implementation.
+
+The recommended first choice is existing **option A**, finite requests with
+retained asynchronous work. Keep the B/C alternatives below and their falsifiers;
+do not quietly promise streams or process-loss recovery under A. The programme
+also fixes the boundary needed for later stronger profiles, without inserting
+an installation, migration or disposal method into every pure module.
+
+### Author-facing contracts first
+
+Before dependent projects expand replaceable capabilities, qualify the following
+public boundaries with a small real operation. Preserve feature-owned semantic
+ports and ordinary typed calls inside a cohesive static feature.
+
+| Boundary | Concrete contract obligation | Later change it avoids |
+| --- | --- | --- |
+| Stable facade versus module instance | One Host/operation boundary admits complete work; raw roots of a replaceable instance stay inside their owner | Wrapping every business call later or retaining obsolete instances across generations |
+| Whole-operation completion | Atomic select/admit/retain across nested calls, synchronous reentrancy and awaits; cancellation and actual settlement remain separate | Cleanup occurring when an intermediate Promise settles while dependent work still runs |
+| State and effects | Canonical state belongs to the Host/feature owner; borrowed state and current receiver grants/fences remain explicit | Moving durable state out of transient instances or inventing duplicate authorization stores |
+| Publication and uncertainty | Distinct attempt/payload, generation, head revision and state baseline; committed, rejected and unknown results | Retrying uncertain effects under a new identity or treating a head change as proof of an earlier attempt |
+| Retirement | Exact-instance identity, original Resources completion, cleanup debt and applicable retention holds | Old cleanup removing B, disposing borrowed resources or deleting still-used artifact bytes |
+| Supported replacement | An explicit coherent dependency cohort, compatibility and rejection boundary | Treating every helper as independently replaceable or assuming arbitrary graph mutation |
+
+These are obligations to qualify, not frozen API field names or a new global
+context. Existing CMS, Resources and semantic owners remain authoritative.
+The early contract checkpoint includes working implementation and adverse tests;
+empty interfaces, successful stubs or a paper-only facade do not make it usable.
+
+### Ordered work and independent lanes
+
+| Step | Delivery | Completion evidence |
+| --- | --- | --- |
+| B0 | Finish the reviewed PR #8 independent installed consumer | Canonical root imports, clean second installation, complete inherited contracts and real sole-entry-root GM composition, including refusal and conflict controls |
+| B1 / L0–L1 | Select and record the bounded fixture/profile packet; discriminate invocation in actual Node and Chromium, authority and original cleanup mechanisms; prepare real production bootstrap | Reentrancy/nesting/await, same-attempt authority lookup and actual cleanup observations; common facade feasibility in both targets, eligible source/tooling route and named unsupported behavior |
+| B2 / L2 | Implement the minimal substantive contract/use case with source/FMS checks and a packed consumer | Real success/refusal operation through public boundaries; external application layer remains independent of GM, EF, UI and platform types |
+| B3 / L3 | Plan, establish candidate custody and prepare safely | Stale or unsupported candidates refuse before the claimed effects; failed, partial and late preparation retain their real owner and cleanup |
+| B4 / L4 | Conditional publication and original-attempt reconciliation | Lost acknowledgement stays unknown; changed replay payload refuses; racing updates use actual expected-revision authority |
+| B5 / L5 | Useful adoption, retained A work and exact retirement | Useful B plus coherent held A; current receiver rejects stale/revoked writes; cleanup debt and finite retention budgets remain observable |
+| B6 / L6–L7 | Packed operation through independent Hosts, review, ordinary merge and actual-main checks | All applicable complete-operation controls below execute against the real artifact; support and limitations are recorded from actual results |
+| B7 / shared join | Integrate executor A's qualified EF archive through an outer adapter; online package admission is a separate claim | Verified artifact → typed candidate → useful update → correct predecessor retention/cleanup, including a tampered or refused candidate; no second update coordinator |
+
+B1 investigations, A's verifier/core work and external-consumer packaging design
+can proceed in parallel. B2 dependent contracts wait for their real B1 findings;
+the first production bootstrap lands with substantive behavior rather than an
+empty package. B3/B4 development can proceed behind already agreed narrow ports;
+their integrated claim waits for actual implementations. B7 waits for both
+qualified artifacts, while B6 ordinary-library evidence does not wait for EF.
+
+At B1, prove the prospective common invocation/ownership boundary in actual Node
+and Chromium before freezing it at B2. Node-only context propagation or ambient
+state cannot silently become the shared facade. A target failure remains an
+explicit dependent gap; separately qualified Node results can land, while the
+shared target claim and its dependent contract wait for resolution or a reviewed
+scope correction. No changed browser expectation may hide the failure.
+Reuse the existing target harness for this focused discriminator; do not build
+a second full browser harness. Node-only success does not complete dual-target B6.
+
+At B6, qualify the same portable operation artifact in independently wired Node
+and Chromium Hosts, with different state/authority/lifetime adapters and external
+oracles. Share the operation and contract grammar, not a configurable universal
+Host or the expected decision logic. The browser must execute the operation in
+its own realm. An unavailable browser primitive is an explicit unsupported
+claim until resolved; Node success remains independently useful. Existing static
+Chromium tests are regression evidence and cannot stand in for this new run.
+
+For the first fixture, the Q1–Q7 candidate is: trusted cooperative TS; a coherent
+affected dependency cohort; Host-owned state and compatible reconstruction;
+next-useful-request adoption; bounded retention of admitted finite work with
+current receiver authority; old code as a new authorized compatible transition;
+and an explicit process/realm/session envelope with no durable/offline claim.
+Record exact bounds and policies in the selected packet before dependent code.
+The test-Host owner may choose fixture limits; product interruption, migration,
+retention and offline defaults remain with the actual product. A failing
+discriminator changes the recommendation instead of weakening its assertion.
+
+### Ownership and shared files
+
+Executor B owns this repository's implementation, including
+`tests/qualification/portable-document/adapter/src/index.ts`,
+`consumer/author-entry/**`, `installed-feature-cases.ts`, `pack-modular.ts`,
+`qualification.test.ts`, `source-profile.ts`, `source-check.test.ts` and
+`architecture/foundation/source-dependencies.yaml` under that fixture root where
+applicable. Preserve PR #8's exact initial allowlist; expansion into operation
+code is a separately reviewed stage of this larger assignment. It does not
+silently enlarge the small PR's existing implementation promise.
+
+Select substantive `update-operation` feature/package source roots at B1/B2
+through actual bootstrap and dependency needs. This plan does not reserve empty
+directories or dictate one package per phase. B owns the complete-operation
+fixture and the later EF join. A does not concurrently edit these files.
+
+Executor A owns the EF core, evidence verifier and artifact mechanism and any
+necessary GM-owned follow-up. If B1 demonstrates a missing supported invocation
+primitive, B hands A the exact public API, smallest reproduction, adverse oracle
+and required guarantee. A implements a justified change at its actual owner;
+B continues independent work and later consumes that reviewed artifact.
+GM does not acquire current-head selection, product activation or routing merely
+because it constructs the graph. Resource cleanup remains Resources-owned.
+ADR-0030 supersedes ADR-0028 in full: withdrawn ownership/K1 requirements are not
+prerequisites, and the private lifecycle candidate is not an importable solution.
+
+If the missing responsibility actually belongs to LMU or the selected Host,
+keep it there and qualify its narrow implementation; do not bounce ownership
+between agents or create another registry/cleanup manager. Disputed semantic
+ownership is resolved before that dependent API. Share exact heads and changed
+paths at each handoff; use one owner for each integration file at a time.
+
+### Budget and gates for this assignment
+
+The existing option A band below owns **3,000–6,000 P**, **600–1,200 outer
+integration LOC**, and **4,000–9,000 T**. Add PR #8's **220–430 TEST LOC** once.
+The resulting core assignment is approximately **7,820–16,630 handwritten
+lines**, not a quota. B7's thin outer mapping is included in the integration
+allowance; its independent adverse scenario is included in L6 tests. Re-estimate
+if the agreed EF handoff requires a materially different scope. A's EF verifier,
+artifact work and external consumers are not counted here.
+
+Option A assumes qualified primitives and 35–65 engineer-days for one experienced
+engineer with focused review; #8 adds its own 1–3-day estimate. These are effort
+bands, not calendar promises. Fitness U=8/10, expected reliability for the stated
+profile N=7/10, complexity C=8/10 and sizing confidence 4/10 remain planning
+judgments. Missing upstream mechanisms, production bootstrap/tool admission,
+registry/release work, durable stores and stronger profiles are explicit
+additional work, not hidden in integration LOC. At B1 inventory and estimate any
+such prerequisite before presenting the total as the complete delivery cost.
+
+Existing closed-composition and provider-substitution authors can use their
+already qualified static route with their own accepted source/contract checks;
+they do not wait for B0. The new independently authored dependent-feature route
+adds B0 and the coherent adoption guidance. Authors of a replaceable entry
+additionally need B1/B2's working public boundary and its installed consumer:
+useful admitted work, post-close refusal, nested/reentrant/await affinity and
+original cleanup observations for the claimed target. It qualifies a facade
+over one generation, not live A → B behavior. The full selected live-update
+claim requires B3–B6. B7 proves a combined update of an EF-verified artifact in
+the selected trusted Node Host; durable extension installation additionally
+needs the actual E4/E5 owner mechanisms and admission, outside this assignment.
+None of these certifies another product's adoption automatically.
+
+Desktop, malicious-code containment, long-lived streams, state migration,
+durable/multi-process recovery, offline clients and universal UI are not hidden
+inside option A. Their boundaries and falsifying spikes remain in section 8;
+the existing owners select and qualify those profiles separately. No mandatory
+Effect/native migration, npm publication or legacy application refactor follows.
+
+The coordinated plan receives two actual independent review rounds. Runtime
+implementation receives its own exact-source review and applicable checks,
+including corrections and ordinary postmerge verification. PR descriptions hold
+plan and execution receipts separately; unexecuted or queued work stays explicit.
 
 ## 2. First-profile packet before dependent code
 
@@ -118,7 +328,7 @@ database, event bus or optional framework.
 | --- | --- | --- |
 | L0. Select profile and record contracts | Current source/owner inspection | Completed section 2 packet; open disputes identify only the affected step |
 | L1. Qualify required primitives and bootstrap | Applicable L0 choices | Actual supported dependency path, narrow mechanism controls and eligible production source/tooling route; bootstrap lands with the first substantive L2 source |
-| L2. Implement semantic contract | L0 and the required L1 findings | Typed states/results/ports and one transition policy; adverse cases written independently |
+| L2. Implement semantic contract and initial facade | L0 and the required L1 findings | Typed states/results/ports, one transition policy and a working one-generation public facade with installed success/refusal and ownership controls |
 | L3. Plan and prepare candidates | L2 plus qualified loader/custody | Candidate ownership before evaluation; stale/failed/late preparation preserves all obligations |
 | L4. Publish and reconcile | L2 plus real authority contract; L3 for integrated execution | Expected-revision publication and original-attempt uncertainty resolution |
 | L5. Adopt, retain and retire | L3–L4 and invocation/resource contracts | Useful B, coherent admitted A, exact-instance cleanup/debt and bounded holds |
@@ -157,6 +367,9 @@ Documentation merging alone is not this exit and does not accept a public API.
    Exercise synchronous reentrancy, nested calls and awaits. Add actual iterator
    consumption/return/error only if the profile claims streams. Reading a head
    and retaining it after an await does not qualify this boundary.
+   For the coordinated Node/Chromium claim, execute this discriminator in both
+   actual targets before selecting the common L2 facade; a Node-only mechanism
+   cannot be its unnoticed dependency.
 2. Bind the selected composition result to exact factory/loader identities.
    Verify no candidate evaluation occurs before its attempt owner exists;
    record the trust/import rule for unregistered top-level effects.
@@ -191,10 +404,26 @@ upstream contract change remains with that semantic owner and its own delivery.
    do not create a general workflow language or second event-sourced control plane.
 5. Author the expected outcomes in section 5 before wiring effects. Use targeted
    unit tests for transition invariants; integrated oracles remain independent.
+6. Deliver the initial public facade over one real admitted generation and the
+   qualified L1 primitives. An installed consumer must perform useful work,
+   preserve its identity through reentrancy/nesting/await, refuse new work after
+   admission closes, and retain actual work/resources until settlement and the
+   original cleanup result. Observe effects and cleanup independently; no raw
+   replaceable roots escape. This small vertical slice supplies the early
+   authoring boundary without claiming the later A → B operation. Reuse its
+   cases in L6 rather than create a second facade or a duplicate test campaign.
+   Hold a raw operation across the close request: original close must remain
+   incomplete until that work settles, and borrowed canonical state must survive.
+   A deliberate premature-release defect must fail the named external witness
+   after successful setup. A saved facade must refuse new work after admission
+   closes; cancelling a caller's wait does not release the held operation.
 
-**Exit:** compiled selected contract, explicit invalid transitions and reviewable
-port obligations. Names and layout become implementation decisions here; the
-earlier semantic tables did not freeze a public enum or universal interface.
+**Exit:** compiled selected contract, explicit invalid transitions, reviewable
+port obligations and the executed packed one-generation facade controls above
+for its claimed targets. Names and layout become implementation decisions here;
+the earlier semantic tables did not freeze a public enum or universal interface.
+The initial facade and its tests are allocated within L2/integration/L6 budgets,
+not added as another runtime layer. L3–L6 still own complete update qualification.
 
 ### L3 — implement planning and owned preparation
 
@@ -283,6 +512,86 @@ the Host does not grow a second transition algorithm around it.
 6. Verify merged bytes and support documentation. A package's public release,
    exact artifact conformance and later product adoption remain separate facts.
 
+### B7 — one signed EF artifact through the existing Node operation
+
+The joint fixture uses the actual private public-root API delivered in
+[EF #70 at c0a8f27](https://github.com/agent-teams-ai/extension-foundation/tree/c0a8f2733b54323e2f85322b86167491a169af1d/packages/node-artifact).
+The [owner contract](https://github.com/agent-teams-ai/extension-foundation/blob/c0a8f2733b54323e2f85322b86167491a169af1d/packages/node-artifact/README.md)
+is Linux x64, trusted finite self-contained ESM. Its producer qualified the same
+archive on Node24.22.3 and Node26.12.1. Select our existing Node24.22.3 Host and
+prove that actual combined target. This does not extend EF to Chromium.
+
+**Artifact gate:** no B7 success
+uses a rebuilt substitute or the report's local archive hash. The producer's
+successful source-bound package-conformance run must supply the exact tested
+node-artifact archive, SHA256/SRI, source SHA, run/attempt/job/proof coordinates
+and its dependency closure. The original observation at head 93178d8 remains:
+[push run 45912650620](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45912650620)
+failed the clean consumer's offline dependency resolution before the archive
+and proof steps. Its producer-owned successor c0a8f27 passed
+[run 45914561543](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45914561543),
+including native conformance, the identical archive on both Node versions and
+source-bound proof collection. The unchanged archive, its original lexer
+dependency and the exact run/job/artifact/proof coordinates are retained in
+[package-inputs.json](../../tests/module/fixtures/ef/package-inputs.json).
+The isolated consumer installs only those inputs plus the actual LMU/GM archives;
+the development dependency remains test-only. No source alias or local EF repack
+replaces the producer's bytes.
+The development install uses the archive's real immutable HTTPS mirror, pinned
+to retention commit f966e204c61e8f4474073449d879501769fc835e and the original
+SHA512 integrity. Foundation rejects a local file: archive as an unproven
+external package identity; it accepts the actual remote delivery under the
+unchanged development boundary. Preserve that retention commit in main ancestry
+through an ordinary merge. The isolated operation consumer still installs the
+same retained archive offline, without checkout aliases or lifecycle scripts.
+The archive's conformance proof and the producer's online package-admission
+receipt are distinct. The former supplies a real input for our joint campaign;
+an admitted-EF-package claim additionally requires the latter. Record its actual
+status without creating another admission verifier or replacing its receipt.
+
+| Step | Narrow implementation and independent exit |
+| --- | --- |
+| B7.1 Receive the real handoff | Preserve the unchanged qualified EF archive and dependency integrity as TEST inputs. Install that exact archive in both the typed fixture development closure and an isolated consumer. No declaration shim, checkout runtime alias or copied verifier. Reuse the pinned producer native-tool installer read-only for actual ORAS1.4.0, Cosign3.1.6 and Distribution3.1.2. |
+| B7.2 Own verification and preparation | A real Resources preparation owner exists before verify starts. Await its original settlement; verify has no AbortSignal contract. Successful verify already cleaned its private staging and returns captured bytes, so do not fabricate another artifact-disposal lease. Retain any ArtifactCleanupError location and original error in that same owner's real recovery obligation; incomplete recovery remains cleanup debt. |
+| B7.3 Evaluate and publish | Call the public createNodeArtifactVerifier, verify(request), then the verified artifact's typed evaluate(binding). The binding supplies the Host's exact contract/revision/loader, live authorize callback and export type guard. Construct the known generation around those verified exports and the existing GM/Host ports. The existing LMU startUpdate owns publication, reconciliation, held A work and retirement. |
+| B7.4 Qualify the installed join | B's useful changed output must execute evaluated.value's actual typed behavior while held A retains its actual Node resource. Tampered signature/bytes and denied evaluation must refuse before the evaluation witness/protected effect, leave the canonical head and surviving generation intact, and clean their actual preparation resources. Hold after real verify but before evaluate, then close runtime admission or revoke the Host's evaluation grant: the current authorize check must refuse. Retiring A preserves B and a foreign resource. Record archive/tool/source identities and actual owner/effect/evaluation witnesses. |
+
+Evaluation authorization reads the current Host evaluation grant and runtime
+closed state. A captured planning snapshot or Resources.signal alone is not
+current admission: LMU deliberately defers native close while preparation is
+outstanding. Late verification still settles under its original custody.
+If ArtifactCleanupError occurs, preserve both verificationError and its cleanup
+cause. A missing or changed stagingDirectory is not proof of cleanup: the native
+tree may have moved. No whole-root deletion or ignored missing-path error may
+turn that debt into success. Keep one Resources-owned unresolved obligation
+until the native owner establishes recovery of the exact original tree.
+
+The Host binds LMU closureId to the requested and verified immutable OCI digest.
+The manifest digest, EF evaluationId and session-unique LMU generationId remain
+different identities. The Host owns the explicit mapping between EF's numeric
+contract revision and its own LMU contract; no universal revision negotiation is
+introduced. Signature validity and typed exports do not grant later effect
+authority: the existing receiver still checks its live state/grants.
+
+The fixture exports a known finite document operation/formatter, not a generic
+service bag. Top-level code is inert except an explicit owned evaluation
+witness; any resource acquisition occurs through the Host's supplied native
+scope. Export validation happens after evaluation and cannot undo top-level
+effects. Verified exports stay behind the generation's invocation boundary.
+Node can retain each data-URL module in its ESM cache until process exit;
+bounded attempts and disposable fixture process custody do not promise module
+unloading or hostile-code containment.
+
+Keep the implementation in tests/module/ef-* plus a small native fixture helper
+only where needed. Reuse the existing native authority and GM construction
+mechanisms; add no second update coordinator, receipt store, resolver or cleanup
+stack. Leave B6 files and production invocation/publication ports unchanged.
+The integration owner writes this fixture; root owns dependency/workflow wiring,
+the qualification matrix, review record and publication in the same PR #9.
+Review this concrete section before dependent code, then review the installed
+join and original failure/cleanup evidence before marking B7 executed. The
+producer artifact gate does not stop independent B6/review/delivery work.
+
 ## 5. Required complete-operation evidence
 
 Select controls for the declared profile; stronger rows cannot be marked passed
@@ -362,6 +671,18 @@ tested availability or a comparison of equal threat/failure envelopes.
 
 ## 7. Open items and exact blocked work
 
+**Current disposition:** for the selected trusted finite cooperative profile,
+[ADR-0001](../decisions/0001-cooperative-update-profile.md) and the
+[complete packed campaign](../research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+close the first-profile, invocation-affinity, original-cleanup and session
+publication/reconciliation choices below. The delivered operation uses ordinary
+typed functions; its implementation technique is no longer undecided.
+[ADR-0002](../decisions/0002-production-source-adoption.md) records actual native
+source adoption. Managed repository admission and public release remain their
+own axes. The table retains the original dependency map for an additional or
+stronger profile; it does not reopen qualified B1–B6 work. B7's exact EF input
+and separate online-admission limit are recorded in its subsection above.
+
 The [decision register](../decisions/open-decisions.md) routes Q1–Q7 to their
 owning decisions; it remains a discussion/navigation projection. Acceptance stays
 with the applicable scope, contract, authority and state owners. This table maps
@@ -386,6 +707,10 @@ the assigned scope. Never silently downgrade a promised guarantee to make a step
 appear complete.
 
 ## 8. Parallel confirmed-target work
+
+The finite single-realm Chromium operation now has the actual B6 result linked
+above. The Browser row below applies to a new loading/state/authority profile;
+it is not a request to repeat or substitute that completed campaign.
 
 | Required target | Next bounded work before its implementation claim | Stop condition for unsupported scope |
 | --- | --- | --- |
