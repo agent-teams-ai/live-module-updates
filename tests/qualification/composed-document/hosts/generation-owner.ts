@@ -66,7 +66,7 @@ export function createGenerationOwner(environment: NativeEnvironment, artifacts:
     const prepared = await prepareClosure(provider);
     requireFact(prepared.status === "prepared", "c.generation-plan");
     plans.set(generation, prepared.composition.digest);
-    const built = await prepared.prepared.run({ scope: resources, inputs: {
+    const built = await prepared.prepared.run({ signal: resources.signal, scope: resources, inputs: {
       state: { "fixture/document/state": environment.document(generation) },
       delivery: { "fixture/export/delivery": environment.delivery(generation) },
     } });

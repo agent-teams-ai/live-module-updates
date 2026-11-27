@@ -83,7 +83,7 @@ export function createComposedRuntime(environment: NativeEnvironment, options: R
       "reference/document-runtime/settings": "reference/document-runtime/settings/host",
     }, roots: ["reference/document-runtime/default", "reference/document-runtime/client/default",
       ...(options.failDependent === true ? ["reference/failing-client/default"] : [])] }], { declarations });
-    const built = await prepared.prepared.run({ scope: parent.resources, inputs: {
+    const built = await prepared.prepared.run({ signal: parent.resources.signal, scope: parent.resources, inputs: {
       authority: { "reference/document-runtime/authority": environment.authority },
       compatibility: { "reference/document-runtime/compatibility": generations.compatibility },
       preparation: { "reference/document-runtime/preparation": options.receiverCustody === true ? receiverSensitive(generations.preparation) : generations.preparation },

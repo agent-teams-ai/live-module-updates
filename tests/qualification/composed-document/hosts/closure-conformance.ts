@@ -48,7 +48,7 @@ export async function qualifyClosureConstruction(environment: NativeEnvironment,
   const failures: unknown[] = [];
   let observation: object | undefined;
   try {
-    const result = await prepared.prepared.run({ scope: scope.resources,
+    const result = await prepared.prepared.run({ signal: scope.resources.signal, scope: scope.resources,
       inputs: { state: inputs.state, delivery: { "fixture/export/delivery": environment.delivery("A") } } });
     requireFact(result.status === "succeeded", "c.construction-run");
     const summary = await result.roots.summary.publishSummary();

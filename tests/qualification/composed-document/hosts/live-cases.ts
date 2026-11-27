@@ -184,13 +184,17 @@ const cleanupDebt: LiveCase = { name: "external-parent-cleanup-debt", run: async
   const parent = await host.closeParent(); const original = await host.originalClose();
   requireFact(!parent.complete && parent.settled && original?.complete === false
     && !host.runtime.inspect().ownershipReleased && host.environment.alive("A"), "c.original-cleanup-debt");
+  const debtPaths = parent.debts.map(debt => debt.path);
+  requireFact(JSON.stringify(debtPaths) === JSON.stringify([
+    ["composed-document-host", "reference/document-runtime/default", "document-runtime-owner"],
+  ]), "c.runtime-scope-identity");
   const originalReports = JSON.stringify([parent.complete, original.complete]);
   host.environment.failCleanup("A", false);
   requireFact((await host.runtime.retryCleanup()).ownershipReleased, "c.current-ownership-release");
   const retry = await host.closeParent();
   requireFact(retry.complete && retry.settled && JSON.stringify([parent.complete, original.complete]) === originalReports, "c.native-parent-debt-recovery");
   originalRetired(host, "A");
-  return { originalRuntimeComplete: original.complete, originalParentComplete: parent.complete, retryParentComplete: retry.complete };
+  return { originalRuntimeComplete: original.complete, originalParentComplete: parent.complete, retryParentComplete: retry.complete, debtPaths };
 } };
 
 const capturedOwner: LiveCase = { name: "captured-original-native-owner", options: { receiverCustody: true }, run: async host => {

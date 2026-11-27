@@ -247,4 +247,15 @@ stronger profiles and protected upstream procedures are excluded. Confidence
   exact migration controls, the four bounded CMS/Host changes, and selected
   audit-only Effect option A with B explicitly deferred. No integration rewrite
   is authorized by these estimates.
-- Plan review round 2, implementation, native results and delivery: pending.
+- Plan review round 2: tooling/admission, feature/CMS and Effect reviewers
+  accepted the revised scope without unresolved critical/material findings.
+  The next native Effect proposal also names late candidate acquisition during
+  shutdown; it remains a separate implementation step.
+- D2 implementation: corrected the scoped adapter, group/root authoring and
+  owned construction signals. A new installed-byte control restores the old
+  scope naming and requires its exact native cleanup-path failure.
+- D2 local focused validation: all four strict compiler projects passed;
+  the installed Node campaign passed 34 positive cases and eight negative
+  controls. Chromium was not selected in this local focused run; complete
+  hosted qualification and new-tooling validation remain pending.
+- D1 migration, complete native results and delivery: pending.
