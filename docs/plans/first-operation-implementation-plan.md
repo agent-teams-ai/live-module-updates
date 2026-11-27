@@ -19,8 +19,13 @@ It selects option A and exact fixture limits under this execution assignment.
 The actual dual-target L1 discriminator passed at `2f7392f`; the first private
 implementation and clean consumers passed the native library route at `97e051b`.
 The [qualification matrix](../research/foundation-qualification-matrix.md#3b-first-private-production-checkpoint)
-owns those exact results and limits. The complete packed Node/Chromium operation
-and the EF join still have their distinct B6/B7 exits below. The
+owns those early results and limits. B6's complete native run
+[45913432029 / job 140226913006](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45913432029/job/140226913006)
+passed 52/52 checks at `6089f0a46206b696e81dbe8756e7e71e00a93dd7`.
+The same packed library passed 29 positive cases and all six exact negative
+controls in each of Node and Chromium. Its
+[complete-operation evidence](../research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+remains separate from the B7 EF join below. The
 [usage guide](../architecture/cooperative-operation-usage.md) records the actual
 early authoring surface and Host obligations.
 
@@ -46,7 +51,8 @@ Node/Chromium controlled-restart results. The six-test result at
 [6083e89](https://github.com/agent-teams-ai/live-module-updates/tree/6083e89ba7781b12571a102d273058052ad94148)
 remains an earlier checkpoint. None of these proves live A → B overlap, atomic
 generation admission, durable recovery or production plugin installation.
-There is no production update runtime at the inspected current baseline.
+At that historical planning baseline there was no production update runtime;
+the later implementation and B6 checkpoint are recorded above.
 
 Use the inspected [GM public Assembly](https://github.com/agent-teams-ai/get-modular/blob/50a7148387a3c01163b319da76052ba07e0dbd84/packages/assembly/README.md)
 and [Resources](https://github.com/agent-teams-ai/get-modular/blob/50a7148387a3c01163b319da76052ba07e0dbd84/packages/resources/README.md)
@@ -500,6 +506,72 @@ the Host does not grow a second transition algorithm around it.
    never bypassed; queued, skipped or cancelled is not execution success.
 6. Verify merged bytes and support documentation. A package's public release,
    exact artifact conformance and later product adoption remain separate facts.
+
+### B7 — one signed EF artifact through the existing Node operation
+
+The next joint fixture uses the actual private public-root API delivered in
+[EF #70 at 93178d8](https://github.com/agent-teams-ai/extension-foundation/tree/93178d893fdfff7812aa236002fba008f8ba6d26/packages/node-artifact),
+not its former plan-only surface. The [owner contract](https://github.com/agent-teams-ai/extension-foundation/blob/93178d893fdfff7812aa236002fba008f8ba6d26/packages/node-artifact/README.md)
+is Linux x64, trusted finite self-contained ESM. The package has no Node26 engine
+floor; its factory admits Linux x64. Select our existing Node24.22.3 Host and
+prove that actual combined target. This does not extend EF to Chromium.
+
+**Artifact gate:** source/API preparation may proceed now, but no B7 success
+uses a rebuilt substitute or the report's local archive hash. The producer's
+successful source-bound package-conformance run must supply the exact tested
+node-artifact archive, SHA256/SRI, source SHA, run/attempt/job/proof coordinates
+and its dependency closure. As checked on 2026-11-26, head 93178d8 has no such
+hosted archive: [push run 45912650620](https://github.com/agent-teams-ai/extension-foundation/actions/runs/45912650620)
+failed the clean consumer's offline dependency resolution before the archive
+and proof steps. The producer owns that repair. Pin the genuine resulting
+archive identity when available; do not silently treat a later head as equal.
+The archive's conformance proof and the producer's online package-admission
+receipt are distinct. The former supplies a real input for our joint campaign;
+an admitted-EF-package claim additionally requires the latter. Record its actual
+status without creating another admission verifier or replacing its receipt.
+
+| Step | Narrow implementation and independent exit |
+| --- | --- |
+| B7.1 Receive the real handoff | Preserve the unchanged qualified EF archive and dependency integrity as TEST inputs. Install that exact archive in both the typed fixture development closure and an isolated consumer. No declaration shim, checkout runtime alias or copied verifier. Reuse the pinned producer native-tool installer read-only for actual ORAS1.4.0, Cosign3.1.6 and Distribution3.1.2. |
+| B7.2 Own verification and preparation | A real Resources preparation owner exists before verify starts. Await its original settlement; verify has no AbortSignal contract. Successful verify already cleaned its private staging and returns captured bytes, so do not fabricate another artifact-disposal lease. Retain any ArtifactCleanupError location and original error in that same owner's real recovery obligation; incomplete recovery remains cleanup debt. |
+| B7.3 Evaluate and publish | Call the public createNodeArtifactVerifier, verify(request), then the verified artifact's typed evaluate(binding). The binding supplies the Host's exact contract/revision/loader, live authorize callback and export type guard. Construct the known generation around those verified exports and the existing GM/Host ports. The existing LMU startUpdate owns publication, reconciliation, held A work and retirement. |
+| B7.4 Qualify the installed join | B's useful changed output must execute evaluated.value's actual typed behavior while held A retains its actual Node resource. Tampered signature/bytes and denied evaluation must refuse before the evaluation witness/protected effect, leave the canonical head and surviving generation intact, and clean their actual preparation resources. Hold after real verify but before evaluate, then close runtime admission or revoke the Host's evaluation grant: the current authorize check must refuse. Retiring A preserves B and a foreign resource. Record archive/tool/source identities and actual owner/effect/evaluation witnesses. |
+
+Evaluation authorization reads the current Host evaluation grant and runtime
+closed state. A captured planning snapshot or Resources.signal alone is not
+current admission: LMU deliberately defers native close while preparation is
+outstanding. Late verification still settles under its original custody.
+If ArtifactCleanupError occurs, preserve both verificationError and its cleanup
+cause. A missing or changed stagingDirectory is not proof of cleanup: the native
+tree may have moved. No whole-root deletion or ignored missing-path error may
+turn that debt into success. Keep one Resources-owned unresolved obligation
+until the native owner establishes recovery of the exact original tree.
+
+The Host binds LMU closureId to the requested and verified immutable OCI digest.
+The manifest digest, EF evaluationId and session-unique LMU generationId remain
+different identities. The Host owns the explicit mapping between EF's numeric
+contract revision and its own LMU contract; no universal revision negotiation is
+introduced. Signature validity and typed exports do not grant later effect
+authority: the existing receiver still checks its live state/grants.
+
+The fixture exports a known finite document operation/formatter, not a generic
+service bag. Top-level code is inert except an explicit owned evaluation
+witness; any resource acquisition occurs through the Host's supplied native
+scope. Export validation happens after evaluation and cannot undo top-level
+effects. Verified exports stay behind the generation's invocation boundary.
+Node can retain each data-URL module in its ESM cache until process exit;
+bounded attempts and disposable fixture process custody do not promise module
+unloading or hostile-code containment.
+
+Keep the implementation in tests/module/ef-* plus a small native fixture helper
+only where needed. Reuse the existing native authority and GM construction
+mechanisms; add no second update coordinator, receipt store, resolver or cleanup
+stack. Leave B6 files and production invocation/publication ports unchanged.
+The integration owner writes this fixture; root owns dependency/workflow wiring,
+the qualification matrix, review record and publication in the same PR #9.
+Review this concrete section before dependent code, then review the installed
+join and original failure/cleanup evidence before marking B7 executed. The
+producer artifact gate does not stop independent B6/review/delivery work.
 
 ## 5. Required complete-operation evidence
 

@@ -79,12 +79,15 @@ and empty directories. The [controls](../../scripts/check-feature-module.test.ts
 exercise real filesystem inputs and exact rejecting rule families; they do not
 replace operation tests or semantic review.
 
-`tests/qualification/portable-document` and the bounded preproduction L1
-experiment have separate exact dependency/compiler projects. Their independent
-checks remain required evidence for their claims. Root source coverage excludes
-them from production classification and does not pretend that root resolution
-can compile the installed fixture consumers. Historical research and sealed
-archives retain their original identities.
+`tests/qualification/portable-document` retains its separate exact dependency
+and compiler project. Its checks remain required for that authoring reference.
+The preliminary L1 invocation implementation and workflow are retired after the
+complete production package passed both targets; the retained
+[navigation note](../../tests/qualification/update-operation/invocation-profile.md)
+links immutable source and results. Root source coverage does not pretend that
+root resolution can compile isolated installed consumers; their actual separate
+compilations remain mandatory. Historical research and sealed archives retain
+their original identities.
 
 Full source conformance, same-source hosted checks, central registration,
 managed Docs admission, remote enforcement and public release are separate

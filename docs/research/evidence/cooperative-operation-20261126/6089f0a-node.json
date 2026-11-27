@@ -1,0 +1,312 @@
+{
+  "source": "6089f0a46206b696e81dbe8756e7e71e00a93dd7",
+  "node": "v24.22.3",
+  "compiler": "7.0.2",
+  "cohort": {
+    "@get-modular/core": "0.8.0",
+    "@get-modular/assembly": "0.8.0",
+    "@get-modular/resources": "0.2.2",
+    "@get-modular/conformance": "0.5.2"
+  },
+  "archives": {
+    "live-module-updates": "5d088d203597ecf9da15797f0ebf974629f68984583984e340132ce3168dceb5",
+    "@get-modular/core": "532bba3d1f092f7f4777f881a23135ec6ccbcc9ff6f4553c027cfaf8e730f098",
+    "@get-modular/assembly": "af2772ae67bbef08f9f857a11aa70e6c01d861a1b96e0c287ea69d000925c330",
+    "@get-modular/resources": "1752fe321b8f816933ad0bdd07d8b27511449e9fa98d88a318378a45dc227381",
+    "@get-modular/conformance": "4f2e5c9c86b344d9e586ba2fdf414c3ba7eb20c77fd7a2148a6a428dcffcd5b7"
+  },
+  "libraryIntegrity": "sha512-NJI0D1OZwCSVEY6Eyg4pT0q0b7l8t2tfWGLVkwoIee9OaD3ByHdVtJaVod3MSmjRHVJPD6XS0cebgOFWHLHlSQ==",
+  "rootLockSha256": "3550572edd004a4b59bd1303267af954419b0c3edfad3dc1df9b1790b8927473",
+  "consumerLockSha256": "82d57c3e1f303800368d8dcae78d689dd80c72539a23fc2d6197db78c4f33ef6",
+  "hosts": {
+    "node/generation-composition.js": "e9a167658b99136d8bb9c22bd7681323fcac2a43f4593edbf6bcc457bfe231dc",
+    "node/host-cases.js": "44667bb79227cee708a59cc0026ede0b1bb18c79b70bef4f62e3733e75af99f9",
+    "node/host-contract.js": "e19c5173699e7eabc3383c01c92f09dddb9fac3a3d28a2cbe354b5fceed1e730",
+    "node/native-node-authority.js": "164021ae868d7ab312422687a91922dae0ec3421fa3164826846fd76db066589",
+    "node/node-host.js": "13be55f9d625a2bc568b9162e74012b89cf71df241efb11648dd12ce0190cf23",
+    "browser/browser-host.js": "2287ab15a9bc91118fe387043f8955887350fdca9ec55ecb5e8b1174c453d941",
+    "browser/generation-composition.js": "e9a167658b99136d8bb9c22bd7681323fcac2a43f4593edbf6bcc457bfe231dc",
+    "browser/host-cases.js": "44667bb79227cee708a59cc0026ede0b1bb18c79b70bef4f62e3733e75af99f9",
+    "browser/host-contract.js": "e19c5173699e7eabc3383c01c92f09dddb9fac3a3d28a2cbe354b5fceed1e730",
+    "browser/native-browser-authority.js": "edccec9ed57e58727a0d15b94ab46b5978e392256bc7b2043f0dad506b1f4050"
+  },
+  "target": "node",
+  "baseline": {
+    "status": "passed",
+    "rows": [
+      {
+        "name": "actual-gm-conformance",
+        "outcome": "passed"
+      },
+      {
+        "name": "normal-update",
+        "outcome": "passed"
+      },
+      {
+        "name": "selection-race",
+        "outcome": "passed"
+      },
+      {
+        "name": "reentrant-close",
+        "outcome": "passed"
+      },
+      {
+        "name": "held-cohort",
+        "outcome": "passed"
+      },
+      {
+        "name": "receiver-fence",
+        "outcome": "passed"
+      },
+      {
+        "name": "revoked-grant",
+        "outcome": "passed"
+      },
+      {
+        "name": "lost-publication",
+        "outcome": "passed"
+      },
+      {
+        "name": "late-publication",
+        "outcome": "passed"
+      },
+      {
+        "name": "unknown-superseded",
+        "outcome": "passed"
+      },
+      {
+        "name": "failed-preparation",
+        "outcome": "passed"
+      },
+      {
+        "name": "late-preparation",
+        "outcome": "passed"
+      },
+      {
+        "name": "unsupported-contract",
+        "outcome": "passed"
+      },
+      {
+        "name": "state-basis-change",
+        "outcome": "passed"
+      },
+      {
+        "name": "schema-basis-change",
+        "outcome": "passed"
+      },
+      {
+        "name": "grant-basis-change",
+        "outcome": "passed"
+      },
+      {
+        "name": "attempt-replay",
+        "outcome": "passed"
+      },
+      {
+        "name": "racing-updates",
+        "outcome": "passed"
+      },
+      {
+        "name": "cleanup-debt",
+        "outcome": "passed"
+      },
+      {
+        "name": "retention-capacity",
+        "outcome": "passed"
+      },
+      {
+        "name": "registration-identity",
+        "outcome": "passed"
+      },
+      {
+        "name": "abandoned-waiter",
+        "outcome": "passed"
+      },
+      {
+        "name": "incompatible-state",
+        "outcome": "passed"
+      },
+      {
+        "name": "unknown-closure",
+        "outcome": "passed"
+      },
+      {
+        "name": "multiple-delayed-attempts",
+        "outcome": "passed"
+      },
+      {
+        "name": "receipt-capacity",
+        "outcome": "passed"
+      },
+      {
+        "name": "pending-receipt-capacity",
+        "outcome": "passed"
+      },
+      {
+        "name": "attempt-capacity",
+        "outcome": "passed"
+      },
+      {
+        "name": "independent-domains-both-orders",
+        "outcome": "passed"
+      }
+    ]
+  },
+  "negative": [
+    {
+      "defect": "split-selection",
+      "target": "packed-library-copy",
+      "caseName": "selection-race",
+      "oracle": "b6.selection-affinity",
+      "file": "dist/features/update-operation/application/invocation.js",
+      "marker": "return entry.start(args);",
+      "replacement": "return Promise.resolve().then(() => entry.start(args));",
+      "markerCount": 1,
+      "originalFileSha256": "4cc4ccc8983cc8bafef7e2674b02a04c58b7ec2fa33c76b38604e9c9d5eba498",
+      "mutatedFileSha256": "ceddd7cf335ba46b82caa3b4e8f0ef54ab27e532681603c76387879a6aa6e40c",
+      "originalPackageInventorySha256": "030e439266e450269448bb95b657df703dd7865fc7410d9672ad326baa53ae89",
+      "mutatedPackageInventorySha256": "a91cbcf7990393fe87e8e1f878866bed7152584d8fa92605f2b6da46c4d9e251",
+      "changedFiles": [
+        "dist/features/update-operation/application/invocation.js"
+      ],
+      "observed": {
+        "status": "rejected",
+        "oracle": "b6.selection-affinity",
+        "details": []
+      }
+    },
+    {
+      "defect": "early-release",
+      "target": "packed-library-copy",
+      "caseName": "held-cohort",
+      "oracle": "b6.held-native-owner",
+      "file": "dist/features/update-operation/application/generation.js",
+      "marker": "await this.#drained();",
+      "replacement": "await Promise.resolve(); // Deliberate defect: skip actual admitted-work drain.",
+      "markerCount": 1,
+      "originalFileSha256": "aaf64e8e3a14490383a0dc62501f61b8ca419791c4139447706d80a01390d5ef",
+      "mutatedFileSha256": "84bc8cac2d39a7b3c47ff7490078c559557bbad0058c907bdefd79b864cb2de7",
+      "originalPackageInventorySha256": "030e439266e450269448bb95b657df703dd7865fc7410d9672ad326baa53ae89",
+      "mutatedPackageInventorySha256": "d969636031e334ee81e9ef8bf32ee68594c366fc2622605b449ccedacebed60f",
+      "changedFiles": [
+        "dist/features/update-operation/application/generation.js"
+      ],
+      "observed": {
+        "status": "rejected",
+        "oracle": "b6.held-native-owner",
+        "details": []
+      }
+    },
+    {
+      "defect": "lost-publication-rejected",
+      "target": "packed-library-copy",
+      "caseName": "lost-publication",
+      "oracle": "b6.unknown-custody",
+      "file": "dist/features/update-operation/application/update-operation.js",
+      "marker": "attempt.publication = Object.freeze({ status: \"unknown\", ...(cause !== undefined ? { cause } : {}) });",
+      "replacement": "acceptReceipt(coordinator, attempt, { status: \"refused\", reason: \"mutant classified unknown publication as rejection\" });",
+      "markerCount": 1,
+      "originalFileSha256": "ee81af46a1d9ad283cbaa1e5290d46c5d18754d7d8511bbcc847b8560409a37e",
+      "mutatedFileSha256": "8ff2b6ff2c828e7e13731ad5e5cbd820d2d08de701c2d6ac58c963367ab6b387",
+      "originalPackageInventorySha256": "030e439266e450269448bb95b657df703dd7865fc7410d9672ad326baa53ae89",
+      "mutatedPackageInventorySha256": "13c2284b038f013d080be4bebb84ed3827325210ae8116ad1cb192383296868e",
+      "changedFiles": [
+        "dist/features/update-operation/application/update-operation.js"
+      ],
+      "observed": {
+        "status": "rejected",
+        "oracle": "b6.unknown-custody",
+        "details": []
+      }
+    },
+    {
+      "defect": "discard-original-debt",
+      "target": "packed-library-copy",
+      "caseName": "cleanup-debt",
+      "oracle": "b6.original-cleanup-debt",
+      "file": "dist/features/update-operation/application/generation.js",
+      "marker": "if (original) {\n            this.#originalAttempt = attempt;\n        }",
+      "replacement": "this.#originalAttempt = attempt;",
+      "markerCount": 1,
+      "originalFileSha256": "aaf64e8e3a14490383a0dc62501f61b8ca419791c4139447706d80a01390d5ef",
+      "mutatedFileSha256": "ac7b14b4ad8f53546535866ab14dae0edcac377f044ab194ccc624b4f6632eee",
+      "originalPackageInventorySha256": "030e439266e450269448bb95b657df703dd7865fc7410d9672ad326baa53ae89",
+      "mutatedPackageInventorySha256": "f51804b55b3872322a0dc51ceadd0486c9b131c9cea2b7b0a5a4d816b932bd15",
+      "changedFiles": [
+        "dist/features/update-operation/application/generation.js"
+      ],
+      "observed": {
+        "status": "rejected",
+        "oracle": "b6.original-cleanup-debt",
+        "details": []
+      }
+    },
+    {
+      "id": "receiver-guard-bypass",
+      "target": "native-host",
+      "caseName": "receiver-fence",
+      "oracle": "b6.receiver-fence",
+      "options": {
+        "unsafeEffects": true
+      },
+      "packageBytes": "unchanged",
+      "observed": {
+        "status": "rejected",
+        "oracle": "b6.receiver-fence",
+        "details": []
+      },
+      "libraryInventory": {
+        "dist/index.js": "b197676055e880ad0db46c2673a1812053f27702683a419301dbd3d32568c4f0",
+        "dist/resources.js": "00052b61f02344173f59a5007098f0ab115c317f933d8bd03594dc7a4b7d7e26",
+        "dist/features/update-operation/composition/create-update-runtime.js": "e3e4b07fcfcbb385860ef8feb0b5f0c779abf753650ca726144a1c51d0eb3e7c",
+        "dist/features/update-operation/application/cleanup-report.js": "6bbe0cafc4d1156ce7b30c6075e26c66d595b901f91694126c80511d9b4eb381",
+        "dist/features/update-operation/application/generation.js": "aaf64e8e3a14490383a0dc62501f61b8ca419791c4139447706d80a01390d5ef",
+        "dist/features/update-operation/application/invocation.js": "4cc4ccc8983cc8bafef7e2674b02a04c58b7ec2fa33c76b38604e9c9d5eba498",
+        "dist/features/update-operation/application/models.js": "47c6a62d3f23781e32bfe24227960903fc8624d128d7e5e4103b89f225f6ec06",
+        "dist/features/update-operation/application/operation-state.js": "3ab54dd3c125860911898d3794f1f2558a8f43b8c3d2746a1b9a2f1dd2724fe4",
+        "dist/features/update-operation/application/update-operation.js": "ee81af46a1d9ad283cbaa1e5290d46c5d18754d7d8511bbcc847b8560409a37e",
+        "dist/features/update-operation/application/ports/adoption.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/authority.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/invocation.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/lifetime.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/preparation.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/adapters/resources.js": "218a080c91c4ca54e3a0420258b25a162ff624ca5c05a4479c4be71785ee57bb"
+      }
+    },
+    {
+      "id": "stable-name-removal",
+      "target": "native-host",
+      "caseName": "registration-identity",
+      "oracle": "b6.registration-identity",
+      "options": {
+        "unsafeRemoval": true
+      },
+      "packageBytes": "unchanged",
+      "observed": {
+        "status": "rejected",
+        "oracle": "b6.registration-identity",
+        "details": [
+          "b6.registration-identity",
+          "b6.native-teardown"
+        ]
+      },
+      "libraryInventory": {
+        "dist/index.js": "b197676055e880ad0db46c2673a1812053f27702683a419301dbd3d32568c4f0",
+        "dist/resources.js": "00052b61f02344173f59a5007098f0ab115c317f933d8bd03594dc7a4b7d7e26",
+        "dist/features/update-operation/composition/create-update-runtime.js": "e3e4b07fcfcbb385860ef8feb0b5f0c779abf753650ca726144a1c51d0eb3e7c",
+        "dist/features/update-operation/application/cleanup-report.js": "6bbe0cafc4d1156ce7b30c6075e26c66d595b901f91694126c80511d9b4eb381",
+        "dist/features/update-operation/application/generation.js": "aaf64e8e3a14490383a0dc62501f61b8ca419791c4139447706d80a01390d5ef",
+        "dist/features/update-operation/application/invocation.js": "4cc4ccc8983cc8bafef7e2674b02a04c58b7ec2fa33c76b38604e9c9d5eba498",
+        "dist/features/update-operation/application/models.js": "47c6a62d3f23781e32bfe24227960903fc8624d128d7e5e4103b89f225f6ec06",
+        "dist/features/update-operation/application/operation-state.js": "3ab54dd3c125860911898d3794f1f2558a8f43b8c3d2746a1b9a2f1dd2724fe4",
+        "dist/features/update-operation/application/update-operation.js": "ee81af46a1d9ad283cbaa1e5290d46c5d18754d7d8511bbcc847b8560409a37e",
+        "dist/features/update-operation/application/ports/adoption.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/authority.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/invocation.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/lifetime.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/application/ports/preparation.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "dist/features/update-operation/adapters/resources.js": "218a080c91c4ca54e3a0420258b25a162ff624ca5c05a4479c4be71785ee57bb"
+      }
+    }
+  ]
+}

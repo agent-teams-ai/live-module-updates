@@ -207,7 +207,8 @@ An explicit empty workspace restores the precursor's own frozen dependency
 graph. Local normal frozen installation and strict TypeScript passed after the
 correction. The original missing offline metadata attempt was not a pass; the
 ordinary supply-chain-checked install resolved it without disabling the policy.
-The precursor remains active until the real B6 replacement succeeds.
+The precursor stayed active until the real B6 replacement succeeded; its later
+retirement is recorded below.
 
 The hosted installer also exposed a real vulnerable bootstrap: the old pinned
 `pnpm/action-setup` installs pnpm 11.7.0 before selecting the requested 11.25.0.
@@ -233,11 +234,17 @@ setup-pin correction.
 
 ## Remaining delivery observations
 
-The same packed implementation still needs the complete independent Node and
-Chromium campaign, real rejecting controls, the EF verified-artifact join and
-their exact final source reviews. The old L1 candidate and its active workflow
-will be retired after the production replacement proves those claims; the
-original source, runs and artifacts remain historical evidence.
+The complete packed Node/Chromium campaign passed at `6089f0a`: the
+[matrix](../research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+records 52/52 runner tests, 29 positive rows and six exact defect controls per
+target, downloaded artifact verification and unchanged raw reports. The root
+reviewer also checked every browser-served LMU hash and all retained mutated
+files against the actual archive. The superseded L1 candidate and workflow are
+now retired, with an immutable history route in their former profile note.
+
+The EF verified-artifact join and its final exact-source review remain a distinct
+exit. Executor A has published real public contracts in EF #70; actual qualified
+archive handoff and the combined native operation must establish that result.
 
 Normal merge and actual-main checks belong to the final source. No pending
 case, unknown publication, cleanup debt, unexecuted browser test, external

@@ -21,8 +21,9 @@ A separately packed optional GM adapter supplies composition. The implemented
 controlled-restart profile has the bounded integrated result below, including
 the corrected package-peer policy and abort-aware browser-harness cleanup.
 
-Later fixtures can extend the family with bounded streams, candidate replacement
-or artifact admission when those discriminators are needed. Do not add all of
+The complete-operation successor below adds actual candidate replacement.
+Later fixtures can extend the family with bounded streams or artifact admission
+when those discriminators are needed. Do not add all of
 them to the first edit operation or copy the LMU coordinator into each Host.
 Expected outcomes and denied effects must be specified independently from the
 implementation under test. Reusing input types or encoding grammar is valid;
@@ -45,7 +46,7 @@ does not erase that requirement or block unrelated qualified static work.
 | Cleanup oracle — fixture lifetime owner | Independently omit Save, Query, Revoke or Close listener removal; actual post-close dispatch must fail the corresponding oracle, including query error/repeated close | Q3 passed all four rejecting controls in the `6083e89` result. A closed-state guard cannot hide the tested retained listener; no arbitrary leak freedom or hostile-code stop is claimed. |
 | Controlled restart — TEST Hosts and Resources | Stop ingress, retain raw asynchronous work until settlement, preserve canonical state, reject stale/revoked effects and refuse B while original cleanup is incomplete | The `6b22e4b` Node/Chromium suite passes the supported finite-work, actual resource and rejecting-control cases. No live overlap, stream custody, fleet publication or complete LMU operation follows. |
 | Installable contribution — EF and test Host | Actual verified artifact/import closure to admitted invocation, denied/tampered/incompatible/wrong-scope/stale/revoked paths, disable/uninstall and explicit data retention | [EF #66](https://github.com/agent-teams-ai/extension-foundation/pull/66) supplies the bounded trusted Node package-to-effect path. [EF #68](https://github.com/agent-teams-ai/extension-foundation/pull/68) adds EF-local TEST exact-revision compatibility work. Neither is an EF runtime integration in this LMU reference or proof of signed OCI trust, durable installation or production SPI. |
-| Full live update — LMU and actual authorities | Atomic select/retain, failed B preserving A, useful B adoption while admitted A work remains coherent, original-attempt reconciliation, stale-writer rejection and retirement holds | Operation proposal plus mechanism witnesses. No implemented complete LMU runtime; supported public admission/custody path must be established before claiming this row. |
+| Full live update — LMU and actual authorities | Atomic select/retain, failed B preserving A, useful B adoption while admitted A work remains coherent, original-attempt reconciliation, stale-writer rejection and retirement holds | The private complete operation passed the actual packed Node/Chromium campaign at `6089f0a`, including live overlap, original-attempt recovery and six defect controls per target; see section 3c. This is the selected finite session profile, not npm release, EF admission, durable recovery or automatic product adoption. |
 | Desktop — selected shell and privileged receiver | Actual renderer/main or native boundary, versioned IPC, malformed/denied calls, native resources, recovery and observed shutdown on selected OS | Required design boundary; exact shell/profile and native qualification remain open. Node plus browser tests do not qualify Desktop. |
 | Untrusted code — selected executor/authority | Denied file/network/IPC and privilege access, current grants at the real effect receiver, quotas and actual termination under adversarial behavior | Required design boundary; selected enforceable mechanism and native evidence remain open. A grant toggle, Worker, process label or signed artifact does not prove containment. |
 | Optional portable UI — semantic owner and presentation adapters | One declared interaction through independent presentations; unsupported required contribution, action identity, stale results, keyboard/focus and accessible behavior | Current raw DOM interaction is one bounded presentation. No shared UI vocabulary, renderer, vendor library or cross-presentation/a11y qualification is selected. |
@@ -277,7 +278,9 @@ prove repeated-update retention, safe registry forgetting or the complete
 prepare/publish/adopt/retire coordinator. Its split-selection negative control
 proves witness sensitivity; B6 must mutate the actual operation path or use a
 genuine faulty adapter with the same independent oracle. These limits remain
-explicit when the candidate is refined into production source.
+explicit in the retained history. After the section 3c replacement passed, the
+precursor code/workflow was retired; its [navigation note](../../tests/qualification/update-operation/invocation-profile.md)
+links immutable source, runs and the earlier installation failure.
 
 ## 3b. First private production checkpoint
 
@@ -315,6 +318,61 @@ and [original artifact 15158838139](https://github.com/agent-teams-ai/live-modul
 preserve this failure. Its repair gives the precursor its own empty workspace,
 preserving the exact frozen graph and checks until B6 supersedes it. No native
 L1 result is claimed for that failed run.
+
+## 3c. Complete packed operation
+
+The actual private operation passed in independent Node and Chromium Hosts at
+[`6089f0a46206b696e81dbe8756e7e71e00a93dd7`](https://github.com/agent-teams-ai/live-module-updates/commit/6089f0a46206b696e81dbe8756e7e71e00a93dd7).
+The selected scope is [ADR-0001](../decisions/0001-cooperative-update-profile.md):
+trusted finite work in one process or realm/session, compatible borrowed state,
+explicit owner limits and receiver-side effects. The same complete operation
+runs in both targets; each Host independently owns authority and native resources.
+
+| Evidence field | Exact result |
+| --- | --- |
+| Full native route | [Run 45913432029 / job 140226913006](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45913432029/job/140226913006): **52/52 passed**, zero failed/cancelled/skipped; all strict/FMS/stock Foundation gates passed |
+| Packed campaign counts | 29 positive named rows and six exact defect rejections **per target**, inside two subtests and their shared parent; these row counts are not additional runner tests |
+| Runtime/compiler | Node 24.22.3, TypeScript 7.0.2, pnpm 11.25.0, Playwright 1.65.1, actual Chrome Headless Shell 159.0.8154.6 build 1255 |
+| Public GM cohort | Core/Assembly 0.8.0, Resources 0.2.2, Conformance 0.5.2; actual complete GM composition and supplied Host ports |
+| LMU archive | SHA256 `5d088d203597ecf9da15797f0ebf974629f68984583984e340132ce3168dceb5`; same bytes in ordinary installed consumers, Node and Chromium |
+| Root / consumer locks | Root SHA256 `3550572edd004a4b59bd1303267af954419b0c3edfad3dc1df9b1790b8927473`; combined consumer SHA256 `82d57c3e1f303800368d8dcae78d689dd80c72539a23fc2d6197db78c4f33ef6` |
+| Raw reports | Unchanged [Node](evidence/cooperative-operation-20261126/6089f0a-node.json) and [Chromium](evidence/cooperative-operation-20261126/6089f0a-chromium.json) CI reports |
+| Evidence archive | [Artifact 15160973973](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45913432029/artifacts/15160973973), independently downloaded ZIP SHA256 `3e45d1bae6e9fc3707c9b3b4f6860eec61c40d22b49933928fbbb18d1fc94292` |
+| First failed run | `bfea5e5`, [run 45912637899 / job 140224383016](https://github.com/agent-teams-ai/live-module-updates/actions/runs/45912637899/job/140224383016): 50/51, browser fixture removed before its test registration; [original excerpt](evidence/cooperative-operation-20261126/bfea5e5-browser-fixture-lifetime-failure.log) and [reviewed lifetime repair](../reviews/cooperative-operation-delivery-2026-11-26.md#first-hosted-b6-failure-the-shared-fixture-lifetime) remain available |
+
+The useful operation edits the actual Host-owned document. New B calls return
+`B:SEED`; admitted A work resumes coherently through its bound nested calls.
+Current receiver checks reject stale or revoked effects. Canonical Map or
+Storage replacement atomically records head and original receipt; a deliberately
+lost acknowledgement after that mutation stays unknown until original lookup.
+Failed/partial/late preparation, competing updates, current state/schema/grant
+changes, exact replay, independent domains, session budgets and cleanup debt
+retain their own observable outcomes.
+
+Node uses actual file descriptors. Chromium uses genuine DOM listeners and
+native sessionStorage, including foreign-resource preservation. Exact retirement,
+reentrant close and abandoned caller waits preserve the real native owner until
+admitted work ends. A later successful retry preserves the original debt report.
+Receipt-capacity rows directly exercise the Host authority primitive after useful
+A setup; they are not 32 complete replacements. Runtime attempt capacity has a
+separate row.
+
+The four library defects change one installed JavaScript file each: split
+selection/admission, premature cleanup, unknown publication classified as refusal,
+and overwrite of original cleanup debt. Two genuine faulty Host profiles bypass
+the effect guard or remove B's resource under A's stable name. Every negative
+performs useful A first and fails its exact named runtime oracle; compiler,
+import, setup and unrelated teardown failures cannot substitute. Independent
+review verified original archives, all eight retained mutated target files and
+every browser-served LMU hash against the expected original or exact mutation.
+
+This qualifies the declared fixture closure catalogue and selected ordinary
+library profile. It does not qualify EF artifact admission, untrusted execution,
+Desktop, Node ESM unloading, streams, cross-tab/process publication, durable
+recovery, managed repository admission, npm publication or another product.
+The EF join has its own B7 result and the final PR/actual-main source must retain
+its own checks. The preliminary L1 implementation is retired after this proof;
+historical findings, failures and immutable artifacts remain separately scoped.
 
 ## 4. Independent oracles, negative controls and reset
 
@@ -362,9 +420,8 @@ artifact result or a complete foundation runtime. X4 is an application-level
 incomplete acknowledgement, not a TCP-reset proof.
 
 Next work follows the missing guarantee: public composition projection under GM;
-artifact-to-effect admission under EF; complete update admission/reconciliation
-under LMU; and real Desktop, untrusted-executor and optional UI profiles at their
-owners. These can progress in parallel when independent. Select a substantive
+artifact-to-effect admission under EF and its combined B7 operation under LMU;
+and real Desktop, untrusted-executor and optional UI profiles at their owners. These can progress in parallel when independent. Select a substantive
 profile and its accepted mechanism before dependent implementation; use a
 discriminating spike for unresolved technical alternatives. No product launch
 is needed to run those fixtures, and no single passing row closes all of them.

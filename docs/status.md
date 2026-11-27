@@ -29,9 +29,13 @@ scope are recorded once in the
 The first substantive private implementation now has the portable invocation
 boundary, owned preparation, conditional publication and reconciliation,
 useful-adoption observation and exact-generation retirement. Clean installed
-consumers exercise its ordinary root and optional Resources entry. Full packed
-Node/Chromium operation qualification, the EF artifact join and final delivery
-reviews remain separate exits; precursor tests do not prove those exits.
+consumers exercise its ordinary root and optional Resources entry. The complete
+packed operation passed the native route at `6089f0a`: **52/52 runner tests**,
+including 29 named scenarios and six exact defect controls per native target.
+The [matrix](research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+retains original failures, archive identities and support limits. The preliminary
+L1 implementation is retired after this replacement proof. The EF artifact join,
+final delivery review and actual-main verification remain separate exits.
 
 [ADR-0002](decisions/0002-production-source-adoption.md) and the
 [source ownership guide](architecture/source-ownership.md) define the native

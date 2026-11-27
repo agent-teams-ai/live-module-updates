@@ -22,9 +22,11 @@ package entry has no mandatory GM, EF, UI, Node or DOM dependency. The optional
 The installed dependent-feature checkpoint passed in Node with the existing
 browser regression. The invocation/authority discriminators passed on their
 exact source in Node and actual Chromium.
-The production implementation and its installed consumers are a later source
-checkpoint; the complete packed operation and EF integration require their own
-results in the [qualification matrix](docs/research/foundation-qualification-matrix.md).
+The complete packed production operation has now passed in both independent
+Node and Chromium Hosts: 29 named scenarios and six deliberate defect controls
+per target. The [qualification matrix](docs/research/foundation-qualification-matrix.md#3c-complete-packed-operation)
+binds that result to exact source, archive and native resources. The EF artifact
+join remains a separate integration result.
 Native Effect, isolated execution and
 Wasm/Extism are separate candidate profiles. Module Federation, Piral,
 Native Federation and OpenComponents are considered at their actual delivery,
