@@ -17,8 +17,22 @@ The root agent integrated their findings; no implementation approval is claimed.
 
 ## Plan review
 
-Pending: independent reviewers inspect the published full plan and review its
-material corrections before dependent production implementation.
+Round 1 reviewed the full published abed8ff7a5d6087ae3bc65753b4a542d3092d2fb
+plan. No critical architectural contradiction was found. Material corrections:
+
+| Finding | Reviewer | Correction |
+| --- | --- | --- |
+| External abort can reenter invocation before cleanup seals LMU | invocation_contract | C2 now defines a shutdown admission cutoff and earlier-listener reentry test; bound existing work remains valid. |
+| Parent teardown also threatens pending preparation and unknown publication | invocation_contract | Separate held-acquisition and committed/lost-ack parent-close experiments retain actual ports until settlement/reconciliation. |
+| Initial ownership has post-constructor and late/cancelled windows | operation_design, invocation_contract | Explicit transfer matrix covers refusal, successful transfer followed by GM failure, late initial preparation and cancellation before root publication. |
+| Current completion must include every actual owner | operation_design | Coordinator-owned fact, if needed, includes closed admission, preparation/publication/work and unregistered/invalid-report custody; no copied predicate or false physical-release claim. |
+| Test suite owner and package delivery were ambiguous | installed_consumer | Selected portable live-module-updates/testing, no runtime/platform/GM dependencies, real FMS testing role and forbidden inward production import. |
+| New root runner could accidentally depend on old child compiler or shared outputs | installed_consumer | Explicit ordered isolated staging from unchanged maintained sources, root compiler, clean second installation, actual compiler input list and separate C evidence. |
+| Coordinator replacement, data isolation and writer scopes were implicit | root self-review, confirmed by operation_design | Exclude coordinator hot-swap; distinguish provider coherence from transactional state; add disjoint phase/file ownership map. |
+
+Round 2 pending: independently check the corrected complete plan before
+dependent production implementation. These are actual agent reviews, not an
+external approval or runtime qualification.
 
 ## Implementation and delivery
 

@@ -68,6 +68,11 @@ finite work, original publication recovery and retirement. Resources owns
 physical cleanup. Host authority owns the canonical head and each receiver
 checks its current effect permissions. There is one owner of each concern.
 
+Composing the LMU runtime as a module does **not** hot-swap that coordinator.
+Exactly one live runtime owns an activation domain/session. Closure coherence
+means a consistent code/provider set, not a transactional snapshot of mutable
+business data; the state owner supplies any stronger data isolation.
+
 ### Concrete composition direction
 
 A real GM module calls the ordinary LMU factory. Its Host-only instance may
@@ -164,6 +169,24 @@ they apply; do not invent a general test framework or a universal Map authority.
 
 Exit: reviewed scope, exact file ownership and no material contradiction.
 
+### File ownership and dependency map
+
+All implementation goes through the same PR. Reviewers may inspect every area,
+but concurrent writers own disjoint files; the root integrates shared files.
+
+| Area | Primary writer | Planned files and dependency |
+| --- | --- | --- |
+| C1 public contract correction | operation_design | Existing invocation/preparation/lifetime port types, UpdateRuntime/UpdateHandle signatures; new tests/module/contract-variance-cases.ts and its existing packed-consumer integration. Root integrates shared model/lint edits. |
+| C2 native discriminator and C3 justified lifetime integration | invocation_contract | New tests/module/owned-runtime-discriminator.test.ts and focused feature tests; only after evidence, existing coordinator/current ownership fact and a narrowly owned Resources adapter. Root serializes shared src/models/exports changes after C1. |
+| C4 complete reference and C6 installed/native delivery | installed_consumer | New tests/qualification/composed-document/ maintained consumer/adoption slice; tests/module/composed-* staging, runner and evidence. Reuse existing portable core/adapter/Summary source unchanged; no edits to EF or old sealed evidence. |
+| C5 actual Host contract laws | root | src/features/update-operation/testing/, curated src/testing.ts, focused laws/negative controls and external consumer connection; no runner or platform dependency. |
+| Shared policy, plan, decisions and delivery | root | package exports, compiler scopes, existing FMS/Foundation/lint profiles, CI integration, owning docs/reviews and branch/PR operations. |
+
+These are scoped file families, not permission to create empty layers. If C2
+shows no missing adapter, its proposed source file is not created. A changed
+ownership boundary is recorded before adding its profile. No writer silently
+extends another writer's file set.
+
 ### C1 — strengthen public operation contracts
 
 - Reproduce public invocation variance through installed declarations: a
@@ -183,13 +206,35 @@ consumers still compile/run without GM or Node/DOM types.
   capability to a dependent module. Keep owner controls Host-only.
 - Acquire the initial generation under existing inert preparation custody; a
   native setup/transfer cell must retain it if construction refuses.
+- Define external admission cutoff at the beginning of the owner's shutdown
+  action. A previously registered abort listener must not admit a fresh facade
+  call after that cutoff, regardless of listener order; an already admitted
+  BoundInvocation may continue. Test this reentrant listener before choosing
+  explicit Host-close ordering or a qualified facade/signal guard.
 - Start held post-await work, close the external GM Host, and prove resources
   and borrowed providers remain usable until actual drain.
+- Independently hold candidate preparation after native acquisition, close the
+  parent, then allow its late settlement. Preserve original custody and all
+  required borrowed ports; the late candidate cannot be published.
+- Independently commit B with a lost acknowledgement, close the parent and
+  resolve the original receipt through still-usable reconciliation ports.
+  Parent completion cannot precede discharge of that actual uncertainty.
 - Force native cleanup debt, retain the original incomplete LMU/parent reports,
   allow explicit recovery, then prove the parent's retry actually completes.
+  Pending or unproven original settlement never permits concurrent native retry.
+- Exercise the complete initial transfer matrix: constructor refusal before
+  transfer; constructor success followed by GM product/dependent-module failure;
+  parent close during initial preparation; and cancellation after runtime success
+  but before GM root publication. Exactly one actual owner retains/releases the
+  initial instance; no cancelled/closed root escapes and no borrowed owner closes.
 - Establish whether current public snapshots suffice. If a current ownership
   fact is missing, derive it once from the existing coordinator rule; do not
-  reconstruct private policy in the integration adapter.
+  reconstruct private policy in the integration adapter. It means a closed
+  runtime with all preparation/publication/work obligations discharged and all
+  actual custody released, including unregistered custody and invalid native
+  report paths. Zero registered generations, elapsed time or closed=true alone
+  cannot establish it. It is advisory native-report evidence, not a proof of
+  physical release or a rewrite of the original close result.
 - Compare two integrations/meaningful profiles and separate common handoff
   obligations from owner-specific state, grants, root selection and behavior.
 - Record the selected option and exact public API/source ownership before C3.
@@ -245,9 +290,15 @@ resources. Shared portable behavior/test cases alone are not independent Hosts.
 
 ### C5 — reusable actual Host laws and bounded operation
 
-- Extract a narrow owner-maintained test surface only after both Hosts exercise
-  the actual laws. Prefer existing Conformance cases/registrars where suitable.
-  Test-only exports remain separate from production; no new test-runner engine.
+- Deliver the owner-maintained optional test subpath live-module-updates/testing
+  after both Hosts exercise the actual laws. Its portable cases/registrar have
+  no Node, DOM, GM, Conformance or test-runner dependency, and no export from the
+  ordinary root. These laws belong to LMU, not the document-reference package.
+- Give the implementation the real feature-owned FMS testing role and curated
+  src/testing.ts entry. Full strict/typed coverage applies; Foundation rejects
+  production/application imports of this testing surface. A clean external
+  consumer imports it without optional peers. GM Conformance continues to own
+  GM descriptor/module checks, not ordinary LMU publication laws.
 - Qualify canonical read/publication consistency, detached snapshots, exact
   original payload and immutable receipts, legitimate unknown, preparation
   custody and truthful lifetime. Driver barriers/fault injection must not supply
@@ -269,6 +320,16 @@ admission or physical release without an independent native witness.
 - Install exact archives into clean external directories, compile public
   declarations and execute useful operations. Retain source, lock, compiler,
   archive and actual input/output identities.
+- Keep the two maintained build scopes explicit. The new root-native staging
+  route uses the already qualified root TS 7.0.2 compiler and an explicit
+  unchanged input inventory from portable core, adapter and Summary. Build and
+  pack in dependency order in an isolated temporary tree; do not import the old
+  child pack helpers or rely on that child's node_modules/.bin/tsc.
+- A second clean consumer contains only its authored files and the packed
+  installations. Record compiler --listFiles inputs: consumer sources plus
+  installed declarations, no checkout aliases. C evidence has its own directory;
+  no mutable output is shared with the parallel old qualification workflow.
+  Preserve the old child graph and accepted CMS authority unchanged.
 - Ordinary installation still has no GM/EF/organization runtime packages.
   Optional integration uses one physical copy of each exact necessary GM peer.
   Verify exports and reject private imports/missing required optional-entry peers.
@@ -319,7 +380,9 @@ stays under full FMS/Foundation coverage. No new dependency just to use a name.
 
 ## Deferred decisions
 
-These do not block the selected finite programme:
+The [existing owner decision register](../decisions/open-decisions.md) remains
+authoritative. The following scoped deferrals do not reopen accepted ADR-0001
+choices or block this finite programme:
 
 - **Streams and long-lived sessions:** alternatives are finite per-event calls,
   explicitly owned bounded sessions, or an executor-specific profile. Choose
