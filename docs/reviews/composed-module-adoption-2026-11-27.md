@@ -67,3 +67,30 @@ declarations. Ordinary no-peer and optional Resources consumers still execute.
 The stock native lint route additionally has a permanent scoped method-signature
 rejection control. Focused local strict, native lint and packed checks passed;
 source-bound CI remains authoritative for the committed checkpoint.
+
+### C2: actual GM-owned lifecycle discriminator
+
+The initial native campaign completed 12/12 tests (one parent and eleven
+scenarios), with strict compiler and stock typed lint checks. Its
+[unaltered observation](../research/evidence/composed-module-20261127/c2-owned-runtime.json)
+records eight positive native scenarios, two deliberately rejected integration
+patterns and one demonstrated gap. Actual GM construction, Resources scopes
+and native file descriptors exercise initial transfer, reentrant parent abort,
+held work/preparation, lost publication acknowledgement and physical cleanup.
+
+After native cleanup succeeds on explicit retry, the immutable original LMU
+close result still says incomplete. A parent cleanup callback that consults only
+that original result cannot discharge its own debt. This proves a need for a
+coordinator-owned current ownership fact; it does not justify a second cleanup
+manager or a public wrapper for the small owner-defined callback.
+
+Independent follow-up found another obligation before that fact may be frozen:
+a terminal publication receipt can become known while the original publish or
+an overlapping lookup still uses borrowed native infrastructure. The two actual
+flight orders need separate discriminators before C3. The logical
+`pendingPublication` flag alone is not physical authority-flight completion.
+C3 remains unimplemented at this checkpoint.
+
+The C1 checkpoint 6b2dee66cf42aaa5c16c9d0eee4bdc5cf1d340cf passed native CI
+45924590958 and repository-admission inspection 45924591299. Admission still
+retains its separate configured-versus-qualified meaning.
