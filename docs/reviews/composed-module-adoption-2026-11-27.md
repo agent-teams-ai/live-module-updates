@@ -48,3 +48,22 @@ unavailable during planning; the plan and corrections were immediately preserved
 through GitHub in Draft PR #11. The executor is restored. The initial plan's
 native regression run 45922316110 passed against abed8ff7; it is baseline
 evidence, not execution of the new programme.
+
+### C1: sound installed operation contracts
+
+The original emitted archive from actual main #9, SHA-256
+58b63bff40c946599a314dc6a9c9339d7a75e4b87276241334ebdfa9423478fa,
+accepted narrower facade, continuation and runtime providers for wider consumers
+under real TS 7.0.2. The [unaltered observation](../research/evidence/composed-module-20261127/c1-unsafe-assignment.json)
+retains that archive/declaration/input identity; this is not a rebuilt old-source
+claim. C1 changes only public interface signatures to readonly function-valued
+properties, preserving executable operation behavior and legitimate provider
+continuation invariance.
+
+The installed campaign passes valid substitutions and checks ten separate
+invalid programs against exact diagnostics at their violating assignments.
+Actual compiler inputs are confined to authored consumer files and installed
+declarations. Ordinary no-peer and optional Resources consumers still execute.
+The stock native lint route additionally has a permanent scoped method-signature
+rejection control. Focused local strict, native lint and packed checks passed;
+source-bound CI remains authoritative for the committed checkpoint.

@@ -38,18 +38,18 @@ export type ForgetResult =
 /** Host coordination only: none of these methods exposes a provider or resource root. */
 export interface GenerationControl<Args extends readonly unknown[], Result> {
   readonly generationId: string;
-  install(entry: ModuleEntry<Args, Result>): InstallationResult;
-  seal(): void;
-  pending(): number;
-  drained(): Promise<void>;
+  readonly install: (entry: ModuleEntry<Args, Result>) => InstallationResult;
+  readonly seal: () => void;
+  readonly pending: () => number;
+  readonly drained: () => Promise<void>;
   /** Observe the original drain/cleanup attempt; calling again never retries it. */
-  close(): Promise<CleanupReport>;
+  readonly close: () => Promise<CleanupReport>;
   /** A separate native attempt, after actual settlement; an abandoned observation cannot authorize retry. */
-  retryCleanup(): Promise<CleanupReport>;
-  originalCleanup(): Promise<CleanupReport> | undefined;
-  snapshot(): GenerationSnapshot;
+  readonly retryCleanup: () => Promise<CleanupReport>;
+  readonly originalCleanup: () => Promise<CleanupReport> | undefined;
+  readonly snapshot: () => GenerationSnapshot;
   /** The coordinator first discharges preparation/publication obligations. */
-  forget(): ForgetResult;
+  readonly forget: () => ForgetResult;
 }
 
 export type GenerationReservation<Args extends readonly unknown[], Result> =

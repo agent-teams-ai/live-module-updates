@@ -104,13 +104,13 @@ export interface UpdateSnapshot {
 
 export interface UpdateHandle {
   readonly attemptId: string;
-  inspect(): UpdateSnapshot;
+  readonly inspect: () => UpdateSnapshot;
   /** The original terminal result; subsequent cleanup retries cannot rewrite it. */
   readonly completion: Promise<UpdateSnapshot>;
   /** Consults the authority for this exact request, never creates a replacement attempt. */
-  reconcile(): Promise<UpdateSnapshot>;
+  readonly reconcile: () => Promise<UpdateSnapshot>;
   /** A separate action after a settled incomplete original cleanup. */
-  retryCleanup(): Promise<UpdateSnapshot>;
+  readonly retryCleanup: () => Promise<UpdateSnapshot>;
 }
 
 export type StartRefusal =

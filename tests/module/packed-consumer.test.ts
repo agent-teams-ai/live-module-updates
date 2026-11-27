@@ -3,7 +3,39 @@ import { cp, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/p
 import { tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import test from "node:test";
+import { contractVarianceRejections } from "./contract-variance-cases.ts";
 import { compiler, compilerVersion, digest, evidence, object, pack, root, run } from "./pack-operation.ts";
+
+async function qualifyContractVariance(consumer: string) {
+  const filenames: string[] = [];
+  for (const specification of contractVarianceRejections) {
+    const filename = specification.name + ".ts";
+    filenames.push(filename);
+    await writeFile(join(consumer, filename), specification.source);
+  }
+  await writeFile(join(consumer, "tsconfig.variance.json"), JSON.stringify({
+    extends: "./tsconfig.json", compilerOptions: { noEmit: true }, include: filenames,
+  }));
+  const output = run(compiler, ["-p", "tsconfig.variance.json", "--pretty", "false"], consumer, 1);
+  const diagnostics = [...output.matchAll(/^([^\r\n]+\.ts)\((\d+),\d+\): error (TS\d+):/gmu)]
+    .map(match => ({ filename: match[1], line: Number(match[2]), code: match[3] }));
+  assert.equal([...output.matchAll(/error TS\d+:/gu)].length, diagnostics.length, "unmatched compiler diagnostic: " + output);
+  assert.deepEqual(diagnostics.toSorted((a, b) => String(a.filename).localeCompare(String(b.filename))),
+    contractVarianceRejections.map(specification => ({ filename: specification.name + ".ts", line: specification.line, code: specification.code }))
+      .toSorted((a, b) => a.filename.localeCompare(b.filename)), output);
+  const semantic: unknown = JSON.parse(run(process.execPath, ["--input-type=module", "-e", [
+    'import { describeOutcome } from "./out/contract-variance-cases.js";',
+    'console.log(JSON.stringify([',
+    'describeOutcome({ status: "returned", generationId: "a", value: { status: "saved", revision: 7 } }),',
+    'describeOutcome({ status: "returned", generationId: "a", value: { status: "denied", reason: "read-only" } }),',
+    'describeOutcome({ status: "refused", reason: "boundary-closed" }),',
+    'describeOutcome({ status: "failed", generationId: "a", cause: new Error("provider failure") })',
+    ']));',
+  ].join("\n")], consumer));
+  assert.deepEqual(semantic, ["saved:7", "denied:read-only", "admission-refused:boundary-closed", "provider-failed"]);
+  await writeFile(join(evidence, "contract-variance-diagnostics.txt"), output);
+  return { positive: "passed", rejecting: diagnostics, semantic };
+}
 
 await test("packed ordinary root and optional Resources entry work in separate artifact-only installations", async () => {
   const actualCompiler = compilerVersion();
@@ -43,18 +75,28 @@ await test("packed ordinary root and optional Resources entry work in separate a
       const source = await readFile(join(root, "tests/module", filename), "utf8");
       assert.equal(source.split(imported).length, 2, "consumer needs exactly one deliberate public entry relink");
       await writeFile(join(consumer, filename), source.replace(imported, specifier));
+      const sources = [filename];
+      if (kind === "ordinary") {
+        const contracts = await readFile(join(root, "tests/module/contract-variance-cases.ts"), "utf8");
+        assert.equal(contracts.split(imported).length, 2, "contract cases need exactly one public entry relink");
+        await writeFile(join(consumer, "contract-variance-cases.ts"), contracts.replace(imported, specifier));
+        sources.push("contract-variance-cases.ts");
+      }
       await writeFile(join(consumer, "tsconfig.json"), JSON.stringify({
         compilerOptions: { target: "ES2024", module: "NodeNext", moduleResolution: "NodeNext",
           lib: kind === "ordinary" ? ["ES2024"] : ["ES2024", "ESNext.Disposable", "DOM"], types: [],
           strict: true, noUncheckedIndexedAccess: true, exactOptionalPropertyTypes: true, verbatimModuleSyntax: true,
           erasableSyntaxOnly: true, skipLibCheck: false, declaration: true, outDir: "out" },
-        include: [filename],
+        include: sources,
       }));
-      run(compiler, ["-p", "tsconfig.json"], consumer);
+      const listed = run(compiler, ["-p", "tsconfig.json", "--listFiles"], consumer).split(/\r?\n/u).filter(path => path.endsWith(".ts"));
+      assert.ok(listed.includes(join(installed, "dist", kind === "ordinary" ? "index.d.ts" : "resources.d.ts")), "compiler did not consume the installed public declarations");
+      assert.deepEqual(listed.filter(path => !path.endsWith(".d.ts")).toSorted(), sources.map(path => join(consumer, path)).toSorted(), "compiler consumed implementation source outside the isolated consumer");
       const functionName = kind === "ordinary" ? "runOrdinaryConsumer" : "runResourcesConsumer";
       await writeFile(join(consumer, "run.mjs"), 'import { ' + functionName + ' } from "./out/' + filename.replace(".ts", ".js") + '";\nconsole.log(JSON.stringify(await ' + functionName + '()));\n');
       observations[kind] = JSON.parse(run(process.execPath, ["run.mjs"], consumer));
       if (kind === "ordinary") {
+        observations["contracts"] = await qualifyContractVariance(consumer);
         await writeFile(join(consumer, "invalid.ts"), 'import type { UpdateRuntime } from "live-module-updates";\ndeclare const runtime: UpdateRuntime<readonly [number], number>;\nruntime.invoke("wrong");\n');
         await writeFile(join(consumer, "tsconfig.invalid.json"), JSON.stringify({ extends: "./tsconfig.json", compilerOptions: { noEmit: true }, include: ["invalid.ts"] }));
         const negative = run(compiler, ["-p", "tsconfig.invalid.json"], consumer, 1);

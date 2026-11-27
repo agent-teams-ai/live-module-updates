@@ -14,9 +14,9 @@ export interface PreparedGeneration<Args extends readonly unknown[], Result> {
 
 export interface PreparationCustody<Args extends readonly unknown[], Result> {
   /** Every acquisition and evaluation must be covered by this original owner. */
-  prepare(): PreparedGeneration<Args, Result> | PromiseLike<PreparedGeneration<Args, Result>>;
+  readonly prepare: () => PreparedGeneration<Args, Result> | PromiseLike<PreparedGeneration<Args, Result>>;
   /** Actual native close. LMU preserves the first flight and makes retries explicit. */
-  close(): Promise<CleanupReport>;
+  readonly close: () => Promise<CleanupReport>;
 }
 
 export interface PreparationPort<Args extends readonly unknown[], Result> {
