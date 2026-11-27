@@ -212,9 +212,10 @@ ordinary replacement. Qualify retained admitted work, blocked stale effects,
 cleanup and recovery with a negative control before claiming the stronger
 guarantee. Do not implement another updater in a consumer.
 
-Keep `update-operation` cohesive while its phases share a single update
-transaction/operation owner. Extract internal responsibilities as complexity
-grows; promote an independent feature or package only when a separate
+Keep `update-operation` cohesive while its phases share one logical
+operation owner; this does not imply one ACID transaction across effects.
+Extract internal responsibilities as complexity grows; promote an independent
+feature or package only when a separate
 capability, invariant, dependency/release or isolation boundary requires it.
 Do not split phases into competing authorities merely because each has a
 distinct file or state. Existing FMS/CMS and qualification gates remain in
