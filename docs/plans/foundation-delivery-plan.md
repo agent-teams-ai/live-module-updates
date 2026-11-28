@@ -15,6 +15,13 @@ design now. A supported runtime, security boundary or continuity guarantee still
 requires its own executed qualification. No public API, production package,
 consumer pin migration or product admission follows from this plan.
 
+**IMPORTANT delivery follow-through:** [competitive extension and live-evolution implementation plan](competitive-extension-implementation-plan.md)
+is the single coordination plan for the installed trusted journey and five
+stronger follow-ups. Its [early decisions](competitive-extension-implementation-plan.md#2-critical-early-architecture-todos),
+owner-specific implementation sequence, estimates and risk-based acceptance
+refine F3–F5 and later adoption without creating a second update engine or
+expanding the current B/C/D PR scopes. Apply only the selected profile.
+
 ## Outcome and working rules
 
 Give many applications a reusable foundation without making each application

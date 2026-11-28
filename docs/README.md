@@ -6,6 +6,12 @@ release, stable plugin SDK or product admission is established by this index.
 
 ## Choose a task
 
+**IMPORTANT implementation TODO:** the [competitive extension and live-evolution implementation plan](plans/competitive-extension-implementation-plan.md)
+coordinates the installed plugin journey and later recyclable process, agent
+handoff, isolation, management UX and fleet seams. Read its critical early
+architecture decisions before the corresponding dependent contract. Existing
+owner gates remain authoritative; this is the current planning stream.
+
 | Your task | Read in this order | Concrete outcome |
 | --- | --- | --- |
 | Qualify the foundation before applications exist | [Current status](status.md), [foundation guide](architecture/application-foundation.md), [qualification matrix](research/foundation-qualification-matrix.md) | Select representative behavior, independent test Hosts and evidence for the claimed profile |
