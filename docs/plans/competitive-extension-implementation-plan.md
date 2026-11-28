@@ -1,8 +1,8 @@
 # Competitive extension and live-evolution implementation plan
 
 **Priority: IMPORTANT — owner-requested implementation TODO.**
-Version 0, 2026-11-28. Detailed proposal for the seven subsequent,
-owner-triggered substantive review rounds; completed review rounds: **0/7**.
+Version 1, 2026-11-28. Detailed proposal; completed substantive,
+owner-triggered review rounds: **1/7** (see section 12).
 This is the single coordination plan for the competitive extension journey.
 It is not an accepted ADR, package admission, product rollout, stable SPI,
 completed E2E or authorization to implement every optional profile.
@@ -211,6 +211,118 @@ without inventing a consumer release or weakening a dependency.
    cleanup. If publication succeeds but useful adoption fails, report
    active-but-degraded/unknown and use a fresh authorized compatible return
    or fix-forward. Never declare rollback of an external effect.
+
+#### C.1 — source-checked affected-set implementation, not a second compiler
+
+Round 1 source review: the actual public [GM wire model](https://github.com/agent-teams-ai/get-modular/blob/e5bed69b096949346b9c2ffeed24850f86abd406/packages/core/src/features/authoring/wire-types.ts#L32-L72)
+contains roots, selections keyed by module ID, implementation IDs, slot bindings
+with **ordered** provider implementation IDs, exact compatibility and dependency
+order. The [plan emitter](https://github.com/agent-teams-ai/get-modular/blob/e5bed69b096949346b9c2ffeed24850f86abd406/packages/core/src/features/plan-output/factory.ts)
+hashes this inert plan, not executable bytes, mutable state or runtime owners.
+The [Assembly run](https://github.com/agent-teams-ai/get-modular/blob/e5bed69b096949346b9c2ffeed24850f86abd406/packages/assembly/src/features/construction/run.ts)
+constructs its selected entries for the run and treats declared inputs as
+borrowed. It is not a partially mutable live container. The actual
+[LMU model](https://github.com/agent-teams-ai/live-module-updates/blob/da34ba61c0998acf526465ba047b4f5eab44d85b/src/features/update-operation/application/models.ts#L4-L34)
+and [invocation boundary](https://github.com/agent-teams-ai/live-module-updates/blob/da34ba61c0998acf526465ba047b4f5eab44d85b/src/features/update-operation/application/invocation.ts)
+own a **single Host-authoritative domain/head** and reserve the selected
+generation without suspending. They do not provide multi-domain atomic
+publication. Do not extend either library on the strength of its name alone.
+
+**Recommended first implementation:** replace a complete, already coherent
+update domain, with explicit stable borrowed inputs, then qualify selective
+replacement across independently composed domains. Do not construct an
+incremental factory executor that assembles arbitrary subgraphs of a prepared
+GM run. Ordinary immutable assembly remains the only construction authority.
+Move an independently reusable capability into an explicit Host-owned
+borrowed-input boundary only when a real lifetime or update need warrants it.
+Changing or removing that shared provider still requires considering every
+affected consumer. The code path must not dispose the borrowed provider.
+
+Use a small inert Host-local projection derived from existing owner records
+and admitted plan facts, not another persisted service registry:
+
+| Input to the affected-set calculation | Authoritative source / matching rule |
+| --- | --- |
+| Old and candidate admitted plan, exact digest and selected roots | GM compiler output; identify a node within its actual composition occurrence, resolve implementation IDs through its selected module map. |
+| Actual executable/implementation revision and applicable state compatibility | EF/Host artifact and product contract owner; compare exact selected facts, not display names or equal GM digest. |
+| Actual instance/custody and ownership boundary | Host's existing constructed owner and declared borrowed-input map; bind the physical owner/instance to its real scope. Identical module IDs in two independent installations are not one instance. |
+| Active and retained consumer census | Host's admitted routing/retirement owners, including other affected active roots/domains and old still-held generations; no discovery scan of arbitrary process objects. |
+| Expected revision and relevant condition basis | Existing authority owner's opaque head/basis (not a new global version or permission token). Retain the exact admitted impact inputs; compare them at apply. |
+
+For the first bounded selected profile:
+
+1. Capture complete old and proposed admitted input facts under the existing
+   owner revision. Resolve roots and selected implementations to **scoped
+   logical occurrences** before matching old/new graphs. Reject incomplete,
+   ambiguous or stale facts; a plugin ID alone does not locate one live owner.
+   Use the Host's already admitted set, not a fleet-wide census.
+2. Index the old and new bindings by scoped consumer occurrence and slot,
+   resolve ordered provider occurrences and compare compatibility tokens.
+   Seed added/removed/rebound/changed implementations, artifact revisions and
+   affected state/resource ownership units. A changed ordered-many binding
+   is meaningful even if the provider set is equal. A new artifact at the
+   same implementation ID and plan digest is still a changed candidate.
+3. Follow provider-to-consumer edges of the union of old/new resolved graphs
+   and include unsplittable ownership units. Use bounded visited sets and
+   worklists for a fixed point; each indexed occurrence, edge and ownership
+   membership is processed at most a constant number of times. This is
+   linear in the admitted input facts, not a proof of global fleet cost.
+   Reverse edges identify **affected consumers**, not resources to dispose.
+   Retained old generations contribute holds; they are not new routes.
+4. Map affected occurrences to existing update domains. If one domain covers
+   them, reuse one LMU operation and the actual complete assembly. If
+   several already independent domains are affected, **do not** pretend
+   multiple LMU calls form an atomic commit or merge their active heads.
+   Refuse a promised atomic selective change across those domains unless an
+   existing qualified common ownership boundary actually supports it. A
+   compatible, separately selected ordered migration may be designed by
+   the product owner; no distributed coordinator in this slice.
+5. Return an inert proposed scope and bounded refusal reason; keep disposal
+   and actual execution with their original owners. At apply, revalidate
+   authoritative head/basis, selected artifact/contract and all relevant
+   sharing/custody inputs, including new admissions that change the
+   retirement budget. If stale, recompute/reconfirm. Do not lock unrelated
+   domains or reserve a physical resource merely to show a preview.
+6. Reuse the existing compatibility/preparation/publication ports to install
+   the new **whole selected domain**. Keep unaffected domains on their
+   existing owner and invocation facade. Retain exact old held work and
+   resources; do not call another root's cleanup. Measure actual original
+   settlement and useful successor behavior independently.
+
+Design stop conditions: no source change in GM for these existing public
+facts; no mandatory GM dependency in LMU's ordinary root; no deep/private
+imports, arbitrary object graph traversal, runtime-global lookup table,
+per-module live registry, cross-domain transaction engine or automatic
+split of a live shared mutable owner. If a required scope/owner fact is
+missing, first supply it via the current Host contract. Ask the relevant
+owner to review a public successor only if a concrete negative case cannot
+be expressed with existing APIs. No automatic re-partitioning of active
+domains; select boundaries before construction.
+
+C budget remains **650–1,300 P / 900–1,800 T** within §10, not additional
+code: approximately 150–300 P for projection/index/diff, 200–400 P for the
+selected Host/domain integration and shared-custody checks, 150–300 P for
+preflight and exact revalidation, 150–300 P for the remaining narrowly
+necessary adapters/refusals. These are overlapping implementation risks
+to verify against actual code; the row partitions estimates, not mandatory
+new packages or file sizes. If the chosen initial profile uses one fixed
+domain with no dynamic impact surface, reduce C to the needed subset.
+
+**Minimal distinct tests (extend the existing composed reference):**
+- A compact deterministic plan-fact table: changed artifact with equal GM
+  digest, changed ordered-many binding, removed provider and scope separation
+  for identical module IDs. Reject an omitted dependent and incomplete
+  borrowed-owner census with independent expected affected roots.
+- One joined native scenario: roots C and D depend transitively/directly on
+  A, another root has an unrelated owner, and an unchanged borrowed owner
+  is held by retained work. Update A, prove both affected roots are covered,
+  unrelated useful work continues and held borrowed resource remains
+  available. Fail if any original owner's disposal is misattributed.
+- Reuse B/F's actual stale-basis race and add the distinct late affected
+  membership/ownership change or multiple-domain refusal to that same
+  scenario. No duplicate CRUD, graph or cleanup suite per consumer.
+  If a cross-domain compatible migration is later selected, it needs its
+  own partial-apply and recovery evidence, not this single-domain proof.
 
 ### D — explicit stream lifetime
 
@@ -658,7 +770,7 @@ support, downtime or old-client windows. Final publication/completion is
 after the seven actual owner-triggered revisions and applicable review/CI.
 
 Proposed review lenses (not completed work and not a fixed artificial checklist):
-1. Source/owner reuse and precise dependency/placement.
+1. Source/owner reuse and precise dependency/placement (completed in v1).
 2. Durable state, authority, crash boundaries and idempotency.
 3. Lifetime, streams, recycling, concurrent ownership and old/new bindings.
 4. Agent handoff, offered-tool contracts and real provider limitations.
@@ -670,7 +782,8 @@ Proposed review lenses (not completed work and not a fixed artificial checklist)
 | Revision | Status | Meaningful evidence and change |
 | --- | --- | --- |
 | v0 | Initial proposal, 0/7 | Existing owner sources, five follow-up slices, early architecture TODOs, estimates and scope-limited acceptance. No runtime code or new test execution claimed. |
-| v1–v7 | Await actual new owner turns | Record real changes and dispositions here only after each respective round. |
+| v1 | Completed, 1/7 | First new owner continuation. Reviewed exact GM public plan/emitter/Assembly run and LMU single-domain invocation/authority source. Fixed false assumptions about equal graph digests, partial live assembly, unscoped identities, borrowed owner disposal and cross-domain atomic update; added bounded implementation sequence, refusal/stop criteria, C estimate breakdown and three nonduplicated test groups. No new production code or owner API adopted. |
+| v2–v7 | Await actual new owner turns | Record real changes and dispositions only after each respective round. |
 
 The goal is a useful, smaller, safer implementation with proven behavior,
 not seven rounds of adding text. Delete unnecessary layers or tests when
