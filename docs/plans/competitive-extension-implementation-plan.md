@@ -1,8 +1,10 @@
 # Competitive extension and live-evolution implementation plan
 
 **Priority: IMPORTANT — owner-requested implementation TODO.**
-Version 1, 2026-11-28. Detailed proposal; completed substantive,
-owner-triggered review rounds: **1/7** (see section 12).
+Version 2, 2026-11-28. Detailed proposal; completed substantive,
+owner-triggered review rounds: **2/7** (see section 12). The owner now
+requires actual implementation and end-to-end delivery after the seven
+planning rounds; publishing this plan alone does not complete that goal.
 This is the single coordination plan for the competitive extension journey.
 It is not an accepted ADR, package admission, product rollout, stable SPI,
 completed E2E or authorization to implement every optional profile.
@@ -181,6 +183,211 @@ without inventing a consumer release or weakening a dependency.
    artifact/binding/native ownership is reconstructed. Ordinary uninstall
    preserves user data; physical asset disposal waits for actual holders.
    A database snapshot alone does not establish safe physical ownership.
+
+#### B.1 — durable operation contract and linearization (round 2)
+
+The first durable Host is a selected **single serving owner per coherent
+domain** with an actual exclusion/fencing boundary, using PostgreSQL as the
+owner's existing canonical transactional store. Do not assume a process
+mutex, TTL, cached head, or one elected controller establishes this property.
+The supported finite cooperative LMU profile stays independent and unchanged.
+The stricter durable/multiple-host guarantees need their own real native proof.
+
+Source-checked constraints:
+
+- [LMU startUpdate/prepare/publish/reconcile at da34ba61](https://github.com/agent-teams-ai/live-module-updates/blob/da34ba61c0998acf526465ba047b4f5eab44d85b/src/features/update-operation/application/update-operation.ts):
+  the synchronous part of startUpdate registers an in-memory attempt, and
+  preparation can start before the caller receives its handle. Its local
+  replay table is not a durable journal. Persist accepted durable intent
+  **before** calling startUpdate, and bind the actual baseline to that intent.
+- [Actual LMU authority port](https://github.com/agent-teams-ai/live-module-updates/blob/da34ba61c0998acf526465ba047b4f5eab44d85b/src/features/update-operation/application/ports/authority.ts):
+  read is synchronous, inert and detached; publish conditionally mutates the
+  same head and binds the original receipt; lookup resolves the original
+  request. There is no callback for a distributed read transaction or a
+  second independently mutable local head. A definite refusal means that
+  exact request cannot subsequently commit.
+- [Existing authority laws](https://github.com/agent-teams-ai/live-module-updates/blob/da34ba61c0998acf526465ba047b4f5eab44d85b/src/features/update-operation/testing/authority-laws.ts)
+  already check stale head/basis, exact replay, changed-payload conflict,
+  lost acknowledgement and immutable historical receipt. Run the existing
+  laws against the new actual Host adapter; add only the process-loss and
+  native visibility joins those tests do not establish.
+- [EF accepted ADR-0011](https://github.com/agent-teams-ai/extension-foundation/blob/65233d072c7010938b1d641ff70b1341769d76fb/docs/decisions/0011-extension-admission-custody-and-retirement-closure.md#publication-and-lifecycle-fence-hierarchy)
+  requires scope, affected artifact and source fences in canonical order;
+  closure, pin promotion, head, route eligibility, fence and grant
+  activation commit in one owner scope. Remote revocation and router
+  convergence have distinct enforcement semantics; no lock is held across
+  provider work or drain. Do not introduce another fence hierarchy.
+- [Orchestrator accepted ADR-0095](https://github.com/agent-teams-ai/agent-teams-orchestrator/blob/5eab6575ff11e981c63ea5061f1a82306c4cffbd/docs/decisions/0095-extension-safety-and-ownership-invariants.md#decision)
+  requires pre-effect intent, no extension code in a Unit of Work and no
+  blind retry. [Runtime S2](https://github.com/agent-teams-ai/agent-runtime/blob/e8c12c5b3d659f6530d6e17c9242c180f3410ffe/docs/architecture/agent-runtime-architecture-program-s2-operations-storage.md)
+  separately owns native-attempt correlation, storage and recovery.
+  Reuse those owner capabilities when applicable; do not mirror native
+  inventory or introduce a new product operation journal in LMU.
+
+##### Durable records: extend existing owner contracts only
+
+The following are logical facts to map onto existing owner tables/ports,
+not a proposed mandatory physical schema, shared package or duplicate store.
+
+| Durable fact and owner | Minimum binding and rule |
+| --- | --- |
+| Installation/source and graph publication (EF/actual product) | Stable scope/source/installation identity, exact artifact and contract, immutable closure, canonical head and revision, staged/active reference pins, applicable grants/fences. Use the accepted EF source/parent-artifact/graph hierarchy. |
+| Management intent (Host or existing durable product operation owner) | Unique scoped attempt ID, closed request fingerprint, actor/scope, expected head/basis, candidate generation/closure, immutable affected-set/evidence references, selected profile. Store before first candidate preparation/evaluation. Do not copy grants or credentials into a generic intent payload. |
+| Publication result (canonical publication owner) | Exact original request binding, committed/rejected result, previous head and resulting head where committed. Same identity/different payload is a conflict; later revisions must not overwrite a prior receipt. Use the same transaction as actual head mutation. |
+| Native acquisition, effect and cleanup (actual receiver/executor/custodian) | Original operation/correlation ID allocated before dispatch; exact target/generation and incarnation; effect-specific accepted-pending, confirmed, failed, uncertain or reconciled outcome. Existing accepted native journals remain authoritative. |
+| Local serving projection and observation (Host) | Exact reconstructed routing generation, local owner incarnation, authority freshness/fence and whether admission is usable. Not a second persistent active-head writer. Useful adoption, pending cleanup and degraded/unknown visibility are separate from durable publication. |
+
+Keep identity namespaces distinct: a user's request, management attempt,
+durable effect, module generation, and realm/native incarnation are not
+interchangeable. Reuse the current closed request fields and canonical
+owner fingerprint rules rather than a global object serializer. Where a
+logical generation is reconstructed after restart, only the new admitted
+physical incarnation may serve it. Reconstructing that same canonical head
+does not recycle an old attempt or retired generation ID, and it cannot
+silently resurrect an old grant. A newly published rollback has fresh
+authority/generation, even when returning to identical artifact bytes.
+
+##### Ordered durable Host operation
+
+1. **Accept or replay before effects.** Authorize the real management
+   request and derive its scope. Persist its immutable intent/basis under
+   the owner transaction. Resolve same-ID replay from the original
+   durable outcome or pending record before allowing any new preparation.
+   Changed-payload reuse refuses. If acceptance commit is unknown, do not
+   call startUpdate. Reconcile the original ID. For the first profile,
+   allow at most one unresolved management publication per domain; other
+   domains and reserved control/revocation remain independent.
+2. **Capture the actual preparation owner.** With the exact admitted
+   request available, compare the current synchronous authority snapshot
+   to its recorded baseline immediately before startUpdate. If the basis
+   changed, refuse that execution under the durable owner; re-plan only as
+   a new authorized operation. Do not fabricate an LMU receipt for a call
+   that never reached publication. In the selected PreparationPort, create
+   the inert attempt owner synchronously; persist the actual native
+   acquisition/effect identity and staged retention before any external
+   preparation, process creation or evaluation it can trigger. No plugin
+   code, network, provider call or wait for cleanup inside a transaction.
+3. **Close affected new admission before durable switch.** The Host's
+   serving-owner/exclusion contract must establish that only this current
+   owner may admit for this domain. In the selected adapter, close the
+   bounded local admission path synchronously before the publication
+   transaction can change the head. While closed, read must not return a
+   stale head as authoritative; use the current authority-unavailable
+   refusal behavior rather than invent an empty or new head. Retained
+   already admitted work follows its actual generation and receiver policy.
+   Do not disable unrelated domains, or obstruct cancellation/revocation.
+4. **Commit one canonical transaction.** Check the exact durable intent,
+   expected head, all relevant basis/evidence, serving-owner fence and
+   actual affected-member census. Acquire only the existing applicable
+   scope/artifact/source fences in canonical order for this bounded
+   transaction; revalidate affected closure and staged holds. Atomically
+   commit the head, route/fence/grant/pin changes and immutable original
+   publication receipt. A definite rejected/absent outcome requires proof
+   that this exact original attempt cannot later commit. Never derive it
+   from a client timeout or a changed current head alone. Release
+   transactional locks before native work or reconciliation.
+5. **Converge native visibility before reporting usable publication.**
+   A durable commit is not a local invocation-ready projection. Install or
+   reconcile the exact current canonical generation under the same valid
+   serving-owner/authority fence, using the candidate registered by the
+   existing LMU preparation. Keep admission closed when ownership or
+   visibility is uncertain. A response/lookup exposed to the current
+   LMU operation must satisfy its existing same-head authority laws;
+   reconcile the projection before returning that committed receipt.
+   Preserve the durable receipt even if the local adapter cannot yet
+   satisfy its live protocol. Report the known durable commit and
+   unavailable serving status through distinct owner observations;
+   transport/operation uncertainty is not a new durable rejection.
+   Do not silently change the meaning of LMU's unknown/known results.
+   A historical receipt must never rewind a newer native head. If the
+   current adapter cannot preserve these laws, retain the closed domain
+   and qualify an explicit successor contract instead of lying to LMU.
+   Only reopen when the actual current head, fence, receiver policy and
+   installed binding permit it. If a revoke wins after commit, do not
+   claim useful B or restore an obsolete grant just to make the adoption
+   probe succeed.
+6. **Drain and reconcile outside the transaction.** On committed
+   publication, the existing LMU operation coordinates original native
+   predecessor retirement; on proven rejected publication, it retires
+   the candidate. On unknown publication retain both relevant obligations.
+   Call the exact original effect/cleanup owner; independently observe
+   success, authoritative absence where applicable, pending or debt. The
+   owner persists the actual disposition. Never use timeout, local
+   generation removal, process exit or receipt existence as proof that
+   an external effect settled. Do not delete companion bytes while
+   retained work, staged pins or actual state attachments still hold them.
+7. **Recover after process loss.** Boot with ingress closed. Reconcile the
+   actual prior native incarnation and outstanding intent/effects using
+   their stable keys and existing native custody contract. Read the
+   canonical current head and reconstruct its exact verified closure;
+   only rerun preparation/evaluation under a supported idempotent or
+   explicitly restart-safe construction contract. Do not deserialize a
+   vanished JavaScript promise or automatically rerun startUpdate for
+   a previously accepted unknown attempt. If custody/exclusion or
+   compatible reconstruction is unproved, preserve debt and refuse
+   activation for that domain. Only authoritative reconciliation can
+   permit a fresh attempt. The existing process cannot reacquire live
+   authority through a late reply.
+
+Use finite applicable decision/membership leases, freshness and receiver
+fences exactly as ADR-0011 requires; a local barrier by itself does not
+provide remote revocation or multi-serving-owner safety. Emergency
+revocation retains a bounded control path even while management publication
+is pending. A permanently held SQL/advisory lock across evaluation or drain,
+an eventually consistent cache treated as canonical, and a second
+distributed coordinator are rejected.
+
+##### Recovery cases and alternatives
+
+| Injected failure at actual owner boundary | Required durable and native observation |
+| --- | --- |
+| Intent commit response lost, before candidate preparation | Original intent lookup; no extra acquisition, no fresh attempt to escape uncertainty. |
+| Candidate acquired or preparation fails, before head commit | Previous valid head remains; original staged custody survives until actual cleanup/reconciliation. |
+| Canonical commit succeeds, process/reply lost before local projection | Durable new head and original receipt remain; no stale old admission; successor reconstructs exact authorized generation or stays unavailable. |
+| Projection installed before original receipt reaches caller | Original immutable receipt available through lookup. No new publication, no predecessor/candidate disposed solely due to missing acknowledgement. |
+| Effect accepted before acknowledgement or cleanup fails | Original effect-specific state and actual held owner retained; no blind repeat or premature asset disposal. |
+| Competing publish, stale basis, retire/attach or revoke | One canonical winner; rejected stale facts and late former owner; current revoke enforcement, no resurrection of unrelated or retired source. |
+
+Reuse one native PostgreSQL/process fixture with independent DB/receiver
+observations and actual crash barriers, not six separate full-stack systems.
+Existing authority conformance covers ordinary replay/conflict and equality
+laws; add a small distinct transaction/process-loss matrix and a real
+interleaving of publication/visibility/admission. Verify that a pending
+transaction can still commit before treating a missing receipt as absence.
+For receipts and assets, declare the actual retry/restore/replay horizon and
+terminal non-resurrection rule before pruning. Unknown obligations are not
+evictable; use bounded admission or explicit reconciliation at capacity.
+
+| First durable profile option | R/U/C | Incremental P/T | Decision |
+| --- | --- | --- | --- |
+| Single exclusively fenced serving owner per domain, existing owner transaction and fail-closed visibility barrier | 9/8/6 | 1,200–2,400 / 1,700–3,200 (B; includes visibility/recovery join) | Recommended investigation and first bounded target. Requires actual exclusion/fence proof. |
+| Multi-serving-owner authoritative asynchronous selection/reservation | 8/5/9 | 2,000–4,500 / 3,000–6,000 for a narrowly selected alternative, not added to B | Defer until an actual concurrent-host need; requires explicit successor API, real admission and receiver proof. |
+| In-memory mirror with eventual refresh and DB CAS only | 4/9/3 | 150–400 / 200–500 for plumbing, not a valid durable profile | Reject. Cannot satisfy current authoritative read/admission or revocation contract. |
+| Lock held during remote effects or drain | 4/8/7 | No responsible implementation estimate for the rejected guarantee | Reject, conflicts with accepted ownership/transaction floor and creates resource/availability risk. |
+
+Round 2 executed a small **abstract** single-domain interleaving model (no
+actual database, process, lease, external revocation or implementation).
+With commit, local installation, reply, call and lookup, 28/40 valid
+unguarded event orders violated stale-admission or receipt-visibility
+conditions. With admission closed before commit, guarded lookup and
+installation/open ordered before reply, 0/42 modeled orders violated those
+conditions. This is a design discriminator for the selected barrier, not
+native E2E, correctness of a PostgreSQL adapter, or a proof of crash/fence
+behavior. An illustrative lost-ACK replay with a fresh ID duplicated the
+effect; atomic owner receipt observation did not. Unknown external effects
+still require their actual receiver evidence. Do not add this toy model as
+another production test harness.
+
+B budget remains the earlier range. Allocate approximately 250–500 P to
+closed owner facts/mapping, 350–700 P to atomic intent/publication/receipt
+adapter, 350–700 P to native visibility/cold recovery and 250–500 P to
+installation/grant/retirement joins. These partition one B estimate; reduce
+where existing owner code suffices. C keeps its affected-set/preflight work;
+F owns only the uncovered joined native journey, not duplicate B tests.
+SQL/config remain the §10 separate allowance. If actual native exclusion,
+durable management owner or restart-safe acquisition is missing, identify
+that owning prerequisite and re-estimate; do not implement an imitation
+inside LMU. R/U/C and LOC are conditional estimates, not achieved guarantees.
 
 ### C — affected cohort, preflight and publication
 
@@ -766,12 +973,14 @@ owner, evidence, estimate/scope delta and remaining uncertainty. A repeated
 status check or cosmetic edit does not count. If a choice requires product
 policy, present alternatives with R/U/C, P/T, effort and rejecting evidence;
 continue independent plan improvements. Do not silently select untrusted
-support, downtime or old-client windows. Final publication/completion is
-after the seven actual owner-triggered revisions and applicable review/CI.
+support, downtime or old-client windows. After the seven actual owner-triggered
+revisions, review and publish the consolidated plan through its normal gates.
+**The user's updated goal then continues into implementation and E2E delivery.**
+Do not mark the overall goal complete at the end of the seven planning rounds.
 
 Proposed review lenses (not completed work and not a fixed artificial checklist):
 1. Source/owner reuse and precise dependency/placement (completed in v1).
-2. Durable state, authority, crash boundaries and idempotency.
+2. Durable state, authority, crash boundaries and idempotency (completed in v2).
 3. Lifetime, streams, recycling, concurrent ownership and old/new bindings.
 4. Agent handoff, offered-tool contracts and real provider limitations.
 5. Trust, artifact/receiver boundaries, native containment and revocation.
@@ -783,7 +992,37 @@ Proposed review lenses (not completed work and not a fixed artificial checklist)
 | --- | --- | --- |
 | v0 | Initial proposal, 0/7 | Existing owner sources, five follow-up slices, early architecture TODOs, estimates and scope-limited acceptance. No runtime code or new test execution claimed. |
 | v1 | Completed, 1/7 | First new owner continuation. Reviewed exact GM public plan/emitter/Assembly run and LMU single-domain invocation/authority source. Fixed false assumptions about equal graph digests, partial live assembly, unscoped identities, borrowed owner disposal and cross-domain atomic update; added bounded implementation sequence, refusal/stop criteria, C estimate breakdown and three nonduplicated test groups. No new production code or owner API adopted. |
-| v2–v7 | Await actual new owner turns | Record real changes and dispositions only after each respective round. |
+| v2 | Completed, 2/7 | Reviewed actual LMU synchronous admission, preparation and original authority receipt laws, EF ADR-0011, Orchestrator ADR-0095 and Runtime S2. Fixed intent ordering before startUpdate, specified owner-scoped durable facts, visibility barrier, recovery/revocation and exact attempt/physical custody, compared durable alternatives and executed the bounded abstract visibility discriminator. B estimate retained; no native E2E or new public contract claimed. Owner extended the overall goal to actual end-to-end implementation after round 7. |
+| v3–v7 | Await actual new owner turns | Record real changes and dispositions only after each respective round. |
+
+### Implementation continuation and completion ledger
+
+After v7, continue the actual authorized work rather than stop at a merged
+document. Re-read selected owner decisions and live source/PR state.
+Coordinate with ongoing EF #70, LMU #12 and required admission/toolchain
+owners; reuse their completed work without expanding unrelated scope or
+starting parallel competing implementations. Deliver A–F and each of the
+five required follow-ups G/H1/H2/I/J through the selected bounded profile,
+plus C0–C3 and applicable product seams of §9, in the established owners.
+Choose a real supported provider for H2 and a real enforcement target for I;
+conditional alternatives and out-of-scope profiles are not requirements to
+implement every incompatible option. If a choice still changes a product
+promise or no supported mechanism exists, present concrete alternatives
+with R/U/C, LOC and evidence, then continue independent work.
+
+For each slice maintain one actual owner implementation PR (combine related
+changes when suitable), code commits, selected dependency/adoption receipts,
+native positive/negative E2E, actual review dispositions, final-head checks,
+ordinary merge and applicable resulting-main/release/consumer verification.
+The plan is not a release gate or permission to weaken existing protections.
+
+| Completion phase | Current state | Required result |
+| --- | --- | --- |
+| Planning review v1–v7 | 2/7 | Seven substantive owner-message rounds, accepted applicable design choices, reviewed plan and published navigation |
+| Shared foundation A–F | Not delivered by this planning PR | Actual selected installed journey and qualified lifetime/durable/native owner contracts |
+| Five follow-ups G, H1, H2, I, J | Not delivered by this planning PR | Each selected profile implemented and exercised through its actual owner/native/product E2E, including supported failures |
+| Runtime C0–C3 and applicable product adoption | Not delivered by this planning PR | Actual scoped capacity, control, recovery and relevant integration proof; no automatic larger fleet claim |
+| Overall goal | In progress | All selected implementation scopes complete with actual evidence and existing delivery gates; planning completion alone is insufficient |
 
 The goal is a useful, smaller, safer implementation with proven behavior,
 not seven rounds of adding text. Delete unnecessary layers or tests when
